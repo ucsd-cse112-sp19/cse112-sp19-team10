@@ -1,6 +1,6 @@
 # cse112-sp19-team10
 
-<img src="img/rockstar_ninja.png" title="Team Logo" alt="Team Logo" width="700px"/>
+<img src="img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="500px"/>
 
 ## Team Members
 
