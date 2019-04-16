@@ -22,4 +22,4 @@
 | <img src="img/julian.png" title="Julian" alt="Julian" width="300px" /> Julian Pierce | <img src="img/sean.jpg" title="sean" alt="sean" width="300px" /> Sean Nam | <img src="img/adrian.png" title="Adrian" alt="Adrian" width="300px"/> Adrian R. Jacinto |
 | <img src="img/Emily.png" title="Emily" alt="Emily" width="300px"/> Emily Wong | <img src="img/tim.png" title="tim" alt="tim" width="300px"/> Pui Tim Cheng | <img src="img/Nik.png" title="Nik" alt="Nik" width="300px"/> Nikolas Nikravesh |   |
 | <img src="img/Matt.png" title="Matt" alt="Matt" width="300px"/> Matt Qiran Jin | <img src="img/oliver.png" title="Oliver" alt="Oliver" width="300px"/> Oliver Tianheng Liu | <img src="img/Brian.png" title="Brian" alt="Brian" width="300px"/> Brian Frost | 
-|<img src="img/ryan.jpg" title="Ryan" alt="Ryan" width="300px"/> Ryan Nguyen | <img src="img/Olivia.png" title="Olivia" alt="Olivia" width="300px"/> Olivia Miano |
+|<img src="img/ryan.jpg" title="Ryan" alt="Ryan" width="300px"/> Ryan Nguyen | <img src="img/olivia.jpg" title="Olivia" alt="Olivia" width="300px"/> Olivia Miano |
