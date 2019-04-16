@@ -1,4 +1,4 @@
-# cse112-sp19-team10
+# Team Rockstar Ninjas
 
 <img src="img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="500px"/>
 
