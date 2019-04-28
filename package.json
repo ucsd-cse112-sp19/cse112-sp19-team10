@@ -4,7 +4,7 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint",
+    "test": "jest",
     "lint": "standard"
   },
   "repository": {
@@ -15,6 +15,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ucsd-cse112/cse112-sp19-team10/issues"
+  },
+  "standard": {
+    "env": [ "jest" ]
   },
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme"
 }
