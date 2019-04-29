@@ -3,9 +3,7 @@
 * @returns {number} result of the sum value.
 */
 function addOne (a) {
-return a + 1
+  return a + 1
 }
-
-//MyClass.addOne() // Call the function
 
 module.exports = addOne
