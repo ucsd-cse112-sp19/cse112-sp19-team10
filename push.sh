@@ -7,7 +7,7 @@ echo Enter branch name:
 read branch
 
 echo Generating Docs.....
-./node_modules/.bin/esdoc
+documentation build src/ -f html -o docs
 
 echo Pushing to Github
 

@@ -1,99 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | cse112-sp19-team10</title>
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
-  <script src="script/prettify/prettify.js"></script>
-  <script src="script/manual.js"></script>
-<meta name="description" content="&lt;img src=" img rockstar_ninja.png" title="Team Logo" alt="Team Logo" width="500px">&quot;&gt;<meta property="twitter:card" content="summary"><meta property="twitter:title" content="cse112-sp19-team10"><meta property="twitter:description" content="&lt;img src=" img rockstar_ninja.png" title="Team Logo" alt="Team Logo" width="500px">&quot;&gt;</head>
-<body class="layout-container" data-ice="rootContainer">
+  <meta charset='utf-8' />
+  <title>cse112-sp19-team10 1.0.0 | Documentation</title>
+  <meta name='description' content='&lt;img src=&quot;img/rockstar_ninja.PNG&quot; title=&quot;Team Logo&quot; alt=&quot;Team Logo&quot; width=&quot;500px&quot;/&gt;'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet' />
+  <link href='assets/style.css' rel='stylesheet' />
+  <link href='assets/github.css' rel='stylesheet' />
+  <link href='assets/split.css' rel='stylesheet' />
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>cse112-sp19-team10</h3>
+          <div class='mb1'><code>1.0.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#addone'
+                  class="">
+                  addOne
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
-<header>
-  <a href="./">Home</a>
   
-  <a href="identifiers.html">Reference</a>
-  <a href="source.html">Source</a>
-  
-  <div class="search-box">
-  <span>
-    <img src="./image/search.png">
-    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
-  </span>
-    <ul class="search-result"></ul>
-  </div>
-<a style="position:relative; top:3px;" href="https://github.com/ucsd-cse112/cse112-sp19-team10"><img width="20px" src="./image/github.png"></a></header>
-
-<nav class="navigation" data-ice="nav"><div>
-  <ul>
+  <div class='clearfix'>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/foo.js~MyClass.html">MyClass</a></span></span></li>
-</ul>
-</div>
-</nav>
+    <h3 class='fl m0' id='addone'>
+      addOne
+    </h3>
+    
+    
+  </div>
+  
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p><a href="https://travis-ci.com/ucsd-cse112/cse112-sp19-team10"><img src="https://travis-ci.com/ucsd-cse112/cse112-sp19-team10.svg?token=Nn7W4RnbZq1QGEydYuEM&amp;branch=master" alt="Build Status"></a></p>
-<h1 id="team-rockstar-ninjas">Team Rockstar Ninjas</h1><p><img src="img/rockstar_ninja.PNG" title="Team Logo" width="500px"></p>
-<h2 id="team-members">Team Members</h2><ul>
-<li>Julian Pierce, Team Lead/Comms</li>
-<li>Sean Nam, Co-Lead/Comms</li>
-<li>Adrian R. Jacinto, Quality Assurance</li>
-<li>Emily Wing Wong, Quality Assurance</li>
-<li>Pui Tim Cheng, DevOps</li>
-<li>Nikolas Nikravesh, DevOps</li>
-<li>Matt Qiran Jin, Tools &amp; Utilities</li>
-<li>Oliver Tianheng Liu, Tools &amp; Utilities</li>
-<li>Brian Frost, Coder</li>
-<li>Ryan Nguyen, Coder</li>
-<li>Olivia Miano, Coder</li>
-</ul>
-<p><img src="img/team-lunch.jpg" title="Team Lunch" width="500px"></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="img/julian.jpeg" title="Julian" width="300px"> Julian Pierce, Team Lead/Comms</td>
-<td><img src="img/sean.jpg" title="sean" width="300px"> Sean Sangwoo Nam, Co-Lead/Comms</td>
-<td><img src="img/adrian.jpg" title="Adrian" width="300px"> Adrian R. Jacinto, Quality Assurance</td>
-</tr>
-<tr>
-<td><img src="img/Emily.jpg" title="Emily" width="300px"> Emily Wing Wong, Quality Assurance</td>
-<td><img src="img/tim.jpg" title="tim" width="300px"> Pui Tim Cheng, DevOps</td>
-<td><img src="img/nick.png" title="Nik" width="300px"> Nikolas Nikravesh, DevOps</td>
-<td></td>
-</tr>
-<tr>
-<td><img src="img/matt_jin.jpg" title="Matt" width="300px"> Matt Jin, Tools &amp; Utilities</td>
-<td><img src="img/oliver.png" title="Oliver" width="300px"> Oliver Tianheng Liu, Tools &amp; Utilities</td>
-<td><img src="img/Brian.jpg" title="Brian" width="300px"> Brian Frost, Coder</td>
-</tr>
-<tr>
-<td><img src="img/ryan.jpg" title="Ryan" width="300px"> Ryan Nguyen, Coder</td>
-<td><img src="img/olivia.jpg" title="Olivia" width="300px"> Olivia Miano, Coder</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+  
+    <div class='pre p1 fill-light mt0'>addOne(a: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+  
+  
 
-<footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
-</footer>
+  
+  
+  
+  
+  
+  
 
-<script src="script/search_index.js"></script>
-<script src="script/search.js"></script>
-<script src="script/pretty-print.js"></script>
-<script src="script/inherited-summary.js"></script>
-<script src="script/test-summary.js"></script>
-<script src="script/inner-link.js"></script>
-<script src="script/patch-for-local.js"></script>
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>a</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    this is a value.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        result of the sum value.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
 </body>
 </html>
