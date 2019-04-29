@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10.svg?token=Nn7W4RnbZq1QGEydYuEM&branch=master)](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10)
+
 # Team Rockstar Ninjas
 
 <img src="img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="500px"/>
