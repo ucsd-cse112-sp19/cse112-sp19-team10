@@ -29,7 +29,7 @@ template.innerHTML = `
 `
 
 // core-hello class definition
-class CoreHello extends HTMLElement {
+class CoreHello extends window.HTMLElement {
   // Rainbow attribute
   get rainbow () {
     return this.hasAttribute('rainbow')
