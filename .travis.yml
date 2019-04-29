@@ -4,7 +4,9 @@ node_js:
 before_install:
     - npm install -g standard
     - npm install --save-dev mocha
+    - npm i -D mocha puppeteer
     - npm install --save-dev chai
+    - npm install showroom
 
 script:
   - npm run lint
