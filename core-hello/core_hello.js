@@ -15,7 +15,7 @@ template.innerHTML = `
         }
 
         @keyframes rainbow{
-            0%{color: red;}	
+            0%{color: red;}
             15%{color: orange;}
             30%{color: yellow;}
             45%{color: limegreen;}
@@ -76,11 +76,11 @@ class CoreHello extends HTMLElement {
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-    if (this.getAttribute('lang') == 'en') {
+    if (this.getAttribute('lang') === 'en') {
       this.language.innerText = 'Hello World'
-    } else if (this.getAttribute('lang') == 'es') {
+    } else if (this.getAttribute('lang') === 'es') {
       this.language.innerText = 'Hola Mundo'
-    } else if (this.getAttribute('lang') == 'ko') {
+    } else if (this.getAttribute('lang') === 'ko') {
       this.language.innerText = '안녕하세요 세계'
     }
   }
