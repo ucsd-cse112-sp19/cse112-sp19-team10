@@ -3,7 +3,11 @@ node_js:
     - "node"
 before_install:
     - npm install -g standard
-    - npm install --save-dev jest
+    - npm install --save-dev mocha
+    - npm install --save-dev chai
 
+script:
+  - npm run lint
+  - npm run test
 
 
