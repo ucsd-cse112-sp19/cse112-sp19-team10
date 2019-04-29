@@ -17,7 +17,12 @@
     "url": "https://github.com/ucsd-cse112/cse112-sp19-team10/issues"
   },
   "standard": {
-    "env": [ "jest" ]
+    "env": ["jest"],
+    "ignore": ["/docs/"]
   },
-  "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme"
+  "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
+  "dependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0"
+  }
 }

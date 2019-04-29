@@ -5,5 +5,8 @@ before_install:
     - npm install -g standard
     - npm install --save-dev jest
 
+script:
+  - npm run lint
+  - npm run test
 
 
