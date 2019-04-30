@@ -82,6 +82,8 @@ class CoreHello extends window.HTMLElement {
       this.language.innerText = 'Hola Mundo'
     } else if (this.getAttribute('lang') === 'ko') {
       this.language.innerText = '안녕하세요 세계'
+    } else if (this.getAttribute('lang') === 'ge') {
+      this.language.innerText = 'Hallo Welt'
     }
   }
 }
