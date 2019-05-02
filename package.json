@@ -1,10 +1,11 @@
+    
 {
   "name": "cse112-sp19-team10",
   "version": "1.0.0",
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "npx mocha --exit --timeout 5000",
     "lint": "standard"
   },
   "repository": {
