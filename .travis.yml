@@ -7,11 +7,17 @@ before_install:
     - npm i -D mocha puppeteer
     - npm install --save-dev chai
     - npm install showroom
+    - npm install testcafe
 
 script:
   - npm run lint
   - npm run test
 
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - fluxbox >/dev/null 2>&1 &
 
 addons:
   firefox: latest
@@ -20,9 +26,3 @@ addons:
      - google-chrome
     packages:
      - google-chrome-stable fluxbox
-
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3
-  - fluxbox >/dev/null 2>&1 &
