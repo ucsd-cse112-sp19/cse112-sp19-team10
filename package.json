@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --exit --timeout 5000",
-    "lint": "standard"
+    "lint": "standard",
+    "test": "testcafe chrome,firefox test/index-test.js"
   },
   "repository": {
     "type": "git",
