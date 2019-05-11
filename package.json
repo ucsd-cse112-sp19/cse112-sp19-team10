@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npx mocha --exit --timeout 5000",
     "lint": "standard",
-    "test": "testcafe chrome,firefox test/index-test.js"
+    "test": "testcafe chrome,firefox ./test/core-hello-test-fixture.js",
   },
   "repository": {
     "type": "git",
