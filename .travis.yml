@@ -1,15 +1,33 @@
 language: node_js
 node_js:
     - "node"
+    - "stable"
 before_install:
     - npm install -g standard
     - npm install --save-dev mocha
     - npm i -D mocha puppeteer
     - npm install --save-dev chai
     - npm install showroom
+    - stty cols 80
 
 script:
   - npm run lint
   - npm run test
+  - npm run browsertest
 
+dist: trusty
+sudo: required
 
+addons:
+  firefox: latest
+  apt:
+    sources:
+     - google-chrome
+    packages:
+     - google-chrome-stable fluxbox
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - fluxbox >/dev/null 2>&1 &
