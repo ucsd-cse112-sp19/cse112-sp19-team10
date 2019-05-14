@@ -22,7 +22,7 @@
       "mocha"
     ],
     "ignore": [
-      "/docs/"
+      "/docs/", "tests/"
     ]
   },
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
