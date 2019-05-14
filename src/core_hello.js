@@ -1,4 +1,4 @@
-let template = document.createElement('template')
+let template = window.document.createElement('template')
 template.innerHTML = `
     <style>
         h1{
@@ -42,7 +42,7 @@ class CoreHello extends window.HTMLElement {
 
   // Lang attribute
   get lang () {
-    return this.hasAttribute('rainbow')
+    return this.getAttribute('lang')
   }
 
   set lang (val) {
