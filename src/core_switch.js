@@ -72,17 +72,17 @@ class CoreSwitch extends window.HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true))
   }
 
-  get disabled() {
-    return this.hasAttribute('disabled');
-}
+  get disabled () {
+    return this.hasAttribute('disabled')
+  }
 
-set disabled(val) {
+  set disabled (val) {
     if (val) {
-        this.setAttribute('disabled', '');
+      this.setAttribute('disabled', '')
     } else {
-        this.removeAttribute('disabled');
+      this.removeAttribute('disabled')
     }
-}
+  }
 
   get vModel () {
     return this.hasAttribute('v-model')
@@ -92,18 +92,18 @@ set disabled(val) {
     this.setAttribute('v-model', val)
   }
 
-    connectedCallback() {
-        if (!this.hasAttribute('v-model')) {
-            this.setAttribute('v-model', false)
-          }
-        if (!this.hasAttribute('disabled')) {
-            this.setAttribute('disabled', false);
-        }
+  connectedCallback () {
+    if (!this.hasAttribute('v-model')) {
+      this.setAttribute('v-model', false)
     }
+    if (!this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', false)
+    }
+  }
 
-    static get observedAttributes() {
-        return ['v-model', 'disabled'];
-    }
+  static get observedAttributes () {
+    return ['v-model', 'disabled']
+  }
 
   attributeChangedCallback (name, oldValue, newValue) {
 
