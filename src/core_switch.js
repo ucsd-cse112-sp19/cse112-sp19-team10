@@ -22,14 +22,26 @@ class CoreSwitch extends window.HTMLElement {
         this.setAttribute('v-model', val);
     }
 
+    get disabled() {
+        return this.hasAttribute('disabled');
+    }
+
+    set disabled(val) {
+        if (val) {
+            this.setAttribute('disabled', '');
+        } else {
+            this.removeAttribute('disabled');
+        }
+    }
+
     connectedCallback() {
-        if (!this.hasAttribute('v-model')) {
-            this.setAttribute('v-model', false);
+        if (!this.hasAttribute('disabled')) {
+            this.setAttribute('disabled', false);
         }
     }
 
     static get observedAttributes() {
-        return ['v-model'];
+        return ['v-model', 'disabled'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
