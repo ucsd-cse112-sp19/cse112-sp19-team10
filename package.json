@@ -1,11 +1,11 @@
-    
 {
   "name": "cse112-sp19-team10",
   "version": "1.0.0",
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha --exit --timeout 5000",
+    "test": "npx mocha --exit --timeout 5000 && npm run browsertest",
+    "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/index-test.js",
     "lint": "standard"
   },
   "repository": {
@@ -32,6 +32,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "testcafe": "^1.1.4",
+    "testcafe-browser-provider-saucelabs": "^1.7.0"
   }
 }

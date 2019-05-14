@@ -1,7 +1,8 @@
 language: node_js
-node_js:
-    - "node"
+node_js: "stable"
+
 before_install:
+    - stty cols 80
     - npm install -g standard
     - npm install --save-dev mocha
     - npm i -D mocha puppeteer
@@ -9,7 +10,7 @@ before_install:
     - npm install showroom
 
 script:
-  - npm run lint
-  - npm run test
+    - npm run lint
+    - npm run test
 
 
