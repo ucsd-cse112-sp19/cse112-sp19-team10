@@ -64,37 +64,35 @@ input:checked + .slider:before {
 `
 
 class CoreSwitch extends window.HTMLElement {
+  constructor () {
+    super()
 
-    constructor () {
-        super()
+    // Attach shadow root
+    const shadowRoot = this.attachShadow({ mode: 'open' })
+    shadowRoot.appendChild(template.content.cloneNode(true))
+  }
 
-        // Attach shadow root
-        const shadowRoot = this.attachShadow({ mode: 'open' })
-        shadowRoot.appendChild(template.content.cloneNode(true))
+  get vModel () {
+    return this.hasAttribute('v-model')
+  }
+
+  set vModel (val) {
+    this.setAttribute('v-model', val)
+  }
+
+  connectedCallback () {
+    if (!this.hasAttribute('v-model')) {
+      this.setAttribute('v-model', false)
     }
+  }
 
-    get v_model() {
-        return this.hasAttribute('v-model');
-    }
+  static get observedAttributes () {
+    return ['v-model']
+  }
 
-    set v_model(val) {
-        this.setAttribute('v-model', val);
-    }
+  attributeChangedCallback (name, oldValue, newValue) {
 
-    connectedCallback() {
-        if (!this.hasAttribute('v-model')) {
-            this.setAttribute('v-model', false);
-        }
-    }
-
-    static get observedAttributes() {
-        return ['v-model'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-
-    }
-
+  }
 }
 
 window.customElements.define('core-switch', CoreSwitch)
