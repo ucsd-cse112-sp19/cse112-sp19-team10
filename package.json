@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --exit --timeout 5000 && npm run browsertest",
-    "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/index-test.js",
+    "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "lint": "standard"
   },
   "repository": {
