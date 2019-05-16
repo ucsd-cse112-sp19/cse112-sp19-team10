@@ -16,13 +16,15 @@ template.innerHTML = `
 }
 
 .slider {
+    --active-color: #409EFF;
+    --inactive-color: #C0CCDA;
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--inactive-color);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -40,7 +42,7 @@ template.innerHTML = `
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: var(--active-color);
 }
 
 input:checked + .slider:before {
@@ -78,6 +80,9 @@ class CoreSwitch extends window.HTMLElement {
 
     // Place holder for disabled property
     this.disable = shadowRoot.querySelector('input[type=checkbox]')
+    // Place holder for active-color property
+    // Place holder for color
+    this.aColor = shadowRoot.querySelector('.slider').style
   }
 
   get disabled () {
@@ -100,19 +105,49 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('v-model', val)
   }
 
+  get activeColor () {
+    return this.getAttribute('active-color')
+  }
+
+  set activeColor (val) {
+    this.setAttribute('active-color', val)
+  }
+  
+  get inactiveColor () {
+    return this.getAttribute('inactive-color')
+  }
+
+  set inactiveColor (val) {
+    this.setAttribute('inactive-color', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
     }
+    if (!this.hasAttribute('active-color')) {
+        this.setAttribute('active-color', '#409EFF')
+    }
+    if (!this.hasAttribute('inactive-color')) {
+        this.setAttribute('inactive-color', '#C0CCDA')
+    }
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-    if (this.hasAttribute('disabled') === true) {
-      this.disable.disabled = true
+    if (this.hasAttribute('disabled')) {
+        this.disable.disabled = true
+      }
+    if (this.hasAttribute('active-color')) {
+        var newColor = this.getAttribute('active-color')
+        this.aColor.setProperty('--active-color', newColor)
+    }
+    if (this.hasAttribute('inactive-color')) {
+        var newColor = this.getAttribute('inactive-color')
+        this.aColor.setProperty('--inactive-color', newColor)
     }
   }
 }
