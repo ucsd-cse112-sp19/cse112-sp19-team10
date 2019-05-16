@@ -56,6 +56,11 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+input[disabled] + span {
+    cursor: not-allowed;
+    opacity: .6;
+}
 </style>
 <label class="switch">
     <input type="checkbox">
@@ -70,6 +75,9 @@ class CoreSwitch extends window.HTMLElement {
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
+
+    // Place holder for disabled property
+    this.disable = shadowRoot.querySelector('input[type=checkbox]')
   }
 
   get disabled () {
@@ -96,9 +104,6 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
     }
-    if (!this.hasAttribute('disabled')) {
-      this.setAttribute('disabled', false)
-    }
   }
 
   static get observedAttributes () {
@@ -106,7 +111,9 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-
+      if(this.hasAttribute('disabled') === true) {
+          this.disable.disabled = true
+      }
   }
 }
 
