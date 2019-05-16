@@ -22,7 +22,8 @@
       "mocha"
     ],
     "ignore": [
-      "/docs/", "tests/"
+      "/docs/",
+      "tests/"
     ]
   },
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
@@ -30,8 +31,14 @@
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run lint && documentation build src/ -f html -o docs"
+     }
+  },
   "devDependencies": {
     "chai": "^4.2.0",
+    "husky": "^2.3.0",
     "jest": "^24.7.1",
     "testcafe": "^1.1.4",
     "testcafe-browser-provider-saucelabs": "^1.7.0"
