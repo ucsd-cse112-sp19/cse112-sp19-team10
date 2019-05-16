@@ -112,7 +112,7 @@ class CoreSwitch extends window.HTMLElement {
   set activeColor (val) {
     this.setAttribute('active-color', val)
   }
-  
+
   get inactiveColor () {
     return this.getAttribute('inactive-color')
   }
@@ -126,10 +126,10 @@ class CoreSwitch extends window.HTMLElement {
       this.setAttribute('v-model', false)
     }
     if (!this.hasAttribute('active-color')) {
-        this.setAttribute('active-color', '#409EFF')
+      this.setAttribute('active-color', '#409EFF')
     }
     if (!this.hasAttribute('inactive-color')) {
-        this.setAttribute('inactive-color', '#C0CCDA')
+      this.setAttribute('inactive-color', '#C0CCDA')
     }
   }
 
@@ -139,15 +139,15 @@ class CoreSwitch extends window.HTMLElement {
 
   attributeChangedCallback (name, oldValue, newValue) {
     if (this.hasAttribute('disabled')) {
-        this.disable.disabled = true
-      }
+      this.disable.disabled = true
+    }
     if (this.hasAttribute('active-color')) {
-        var newColor = this.getAttribute('active-color')
-        this.aColor.setProperty('--active-color', newColor)
+      var newColor1 = this.getAttribute('active-color')
+      this.aColor.setProperty('--active-color', newColor1)
     }
     if (this.hasAttribute('inactive-color')) {
-        var newColor = this.getAttribute('inactive-color')
-        this.aColor.setProperty('--inactive-color', newColor)
+      var newColor2 = this.getAttribute('inactive-color')
+      this.aColor.setProperty('--inactive-color', newColor2)
     }
   }
 }
