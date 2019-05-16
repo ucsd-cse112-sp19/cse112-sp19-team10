@@ -4,7 +4,7 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha --exit --timeout 5000 && npm run browsertest",
+    "test": "npx mocha --exit --timeout 5000",
     "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/ && testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/ ",
     "lint": "standard --fix && standard"
   },
