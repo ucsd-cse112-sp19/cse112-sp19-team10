@@ -111,9 +111,9 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-      if(this.hasAttribute('disabled') === true) {
-          this.disable.disabled = true
-      }
+    if (this.hasAttribute('disabled') === true) {
+      this.disable.disabled = true
+    }
   }
 }
 
