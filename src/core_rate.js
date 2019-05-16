@@ -33,6 +33,7 @@ template.innerHTML = `
         .rate:not(:checked) > label:hover ~ label {
             color: #deb217;  
         }
+        input:not([disabled]),
         .rate > input:checked + label:hover,
         .rate > input:checked + label:hover ~ label,
         .rate > input:checked ~ label:hover,
@@ -61,6 +62,9 @@ class CoreRate extends window.HTMLElement {
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
+
+    // Place holder for disabled property
+    this.stars = shadowRoot.querySelectorAll('input[type=radio]')
   }
 
   get vModel () {
@@ -79,6 +83,18 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('max', val)
   }
 
+  get disabled () {
+    return this.hasAttribute('disabled')
+  }
+
+  set disabled (val) {
+    if (val) {
+      this.setAttribute('disabled', '')
+    } else {
+      this.removeAttribute('disabled')
+    }
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -89,11 +105,23 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model']
+    return ['v-model', 'disabled']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-
+    if (this.hasAttribute('disabled')) {
+        var i
+        for(i = 0; i < this.stars.length; i++) {
+            this.stars[i].disabled = true
+        }
+    }
+    if (this.hasAttribute('v-model')) {
+        var i
+        var numStars = this.getAttribute('v-model')
+        for(i = 0; i < numStars; i++) {
+            this.stars[i].checked = true
+        }
+    }
   }
 }
 
