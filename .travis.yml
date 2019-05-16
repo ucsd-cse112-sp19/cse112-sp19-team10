@@ -7,7 +7,7 @@ before_install:
     - npm install --save-dev mocha
     - npm i -D mocha puppeteer
     - npm install --save-dev chai
-    - npm install showroom
+    - npm install --showroom
 
 script:
     - npm run lint
