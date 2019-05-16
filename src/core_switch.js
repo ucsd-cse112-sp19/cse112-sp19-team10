@@ -80,9 +80,20 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('v-model', val)
   }
 
+  get activeValue() {
+    return this.getAttribute('active-value')
+  }
+
+  set activeValue(val) {
+    this.setAttribute('active-value', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
+    }
+    if (!this.hasAttribute('active-value')) {
+      this.setAttribute('active-value', true)
     }
   }
 
