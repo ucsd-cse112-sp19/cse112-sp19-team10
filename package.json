@@ -1,4 +1,3 @@
-    
 {
   "name": "cse112-sp19-team10",
   "version": "1.0.0",
@@ -32,6 +31,9 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "mocha": "^6.1.4",
+    "puppeteer": "^1.16.0",
+    "showroom": "^0.9.3"
   }
 }
