@@ -39,7 +39,7 @@ describe('Testing core-switch attribute: v-model', async () => {
     const att = await showroom.hasAttribute('v-model')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('v-model')
-    assert.deepEqual(val, true)
+    assert.deepEqual(val, false)
   })
 
   it('with string', async () => {
@@ -47,7 +47,7 @@ describe('Testing core-switch attribute: v-model', async () => {
     const att = await showroom.hasAttribute('v-model')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('v-model')
-    assert.deepEqual(val, true)
+    assert.deepEqual(val, 'foo')
   })
 
   it('with number', async () => {
@@ -55,7 +55,7 @@ describe('Testing core-switch attribute: v-model', async () => {
     const att = await showroom.hasAttribute('v-model')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('v-model')
-    assert.deepEqual(val, true)
+    assert.deepEqual(val, '123')
   })
 
   it('removing attiribute', async () => {
