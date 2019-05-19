@@ -7,6 +7,7 @@ template.innerHTML = `
     width: 40px;
     height: 22px;
     margin-left: 30px;
+    margin-right: 30px;
 }
 
 .switch input {
@@ -70,8 +71,19 @@ input[disabled] + span {
   top: 2px;
 }
 
+#inactive_icon {
+  position: absolute;
+  right: 45px;
+  top: 2px;
+  color: #409EFF;
+}
+
 input:checked ~ #active_icon {
   color: #409EFF;
+}
+
+input:checked ~ #inactive_icon {
+  color: #000000;
 }
 </style>
 <html>
@@ -82,6 +94,7 @@ input:checked ~ #active_icon {
   <label class="switch">
     <input type="checkbox">
     <span class="slider round"></span>
+    <i id="inactive_icon"></i>
     <i id="active_icon"></i>
   </label>
 </body>
@@ -100,8 +113,10 @@ class CoreSwitch extends window.HTMLElement {
     this.check = shadowRoot.querySelector('input[type=checkbox]')
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
-    // Place holder for icon
-    this.icon = shadowRoot.querySelector('#active_icon')
+    // Place holder for active icon
+    this.activeIcon = shadowRoot.querySelector('#active_icon')
+    // Place holder for inactive icon
+    this.inactiveIcon = shadowRoot.querySelector('#inactive_icon')
   }
 
   get disabled () {
@@ -153,6 +168,14 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('active-icon-class', val)
   }
 
+  get inactiveIconClass () {
+    return this.getAttribute('inactive-icon-class')
+  }
+
+  set inactiveIconClass (val) {
+    this.setAttribute('inactive-icon-class', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
@@ -166,7 +189,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'active-icon-class']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'active-icon-class', 'inactive-icon-class']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -182,8 +205,12 @@ class CoreSwitch extends window.HTMLElement {
       this.aColor.setProperty('--inactive-color', newColor2)
     }
     if (this.hasAttribute('active-icon-class')) {
-      var newClass = this.getAttribute('active-icon-class')
-      this.icon.setAttribute('class', newClass)
+      var newClass1 = this.getAttribute('active-icon-class')
+      this.activeIcon.setAttribute('class', newClass1)
+    }
+    if (this.hasAttribute('inactive-icon-class')) {
+      var newClass2 = this.getAttribute('inactive-icon-class')
+      this.inactiveIcon.setAttribute('class', newClass2)
     }
   }
 }
