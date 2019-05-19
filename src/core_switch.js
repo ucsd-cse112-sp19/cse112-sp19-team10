@@ -6,8 +6,6 @@ template.innerHTML = `
     display: inline-block;
     width: 40px;
     height: 22px;
-    margin-left: 30px;
-    margin-right: 30px;
 }
 
 .switch input {
