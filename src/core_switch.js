@@ -65,10 +65,18 @@ input[disabled] + span {
 }
 </style>
 <label class="switch">
-    <input type="checkbox">
-    <span class="slider round"></span>
+    <table>
+      <col width="130">
+      <tr>
+        <td><p id = "inactive_text"></p></td>
+        <td style="width:100px"><input type="checkbox">
+        <span class="slider round"></span></td>
+        <td><p id = "active_text"></p></td>
+      </tr>
+    </table>
 </label>
 `
+
 
 class CoreSwitch extends window.HTMLElement {
   constructor () {
@@ -83,6 +91,9 @@ class CoreSwitch extends window.HTMLElement {
     // Place holder for active-color property
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
+
+    //this.aText = shadowRoot.querySelector('#active_text')
+    //this.iaText = shadowRoot.querySelector('#inactive_text')
   }
 
   get disabled () {
@@ -121,6 +132,22 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('inactive-color', val)
   }
 
+  get activeText () {
+    return this.getAttribute('active-text')
+  }
+
+  set activeText (val) {
+    this.setAttribute('active-text', val)
+  }
+
+  get inactiveText () {
+    return this.getAttribute('inactive-text')
+  }
+
+  set inactiveText (val) {
+    this.setAttribute('inactive-text', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
@@ -131,13 +158,23 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
+    if (!this.hasAttribute('active-text')) {
+      this.setAttribute('active-text', '')
+    }
+    if (!this.hasAttribute('inactive-text')) {
+      this.setAttribute('inactive-text', '')
+    }
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color',
+            'active-text', 'inactive-text']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
+    const aaText = this.shadowRoot.getElementById("active_text")
+    const iaText = this.shadowRoot.getElementById("inactive_text")
+
     if (this.hasAttribute('disabled')) {
       this.disable.disabled = true
     }
@@ -148,6 +185,16 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('inactive-color')) {
       var newColor2 = this.getAttribute('inactive-color')
       this.aColor.setProperty('--inactive-color', newColor2)
+    }
+    if (this.hasAttribute('active-text')) {
+      var activeText = this.getAttribute('active-text')
+      //this.aText.innerHTML = activeText
+      aaText.innerHTML = activeText
+    }
+    if (this.hasAttribute('inactive-text')) {
+      var inactiveText = this.getAttribute('inactive-text')
+      //this.aText.innerHTML = inactiveText
+      iaText.innerHTML = inactiveText
     }
   }
 }
