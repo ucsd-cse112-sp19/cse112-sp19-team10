@@ -96,7 +96,7 @@ class CoreSwitch extends window.HTMLElement {
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    // Place holder for checkbox 
+    // Place holder for checkbox
     this.check = shadowRoot.querySelector('input[type=checkbox]')
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
@@ -124,8 +124,7 @@ class CoreSwitch extends window.HTMLElement {
     const isChecked = Boolean(val)
     if (isChecked) {
       this.setAttribute('v-model', '')
-    }
-    else {
+    } else {
       this.removeAttribute('v-model')
     }
   }
@@ -184,7 +183,7 @@ class CoreSwitch extends window.HTMLElement {
     }
     if (this.hasAttribute('active-icon-class')) {
       var newClass = this.getAttribute('active-icon-class')
-      this.icon.setAttribute('class', newClass);
+      this.icon.setAttribute('class', newClass)
     }
   }
 }
