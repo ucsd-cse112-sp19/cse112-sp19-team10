@@ -5,55 +5,66 @@ template.innerHTML = `
             margin: 0;
             padding: 0;
         }
+
         .rate {
+            --colors: #F7BA2A;
             float: left;
             height: 46px;
             padding: 0 10px;
         }
+
         .rate:not(:checked) > input {
             position:absolute;
             top:-9999px;
         }
+
         .rate:not(:checked) > label {
             float:right;
-            width:1em;
             overflow:hidden;
             white-space:nowrap;
             cursor:pointer;
-            font-size:30px;
+            font-size:20px;
             color:#ccc;
+            margin:3px;
         }
-        .rate:not(:checked) > label:before {
-            content: '★ ';
-        }
+
         .rate > input:checked ~ label {
-            color: #ffc700;    
+            color: var(--colors);    
         }
+
         .rate:not(:checked) > label:hover,
         .rate:not(:checked) > label:hover ~ label {
-            color: #deb217;  
+            color: var(--colors);  
         }
-        input:not([disabled]),
+
         .rate > input:checked + label:hover,
         .rate > input:checked + label:hover ~ label,
         .rate > input:checked ~ label:hover,
         .rate > input:checked ~ label:hover ~ label,
         .rate > label:hover ~ input:checked ~ label {
-            color: #c59b08;
+            color: var(--colors); 
         }
     </style>
+    </style>
+    <html>
+    <head>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+    <body>
     <div class="rate">
         <input type="radio" id="star5" name="rate"/>
-        <label for="star5" title="text">5 stars</label>
+        <label class="fas fa-star" for="star5" title="text"></label>
         <input type="radio" id="star4" name="rate"/>
-        <label for="star4" title="text">4 stars</label>
+        <label class="fas fa-star" for="star4" title="text"></label>
         <input type="radio" id="star3" name="rate"/>
-        <label for="star3" title="text">3 stars</label>
+        <label class="fas fa-star" for="star3" title="text"></label>
         <input type="radio" id="star2" name="rate"/>
-        <label for="star2" title="text">2 stars</label>
+        <label class="fas fa-star" for="star2" title="text"></label>
         <input type="radio" id="star1" name="rate"/>
-        <label for="star1" title="text">1 stars</label>
+        <label class="fas fa-star" for="star1" title="text"></label>
     </div>
+    </body>
+    </html>
 `
 class CoreRate extends window.HTMLElement {
   constructor () {
@@ -63,8 +74,8 @@ class CoreRate extends window.HTMLElement {
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    // Place holder for disabled property
-    this.stars = shadowRoot.querySelectorAll('input[type=radio]')
+    // Place holder for colors property
+    this.colors1 = shadowRoot.querySelector('.rate').style
   }
 
   get vModel () {
@@ -83,16 +94,12 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('max', val)
   }
 
-  get disabled () {
-    return this.hasAttribute('disabled')
+  get colors () {
+    return this.getAttribute('colors')
   }
 
-  set disabled (val) {
-    if (val) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
+  set colors (val) {
+    this.setAttribute('colors', val)
   }
 
   connectedCallback () {
@@ -105,22 +112,13 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled']
+    return ['v-model', 'colors']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-    if (this.hasAttribute('disabled')) {
-        var i
-        for(i = 0; i < this.stars.length; i++) {
-            this.stars[i].disabled = true
-        }
-    }
-    if (this.hasAttribute('v-model')) {
-        var i
-        var numStars = this.getAttribute('v-model')
-        for(i = 0; i < numStars; i++) {
-            this.stars[i].checked = true
-        }
+    if (this.hasAttribute('colors')) {
+      var newColor1 = this.getAttribute('colors')
+      this.colors1.setProperty('--colors', newColor1)
     }
   }
 }
