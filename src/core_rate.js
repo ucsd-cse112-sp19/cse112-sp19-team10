@@ -29,12 +29,9 @@ template.innerHTML = `
             margin:3px;
         }
 
-        .rate > input:checked ~ label {
-            color: var(--colors);    
-        }
-
-        .rate:not(:checked) > label:hover,
-        .rate:not(:checked) > label:hover ~ label {
+        .rate > input:checked ~ label,
+        .rate input:not(:disabled):not(:checked) + label:hover,
+        .rate input:not(:disabled):not(:checked) + label:hover ~ label {
             color: var(--colors);  
         }
 
@@ -79,6 +76,8 @@ class CoreRate extends window.HTMLElement {
     this.colors1 = shadowRoot.querySelector('.rate').style
     // Place holder for icon property
     this.icon = shadowRoot.querySelectorAll('.fas')
+    // Place holder for radios
+    this.radio = shadowRoot.querySelectorAll('input[type=radio]')
   }
 
   get vModel () {
@@ -121,6 +120,18 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('icon-classes', val)
   }
 
+  get disabled () {
+    return this.hasAttribute('disabled')
+  }
+
+  set disabled (val) {
+    if (val) {
+      this.setAttribute('disabled', '')
+    } else {
+      this.removeAttribute('disabled')
+    }
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -131,7 +142,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'colors', 'icon-classes']
+    return ['v-model', 'colors', 'icon-classes', 'disabled']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -148,6 +159,11 @@ class CoreRate extends window.HTMLElement {
       var i
       for (i = 0; i < this.icon.length; i++) {
         this.icon[i].setAttribute('class', newClass1)
+      }
+    }
+    if (this.hasAttribute('disabled')) {
+      for (i = 0; i < this.icon.length; i++) {
+        this.radio[i].setAttribute('disabled', true)
       }
     }
   }
