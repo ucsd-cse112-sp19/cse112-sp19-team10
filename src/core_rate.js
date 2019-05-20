@@ -8,6 +8,7 @@ template.innerHTML = `
 
         .rate {
             --colors: #F7BA2A;
+            --void-color: #C6D1DE;
             float: left;
             height: 46px;
             padding: 0 10px;
@@ -24,7 +25,7 @@ template.innerHTML = `
             white-space:nowrap;
             cursor:pointer;
             font-size:20px;
-            color:#ccc;
+            color:var(--void-color);
             margin:3px;
         }
 
@@ -102,6 +103,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('colors', val)
   }
 
+  get voidColor () {
+    return this.getAttribute('void-color')
+  }
+
+  set voidColor (val) {
+    this.setAttribute('void-color', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -119,6 +128,10 @@ class CoreRate extends window.HTMLElement {
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
       this.colors1.setProperty('--colors', newColor1)
+    }
+    if (this.hasAttribute('void-color')) {
+      var newColor2 = this.getAttribute('void-color')
+      this.colors1.setProperty('--void-color', newColor2)
     }
   }
 }
