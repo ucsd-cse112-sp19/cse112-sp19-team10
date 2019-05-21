@@ -142,7 +142,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'colors', 'icon-classes', 'disabled']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -162,8 +162,14 @@ class CoreRate extends window.HTMLElement {
       }
     }
     if (this.hasAttribute('disabled')) {
-      for (i = 0; i < this.icon.length; i++) {
+      for (i = 0; i < this.radio.length; i++) {
         this.radio[i].setAttribute('disabled', true)
+      }
+    }
+    if (this.hasAttribute('v-model')) {
+      var numStars = this.getAttribute('v-model')
+      for (i = 0; i < numStars; i++) {
+        this.radio[this.radio.length - numStars].setAttribute('checked', true)
       }
     }
   }
