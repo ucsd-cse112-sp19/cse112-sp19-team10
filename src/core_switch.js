@@ -140,7 +140,7 @@ class CoreSwitch extends window.HTMLElement {
 
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
-      this.setAttribute('active-value', false)
+      this.setAttribute('v-model', false)
     }
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
