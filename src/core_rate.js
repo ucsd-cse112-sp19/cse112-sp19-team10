@@ -7,14 +7,15 @@ template.innerHTML = `
         }
 
         .text {
-          position: relative;
-          color: #ff9900;
+          --text-color: #1F2D3D
+          position: absolute;
+          color: var(--text-color);
           font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
           font-weight: 400;
           font-size: 14px;
-          top: 5px;
           left: 3px;
           float: right;
+          margin-top: 5px;
         }
         
         .rate {
@@ -187,6 +188,14 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  get textColor () {
+    return this.getAttribute('text-color')
+  }
+
+  set textColor (val) {
+    this.setAttribute('text-color', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -197,11 +206,14 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '#F7BA2A')
     }
+    if (!this.hasAttribute('text-color')) {
+      this.setAttribute('text-color', '#1F2D3D')
+    }
     this.addEventListener('click', this._onClick)
   }
 
   static get observedAttributes () {
-    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text', 'text-color']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -242,6 +254,9 @@ class CoreRate extends window.HTMLElement {
       var length = this.textsArr.length
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
+    }
+    if (this.hasAttribute('text-color')) {
+      this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
     }
   }
 
