@@ -6,6 +6,15 @@ template.innerHTML = `
             padding: 0;
         }
 
+        .text {
+          position: absolute;
+          color: #ff9900;
+          font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+          font-weight: 400;
+          font-size: 14px;
+          top: 13px;
+        }
+
         .rate {
             --colors: #F7BA2A;
             --void-color: #C6D1DE;
@@ -49,7 +58,7 @@ template.innerHTML = `
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     </head>
     <body>
-    <div class="rate">
+      <div class="rate">
         <input type="radio" id="star5" name="rate"/>
         <label class="fas fa-star" for="star5" title="text"></label>
         <input type="radio" id="star4" name="rate"/>
@@ -60,7 +69,8 @@ template.innerHTML = `
         <label class="fas fa-star" for="star2" title="text"></label>
         <input type="radio" id="star1" name="rate"/>
         <label class="fas fa-star" for="star1" title="text"></label>
-    </div>
+      </div>
+      <span class="text"></span>
     </body>
     </html>
 `
@@ -78,6 +88,8 @@ class CoreRate extends window.HTMLElement {
     this.icon = shadowRoot.querySelectorAll('.fas')
     // Place holder for radios
     this.radio = shadowRoot.querySelectorAll('input[type=radio]')
+    // Place holder for text
+    this.text = shadowRoot.querySelector('.text')
   }
 
   get vModel () {
@@ -132,6 +144,26 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  get scoreTemplate () {
+    return this.getAttribute('score-template')
+  }
+
+  set scoreTemplate (val) {
+    this.setAttribute('score-template', val)
+  }
+
+  get showScore () {
+    return this.hasAttribute('show-score')
+  }
+
+  set showScore (val) {
+    if (val) {
+      this.setAttribute('show-score', '')
+    } else {
+      this.removeAttribute('show-score')
+    }
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -142,7 +174,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -171,6 +203,11 @@ class CoreRate extends window.HTMLElement {
       for (i = 0; i < numStars; i++) {
         this.radio[this.radio.length - numStars].setAttribute('checked', true)
       }
+    }
+    if (this.hasAttribute('show-score')) {
+      var scoreTemp = this.getAttribute('score-template')
+      var score = this.getAttribute('v-model')
+      this.text.innerHTML = score + scoreTemp
     }
   }
 }
