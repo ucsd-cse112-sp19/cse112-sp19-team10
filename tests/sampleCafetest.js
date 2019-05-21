@@ -13,3 +13,4 @@ test('My first test @added core-hello test', async t => {
        // Use the assertion to check the first core-hello with id = test_cafe
         .expect(Selector('#test_cafe').innerText).eql('Thomas');
 })
+asdasd
