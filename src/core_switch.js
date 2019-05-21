@@ -2,6 +2,12 @@
 let template = document.createElement('template')
 template.innerHTML = `
 <style>
+
+:root {
+  --active-text-color: blue;
+  --inactive-text-color: grey;
+}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -63,20 +69,25 @@ input[disabled] + span {
     cursor: not-allowed;
     opacity: .6;
 }
-</style>
-<label class="switch">
-    <table>
-      <col width="130">
-      <tr>
-        <td><p id = "inactive_text"></p></td>
-        <td style="width:100px"><input type="checkbox">
-        <span class="slider round"></span></td>
-        <td><p id = "active_text"></p></td>
-      </tr>
-    </table>
-</label>
-`
 
+.div {
+    color: blue;
+}
+
+</style>
+<table style="display:inline">
+  <tr>
+    <td id="inactive_cell"><div id="inactive_text"></div></td>
+    <td>
+      <label class="switch">
+        <input id="box" type="checkbox" value="0">
+        <span class="slider round"></span>
+      </label>
+    </td>
+    <td id="active_cell"><div id="active_text"></div</td></td>
+  </tr>
+</table>
+`
 
 class CoreSwitch extends window.HTMLElement {
   constructor () {
@@ -92,8 +103,9 @@ class CoreSwitch extends window.HTMLElement {
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
 
-    //this.aText = shadowRoot.querySelector('#active_text')
-    //this.iaText = shadowRoot.querySelector('#inactive_text')
+    this.aText = shadowRoot.querySelector('#active_text')
+    this.iaText = shadowRoot.querySelector('#inactive_text')
+    this.boxx = shadowRoot.querySelector('#box')
   }
 
   get disabled () {
@@ -160,9 +172,15 @@ class CoreSwitch extends window.HTMLElement {
     }
     if (!this.hasAttribute('active-text')) {
       this.setAttribute('active-text', '')
+      //this.removeAttribute('active-text')
+      //const cell = document.getElementById('active_cell')
+      //cell.style.visibility = 'hidden'
     }
     if (!this.hasAttribute('inactive-text')) {
       this.setAttribute('inactive-text', '')
+      //this.removeAttribute('inactive-text')
+      //const cell = document.getElementById('inactive_cell')
+      //cell.style.visibility = 'hidden'
     }
   }
 
@@ -172,8 +190,6 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-    const aaText = this.shadowRoot.getElementById("active_text")
-    const iaText = this.shadowRoot.getElementById("inactive_text")
 
     if (this.hasAttribute('disabled')) {
       this.disable.disabled = true
@@ -188,13 +204,20 @@ class CoreSwitch extends window.HTMLElement {
     }
     if (this.hasAttribute('active-text')) {
       var activeText = this.getAttribute('active-text')
-      //this.aText.innerHTML = activeText
-      aaText.innerHTML = activeText
+      this.aText.innerHTML = activeText
+      //var curText = shadowRoot.querySelector('#box').getAttribute('value')
+      //if (curText === "0") {
+      //  this.aText.style.color = 'blue'
+      //  shadowRoot.querySelector('#box').setAttribute('value', '1')
+      //} else if (curText === "1") {
+      //  this.aText.style.color = 'red'
+      //  shadowRoot.querySelector('#box').setAttribute('value', '0')
+      //}
     }
     if (this.hasAttribute('inactive-text')) {
       var inactiveText = this.getAttribute('inactive-text')
-      //this.aText.innerHTML = inactiveText
-      iaText.innerHTML = inactiveText
+      this.iaText.innerHTML = inactiveText
+      this.iaText.style.color = 'red'
     }
   }
 }
