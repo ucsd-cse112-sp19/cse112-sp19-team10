@@ -7,14 +7,16 @@ template.innerHTML = `
         }
 
         .text {
-          position: absolute;
+          position: relative;
           color: #ff9900;
           font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
           font-weight: 400;
           font-size: 14px;
-          top: 13px;
+          top: 5px;
+          left: 3px;
+          float: right;
         }
-
+        
         .rate {
             --colors: #F7BA2A;
             --void-color: #C6D1DE;
@@ -51,6 +53,7 @@ template.innerHTML = `
         .rate > label:hover ~ input:checked ~ label {
             color: var(--colors); 
         }
+
     </style>
     </style>
     <html>
@@ -59,18 +62,18 @@ template.innerHTML = `
     </head>
     <body>
       <div class="rate">
+        <span class="text"></span>
         <input type="radio" id="star5" name="rate"/>
-        <label class="fas fa-star" for="star5" title="text"></label>
+        <label class="fas fa-star" for="star5"></label>
         <input type="radio" id="star4" name="rate"/>
-        <label class="fas fa-star" for="star4" title="text"></label>
+        <label class="fas fa-star" for="star4"></label>
         <input type="radio" id="star3" name="rate"/>
-        <label class="fas fa-star" for="star3" title="text"></label>
+        <label class="fas fa-star" for="star3"></label>
         <input type="radio" id="star2" name="rate"/>
-        <label class="fas fa-star" for="star2" title="text"></label>
+        <label class="fas fa-star" for="star2"></label>
         <input type="radio" id="star1" name="rate"/>
-        <label class="fas fa-star" for="star1" title="text"></label>
+        <label class="fas fa-star" for="star1"></label>
       </div>
-      <span class="text"></span>
     </body>
     </html>
 `
@@ -164,6 +167,26 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  get texts () {
+    return this.getAttribute('texts')
+  }
+
+  set texts (val) {
+    this.setAttribute('texts', val)
+  }
+
+  get showText () {
+    return this.hasAttribute('show-text')
+  }
+
+  set showText (val) {
+    if (val) {
+      this.setAttribute('show-text', '')
+    } else {
+      this.removeAttribute('show-text')
+    }
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -171,10 +194,14 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('max')) {
       this.setAttribute('max', 5)
     }
+    if (!this.hasAttribute('colors')) {
+      this.setAttribute('colors', '#F7BA2A')
+    }
+    this.addEventListener('click', this._onClick)
   }
 
   static get observedAttributes () {
-    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -204,11 +231,46 @@ class CoreRate extends window.HTMLElement {
         this.radio[this.radio.length - numStars].setAttribute('checked', true)
       }
     }
-    if (this.hasAttribute('show-score')) {
+    if (this.hasAttribute('show-score') && this.hasAttribute('score-template')) {
       var scoreTemp = this.getAttribute('score-template')
       var score = this.getAttribute('v-model')
       this.text.innerHTML = score + scoreTemp
     }
+    if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
+      var texts = this.getAttribute('texts')
+      this.textsArr = texts.split("', '")
+      var length = this.textsArr.length
+      this.textsArr[0] = this.textsArr[0].substr(2)
+      this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
+    }
+  }
+
+  _onClick (event) {
+    this._updateVmodel()
+    this._updateTexts()
+  }
+
+  _updateVmodel () {
+    if (this.disabled) {
+      console.log('is disabled')
+      return
+    }
+    var i
+    var numStars = 0
+    for (i = 0; i < this.radio.length; i++) {
+      if (this.radio[i].checked) {
+        numStars = this.radio.length - i
+        console.log('numStars ' + numStars)
+        break
+      }
+    }
+    console.log('setting to ' + numStars)
+    this.setAttribute('v-model', numStars)
+  }
+
+  _updateTexts () {
+    var index = this.getAttribute('v-model')
+    this.text.innerHTML = this.textsArr[index - 1]
   }
 }
 
