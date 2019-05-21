@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe'
 
-fixture`Getting Started`
-  .page`../test/core-rate.html`
+fixture `Getting Started`
+  .page `../test/core-rate.html`
 // to use local file look at this https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#specifying-the-start-webpage
 // Eg fixture `MyFixture`
 //  .page `file:///user/my-website/index.html`;
@@ -9,36 +9,46 @@ fixture`Getting Started`
 
 test('rate component exists', async t => {
     await t
-        .expect(Selector('.rate').exists).ok()
+        .expect(Selector(() => document.querySelector('#shadow-root').exists)).ok()
 })
 
 test('one stars', async t => {
+    const core_component = Selector(() => document.querySelector('core-rate'))
+    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
     await t
-        .click(Selector('#star1'))
-        .expect(Selector('.rate').innerText).eql("1 stars");
+        .click(stars.nth(0))
+        .expect(core_component.textContent).eql("1 stars")
 })
 
 test('two stars', async t => {
+    const core_component = Selector(() => document.querySelector('core-rate'))
+    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
     await t
-        .click(Selector('#star2'))
-        .expect(Selector('.rate').innerText).eql("2 stars");
+        .click(stars.nth(1))
+        .expect(core_component.textContent).eql("2 stars")
 })
 
 test('three stars', async t => {
+    const core_component = Selector(() => document.querySelector('core-rate'))
+    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
     await t
-        .click(Selector('#star3'))
-        .expect(Selector('.rate').innerText).eql("3 stars");
+        .click(stars.nth(2))
+        .expect(core_component.textContent).eql("3 stars")
 })
 
 test('four stars', async t => {
+    const core_component = Selector(() => document.querySelector('core-rate'))
+    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
     await t
-        .click(Selector('#star4'))
-        .expect(Selector('.rate').innerText).eql("4 stars");
+        .click(stars.nth(3))
+        .expect(core_component.textContent).eql("4 stars")
 })
 
 test('five stars', async t => {
+    const core_component = Selector(() => document.querySelector('core-rate'))
+    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
     await t
-        .click(Selector('#star5'))
-        .expect(Selector('.rate').innerText).eql("5 stars");
+        .click(stars.nth(4))
+        .expect(core_component.innerText).eql("5 stars")
 })
 
