@@ -31,7 +31,7 @@ describe('core-rate', async => {
     await showroom.setAttribute('void-icon-class', 'el-icon-star-off')
     const att = await showroom.hasAttribute('void-icon-class')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('void-icon-class')
+    var val = await showroom.getAttribute('void-icon-class')
     assert.deepEqual(val, 'el-icon-star-off')
     await showroom.removeAttribute('void-icon-class')
     val = await showroom.hasAttribute('void-icon-class')

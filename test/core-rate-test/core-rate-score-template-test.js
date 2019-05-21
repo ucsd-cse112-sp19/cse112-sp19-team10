@@ -20,19 +20,19 @@ describe('core-rate', async => {
   })
 
   it('variable', async () => {
-    await showroom.setAttribute('score-template', '{value}')
+    await showroom.setAttribute('score-template', '{3.7}')
     const att = await showroom.hasAttribute('score-template')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('score-template')
-    assert.deepEqual(val, value)
+    assert.deepEqual(val, '3.7')
   })
 
   it('remove attribute', async () => {
-    await showroom.setAttribute('score-template', '{value}')
+    await showroom.setAttribute('score-template', '{3.7}')
     const att = await showroom.hasAttribute('score-template')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('score-template')
-    assert.deepEqual(val, value)
+    var val = await showroom.getAttribute('score-template')
+    assert.deepEqual(val, '3.7')
     await showroom.removeAttribute('score-template')
     val = await showroom.hasAttribute('score-template')
     assert.deepEqual(val, false)

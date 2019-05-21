@@ -31,7 +31,7 @@ describe('core-rate', async => {
     await showroom.setAttribute('icon-classes', "['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on']")
     const att = await showroom.hasAttribute('icon-classes')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('icon-classes')
+    var val = await showroom.getAttribute('icon-classes')
     assert.deepEqual(val, ['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on'])
     await showroom.removeAttribute('icon-classes')
     val = await showroom.hasAttribute('icon-classes')

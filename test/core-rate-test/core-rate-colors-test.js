@@ -31,7 +31,7 @@ describe('core-rate', async => {
     await showroom.setAttribute('colors', "['#F7BA2A', '#F7BA2A', '#F7BA2A']")
     const att = await showroom.hasAttribute('colors')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('colors')
+    var val = await showroom.getAttribute('colors')
     assert.deepEqual(val, ['#F7BA2A', '#F7BA2A', '#F7BA2A'])
     await showroom.removeAttribute('colors')
     val = await showroom.hasAttribute('colors')

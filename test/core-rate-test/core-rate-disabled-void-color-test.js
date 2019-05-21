@@ -31,7 +31,7 @@ describe('core-rate', async => {
     await showroom.setAttribute('disabled-void-color', '#EFF2F7')
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('disabled-void-color')
+    var val = await showroom.getAttribute('disabled-void-color')
     assert.deepEqual(val, '#EFF2F7')
     await showroom.removeAttribute('disabled-void-color')
     val = await showroom.hasAttribute('disabled-void-color')

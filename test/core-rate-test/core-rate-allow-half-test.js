@@ -29,7 +29,7 @@ describe('core-rate', async => {
 
   it('remove allow-half', async () => {
     await showroom.setAttribute('allow-half', 'true')
-    var att = await showroom.hasAttribute('allow-half')
+    const att = await showroom.hasAttribute('allow-half')
     assert.deepEqual(att, true)
     var val = await showroom.getAttribute('allow-half')
     assert.deepEqual(val, '')

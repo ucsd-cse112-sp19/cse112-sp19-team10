@@ -39,15 +39,12 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "jest": "^24.7.1",
-    "mocha": "^6.1.4",
-    "puppeteer": "^1.16.0",
-    "showroom": "^0.9.3",
     "documentation": "^11.0.0",
     "husky": "^2.3.0",
     "jest": "^24.7.1",
     "mocha": "^6.1.4",
     "puppeteer": "^1.16.0",
+    "showroom": "^0.9.3",
     "standard": "^12.0.1",
     "testcafe": "^1.1.4",
     "testcafe-browser-provider-saucelabs": "^1.7.0"

@@ -31,7 +31,7 @@ describe('core-rate', async => {
     await showroom.setAttribute('max', '5')
     const att = await showroom.hasAttribute('max')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('max')
+    var val = await showroom.getAttribute('max')
     assert.deepEqual(val, 5)
     await showroom.removeAttribute('max')
     val = await showroom.hasAttribute('max')

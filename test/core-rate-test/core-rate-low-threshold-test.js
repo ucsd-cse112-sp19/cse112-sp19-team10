@@ -31,7 +31,7 @@ describe('core-rate', async => {
     await showroom.setAttribute('low-threshold', '2')
     const att = await showroom.hasAttribute('low-threshold')
     assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('low-threshold')
+    var val = await showroom.getAttribute('low-threshold')
     assert.deepEqual(val, 4)
     await showroom.removeAttribute('low-threshold')
     val = await showroom.hasAttribute('low-threshold')

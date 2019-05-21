@@ -29,7 +29,7 @@ describe('core-rate', async => {
 
   it('remove attribute', async () => {
     await showroom.setAttribute('show-text', 'true')
-    var att = await showroom.hasAttribute('show-text')
+    const att = await showroom.hasAttribute('show-text')
     assert.deepEqual(att, true)
     var val = await showroom.getAttribute('show-text')
     assert.deepEqual(val, '')
