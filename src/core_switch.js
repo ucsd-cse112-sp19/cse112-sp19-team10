@@ -85,6 +85,14 @@ class CoreSwitch extends window.HTMLElement {
     this.aColor = shadowRoot.querySelector('.slider').style
   }
 
+  get vModel () {
+    return this.hasAttribute('v-model')
+  }
+
+  set vModel (val) {
+    this.setAttribute('v-model', val)
+  }
+
   get disabled () {
     return this.hasAttribute('disabled')
   }
@@ -95,14 +103,6 @@ class CoreSwitch extends window.HTMLElement {
     } else {
       this.removeAttribute('disabled')
     }
-  }
-
-  get vModel () {
-    return this.hasAttribute('v-model')
-  }
-
-  set vModel (val) {
-    this.setAttribute('v-model', val)
   }
 
   get activeValue() {
