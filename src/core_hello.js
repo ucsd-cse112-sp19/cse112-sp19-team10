@@ -1,13 +1,9 @@
-let template = document.createElement('template')
+let template = window.document.createElement('template')
 template.innerHTML = `
     <style>
         h1{
-            font-size: 50px;
-            font-family: "Courier New";
-        }
-
-        :host([lang='ko']) span{
-            font-family: "Batang";
+            font-size: var(--font-size, 50px);
+            font-family: var(--font-family, Courier New);
         }
 
         :host([rainbow]){
@@ -46,7 +42,7 @@ class CoreHello extends window.HTMLElement {
 
   // Lang attribute
   get lang () {
-    return this.hasAttribute('rainbow')
+    return this.getAttribute('lang')
   }
 
   set lang (val) {
@@ -82,6 +78,8 @@ class CoreHello extends window.HTMLElement {
       this.language.innerText = 'Hola Mundo'
     } else if (this.getAttribute('lang') === 'ko') {
       this.language.innerText = '안녕하세요 세계'
+    } else if (this.getAttribute('lang') === 'ge') {
+      this.language.innerText = 'Hallo Welt'
     }
   }
 }
