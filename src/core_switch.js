@@ -80,9 +80,18 @@ class CoreSwitch extends window.HTMLElement {
 
     // Place holder for disabled property
     this.disable = shadowRoot.querySelector('input[type=checkbox]')
+
     // Place holder for active-color property
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
+
+    this.addEventListener('click', e => {
+      // Don't toggle the drawer if it's disabled.
+      if (this.disabled) {
+        return
+      }
+      this.toggleSwitch()
+    })
   }
 
   get vModel () {
@@ -105,14 +114,14 @@ class CoreSwitch extends window.HTMLElement {
     }
   }
 
-  get activeValue() {
+  get activeValue () {
     return this.getAttribute('active-value')
   }
 
-  set activeValue(val) {
+  set activeValue (val) {
     this.setAttribute('active-value', val)
   }
-  
+
   get activeColor () {
     return this.getAttribute('active-color')
   }
@@ -131,7 +140,7 @@ class CoreSwitch extends window.HTMLElement {
 
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', false)
+      this.setAttribute('active-value', false)
     }
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
@@ -145,7 +154,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'active-value']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -160,9 +169,20 @@ class CoreSwitch extends window.HTMLElement {
       var newColor2 = this.getAttribute('inactive-color')
       this.aColor.setProperty('--inactive-color', newColor2)
     }
-    if (name === 'active-value') {
-      //TODO: MAKE TOOLTIP?
-      this.setAttribute('title', 'Switch value: ' + newValue)
+  }
+
+  toggleSwitch () {
+    if (this.disable.checked) {
+      let activeValue = this.getAttribute('active-value')
+      this.setAttribute('v-model', activeValue)
+      if (activeValue === 'true') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + activeValue)
+      }
+    } else {
+      this.removeAttribute('title')
     }
   }
 }
