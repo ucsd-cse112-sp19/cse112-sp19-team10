@@ -54,7 +54,6 @@ template.innerHTML = `
         .rate > label:hover ~ input:checked ~ label {
             color: var(--colors); 
         }
-
     </style>
     </style>
     <html>
@@ -196,6 +195,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('text-color', val)
   }
 
+  get disabledVoidColor () {
+    return this.getAttribute('disabled-void-color')
+  }
+
+  set disabledVoidColor (val) {
+    this.setAttribute('disabled-void-color', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -206,14 +213,20 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '#F7BA2A')
     }
+    if (!this.hasAttribute('void-color')) {
+      this.setAttribute('void-color', '#C6D1DE')
+    }
     if (!this.hasAttribute('text-color')) {
       this.setAttribute('text-color', '#1F2D3D')
+    }
+    if (!this.hasAttribute('disabled-void-color')) {
+      this.setAttribute('disabled-void-color', '#C6D1DE')
     }
     this.addEventListener('click', this._onClick)
   }
 
   static get observedAttributes () {
-    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text', 'text-color']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text', 'text-color', 'disabled-void-color']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -257,6 +270,10 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('text-color')) {
       this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
+    }
+    if (this.hasAttribute('disabled-void-color') && this.hasAttribute('disabled')) {
+      var dVoid = this.getAttribute('disabled-void-color')
+      this.colors1.setProperty('--void-color', dVoid)
     }
   }
 
