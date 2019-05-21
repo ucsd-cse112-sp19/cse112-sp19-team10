@@ -98,11 +98,14 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model']
+    return ['v-model', 'active-value']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
-
+    if (name === 'active-value') {
+      //TODO: MAKE TOOLTIP?
+      this.setAttribute('title', 'Switch value: ' + newValue)
+    }
   }
 }
 
