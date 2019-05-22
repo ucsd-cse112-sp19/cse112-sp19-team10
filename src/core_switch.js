@@ -81,10 +81,10 @@ class CoreSwitch extends window.HTMLElement {
     // Place holder for disabled property
     this.disable = shadowRoot.querySelector('input[type=checkbox]')
 
-    // Place holder for active-color property
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
 
+    // Event listener for toggling switch
     this.addEventListener('click', e => {
       // Don't toggle the drawer if it's disabled.
       if (this.disabled) {
@@ -146,6 +146,14 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('inactive-color', val)
   }
 
+  get name () {
+    return this.getAttribute('name')
+  }
+
+  set name (val) {
+    this.setAttribute('name', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
@@ -166,7 +174,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -180,6 +188,9 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('inactive-color')) {
       var newColor2 = this.getAttribute('inactive-color')
       this.aColor.setProperty('--inactive-color', newColor2)
+    }
+    if (this.hasAttribute('name')) {
+      this.disable.setAttribute('name', this.getAttribute('name'))
     }
   }
 
