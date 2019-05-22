@@ -284,7 +284,6 @@ class CoreRate extends window.HTMLElement {
 
   _updateVmodel () {
     if (this.disabled) {
-      console.log('is disabled')
       return
     }
     var i
@@ -292,17 +291,17 @@ class CoreRate extends window.HTMLElement {
     for (i = 0; i < this.radio.length; i++) {
       if (this.radio[i].checked) {
         numStars = this.radio.length - i
-        console.log('numStars ' + numStars)
         break
       }
     }
-    console.log('setting to ' + numStars)
     this.setAttribute('v-model', numStars)
   }
 
   _updateTexts () {
     var index = this.getAttribute('v-model')
-    this.text.innerHTML = this.textsArr[index - 1]
+    if (index !== 0 && this.textsArr) {
+      this.text.innerHTML = this.textsArr[index - 1]
+    }
   }
 }
 
