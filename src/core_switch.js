@@ -81,10 +81,10 @@ class CoreSwitch extends window.HTMLElement {
     // Place holder for disabled property
     this.disable = shadowRoot.querySelector('input[type=checkbox]')
 
-    // Place holder for active-color property
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
 
+    // Event listener for toggling switch
     this.addEventListener('click', e => {
       // Don't toggle the drawer if it's disabled.
       if (this.disabled) {
