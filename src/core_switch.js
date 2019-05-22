@@ -138,6 +138,14 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('inactive-color', val)
   }
 
+  get name () {
+    return this.getAttribute('name')
+  }
+
+  set name (val) {
+    this.setAttribute('name', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
