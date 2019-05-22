@@ -177,6 +177,9 @@ class CoreSwitch extends window.HTMLElement {
       var newColor2 = this.getAttribute('inactive-color')
       this.aColor.setProperty('--inactive-color', newColor2)
     }
+    if (this.hasAttribute('name')) {
+      this.disable.setAttribute('name', this.getAttribute('name'))
+    }
   }
 
   toggleSwitch () {
