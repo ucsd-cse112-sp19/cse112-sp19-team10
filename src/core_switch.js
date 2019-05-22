@@ -122,6 +122,14 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('active-value', val)
   }
 
+  get inactiveValue () {
+    return this.getAttribute('inactive-value')
+  }
+
+  set inactiveValue (val) {
+    this.setAttribute('inactive-value', val)
+  }
+
   get activeColor () {
     return this.getAttribute('active-color')
   }
@@ -153,12 +161,16 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
     }
+    if (!this.hasAttribute('inactive-value')) {
+      this.setAttribute('inactive-value', false)
+    }
     if (!this.hasAttribute('active-color')) {
       this.setAttribute('active-color', '#409EFF')
     }
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
+    this.toggleSwitch()
   }
 
   static get observedAttributes () {
@@ -193,7 +205,14 @@ class CoreSwitch extends window.HTMLElement {
         this.setAttribute('title', 'Switch value: ' + activeValue)
       }
     } else {
-      this.removeAttribute('title')
+      let inactiveValue = this.getAttribute('inactive-value')
+      this.setAttribute('v-model', inactiveValue)
+      if (inactiveValue === 'false') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + inactiveValue)
+      }
     }
   }
 }
