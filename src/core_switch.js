@@ -122,6 +122,14 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('active-value', val)
   }
 
+  get inactiveValue () {
+    return this.getAttribute('inactive-value')
+  }
+
+  set inactiveValue (val) {
+    this.setAttribute('inactive-value', val)
+  }
+
   get activeColor () {
     return this.getAttribute('active-color')
   }
