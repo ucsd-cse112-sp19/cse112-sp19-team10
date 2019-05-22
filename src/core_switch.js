@@ -162,6 +162,7 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
+    this.toggleSwitch()
   }
 
   static get observedAttributes () {
@@ -195,7 +196,7 @@ class CoreSwitch extends window.HTMLElement {
     } else {
       let inactiveValue = this.getAttribute('inactive-value')
       this.setAttribute('v-model', inactiveValue)
-      if (inactiveValue === 'true') {
+      if (inactiveValue === 'false') {
         this.removeAttribute('title')
       } else {
         // TODO: MAKE TOOLTIP?
