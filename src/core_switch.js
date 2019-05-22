@@ -193,7 +193,14 @@ class CoreSwitch extends window.HTMLElement {
         this.setAttribute('title', 'Switch value: ' + activeValue)
       }
     } else {
-      this.removeAttribute('title')
+      let inactiveValue = this.getAttribute('inactive-value')
+      this.setAttribute('v-model', inactiveValue)
+      if (inactiveValue === 'true') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + inactiveValue)
+      }
     }
   }
 }
