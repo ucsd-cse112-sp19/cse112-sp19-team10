@@ -9,7 +9,7 @@ fixture `Getting Started`
 
 test('rate component exists', async t => {
     await t
-        .expect(Selector(() => document.querySelector('#shadow-root').exists)).ok()
+        .expect(Selector(() => document.querySelector('core-rate').exists)).ok()
 })
 
 test('one stars', async t => {
