@@ -162,7 +162,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
