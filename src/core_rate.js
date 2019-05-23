@@ -144,6 +144,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('low-threshold', val)
   }
 
+  get highThreshold () {
+    return this.getAttribute('high-threshold')
+  }
+
+  set highThreshold (val) {
+    this.setAttribute('high-threshold', val)
+  }
+
   get colors () {
     return this.getAttribute('colors')
   }
