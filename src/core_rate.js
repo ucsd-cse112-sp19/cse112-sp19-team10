@@ -250,7 +250,7 @@ class CoreRate extends window.HTMLElement {
       }
     }
     if (this.hasAttribute('show-score') && this.hasAttribute('score-template') && 
-       !this.hasAttribute('show-text')) {
+       !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
       var scoreTemp = this.getAttribute('score-template')
       var score = this.getAttribute('v-model')
       this.text.innerHTML = score + scoreTemp
