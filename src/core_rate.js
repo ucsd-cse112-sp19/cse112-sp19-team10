@@ -77,6 +77,8 @@ class CoreRate extends window.HTMLElement {
 
     // Place holder for colors property
     this.colors1 = shadowRoot.querySelector('.rate').style
+    // Place holder for icon property
+    this.icon = shadowRoot.querySelectorAll('.fas')
   }
 
   get vModel () {
@@ -111,6 +113,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('void-color', val)
   }
 
+  get iconClasses () {
+    return this.getAttribute('icon-classes')
+  }
+
+  set iconClasses (val) {
+    this.setAttribute('icon-classes', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -121,7 +131,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'colors']
+    return ['v-model', 'colors', 'icon-classes']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -132,6 +142,13 @@ class CoreRate extends window.HTMLElement {
     if (this.hasAttribute('void-color')) {
       var newColor2 = this.getAttribute('void-color')
       this.colors1.setProperty('--void-color', newColor2)
+    }
+    if (this.hasAttribute('icon-classes')) {
+      var newClass1 = this.getAttribute('icon-classes')
+      var i
+      for (i = 0; i < this.icon.length; i++) {
+        this.icon[i].setAttribute('class', newClass1)
+      }
     }
   }
 }
