@@ -328,7 +328,13 @@ class CoreRate extends window.HTMLElement {
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
       var newClass2 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        this.icon[i].setAttribute('class', newClass2)
+        if(this.icon[i].classList.contains('low')){
+          this.icon[i].setAttribute('class', 'low ' + newClass2)
+        } else if(this.icon[i].classList.contains('mid')){
+          this.icon[i].setAttribute('class', 'mid ' + newClass2)
+        } else if(this.icon[i].classList.contains('high')){
+          this.icon[i].setAttribute('class', 'high ' + newClass2)
+        }
       }
     }
     if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
