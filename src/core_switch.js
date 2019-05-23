@@ -1,20 +1,33 @@
 let template = document.createElement('template')
 template.innerHTML = `
 <style>
-.switch {
+  .switch {
     position: relative;
     display: inline-block;
     width: 40px;
     height: 22px;
-}
-
-.switch input {
+  }
+  .switch input {
     opacity: 0;
     width: 0;
     height: 0;
-}
-
-.slider {
+  }
+  .text {
+    position: absolute;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    top: 3px;
+  }
+  #inactive_text {
+    right: 45px;
+    float: left;
+  }
+  #active_text {
+    float: right;
+    left: 45px;
+  }
+  .slider {
     --active-color: #409EFF;
     --inactive-color: #C0CCDA;
     position: absolute;
@@ -26,9 +39,8 @@ template.innerHTML = `
     background-color: var(--inactive-color);
     -webkit-transition: .4s;
     transition: .4s;
-}
-
-.slider:before {
+  }
+  .slider:before {
     position: absolute;
     content: "";
     height: 18px;
@@ -38,51 +50,62 @@ template.innerHTML = `
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-}
-
-input:checked + .slider {
+  }
+  input:checked + .slider {
     background-color: var(--active-color);
-}
-
-input:checked + .slider:before {
+  }
+  input:checked + .slider:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);
-}
-
-.slider.round {
+  }
+  .slider.round {
     border-radius: 22px;
-}
-  
-.slider.round:before {
-    border-radius: 50%;
-}
+  }
 
-input[disabled] + span {
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  input[disabled] + span {
     cursor: not-allowed;
     opacity: .6;
-}
-
-#active_icon {
-  position: absolute;
-  left: 45px;
-  top: 2px;
-}
-
-#inactive_icon {
-  position: absolute;
-  right: 45px;
-  top: 2px;
-  color: #409EFF;
-}
-
-input:checked ~ #active_icon {
-  color: #409EFF;
-}
-
-input:checked ~ #inactive_icon {
-  color: #000000;
-}
+  }
+  #active_icon {
+    position: absolute;
+    left: 45px;
+    top: 2px;
+  }
+  #inactive_icon {
+    --active-color: #409EFF;
+    position: absolute;
+    right: 45px;
+    top: 2px;
+    color: var(--active-color);
+  }
+  input:checked ~ #active_icon {
+    --active-color: #409EFF;
+    color: var(--active-color);
+  }
+  input:checked ~ #inactive_icon {
+    color: #000000;
+  }
+  #active_icon {
+    position: absolute;
+    left: 45px;
+    top: 2px;
+  }
+  #inactive_icon {
+    position: absolute;
+    right: 45px;
+    top: 2px;
+    color: #409EFF;
+  }
+  input:checked ~ #active_icon {
+    color: #409EFF;
+  }
+  input:checked ~ #inactive_icon {
+    color: #000000;
+  }
 </style>
 <html>
 <head>
@@ -90,10 +113,12 @@ input:checked ~ #inactive_icon {
 </head>
 <body>
   <label class="switch">
+    <span class="text" id="inactive_text"></span>
     <input type="checkbox">
     <span class="slider round"></span>
     <i id="inactive_icon"></i>
     <i id="active_icon"></i>
+    <span class="text" id="active_text"></span>
   </label>
 </body>
 </html>
@@ -115,6 +140,10 @@ class CoreSwitch extends window.HTMLElement {
     this.activeIcon = shadowRoot.querySelector('#active_icon')
     // Place holder for inactive icon
     this.inactiveIcon = shadowRoot.querySelector('#inactive_icon')
+    // Place holder for active text
+    this.aText = shadowRoot.querySelector('#active_text')
+    // Place holder for inactive text
+    this.iaText = shadowRoot.querySelector('#inactive_text')
 
     // Event listener for toggling switch
     this.addEventListener('click', e => {
@@ -194,6 +223,22 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('inactive-icon-class', val)
   }
 
+  get activeText () {
+    return this.getAttribute('active-text')
+  }
+
+  set activeText (val) {
+    this.setAttribute('active-text', val)
+  }
+
+  get inactiveText () {
+    return this.getAttribute('inactive-text')
+  }
+
+  set inactiveText (val) {
+    this.setAttribute('inactive-text', val)
+  }
+
   get name () {
     return this.getAttribute('name')
   }
@@ -218,11 +263,18 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
+    if (!this.hasAttribute('active-text')) {
+      this.setAttribute('active-text', '')
+    }
+    if (!this.hasAttribute('inactive-text')) {
+      this.setAttribute('inactive-text', '')
+    }
+    this.addEventListener('click', this._onClick)
     this.toggleSwitch()
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class', 'active-text', 'inactive-text']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -240,14 +292,50 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('active-icon-class')) {
       var newClass1 = this.getAttribute('active-icon-class')
       this.activeIcon.setAttribute('class', newClass1)
+      var actIconColor = this.getAttribute('active-color')
+      this.activeIcon.style.setProperty('--active-color', actIconColor)
     }
     if (this.hasAttribute('inactive-icon-class')) {
       var newClass2 = this.getAttribute('inactive-icon-class')
       this.inactiveIcon.setAttribute('class', newClass2)
+      var inactIconColor = this.getAttribute('active-color')
+      this.inactiveIcon.style.setProperty('--active-color', inactIconColor)
+    }
+    if (this.hasAttribute('active-text')) {
+      var activeText = this.getAttribute('active-text')
+      this.aText.innerHTML = activeText
+      var actColor1 = this.getAttribute('active-color')
+      if (this.check.checked) {
+        this.aText.style.setProperty('color', actColor1)
+      } else {
+        this.aText.style.setProperty('color', 'black')
+      }
+    }
+    if (this.hasAttribute('inactive-text')) {
+      var inactiveText = this.getAttribute('inactive-text')
+      this.iaText.innerHTML = inactiveText
+      var actColor2 = this.getAttribute('active-color')
+      if (!this.check.checked) {
+        this.iaText.style.setProperty('color', actColor2)
+      } else {
+        this.iaText.style.setProperty('color', 'black')
+      }
     }
     if (this.hasAttribute('name')) {
       this.disable.setAttribute('name', this.getAttribute('name'))
     }
+  }
+
+  _onClick (event) {
+    this._updateVmodel()
+  }
+
+  _updateVmodel () {
+    if (this.disabled) {
+      return
+    }
+    var isChecked = this.check.checked
+    this.setAttribute('v-model', isChecked)
   }
 
   toggleSwitch () {
