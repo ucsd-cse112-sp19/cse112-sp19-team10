@@ -152,7 +152,7 @@ test('icon-classes attribute', async t => {
         .expect(star.getAttribute('class')).eql("fas fa-smile")
 })
 
-/*
+/* TODO: when ready for review
 test('void-icon-class attribute', async t => {
     const rate = await Selector(() => {
         return document.querySelectorAll('core-rate')[2]
@@ -161,9 +161,7 @@ test('void-icon-class attribute', async t => {
         return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0]
     })
     await t
-        .expect(rate.hasAttribute('icon-classes')).eql(true)
-        .expect(rate.getAttribute('icon-classes')).contains('TODO: get void-icon-class value')
-        .expect(star.getAttribute('style')).contains("void-icon-class:" + 'TODO: get void-icon-class value')
+        .expect(star.getAttribute('class')).eql("TODO: write name of void-icon-class")
 })
 */
 
