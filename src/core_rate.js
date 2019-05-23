@@ -288,33 +288,18 @@ class CoreRate extends window.HTMLElement {
     if (this.hasAttribute('low-threshold') || this.hasAttribute('high-threshold')) {
       var low = parseInt(this.getAttribute('low-threshold'))
       var high = parseInt(this.getAttribute('high-threshold'))
-      // if (low < high) {
-        for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
-          this.radio[i].classList.add('low')
-          this.icon[i].classList.add('low')
-        }
-        for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
-          this.radio[i].classList.add('mid')
-          this.icon[i].classList.add('mid')
-        }
-        for (i = this.radio.length - high; i >= 0; i--) {
-          this.radio[i].classList.add('high')
-          this.icon[i].classList.add('high')
-        }
-      // } else {
-      //   for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
-      //     this.radio[i].classList.add('low')
-      //     this.icon[i].classList.add('low')
-      //   }
-      //   for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
-      //     this.radio[i].classList.add('mid')
-      //     this.icon[i].classList.add('mid')
-      //   }
-      //   for (i = this.radio.length - high; i >= 0; i--) {
-      //     this.radio[i].classList.add('high')
-      //     this.icon[i].classList.add('high')
-      //   }
-      // }
+      for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
+        this.radio[i].classList.add('low')
+        this.icon[i].classList.add('low')
+      }
+      for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
+        this.radio[i].classList.add('mid')
+        this.icon[i].classList.add('mid')
+      }
+      for (i = this.radio.length - high; i >= 0; i--) {
+        this.radio[i].classList.add('high')
+        this.icon[i].classList.add('high')
+      }
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
