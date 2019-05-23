@@ -107,8 +107,6 @@ class CoreSwitch extends window.HTMLElement {
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    // Place holder for disabled property
-    this.disable = shadowRoot.querySelector('input[type=checkbox]')
     // Place holder for checkbox
     this.check = shadowRoot.querySelector('input[type=checkbox]')
     // Place holder for color
@@ -253,7 +251,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   toggleSwitch () {
-    if (this.check) {
+    if (this.check.checked) {
       let activeValue = this.getAttribute('active-value')
       this.setAttribute('v-model', activeValue)
       if (activeValue === 'true') {
