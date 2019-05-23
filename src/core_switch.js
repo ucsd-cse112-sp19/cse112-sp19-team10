@@ -222,7 +222,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'active-icon-class', 'inactive-icon-class', 'name']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -244,7 +244,7 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('inactive-icon-class')) {
       var newClass2 = this.getAttribute('inactive-icon-class')
       this.inactiveIcon.setAttribute('class', newClass2)
-    }
+    } 
     if (this.hasAttribute('name')) {
       this.disable.setAttribute('name', this.getAttribute('name'))
     }
