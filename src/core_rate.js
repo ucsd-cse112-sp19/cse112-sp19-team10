@@ -279,21 +279,26 @@ class CoreRate extends window.HTMLElement {
       var high = 4
       // var high = parseInt(this.getAttribute('high-threshold'))
       // if (low < high) {
-      for (i = 0; i <= low; i++) {
+      for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
         this.radio[i].classList.add('low')
+        this.icon[i].classList.add('low')
       }
-      for (i = low+1; i < high; i++) {
+      for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
         this.radio[i].classList.add('mid')
+        this.icon[i].classList.add('mid')
       }
-      for (i = high; i < this.radio.length; i++) {
+      for (i = this.radio.length - high; i >=0; i--) {
         this.radio[i].classList.add('high')
+        this.icon[i].classList.add('high')
       }
       // } else {
-      // for (i = 0; i < high; i++) {
+      // for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
       //   this.radio[i].classList.add('mid')
+      //   this.icon[i].classList.add('mid')
       // }
-      // for (i = high; i < this.radio.length; i++) {
+      // for (i = this.radio.length - high; i >=0; i--) {
       //   this.radio[i].classList.add('high')
+      //   this.icon[i].classList.add('high')
       // }
       // }
     }
