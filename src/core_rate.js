@@ -274,7 +274,7 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].setAttribute('disabled', true)
       }
     }
-    if (this.hasAttribute('low-threshold')) {// || this.hasAttribute('high-threshold')) {
+    if (this.hasAttribute('low-threshold')) { // || this.hasAttribute('high-threshold')) {
       var low = parseInt(this.getAttribute('low-threshold'))
       var high = 4
       // var high = parseInt(this.getAttribute('high-threshold'))
@@ -287,7 +287,7 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].classList.add('mid')
         this.icon[i].classList.add('mid')
       }
-      for (i = this.radio.length - high; i >=0; i--) {
+      for (i = this.radio.length - high; i >= 0; i--) {
         this.radio[i].classList.add('high')
         this.icon[i].classList.add('high')
       }
@@ -304,7 +304,7 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
-      var colors = newColor1.slice(1,newColor1.length-1).split(",")
+      var colors = newColor1.slice(1, newColor1.length - 1).split(',')
       this.colors1.setProperty('--low-color', colors[0])
       this.colors1.setProperty('--mid-color', colors[1])
       this.colors1.setProperty('--high-color', colors[2])
@@ -319,13 +319,13 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('icon-classes')) {
       var newClass1 = this.getAttribute('icon-classes')
-      var classes = newClass1.slice(1,newClass1.length-1).split(",")
+      var classes = newClass1.slice(1, newClass1.length - 1).split(',')
       for (i = 0; i < this.icon.length; i++) {
-        if(this.icon[i].classList.contains('low')){
+        if (this.icon[i].classList.contains('low')) {
           this.icon[i].setAttribute('class', 'low ' + classes[0])
-        } else if(this.icon[i].classList.contains('mid')){
+        } else if (this.icon[i].classList.contains('mid')) {
           this.icon[i].setAttribute('class', 'mid ' + classes[1])
-        } else if(this.icon[i].classList.contains('high')){
+        } else if (this.icon[i].classList.contains('high')) {
           this.icon[i].setAttribute('class', 'high ' + classes[2])
         }
       }
@@ -333,11 +333,11 @@ class CoreRate extends window.HTMLElement {
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
       var newClass2 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        if(this.icon[i].classList.contains('low')){
+        if (this.icon[i].classList.contains('low')) {
           this.icon[i].setAttribute('class', 'low ' + newClass2)
-        } else if(this.icon[i].classList.contains('mid')){
+        } else if (this.icon[i].classList.contains('mid')) {
           this.icon[i].setAttribute('class', 'mid ' + newClass2)
-        } else if(this.icon[i].classList.contains('high')){
+        } else if (this.icon[i].classList.contains('high')) {
           this.icon[i].setAttribute('class', 'high ' + newClass2)
         }
       }
