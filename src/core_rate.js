@@ -250,6 +250,9 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('low-threshold')) {
       this.setAttribute('low-threshold', 2)
     }
+    if (!this.hasAttribute('high-threshold')) {
+      this.setAttribute('high-threshold', 4)
+    }
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
     }
