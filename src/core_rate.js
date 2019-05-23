@@ -328,25 +328,18 @@ class CoreRate extends window.HTMLElement {
       var newClass1 = this.getAttribute('icon-classes')
       var classes = newClass1.slice(1,newClass1.length-1).split(",")
       for (i = 0; i < this.icon.length; i++) {
-        if(this.icon[i].classList.contains('low')){
-          this.icon[i].setAttribute('class', 'low ' + classes[0])
-        } else if(this.icon[i].classList.contains('mid')){
-          this.icon[i].setAttribute('class', 'mid ' + classes[1])
-        } else if(this.icon[i].classList.contains('high')){
-          this.icon[i].setAttribute('class', 'high ' + classes[2])
-        }
+        this.icon[i].setAttribute('class', newClass1)
+      }
+    }
+    if (this.hasAttribute('disabled')) {
+      for (i = 0; i < this.radio.length; i++) {
+        this.radio[i].setAttribute('disabled', true)
       }
     }
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
       var newClass2 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        if(this.icon[i].classList.contains('low')){
-          this.icon[i].setAttribute('class', 'low ' + newClass2)
-        } else if(this.icon[i].classList.contains('mid')){
-          this.icon[i].setAttribute('class', 'mid ' + newClass2)
-        } else if(this.icon[i].classList.contains('high')){
-          this.icon[i].setAttribute('class', 'high ' + newClass2)
-        }
+        this.icon[i].setAttribute('class', newClass2)
       }
     }
     if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
