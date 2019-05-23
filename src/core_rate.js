@@ -277,7 +277,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
+    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'void-icon-class', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
