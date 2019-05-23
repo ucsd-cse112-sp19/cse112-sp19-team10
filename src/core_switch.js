@@ -193,7 +193,7 @@ class CoreSwitch extends window.HTMLElement {
   set inactiveIconClass (val) {
     this.setAttribute('inactive-icon-class', val)
   }
-  
+
   get name () {
     return this.getAttribute('name')
   }
@@ -244,7 +244,7 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('inactive-icon-class')) {
       var newClass2 = this.getAttribute('inactive-icon-class')
       this.inactiveIcon.setAttribute('class', newClass2)
-    } 
+    }
     if (this.hasAttribute('name')) {
       this.disable.setAttribute('name', this.getAttribute('name'))
     }
