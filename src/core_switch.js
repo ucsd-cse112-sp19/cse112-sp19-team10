@@ -115,6 +115,24 @@ class CoreSwitch extends window.HTMLElement {
     this.activeIcon = shadowRoot.querySelector('#active_icon')
     // Place holder for inactive icon
     this.inactiveIcon = shadowRoot.querySelector('#inactive_icon')
+
+
+    // Event listener for toggling switch
+    this.addEventListener('click', e => {
+      // Don't toggle the drawer if it's disabled.
+      if (this.disabled) {
+        return
+      }
+      this.toggleSwitch()
+    })
+  }
+
+  get vModel () {
+    return this.hasAttribute('v-model')
+  }
+
+  set vModel (val) {
+    this.setAttribute('v-model', val)
   }
 
   get disabled () {
@@ -129,17 +147,20 @@ class CoreSwitch extends window.HTMLElement {
     }
   }
 
-  get vModel () {
-    return this.hasAttribute('v-model')
+  get activeValue () {
+    return this.getAttribute('active-value')
   }
 
-  set vModel (val) {
-    const isChecked = Boolean(val)
-    if (isChecked) {
-      this.setAttribute('v-model', '')
-    } else {
-      this.removeAttribute('v-model')
-    }
+  set activeValue (val) {
+    this.setAttribute('active-value', val)
+  }
+
+  get inactiveValue () {
+    return this.getAttribute('inactive-value')
+  }
+
+  set inactiveValue (val) {
+    this.setAttribute('inactive-value', val)
   }
 
   get activeColor () {
@@ -172,11 +193,24 @@ class CoreSwitch extends window.HTMLElement {
 
   set inactiveIconClass (val) {
     this.setAttribute('inactive-icon-class', val)
+
+  get name () {
+    return this.getAttribute('name')
+  }
+
+  set name (val) {
+    this.setAttribute('name', val)
   }
 
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
+    }
+    if (!this.hasAttribute('active-value')) {
+      this.setAttribute('active-value', true)
+    }
+    if (!this.hasAttribute('inactive-value')) {
+      this.setAttribute('inactive-value', false)
     }
     if (!this.hasAttribute('active-color')) {
       this.setAttribute('active-color', '#409EFF')
@@ -184,10 +218,11 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
+    this.toggleSwitch()
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'active-icon-class', 'inactive-icon-class']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -209,6 +244,31 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('inactive-icon-class')) {
       var newClass2 = this.getAttribute('inactive-icon-class')
       this.inactiveIcon.setAttribute('class', newClass2)
+    } 
+    if (this.hasAttribute('name')) {
+      this.disable.setAttribute('name', this.getAttribute('name'))
+    }
+  }
+
+  toggleSwitch () {
+    if (this.disable.checked) {
+      let activeValue = this.getAttribute('active-value')
+      this.setAttribute('v-model', activeValue)
+      if (activeValue === 'true') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + activeValue)
+      }
+    } else {
+      let inactiveValue = this.getAttribute('inactive-value')
+      this.setAttribute('v-model', inactiveValue)
+      if (inactiveValue === 'false') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + inactiveValue)
+      }
     }
   }
 }
