@@ -334,7 +334,6 @@ class CoreRate extends window.HTMLElement {
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
         this.icon[i].setAttribute('class', newClass2)
       }
-      }
     }
     if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
       var texts = this.getAttribute('texts')
