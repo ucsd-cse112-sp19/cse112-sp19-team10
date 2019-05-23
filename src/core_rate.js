@@ -102,6 +102,16 @@ class CoreRate extends window.HTMLElement {
 
   set max (val) {
     this.setAttribute('max', val)
+  get disabled () {
+    return this.hasAttribute('disabled')
+  }
+
+  set disabled (val) {
+    if (val) {
+      this.setAttribute('disabled', '')
+    } else {
+      this.removeAttribute('disabled')
+    }
   }
 
   get colors () {
