@@ -220,7 +220,7 @@ class CoreRate extends window.HTMLElement {
       this.setAttribute('max', 5)
     }
     if (!this.hasAttribute('low-threshold')) {
-      this.setAttribute('lowthreshold', 2)
+      this.setAttribute('low-threshold', 2)
     }
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '#F7BA2A')
@@ -253,6 +253,29 @@ class CoreRate extends window.HTMLElement {
       for (i = 0; i < this.radio.length; i++) {
         this.radio[i].setAttribute('disabled', true)
       }
+    }
+    if (this.hasAttribute('low-threshold')) {// || this.hasAttribute('high-threshold')) {
+      var low = parseInt(this.getAttribute('low-threshold'))
+      var high = 4
+      // var high = parseInt(this.getAttribute('high-threshold'))
+      // if (low < high) {
+      for (i = 0; i <= low; i++) {
+        this.radio[i].classList.add('low')
+      }
+      for (i = low+1; i < high; i++) {
+        this.radio[i].classList.add('mid')
+      }
+      for (i = high; i < this.radio.length; i++) {
+        this.radio[i].classList.add('high')
+      }
+      // } else {
+      // for (i = 0; i < high; i++) {
+      //   this.radio[i].classList.add('mid')
+      // }
+      // for (i = high; i < this.radio.length; i++) {
+      //   this.radio[i].classList.add('high')
+      // }
+      // }
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
