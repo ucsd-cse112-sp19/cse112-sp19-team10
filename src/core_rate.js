@@ -203,6 +203,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('disabled-void-color', val)
   }
 
+  get disabledVoidIcon () {
+    return this.getAttribute('disabled-void-icon-class')
+  }
+
+  set disabledVoidIcon (val) {
+    this.setAttribute('disabled-void-icon-class', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -226,7 +234,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text', 'text-color', 'disabled-void-color']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text', 'text-color', 'disabled-void-color', 'disabled-void-icon-class']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -275,6 +283,12 @@ class CoreRate extends window.HTMLElement {
       var dVoid = this.getAttribute('disabled-void-color')
       this.colors1.setProperty('--void-color', dVoid)
     }
+    if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
+      var newClass2 = this.getAttribute('disabled-void-icon-class')
+      for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
+        this.icon[i].setAttribute('class', newClass2)
+      }
+    }
   }
 
   _onClick (event) {
@@ -284,7 +298,6 @@ class CoreRate extends window.HTMLElement {
 
   _updateVmodel () {
     if (this.disabled) {
-      console.log('is disabled')
       return
     }
     var i
@@ -292,11 +305,9 @@ class CoreRate extends window.HTMLElement {
     for (i = 0; i < this.radio.length; i++) {
       if (this.radio[i].checked) {
         numStars = this.radio.length - i
-        console.log('numStars ' + numStars)
         break
       }
     }
-    console.log('setting to ' + numStars)
     this.setAttribute('v-model', numStars)
   }
 
