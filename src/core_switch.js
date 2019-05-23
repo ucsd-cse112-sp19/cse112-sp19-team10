@@ -322,7 +322,7 @@ class CoreSwitch extends window.HTMLElement {
       }
     }
     if (this.hasAttribute('name')) {
-      this.disable.setAttribute('name', this.getAttribute('name'))
+      this.check.setAttribute('name', this.getAttribute('name'))
     }
   }
 
