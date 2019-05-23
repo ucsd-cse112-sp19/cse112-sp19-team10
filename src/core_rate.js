@@ -248,11 +248,11 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
     }
-    if (!this.hasAttribute('text-color')) {
-      this.setAttribute('text-color', '#1F2D3D')
-    }
     if (!this.hasAttribute('disabled-void-color')) {
       this.setAttribute('disabled-void-color', '#C6D1DE')
+    }
+    if (!this.hasAttribute('text-color')) {
+      this.setAttribute('text-color', '#1F2D3D')
     }
     this.addEventListener('click', this._onClick)
   }
