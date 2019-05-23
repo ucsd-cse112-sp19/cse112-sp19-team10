@@ -13,58 +13,19 @@ test('rate component exists', async t => {
 })
 
 test('core-rate count', async t => {
-    const rate_group = Selector(() => {
+    const rate_group = await Selector(() => {
         return document.querySelectorAll('core-rate')
     })
     await t
         .expect(rate_group.count).eql(6)
 })
 
-test('text attribute initial state', async t => {
-    const output_txt = Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('span')
-    })
-    await t
-        .expect(output_txt.innerText).eql("0 points")
-})
-
-test('text attribute new state', async t => {
-    const star = Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[1]
-    })
-    const output_txt = Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('span')
-    })
-    await t
-        .click(star)
-        .expect(output_txt.innerText).eql("4 points")
-})
-
-test('show-score attribute', async t => {
-    const rate = Selector(() => {
-        return document.querySelectorAll('core-rate')[4]
-    })
-    const star = Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[1]
-    })
-    const output_txt = Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('span')
-    })
-    await t
-        .expect(rate.withAttribute('show-score', '').exists).ok()
-        .click(star)
-        .expect(output_txt.innerText).notEql('')
-})
-
 test('v-model attribute', async t => {
-    const rate = Selector(() => {
+    const rate = await Selector(() => {
         return document.querySelectorAll('core-rate')[5]
     })
-    const star = Selector(() => {
+    const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
-    })
-    const output_txt = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
     })
     await t
         .expect(rate.withAttribute('v-model', '0').exists).ok()
@@ -72,65 +33,223 @@ test('v-model attribute', async t => {
         .expect(rate.withAttribute('v-model', '4').exists).ok()
 })
 
-test('show-text attribute', async t => {
-    const rate = Selector(() => {
-        return document.querySelectorAll('core-rate')[5]
+
+test('max attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[0]
     })
-    const star = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
-    })
-    const output_txt = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
+    const labels = await Selector(() => {
+        return document.querySelectorAll('core-rate')[0].shadowRoot.querySelectorAll('label')
+    })    
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[0].shadowRoot.querySelectorAll('label')[0]
     })
     await t
-        .expect(rate.withAttribute('show-text', '').exists).ok()
         .click(star)
-        .expect(output_txt.innerText).notEql('')
+        .expect(rate.getAttribute('v-model')).notEql('5')
 })
 
-test('disable attribute', async t => {
-    const star = Selector(() => {
+
+test('disabled attribute', async t => {
+    const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[1]
     })
-    const output_txt = Selector(() => {
+    const output = await Selector(() => {
         return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('#star5')
     })
     await t
         .click(star)
-        .expect(output_txt.checked).notOk()
+        .expect(output.checked).notOk()
 })
 
-/*
-test('two stars', async t => {
-    const core_component = Selector(() => document.querySelector('core-rate'))
-    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
+/* TODO: when ready for review
+test('allow-half attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[2]
+    })
+    const output = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('#star5')
+    })
     await t
-        .click(stars.nth(1))
-        .expect(core_component.textContent).eql("2 stars")
+        .expect(rate.getAttribute('allow-half')).ok()
+        .click(star)
+        .expect(rate.getAttribute('v-model')).contains('.')
 })
 
-test('three stars', async t => {
-    const core_component = Selector(() => document.querySelector('core-rate'))
-    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
+test('low-threshold attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[3]
+    })
     await t
-        .click(stars.nth(2))
-        .expect(core_component.textContent).eql("3 stars")
+        .expect(rate.hasAttribute('low-threshold')).eql(true)
+        .click(star)
+        .expect(star.getStyleProperty('--colors')).within(rate.getAttribute('colors'))
 })
 
-test('four stars', async t => {
-    const core_component = Selector(() => document.querySelector('core-rate'))
-    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
+test('high-threshold attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[1]
+    })
     await t
-        .click(stars.nth(3))
-        .expect(core_component.textContent).eql("4 stars")
+        .expect(rate.hasAttribute('high-threshold')).eql(true)
+        .click(star)
+        .expect(star.getStyleProperty('--colors')).within(rate.getAttribute('colors'))
 })
-
-test('five stars', async t => {
-    const core_component = Selector(() => document.querySelector('core-rate'))
-    const stars = Selector(() => document.querySelector('core-rate').shadowRoot.querySelector('.rate').querySelectorAll('label'))
-    await t
-        .click(stars.nth(4))
-        .expect(core_component.innerText).eql("5 stars")
-})
-
 */
+
+test('colors attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[1]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[1].shadowRoot.querySelector('.rate')
+    })
+    await t
+        .expect(star.getAttribute('style')).contains("colors:#2ed3ce")
+})
+
+test('void-color attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[1]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[1].shadowRoot.querySelector('.rate')
+    })
+    await t
+        .expect(star.getAttribute('style')).contains("void-color:black")
+})
+
+test('disabled-void-color attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[3]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelector('.rate')
+    })
+    await t
+        .expect(rate.hasAttribute('disabled')).eql(true)
+        .expect(star.getAttribute('style')).contains("void-color:#4286f4")
+})
+
+test('icon-classes attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0]
+    })
+    await t
+        .expect(rate.hasAttribute('icon-classes')).eql(true)
+        .expect(star.getAttribute('class')).eql("fas fa-smile")
+})
+
+/* TODO Coders
+test('void-icon-class attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0]
+    })
+    await t
+        .expect(rate.hasAttribute('icon-classes')).eql(true)
+        .expect(rate.getAttribute('icon-classes')).contains('TODO: get void-icon-class value')
+        .expect(star.getAttribute('style')).contains("void-icon-class:" + 'TODO: get void-icon-class value')
+})
+
+test('disabled-void-icon-class attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[3]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[0]
+    })
+    await t
+        .expect(rate.hasAttribute('disabled')).eql(true)
+        .expect(rate.hasAttribute('icon-classes')).eql(true)
+        .expect(star.getAttribute('style')).contains("disabled-void-icon-class:" + 'TODO: get disabled-void-icon-class value')
+})
+*/
+
+test('show-text attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
+    })
+    const output_txt = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
+    })
+    await t
+        .expect(rate.hasAttribute('show-text')).eql(true)
+        .click(star)
+        .expect(output_txt.innerText).notEql('')
+})
+
+test('show-score attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[4]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[1]
+    })
+    const output_txt = await Selector(() => {
+        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('span')
+    })
+    await t
+        .expect(rate.hasAttribute('show-score')).eql(true)
+        .click(star)
+        .expect(output_txt.innerText).notEql('')
+})
+
+test('text-color attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5]
+    })
+    const output_txt = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
+    })
+    await t
+        .expect(rate.hasAttribute('show-text')).eql(true)
+        .expect(output_txt.getAttribute('style')).contains('text-color:green')
+})
+
+test('texts attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0]
+    })
+    const output_txt = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
+    })
+    await t
+        .click(star)
+        .expect(rate.getAttribute('texts')).contains('great')
+})
+
+test('score-template attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[4]
+    })
+    const star = await Selector(() => {
+        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[1]
+    })
+    const output_txt = await Selector(() => {
+        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('span')
+    })
+    await t
+        .click(star)
+        .expect(output_txt.innerText).contains(' points')
+})
