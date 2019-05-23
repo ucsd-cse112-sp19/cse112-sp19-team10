@@ -4,11 +4,22 @@
         <meta name="viewport" content="width=device-width, inital-scale=1">
         <title>core-switch</title>
         <script src="../src/core_switch.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <style>
+            .switch_group core-switch{
+                padding: 10px 24px;
+                display: block;
+            }
+        </style>
     </head>
     <body>
-        <core-switch id='switch1' name='wow'></core-switch>
-        <core-switch id='switch_disabled' disabled></core-switch>
-        <core-switch id='switch_named' active-value='cow'></core-switch>
-        <core-switch id='switch_coloered' active-color='red' inactive-color='green'></core-switch>
+        <div class="switch_group">
+            <core-switch id='switch1' name='wow'></core-switch>
+            <core-switch id='switch_disabled' disabled></core-switch>
+            <core-switch id='switch_named' active-value='cow'></core-switch>
+            <core-switch id='switch_coloered' active-color='green' inactive-color='red'></core-switch>
+            <core-switch active-icon-class="fas fa-hamburger" inactive-icon-class="fas fa-beer"></core-switch>
+            <core-switch active-text='Right' inactive-text='Left'></core-switch>
+        </div>
     </body>
 </html>
