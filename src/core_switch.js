@@ -1,4 +1,3 @@
-
 let template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -90,6 +89,27 @@ template.innerHTML = `
   input:checked ~ #inactive_icon {
     color: #000000;
 }
+
+#active_icon {
+  position: absolute;
+  left: 45px;
+  top: 2px;
+}
+
+#inactive_icon {
+  position: absolute;
+  right: 45px;
+  top: 2px;
+  color: #409EFF;
+}
+
+input:checked ~ #active_icon {
+  color: #409EFF;
+}
+
+input:checked ~ #inactive_icon {
+  color: #000000;
+}
 </style>
 <html>
 <head>
@@ -128,6 +148,23 @@ class CoreSwitch extends window.HTMLElement {
     this.aText = shadowRoot.querySelector('#active_text')
     // Place holder for inactive text
     this.iaText = shadowRoot.querySelector('#inactive_text')
+
+    // Event listener for toggling switch
+    this.addEventListener('click', e => {
+      // Don't toggle the drawer if it's disabled.
+      if (this.disabled) {
+        return
+      }
+      this.toggleSwitch()
+    })
+  }
+
+  get vModel () {
+    return this.hasAttribute('v-model')
+  }
+
+  set vModel (val) {
+    this.setAttribute('v-model', val)
   }
 
   get disabled () {
@@ -142,17 +179,20 @@ class CoreSwitch extends window.HTMLElement {
     }
   }
 
-  get vModel () {
-    return this.hasAttribute('v-model')
+  get activeValue () {
+    return this.getAttribute('active-value')
   }
 
-  set vModel (val) {
-    const isChecked = Boolean(val)
-    if (isChecked) {
-      this.setAttribute('v-model', '')
-    } else {
-      this.removeAttribute('v-model')
-    }
+  set activeValue (val) {
+    this.setAttribute('active-value', val)
+  }
+
+  get inactiveValue () {
+    return this.getAttribute('inactive-value')
+  }
+
+  set inactiveValue (val) {
+    this.setAttribute('inactive-value', val)
   }
 
   get activeColor () {
@@ -202,10 +242,24 @@ class CoreSwitch extends window.HTMLElement {
   set inactiveText (val) {
     this.setAttribute('inactive-text', val)
   }
+  
+  get name () {
+    return this.getAttribute('name')
+  }
+
+  set name (val) {
+    this.setAttribute('name', val)
+  }
 
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
+    }
+    if (!this.hasAttribute('active-value')) {
+      this.setAttribute('active-value', true)
+    }
+    if (!this.hasAttribute('inactive-value')) {
+      this.setAttribute('inactive-value', false)
     }
     if (!this.hasAttribute('active-color')) {
       this.setAttribute('active-color', '#409EFF')
@@ -220,10 +274,11 @@ class CoreSwitch extends window.HTMLElement {
       this.setAttribute('inactive-text', '')
     }
     this.addEventListener('click', this._onClick)
+    this.toggleSwitch()
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'active-icon-class', 'inactive-icon-class', 'active-text', 'inactive-text']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class', 'active-text', 'inactive-text']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -270,6 +325,9 @@ class CoreSwitch extends window.HTMLElement {
         this.iaText.style.setProperty('color', 'black')
       }
     }
+    if (this.hasAttribute('name')) {
+      this.disable.setAttribute('name', this.getAttribute('name'))
+    }
   }
 
   _onClick (event) {
@@ -282,6 +340,28 @@ class CoreSwitch extends window.HTMLElement {
     }
     var isChecked = this.check.checked
     this.setAttribute('v-model', isChecked)
+  }
+
+  toggleSwitch () {
+    if (this.check.checked) {
+      let activeValue = this.getAttribute('active-value')
+      this.setAttribute('v-model', activeValue)
+      if (activeValue === 'true') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + activeValue)
+      }
+    } else {
+      let inactiveValue = this.getAttribute('inactive-value')
+      this.setAttribute('v-model', inactiveValue)
+      if (inactiveValue === 'false') {
+        this.removeAttribute('title')
+      } else {
+        // TODO: MAKE TOOLTIP?
+        this.setAttribute('title', 'Switch value: ' + inactiveValue)
+      }
+    }
   }
 }
 
