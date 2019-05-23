@@ -314,8 +314,15 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('icon-classes')) {
       var newClass1 = this.getAttribute('icon-classes')
+      var classes = newClass1.slice(1,newClass1.length-1).split(",")
       for (i = 0; i < this.icon.length; i++) {
-        this.icon[i].setAttribute('class', newClass1)
+        if(this.icon[i].classList.contains('low')){
+          this.icon[i].setAttribute('class', 'low ' + classes[0])
+        } else if(this.icon[i].classList.contains('mid')){
+          this.icon[i].setAttribute('class', 'mid ' + classes[1])
+        } else if(this.icon[i].classList.contains('high')){
+          this.icon[i].setAttribute('class', 'high ' + classes[2])
+        }
       }
     }
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
