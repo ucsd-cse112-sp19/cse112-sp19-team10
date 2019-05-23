@@ -152,7 +152,7 @@ test('icon-classes attribute', async t => {
         .expect(star.getAttribute('class')).eql("fas fa-smile")
 })
 
-/* TODO
+/*
 test('void-icon-class attribute', async t => {
     const rate = await Selector(() => {
         return document.querySelectorAll('core-rate')[2]
@@ -165,6 +165,7 @@ test('void-icon-class attribute', async t => {
         .expect(rate.getAttribute('icon-classes')).contains('TODO: get void-icon-class value')
         .expect(star.getAttribute('style')).contains("void-icon-class:" + 'TODO: get void-icon-class value')
 })
+*/
 
 test('disabled-void-icon-class attribute', async t => {
     const rate = await Selector(() => {
@@ -175,10 +176,9 @@ test('disabled-void-icon-class attribute', async t => {
     })
     await t
         .expect(rate.hasAttribute('disabled')).eql(true)
-        .expect(rate.hasAttribute('icon-classes')).eql(true)
-        .expect(star.getAttribute('style')).contains("disabled-void-icon-class:" + 'TODO: get disabled-void-icon-class value')
+        .expect(star.getAttribute('class')).eql("fas fa-ban")
 })
-*/
+
 
 test('show-text attribute', async t => {
     const rate = await Selector(() => {
@@ -231,18 +231,12 @@ test('texts attribute', async t => {
     const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0]
     })
-    const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
-    })
     await t
         .click(star)
         .expect(rate.getAttribute('texts')).contains('great')
 })
 
 test('score-template attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[4]
-    })
     const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[1]
     })
