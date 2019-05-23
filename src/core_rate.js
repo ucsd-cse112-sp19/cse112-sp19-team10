@@ -17,7 +17,9 @@ template.innerHTML = `
         margin-top: 5px;
       }
       .rate {
-          --colors: #F7BA2A;
+          --low-color: #F7BA2A;
+          --mid-color: #F7BA2A;
+          --high-color: #F7BA2A;
           --void-color: #C6D1DE;
           float: left;
           height: 46px;
@@ -36,17 +38,35 @@ template.innerHTML = `
           color:var(--void-color);
           margin:3px;
       }
-      .rate > input:checked ~ label,
-      .rate input:not(:disabled):not(:checked) + label:hover,
-      .rate input:not(:disabled):not(:checked) + label:hover ~ label {
-          color: var(--colors);  
+      .rate > input.low:checked ~ label,
+      .rate input.low:not(:disabled):not(:checked) + label:hover,
+      .rate input.low:not(:disabled):not(:checked) + label:hover ~ label,
+      .rate > input.low:checked + label:hover,
+      .rate > input.low:checked + label:hover ~ label,
+      .rate > input.low:checked ~ label:hover,
+      .rate > input.low:checked ~ label:hover ~ label,
+      .rate > label:hover ~ input.low:checked ~ label {
+          color: var(--low-color); 
       }
-      .rate > input:checked + label:hover,
-      .rate > input:checked + label:hover ~ label,
-      .rate > input:checked ~ label:hover,
-      .rate > input:checked ~ label:hover ~ label,
-      .rate > label:hover ~ input:checked ~ label {
-          color: var(--colors); 
+      .rate > input.mid:checked ~ label,
+      .rate input.mid:not(:disabled):not(:checked) + label:hover,
+      .rate input.mid:not(:disabled):not(:checked) + label:hover ~ label,
+      .rate > input.mid:checked + label:hover,
+      .rate > input.mid:checked + label:hover ~ label,
+      .rate > input.mid:checked ~ label:hover,
+      .rate > input.mid:checked ~ label:hover ~ label,
+      .rate > label:hover ~ input.mid:checked ~ label {
+          color: var(--mid-color); 
+      }
+      .rate > input.high:checked ~ label,
+      .rate input.high:not(:disabled):not(:checked) + label:hover,
+      .rate input.high:not(:disabled):not(:checked) + label:hover ~ label,
+      .rate > input.high:checked + label:hover,
+      .rate > input.high:checked + label:hover ~ label,
+      .rate > input.high:checked ~ label:hover,
+      .rate > input.high:checked ~ label:hover ~ label,
+      .rate > label:hover ~ input.high:checked ~ label {
+          color: var(--high-color); 
       }
     </style>
     <html>
@@ -223,7 +243,7 @@ class CoreRate extends window.HTMLElement {
       this.setAttribute('low-threshold', 2)
     }
     if (!this.hasAttribute('colors')) {
-      this.setAttribute('colors', '#F7BA2A')
+      this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
     }
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
@@ -279,7 +299,10 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
-      this.colors1.setProperty('--colors', newColor1)
+      var colors = newColor1.slice(1,newColor1.length-1).split(",")
+      this.colors1.setProperty('--low-color', colors[0])
+      this.colors1.setProperty('--mid-color', colors[1])
+      this.colors1.setProperty('--high-color', colors[2])
     }
     if (this.hasAttribute('void-color')) {
       var newColor2 = this.getAttribute('void-color')
