@@ -1,12 +1,11 @@
-
 let template = document.createElement('template')
 template.innerHTML = `
 <style>
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 40px;
+    height: 22px;
 }
 
 .switch input {
@@ -32,10 +31,10 @@ template.innerHTML = `
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -46,13 +45,13 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
 }
 
 .slider.round {
-    border-radius: 34px;
+    border-radius: 22px;
 }
   
 .slider.round:before {
@@ -63,11 +62,41 @@ input[disabled] + span {
     cursor: not-allowed;
     opacity: .6;
 }
+
+#active_icon {
+  position: absolute;
+  left: 45px;
+  top: 2px;
+}
+
+#inactive_icon {
+  position: absolute;
+  right: 45px;
+  top: 2px;
+  color: #409EFF;
+}
+
+input:checked ~ #active_icon {
+  color: #409EFF;
+}
+
+input:checked ~ #inactive_icon {
+  color: #000000;
+}
 </style>
-<label class="switch">
+<html>
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+  <label class="switch">
     <input type="checkbox">
     <span class="slider round"></span>
-</label>
+    <i id="inactive_icon"></i>
+    <i id="active_icon"></i>
+  </label>
+</body>
+</html>
 `
 
 class CoreSwitch extends window.HTMLElement {
@@ -78,11 +107,14 @@ class CoreSwitch extends window.HTMLElement {
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    // Place holder for disabled property
-    this.disable = shadowRoot.querySelector('input[type=checkbox]')
-
+    // Place holder for checkbox
+    this.check = shadowRoot.querySelector('input[type=checkbox]')
     // Place holder for color
     this.aColor = shadowRoot.querySelector('.slider').style
+    // Place holder for active icon
+    this.activeIcon = shadowRoot.querySelector('#active_icon')
+    // Place holder for inactive icon
+    this.inactiveIcon = shadowRoot.querySelector('#inactive_icon')
 
     // Event listener for toggling switch
     this.addEventListener('click', e => {
@@ -146,6 +178,22 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('inactive-color', val)
   }
 
+  get activeIconClass () {
+    return this.getAttribute('active-icon-class')
+  }
+
+  set activeIconClass (val) {
+    this.setAttribute('active-icon-class', val)
+  }
+
+  get inactiveIconClass () {
+    return this.getAttribute('inactive-icon-class')
+  }
+
+  set inactiveIconClass (val) {
+    this.setAttribute('inactive-icon-class', val)
+  }
+
   get name () {
     return this.getAttribute('name')
   }
@@ -174,12 +222,12 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name']
+    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
     if (this.hasAttribute('disabled')) {
-      this.disable.disabled = true
+      this.check.setAttribute('disabled', true)
     }
     if (this.hasAttribute('active-color')) {
       var newColor1 = this.getAttribute('active-color')
@@ -189,13 +237,21 @@ class CoreSwitch extends window.HTMLElement {
       var newColor2 = this.getAttribute('inactive-color')
       this.aColor.setProperty('--inactive-color', newColor2)
     }
+    if (this.hasAttribute('active-icon-class')) {
+      var newClass1 = this.getAttribute('active-icon-class')
+      this.activeIcon.setAttribute('class', newClass1)
+    }
+    if (this.hasAttribute('inactive-icon-class')) {
+      var newClass2 = this.getAttribute('inactive-icon-class')
+      this.inactiveIcon.setAttribute('class', newClass2)
+    }
     if (this.hasAttribute('name')) {
       this.disable.setAttribute('name', this.getAttribute('name'))
     }
   }
 
   toggleSwitch () {
-    if (this.disable.checked) {
+    if (this.check.checked) {
       let activeValue = this.getAttribute('active-value')
       this.setAttribute('v-model', activeValue)
       if (activeValue === 'true') {
