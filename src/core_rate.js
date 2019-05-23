@@ -283,7 +283,7 @@ class CoreRate extends window.HTMLElement {
       var dVoid = this.getAttribute('disabled-void-color')
       this.colors1.setProperty('--void-color', dVoid)
     }
-    if (this.hasAttribute('disabled-void-icon-class')) {
+    if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
       var newClass2 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
         this.icon[i].setAttribute('class', newClass2)
