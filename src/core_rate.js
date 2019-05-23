@@ -197,6 +197,8 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '#F7BA2A')
     }
+
+    // 
     this.addEventListener('click', this._onClick)
   }
 
@@ -231,12 +233,14 @@ class CoreRate extends window.HTMLElement {
         this.radio[this.radio.length - numStars].setAttribute('checked', true)
       }
     }
-    if (this.hasAttribute('show-score') && this.hasAttribute('score-template')) {
+    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') && 
+       !this.hasAttribute('show-text')) {
       var scoreTemp = this.getAttribute('score-template')
       var score = this.getAttribute('v-model')
       this.text.innerHTML = score + scoreTemp
     }
-    if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
+    if (this.hasAttribute('show-text') && this.hasAttribute('texts') &&
+       !this.hasAttribute('show-score')) {
       var texts = this.getAttribute('texts')
       this.textsArr = texts.split("', '")
       var length = this.textsArr.length
