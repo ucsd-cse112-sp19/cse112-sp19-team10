@@ -302,7 +302,9 @@ class CoreRate extends window.HTMLElement {
 
   _updateTexts () {
     var index = this.getAttribute('v-model')
-    this.text.innerHTML = this.textsArr[index - 1]
+    if (index !== 0 && this.textsArr) {
+      this.text.innerHTML = this.textsArr[index - 1]
+    }
   }
 }
 
