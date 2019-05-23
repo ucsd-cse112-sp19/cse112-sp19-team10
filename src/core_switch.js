@@ -251,7 +251,7 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   toggleSwitch () {
-    if (this.disable.checked) {
+    if (this.check) {
       let activeValue = this.getAttribute('active-value')
       this.setAttribute('v-model', activeValue)
       if (activeValue === 'true') {
