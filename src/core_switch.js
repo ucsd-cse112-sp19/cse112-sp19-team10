@@ -88,28 +88,24 @@ template.innerHTML = `
   }
   input:checked ~ #inactive_icon {
     color: #000000;
-}
-
-#active_icon {
-  position: absolute;
-  left: 45px;
-  top: 2px;
-}
-
-#inactive_icon {
-  position: absolute;
-  right: 45px;
-  top: 2px;
-  color: #409EFF;
-}
-
-input:checked ~ #active_icon {
-  color: #409EFF;
-}
-
-input:checked ~ #inactive_icon {
-  color: #000000;
-}
+  }
+  #active_icon {
+    position: absolute;
+    left: 45px;
+    top: 2px;
+  }
+  #inactive_icon {
+    position: absolute;
+    right: 45px;
+    top: 2px;
+    color: #409EFF;
+  }
+  input:checked ~ #active_icon {
+    color: #409EFF;
+  }
+  input:checked ~ #inactive_icon {
+    color: #000000;
+  }
 </style>
 <html>
 <head>
