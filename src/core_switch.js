@@ -242,7 +242,7 @@ class CoreSwitch extends window.HTMLElement {
   set inactiveText (val) {
     this.setAttribute('inactive-text', val)
   }
-  
+
   get name () {
     return this.getAttribute('name')
   }
