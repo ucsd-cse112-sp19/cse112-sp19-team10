@@ -1,60 +1,53 @@
 let template = document.createElement('template')
 template.innerHTML = ` 
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        .text {
-          --text-color: #1F2D3D
-          position: absolute;
-          color: var(--text-color);
-          font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
-          font-weight: 400;
-          font-size: 14px;
-          left: 3px;
-          float: right;
-          margin-top: 5px;
-        }
-        
-        .rate {
-            --colors: #F7BA2A;
-            --void-color: #C6D1DE;
-            float: left;
-            height: 46px;
-            padding: 0 10px;
-        }
-
-        .rate:not(:checked) > input {
-            position:absolute;
-            top:-9999px;
-        }
-
-        .rate:not(:checked) > label {
-            float:right;
-            overflow:hidden;
-            white-space:nowrap;
-            cursor:pointer;
-            font-size:20px;
-            color:var(--void-color);
-            margin:3px;
-        }
-
-        .rate > input:checked ~ label,
-        .rate input:not(:disabled):not(:checked) + label:hover,
-        .rate input:not(:disabled):not(:checked) + label:hover ~ label {
-            color: var(--colors);  
-        }
-
-        .rate > input:checked + label:hover,
-        .rate > input:checked + label:hover ~ label,
-        .rate > input:checked ~ label:hover,
-        .rate > input:checked ~ label:hover ~ label,
-        .rate > label:hover ~ input:checked ~ label {
-            color: var(--colors); 
-        }
-    </style>
+      *{
+          margin: 0;
+          padding: 0;
+      }
+      .text {
+        --text-color: #1F2D3D
+        position: absolute;
+        color: var(--text-color);
+        font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        left: 3px;
+        float: right;
+        margin-top: 5px;
+      }
+      .rate {
+          --colors: #F7BA2A;
+          --void-color: #C6D1DE;
+          float: left;
+          height: 46px;
+          padding: 0 10px;
+      }
+      .rate:not(:checked) > input {
+          position:absolute;
+          top:-9999px;
+      }
+      .rate:not(:checked) > label {
+          float:right;
+          overflow:hidden;
+          white-space:nowrap;
+          cursor:pointer;
+          font-size:20px;
+          color:var(--void-color);
+          margin:3px;
+      }
+      .rate > input:checked ~ label,
+      .rate input:not(:disabled):not(:checked) + label:hover,
+      .rate input:not(:disabled):not(:checked) + label:hover ~ label {
+          color: var(--colors);  
+      }
+      .rate > input:checked + label:hover,
+      .rate > input:checked + label:hover ~ label,
+      .rate > input:checked ~ label:hover,
+      .rate > input:checked ~ label:hover ~ label,
+      .rate > label:hover ~ input:checked ~ label {
+          color: var(--colors); 
+      }
     </style>
     <html>
     <head>
@@ -127,6 +120,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('void-color', val)
   }
 
+  get disabledVoidColor () {
+    return this.getAttribute('disabled-void-color')
+  }
+
+  set disabledVoidColor (val) {
+    this.setAttribute('disabled-void-color', val)
+  }
+
   get iconClasses () {
     return this.getAttribute('icon-classes')
   }
@@ -135,44 +136,12 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('icon-classes', val)
   }
 
-  get disabled () {
-    return this.hasAttribute('disabled')
+  get disabledVoidIcon () {
+    return this.getAttribute('disabled-void-icon-class')
   }
 
-  set disabled (val) {
-    if (val) {
-      this.setAttribute('disabled', '')
-    } else {
-      this.removeAttribute('disabled')
-    }
-  }
-
-  get scoreTemplate () {
-    return this.getAttribute('score-template')
-  }
-
-  set scoreTemplate (val) {
-    this.setAttribute('score-template', val)
-  }
-
-  get showScore () {
-    return this.hasAttribute('show-score')
-  }
-
-  set showScore (val) {
-    if (val) {
-      this.setAttribute('show-score', '')
-    } else {
-      this.removeAttribute('show-score')
-    }
-  }
-
-  get texts () {
-    return this.getAttribute('texts')
-  }
-
-  set texts (val) {
-    this.setAttribute('texts', val)
+  set disabledVoidIcon (val) {
+    this.setAttribute('disabled-void-icon-class', val)
   }
 
   get showText () {
@@ -187,6 +156,18 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  get showScore () {
+    return this.hasAttribute('show-score')
+  }
+
+  set showScore (val) {
+    if (val) {
+      this.setAttribute('show-score', '')
+    } else {
+      this.removeAttribute('show-score')
+    }
+  }
+
   get textColor () {
     return this.getAttribute('text-color')
   }
@@ -195,21 +176,22 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('text-color', val)
   }
 
-  get disabledVoidColor () {
-    return this.getAttribute('disabled-void-color')
+  get texts () {
+    return this.getAttribute('texts')
   }
 
-  set disabledVoidColor (val) {
-    this.setAttribute('disabled-void-color', val)
+  set texts (val) {
+    this.setAttribute('texts', val)
   }
 
-  get disabledVoidIcon () {
-    return this.getAttribute('disabled-void-icon-class')
+  get scoreTemplate () {
+    return this.getAttribute('score-template')
   }
 
-  set disabledVoidIcon (val) {
-    this.setAttribute('disabled-void-icon-class', val)
+  set scoreTemplate (val) {
+    this.setAttribute('score-template', val)
   }
+
 
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
