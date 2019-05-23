@@ -326,7 +326,6 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('icon-classes')) {
       var newClass1 = this.getAttribute('icon-classes')
-      var classes = newClass1.slice(1,newClass1.length-1).split(",")
       for (i = 0; i < this.icon.length; i++) {
         this.icon[i].setAttribute('class', newClass1)
       }
