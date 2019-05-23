@@ -197,8 +197,24 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '#F7BA2A')
     }
-
-    // 
+    if (!this.hasAttribute('icon-classes')) {
+      this.setAttribute('icon-classes', 'fas fa-star')
+    }
+    //if (!this.hasAttribute('disabled')) {
+    //  this.setAttribute('disabled', false)
+    //}
+    if (!this.hasAttribute('score-template')) {
+      this.setAttribute('score-template', " points")
+    }
+    if (!this.hasAttribute('show-score')) {
+      this.setAttribute('show-score', false)
+    }
+    if (!this.hasAttribute('texts')) {
+      this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
+    }
+    if (!this.hasAttribute('show-text')) {
+      this.setAttribute('show-text', false)
+    }
     this.addEventListener('click', this._onClick)
   }
 
@@ -247,6 +263,7 @@ class CoreRate extends window.HTMLElement {
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
     }
+
   }
 
   _onClick (event) {
