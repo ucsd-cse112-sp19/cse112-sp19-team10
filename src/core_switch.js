@@ -147,7 +147,7 @@ class CoreSwitch extends window.HTMLElement {
 
     // Event listener for toggling switch
     this.addEventListener('click', e => {
-      // Don't toggle the drawer if it's disabled.
+      // Don't toggle the switch if it's disabled.
       if (this.disabled) {
         return
       }
