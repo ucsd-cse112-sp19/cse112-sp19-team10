@@ -166,7 +166,7 @@ test('show-text attribute', async t => {
     })
     await t
         .click(star)
-        .expect(output_txt.innerText).notEql('')
+        .expect(output_txt.textContent).notEql('')
 })
 
 test('show-score attribute', async t => {
@@ -178,7 +178,7 @@ test('show-score attribute', async t => {
     })
     await t
         .click(star)
-        .expect(output_txt.innerText).notEql('')
+        .expect(output_txt.textContent).notEql('')
 })
 
 test('text-color attribute', async t => {
