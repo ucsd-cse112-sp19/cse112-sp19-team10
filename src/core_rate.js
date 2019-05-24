@@ -348,9 +348,9 @@ class CoreRate extends window.HTMLElement {
       }
     }
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
-      var newClass2 = this.getAttribute('disabled-void-icon-class')
+      var newClass3 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        this.icon[i].setAttribute('class', newClass2)
+        this.icon[i].setAttribute('class', newClass3)
       }
     }
     if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
