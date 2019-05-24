@@ -7,14 +7,15 @@ template.innerHTML = `
         }
 
         .text {
-          position: relative;
-          color: #ff9900;
+          --text-color: #1F2D3D
+          position: absolute;
+          color: var(--text-color);
           font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
           font-weight: 400;
           font-size: 14px;
-          top: 5px;
           left: 3px;
           float: right;
+          margin-top: 5px;
         }
         
         .rate {
@@ -53,7 +54,6 @@ template.innerHTML = `
         .rate > label:hover ~ input:checked ~ label {
             color: var(--colors); 
         }
-
     </style>
     </style>
     <html>
@@ -187,6 +187,30 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  get textColor () {
+    return this.getAttribute('text-color')
+  }
+
+  set textColor (val) {
+    this.setAttribute('text-color', val)
+  }
+
+  get disabledVoidColor () {
+    return this.getAttribute('disabled-void-color')
+  }
+
+  set disabledVoidColor (val) {
+    this.setAttribute('disabled-void-color', val)
+  }
+
+  get disabledVoidIcon () {
+    return this.getAttribute('disabled-void-icon-class')
+  }
+
+  set disabledVoidIcon (val) {
+    this.setAttribute('disabled-void-icon-class', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -215,11 +239,20 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('show-text')) {
       this.setAttribute('show-text', false)
     }
+    if (!this.hasAttribute('void-color')) {
+      this.setAttribute('void-color', '#C6D1DE')
+    }
+    if (!this.hasAttribute('text-color')) {
+      this.setAttribute('text-color', '#1F2D3D')
+    }
+    if (!this.hasAttribute('disabled-void-color')) {
+      this.setAttribute('disabled-void-color', '#C6D1DE')
+    }
     this.addEventListener('click', this._onClick)
   }
 
   static get observedAttributes () {
-    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text']
+    return ['v-model', 'max', 'colors', 'icon-classes', 'disabled', 'score-template', 'show-score', 'texts', 'show-text', 'text-color', 'disabled-void-color', 'disabled-void-icon-class']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -263,7 +296,19 @@ class CoreRate extends window.HTMLElement {
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
     }
-
+    if (this.hasAttribute('text-color')) {
+      this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
+    }
+    if (this.hasAttribute('disabled-void-color') && this.hasAttribute('disabled')) {
+      var dVoid = this.getAttribute('disabled-void-color')
+      this.colors1.setProperty('--void-color', dVoid)
+    }
+    if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
+      var newClass2 = this.getAttribute('disabled-void-icon-class')
+      for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
+        this.icon[i].setAttribute('class', newClass2)
+      }
+    }
   }
 
   _onClick (event) {
@@ -273,7 +318,6 @@ class CoreRate extends window.HTMLElement {
 
   _updateVmodel () {
     if (this.disabled) {
-      console.log('is disabled')
       return
     }
     var i
@@ -281,17 +325,17 @@ class CoreRate extends window.HTMLElement {
     for (i = 0; i < this.radio.length; i++) {
       if (this.radio[i].checked) {
         numStars = this.radio.length - i
-        console.log('numStars ' + numStars)
         break
       }
     }
-    console.log('setting to ' + numStars)
     this.setAttribute('v-model', numStars)
   }
 
   _updateTexts () {
     var index = this.getAttribute('v-model')
-    this.text.innerHTML = this.textsArr[index - 1]
+    if (index !== 0 && this.textsArr) {
+      this.text.innerHTML = this.textsArr[index - 1]
+    }
   }
 }
 
