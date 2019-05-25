@@ -53,9 +53,9 @@ fixture`switch browser test:`
 
   test("SwitchBrowserTest @ light up corresponding icon",async t=>{
     const switch1 = Selector('#switch_icon');
-    const switch_span = await Selector(() => switch1.shadowRoot.querySelector('label'));
-    const switch_inactive_icon = await Selector(() => switch1.shadowRoot.querySelector('#inactive_text'));
-    const switch_active_icon = await Selector(() => switch1.shadowRoot.querySelector('#active_text'));
+    const switch_span = await Selector(() => document.querySelector('#switch_icon').shadowRoot.querySelector('label'));
+    const switch_inactive_icon = await Selector(() => document.querySelector('#switch_icon').shadowRoot.querySelector('#inactive_text'));
+    const switch_active_icon = await Selector(() => document.querySelector('#switch_icon').shadowRoot.querySelector('#active_text'));
 
     await t
         .expect(switch1.count).eql(1)
@@ -71,22 +71,22 @@ fixture`switch browser test:`
 
   test("SwitchBrowserTest @ light up corresponding text",async t=>{
     const switch1 = Selector('#switch_text');
-    const switch_span = await Selector(() => switch1.shadowRoot.querySelector('label'));
-    const switch_inactive_icon = await Selector(() => switch1.shadowRoot.querySelector('#inactive_text'));
-    const switch_active_icon = await Selector(() => switch1.shadowRoot.querySelector('#active_text'));
+    const switch_span = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('label'));
+    const switch_inactive_icon = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#inactive_text'));
+    const switch_active_icon = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#active_text'));
 
     await t
         .expect(switch1.count).eql(1)
         .expect(switch1.exists).ok()
         .expect(switch1.getAttribute('v-model')).eql('false')
-        //.expect(switch_inactive_icon.textContent).eql('Left')
-        //.expect(switch_active_icon.textContent).eql('Right')
+        .expect(switch_inactive_icon.textContent).eql('Left')
+        .expect(switch_active_icon.textContent).eql('Right')
         .expect(switch_inactive_icon.getAttribute('style')).eql('color: rgb(64, 158, 255);')
         .expect(switch_active_icon.getAttribute('style')).eql('color: black;');
     await t
         .click(switch_span)
-        //.expect(switch_inactive_icon.textContent).eql('Left')
-        //.expect(switch_active_icon.textContent).eql('Right')
+        .expect(switch_inactive_icon.textContent).eql('Left')
+        .expect(switch_active_icon.textContent).eql('Right')
         .expect(switch_inactive_icon.getAttribute('style')).eql('color: black;')
         .expect(switch_active_icon.getAttribute('style')).eql('color: rgb(64, 158, 255);');
   })
