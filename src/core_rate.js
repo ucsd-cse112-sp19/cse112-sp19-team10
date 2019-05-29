@@ -224,20 +224,11 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('icon-classes')) {
       this.setAttribute('icon-classes', 'fas fa-star')
     }
-    //if (!this.hasAttribute('disabled')) {
-    //  this.setAttribute('disabled', false)
-    //}
     if (!this.hasAttribute('score-template')) {
       this.setAttribute('score-template', " points")
     }
-    if (!this.hasAttribute('show-score')) {
-      this.setAttribute('show-score', false)
-    }
     if (!this.hasAttribute('texts')) {
       this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
-    }
-    if (!this.hasAttribute('show-text')) {
-      this.setAttribute('show-text', false)
     }
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
