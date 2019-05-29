@@ -144,6 +144,14 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('low-threshold', val)
   }
 
+  get highThreshold () {
+    return this.getAttribute('high-threshold')
+  }
+
+  set highThreshold (val) {
+    this.setAttribute('high-threshold', val)
+  }
+
   get colors () {
     return this.getAttribute('colors')
   }
@@ -176,11 +184,19 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('icon-classes', val)
   }
 
-  get disabledVoidIcon () {
+  get voidIconClass () {
+    return this.getAttribute('void-icon-class')
+  }
+
+  set voidIconClass (val) {
+    this.setAttribute('void-icon-class', val)
+  }
+  
+  get disabledVoidIconClass () {
     return this.getAttribute('disabled-void-icon-class')
   }
 
-  set disabledVoidIcon (val) {
+  set disabledVoidIconClass (val) {
     this.setAttribute('disabled-void-icon-class', val)
   }
 
@@ -242,6 +258,9 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('low-threshold')) {
       this.setAttribute('low-threshold', 2)
     }
+    if (!this.hasAttribute('high-threshold')) {
+      this.setAttribute('high-threshold', 4)
+    }
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
     }
@@ -267,7 +286,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'low-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
+    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -283,11 +302,9 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].setAttribute('disabled', true)
       }
     }
-    if (this.hasAttribute('low-threshold')) { // || this.hasAttribute('high-threshold')) {
+    if (this.hasAttribute('low-threshold') || this.hasAttribute('high-threshold')) {
       var low = parseInt(this.getAttribute('low-threshold'))
-      var high = 4
-      // var high = parseInt(this.getAttribute('high-threshold'))
-      // if (low < high) {
+      var high = parseInt(this.getAttribute('high-threshold'))
       for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
         this.radio[i].classList.add('low')
         this.icon[i].classList.add('low')
@@ -300,16 +317,6 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].classList.add('high')
         this.icon[i].classList.add('high')
       }
-      // } else {
-      // for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
-      //   this.radio[i].classList.add('mid')
-      //   this.icon[i].classList.add('mid')
-      // }
-      // for (i = this.radio.length - high; i >=0; i--) {
-      //   this.radio[i].classList.add('high')
-      //   this.icon[i].classList.add('high')
-      // }
-      // }
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
