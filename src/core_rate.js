@@ -249,7 +249,7 @@ class CoreRate extends window.HTMLElement {
       this.setAttribute('icon-classes', 'fas fa-star')
     }
     if (!this.hasAttribute('score-template')) {
-      this.setAttribute('score-template', " points")
+      this.setAttribute('score-template', ' points')
     }
     if (!this.hasAttribute('texts')) {
       this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
@@ -283,7 +283,7 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].setAttribute('disabled', true)
       }
     }
-    if (this.hasAttribute('low-threshold')) {// || this.hasAttribute('high-threshold')) {
+    if (this.hasAttribute('low-threshold')) { // || this.hasAttribute('high-threshold')) {
       var low = parseInt(this.getAttribute('low-threshold'))
       var high = 4
       // var high = parseInt(this.getAttribute('high-threshold'))
@@ -296,7 +296,7 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].classList.add('mid')
         this.icon[i].classList.add('mid')
       }
-      for (i = this.radio.length - high; i >=0; i--) {
+      for (i = this.radio.length - high; i >= 0; i--) {
         this.radio[i].classList.add('high')
         this.icon[i].classList.add('high')
       }
@@ -313,7 +313,7 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
-      var colors = newColor1.slice(1,newColor1.length-1).split(",")
+      var colors = newColor1.slice(1, newColor1.length - 1).split(',')
       this.colors1.setProperty('--low-color', colors[0])
       this.colors1.setProperty('--mid-color', colors[1])
       this.colors1.setProperty('--high-color', colors[2])
@@ -343,7 +343,7 @@ class CoreRate extends window.HTMLElement {
         this.icon[i].setAttribute('class', newClass2)
       }
     }
-    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') && 
+    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
        !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
       var scoreTemp = this.getAttribute('score-template')
       var score = this.getAttribute('v-model')
@@ -356,11 +356,6 @@ class CoreRate extends window.HTMLElement {
       var length = this.textsArr.length
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
-    }
-    if (this.hasAttribute('show-score') && this.hasAttribute('score-template')) {
-      var scoreTemp = this.getAttribute('score-template')
-      var score = this.getAttribute('v-model')
-      this.text.innerHTML = score + scoreTemp
     }
     if (this.hasAttribute('text-color')) {
       this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
