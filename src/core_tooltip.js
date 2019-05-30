@@ -3,34 +3,29 @@ template.innerHTML = `
 <style>
     /* Tooltip container */
     .tooltip {
-        position: relative;
-        display: inline-block;
-        --background-color: #303133;
-        --text-color: #fff;
+      position: relative;
+      display: inline-block;
+      --background-color: #303133;
+      --text-color: #fff;
     }
 
     /* Tooltip text */
     .tooltip .tooltiptext {
-        visibility: hidden;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
-        font-size: 12px;
-        text-align: center;
-        word-wrap: break-word;
-        line-height: 1.2;
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #303133;
+      visibility: hidden;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+      font-size: 12px;
+      text-align: center;
+      word-wrap: break-word;
+      line-height: 1.2;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #303133;
 
-        /* Position the tooltip text*/
-        position: absolute;
-        z-index: 1;
-    
-        /* Position the tooltip text with arrow */
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
+      /* Position the tooltip text*/
+      position: absolute;
+      z-index: 1;
     }
     
     /* Tooltip arrow */
@@ -52,6 +47,15 @@ template.innerHTML = `
     }
 
     /* Top tooltip */
+    .tooltip .tooltiptext.top {
+      bottom: 125%;
+      left: 50%;
+      //margin-left: -60px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
     .tooltiptext.top::after, .tooltiptext.top::before {
       top: 100%;
       left: 50%;
@@ -66,6 +70,14 @@ template.innerHTML = `
     }
     
     /* Bottom tooltip */
+    .tooltip .tooltiptext.bottom {
+      top: 125%;
+      left: 50%;
+      //margin-left: -60px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .tooltiptext.bottom::after, .tooltiptext.bottom::before {
       bottom: 100%;
       left: 50%;
@@ -80,6 +92,11 @@ template.innerHTML = `
     }
 
     /* Left tooltip */
+    .tooltip .tooltiptext.left {
+      right: 125%;
+      top: 50%;
+      //margin-top: -60px;
+    }
     .tooltiptext.left::after, .tooltiptext.left::before {
       left: 100%;
       top: 50%;
@@ -94,6 +111,11 @@ template.innerHTML = `
     }
 
     /* Right tooltip */
+    .tooltip .tooltiptext.right {
+      left: 125%;
+      top: 50%;
+      //margin-top: -60px;
+    }
     .tooltiptext.right::after, .tooltiptext.right::before {
       right: 100%;
       top: 50%;
@@ -211,27 +233,40 @@ class CoreTooltip extends window.HTMLElement {
         this.text.innerHTML = newValue
         break
       case 'placement':
-        if (newValue === 'top') {
-          // this.tooltip.setProperty('--text-color', '#fff')
+        if (newValue === oldValue) {
+          break
+        }
 
+        if (oldValue === 'top' || oldValue === 'top-start' || oldValue === 'top-end') {
+          this.text.classList.remove('top')
+        } else if (oldValue === 'bottom' || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
+          this.text.classList.remove('bottom')
+        } else if (oldValue === 'left' || oldValue === 'left-start' || oldValue === 'left-end') {
+          this.text.classList.remove('left')
+        } else if (oldValue === 'right' || oldValue === 'right-start' || oldValue === 'right-end') {
+          this.text.classList.remove('left')
+        }
+        
+        if (newValue === 'top') {
+          this.text.classList.add('top')
         // } else if (newValue === 'top-start') {
 
         // } else if (newValue === 'top-end') {
 
         } else if (newValue === 'bottom') {
-
+          this.text.classList.add('bottom')
         // } else if (newValue === 'bottom-start') {
 
         // } else if (newValue === 'bottom-end') {
 
         } else if (newValue === 'left') {
-
+          this.text.classList.add('left')
         // } else if (newValue === 'left-start') {
 
         // } else if (newValue === 'left-end') {
 
         } else if (newValue === 'right') {
-
+          this.text.classList.add('right')
         // } else if (newValue === 'right-start') {
 
         // } else if (newValue === 'right-end') {
