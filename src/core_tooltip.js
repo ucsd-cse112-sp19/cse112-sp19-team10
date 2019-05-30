@@ -5,13 +5,15 @@ template.innerHTML = `
     .tooltip {
         position: relative;
         display: inline-block;
+        --background-color: #303133;
+        --text-color: #fff;
     }
 
     /* Tooltip text */
     .tooltip .tooltiptext {
         visibility: hidden;
-        background-color: #303133;
-        color: #fff;
+        background-color: var(--background-color);
+        color: var(--text-color);
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
         font-size: 12px;
         text-align: center;
@@ -19,6 +21,7 @@ template.innerHTML = `
         line-height: 1.2;
         padding: 10px;
         border-radius: 4px;
+        border: 1px solid #303133;
 
         /* Position the tooltip text*/
         position: absolute;
@@ -31,15 +34,28 @@ template.innerHTML = `
     }
     
     /* Tooltip arrow */
-    .tooltip .tooltiptext::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #303133 transparent transparent transparent;
+    .tooltiptext:after, .tooltiptext:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    
+    .tooltiptext:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-top-color: var(--background-color);
+      border-width: 5px;
+      margin-left: -5px;
+    }
+    .tooltiptext:before {
+      border-color: rgba(48, 49, 51, 0);
+      border-top-color: #303133;
+      border-width: 6px;
+      margin-left: -6px;
     }
 
     /* Show the tooltip text when you mouse over the tooltip container */
@@ -60,11 +76,26 @@ class CoreTooltip extends window.HTMLElement {
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
 
+    // Place holder for tooltip style
+    this.tooltip = shadowRoot.querySelector('.tooltip').style
     // Place holder for tooltip text
     this.text = shadowRoot.getElementById('tooltiptext')
-    // Place holder for tooltip
-    this.tooltip = shadowRoot.querySelector('.tooltip')
-    this.toolhover = shadowRoot.querySelector('.tooltip:hover')
+  }
+
+  /**
+  * This function gets the Tooltip theme.
+  * @returns {String} either "dark" or "light".
+  */
+  get effect () {
+    return this.getAttribute('effect')
+  }
+
+  /**
+  * This function sets the Tooltip theme.
+  * @param {String} val - either "dark" or "light".
+  */
+  set effect (val) {
+    this.setAttribute('effect', val)
   }
 
   /**
@@ -105,18 +136,31 @@ class CoreTooltip extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
+    if (!this.hasAttribute('effect')) {
+      this.setAttribute('effect', 'dark')
+    }
     this.addEventListener('mouseover', this._onHover)
     this.addEventListener('mouseout', this._onHover)
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['content', 'v-model']
+    return ['effect', 'content', 'v-model']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
     switch (name) {
+      // Set the tooltip theme
+      case 'effect':
+        if (newValue === 'light') {
+          this.tooltip.setProperty('--background-color', '#fff')
+          this.tooltip.setProperty('--text-color', '#303133')
+        } else {
+          this.tooltip.setProperty('--background-color', '#303133')
+          this.tooltip.setProperty('--text-color', '#fff')
+        }
+        break
       case 'content':
         // Set the tooltip attribute
         this.text.innerHTML = newValue
