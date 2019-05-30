@@ -191,7 +191,7 @@ class CoreRate extends window.HTMLElement {
   set voidIconClass (val) {
     this.setAttribute('void-icon-class', val)
   }
-  
+
   get disabledVoidIconClass () {
     return this.getAttribute('disabled-void-icon-class')
   }
@@ -311,7 +311,7 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
-      var colors = newColor1.slice(1,newColor1.length-1).split(",")
+      var colors = newColor1.slice(1, newColor1.length - 1).split(',')
       this.colors1.setProperty('--low-color', colors[0])
       this.colors1.setProperty('--mid-color', colors[1])
       this.colors1.setProperty('--high-color', colors[2])
@@ -337,14 +337,8 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('void-icon-class')) {
       var newClass2 = this.getAttribute('void-icon-class')
-      for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        if(this.icon[i].classList.contains('low')){
-          this.icon[i].setAttribute('class', 'low ' + newClass2)
-        } else if(this.icon[i].classList.contains('mid')){
-          this.icon[i].setAttribute('class', 'mid ' + newClass2)
-        } else if(this.icon[i].classList.contains('high')){
-          this.icon[i].setAttribute('class', 'high ' + newClass2)
-        }
+      for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
+        this.icon[this.icon.length - i - 1].setAttribute('class', newClass2)
       }
     }
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
