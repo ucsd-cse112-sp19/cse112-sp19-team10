@@ -81,15 +81,15 @@ class CoreTooltip extends window.HTMLElement {
   }
 
   /**
-  * This function gets the value of the effect attribute.
-  * @returns {String} value of the effect attribute.
+  * This function gets the Tooltip theme.
+  * @returns {String} either "dark" or "light".
   */
   get effect () {
     return this.getAttribute('effect')
   }
   /**
-  * This function sets the value of the effect attribute.
-  * @param {String} val - this is a string.
+  * This function sets the Tooltip theme.
+  * @param {String} val - either "dark" or "light".
   */
   set effect (val) {
     this.setAttribute('effect', val)
