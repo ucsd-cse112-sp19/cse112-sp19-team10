@@ -49,7 +49,7 @@ template.innerHTML = `
 </style>
 <div class="tooltip">
     <slot></slot>
-    <span class="tooltiptext">Text</span>
+    <span class="tooltiptext" id="tooltiptext"></span>
 </div>
 `
 class CoreTooltip extends window.HTMLElement {
@@ -59,6 +59,25 @@ class CoreTooltip extends window.HTMLElement {
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content.cloneNode(true))
+
+    // Place holder for tooltip text
+    this.text = shadowRoot.getElementById('tooltiptext')
+  }
+
+  /**
+  * This function gets the value of the contecnt attribute.
+  * @returns {String} value of the content attribute.
+  */
+  get content () {
+    return this.getAttribute('content')
+  }
+
+  /**
+  * This function sets the value of the content attribute.
+  * @param {String} val - this is a String.
+  */
+  set content (val) {
+    this.setAttribute('content', val)
   }
 
   // Sets default values for attributes.
@@ -67,11 +86,17 @@ class CoreTooltip extends window.HTMLElement {
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return []
+    return ['content']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
+    switch(name) {
+      case 'content':
+        // Set the tooltip attribute
+        this.text.innerHTML = newValue
+        break
+    }
   }
 }
 
