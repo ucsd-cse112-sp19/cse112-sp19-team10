@@ -191,7 +191,7 @@ class CoreRate extends window.HTMLElement {
   set voidIconClass (val) {
     this.setAttribute('void-icon-class', val)
   }
-  
+
   get disabledVoidIconClass () {
     return this.getAttribute('disabled-void-icon-class')
   }
