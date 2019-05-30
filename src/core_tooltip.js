@@ -114,7 +114,7 @@ template.innerHTML = `
 </style>
 <div class="tooltip">
     <slot></slot>
-    <span class="tooltiptext">Text</span>
+    <span class="tooltiptext" id="tooltiptext"></span>
 </div>
 `
 class CoreTooltip extends window.HTMLElement {
@@ -127,6 +127,8 @@ class CoreTooltip extends window.HTMLElement {
 
     // Place holder for tooltip style
     this.tooltip = shadowRoot.querySelector('.tooltip').style
+    // Place holder for tooltip text
+    this.text = shadowRoot.getElementById('tooltiptext')
   }
 
   /**
@@ -136,12 +138,29 @@ class CoreTooltip extends window.HTMLElement {
   get effect () {
     return this.getAttribute('effect')
   }
+
   /**
   * This function sets the value of the effect attribute.
   * @param {String} val - this is a string.
   */
   set effect (val) {
     this.setAttribute('effect', val)
+  }
+
+  /**
+  * This function gets the value of the contecnt attribute.
+  * @returns {String} value of the content attribute.
+  */
+  get content () {
+    return this.getAttribute('content')
+  }
+
+  /**
+  * This function sets the value of the content attribute.
+  * @param {String} val - this is a String.
+  */
+  set content (val) {
+    this.setAttribute('content', val)
   }
 
   /**
@@ -172,7 +191,7 @@ class CoreTooltip extends window.HTMLElement {
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'placement']
+    return ['effect', 'placement', 'content']
   }
 
   // Actions for when an attribute is changed.
@@ -186,6 +205,10 @@ class CoreTooltip extends window.HTMLElement {
           this.tooltip.setProperty('--background-color', '#303133')
           this.tooltip.setProperty('--text-color', '#fff')
         }
+        break
+      case 'content':
+        // Set the tooltip attribute
+        this.text.innerHTML = newValue
         break
       case 'placement':
         if (newValue === 'top') {
