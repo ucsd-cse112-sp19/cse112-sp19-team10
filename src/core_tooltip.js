@@ -89,13 +89,14 @@ class CoreTooltip extends window.HTMLElement {
   get effect () {
     return this.getAttribute('effect')
   }
-  
+
   /**
   * This function sets the Tooltip theme.
   * @param {String} val - either "dark" or "light".
   */
   set effect (val) {
     this.setAttribute('effect', val)
+  }
 
   /**
   * This function gets the value of the content attribute.
@@ -127,7 +128,7 @@ class CoreTooltip extends window.HTMLElement {
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
-    switch(name) {
+    switch (name) {
       case 'effect':
         if (newValue === 'light') {
           this.tooltip.setProperty('--background-color', '#fff')
