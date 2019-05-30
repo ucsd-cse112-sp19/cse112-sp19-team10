@@ -264,6 +264,15 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
     }
+    if (!this.hasAttribute('icon-classes')) {
+      this.setAttribute('icon-classes', 'fas fa-star')
+    }
+    if (!this.hasAttribute('score-template')) {
+      this.setAttribute('score-template', ' points')
+    }
+    if (!this.hasAttribute('texts')) {
+      this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
+    }
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
     }
@@ -347,17 +356,19 @@ class CoreRate extends window.HTMLElement {
         this.icon[i].setAttribute('class', newClass3)
       }
     }
-    if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
+    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
+       !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
+      var scoreTemp = this.getAttribute('score-template')
+      var score = this.getAttribute('v-model')
+      this.text.innerHTML = score + scoreTemp
+    }
+    if (this.hasAttribute('show-text') && this.hasAttribute('texts') &&
+       !this.hasAttribute('show-score')) {
       var texts = this.getAttribute('texts')
       this.textsArr = texts.split("', '")
       var length = this.textsArr.length
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
-    }
-    if (this.hasAttribute('show-score') && this.hasAttribute('score-template')) {
-      var scoreTemp = this.getAttribute('score-template')
-      var score = this.getAttribute('v-model')
-      this.text.innerHTML = score + scoreTemp
     }
     if (this.hasAttribute('text-color')) {
       this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
