@@ -95,6 +95,22 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('effect', val)
   }
 
+  /**
+  * This function gets the value of the placement attribute.
+  * @returns {String} value of the placement attribute.
+  */
+  get placement () {
+    return this.getAttribute('placement')
+  }
+  
+  /**
+  * This function sets the value of the placement attribute.
+  * @param {String} val - this is a string.
+  */
+  set placement (val) {
+    this.setAttribute('placement', val)
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
