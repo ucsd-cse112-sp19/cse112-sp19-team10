@@ -25,21 +25,21 @@ template.innerHTML = `
         z-index: 1;
     
         /* Position the tooltip text with arrow */
-        /*bottom: 125%;
+        bottom: 125%;
         left: 50%;
-        margin-left: -60px;*/
+        margin-left: -60px;
     }
     
     /* Tooltip arrow */
     .tooltip .tooltiptext::after {
         content: "";
         position: absolute;
-        /*top: 100%;
+        top: 100%;
         left: 50%;
-        margin-left: -5px;*/
+        margin-left: -5px;
         border-width: 5px;
         border-style: solid;
-        border-color: #555 transparent transparent transparent;
+        border-color: #303133 transparent transparent transparent;
     }
 
     /* Show the tooltip text when you mouse over the tooltip container */
