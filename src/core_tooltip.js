@@ -62,10 +62,13 @@ class CoreTooltip extends window.HTMLElement {
 
     // Place holder for tooltip text
     this.text = shadowRoot.getElementById('tooltiptext')
+    // Place holder for tooltip
+    this.tooltip = shadowRoot.querySelector('.tooltip')
+    this.toolhover = shadowRoot.querySelector('.tooltip:hover')
   }
 
   /**
-  * This function gets the value of the contecnt attribute.
+  * This function gets the value of the content attribute.
   * @returns {String} value of the content attribute.
   */
   get content () {
@@ -80,22 +83,53 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('content', val)
   }
 
+  /**
+  * This function gets the value of the v-model attribute.
+  * @returns {Boolean} visibility of Tooltip.
+  */
+  get vModel () {
+    return this.hasAttribute('v-model')
+  }
+
+  /**
+  * This function sets the value of the v-model attribute.
+  * @param {Boolean} val - visibility of Tooltip.
+  */
+  set vModel (val) {
+    if (val) {
+      this.setAttribute('v-model', '')
+    } else {
+      this.removeAttribute('v-model')
+    }
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
+    this.addEventListener('mouseover', this._onHover)
+    this.addEventListener('mouseout', this._onHover)
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['content']
+    return ['content', 'v-model']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
-    switch(name) {
+    switch (name) {
       case 'content':
         // Set the tooltip attribute
         this.text.innerHTML = newValue
         break
+    }
+  }
+
+  // Update v-model with new value
+  _onHover (event) {
+    if (!this.hasAttribute('v-model')) {
+      this.setAttribute('v-model', '')
+    } else {
+      this.removeAttribute('v-model')
     }
   }
 }
