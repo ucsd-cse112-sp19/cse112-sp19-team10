@@ -192,8 +192,7 @@ class CoreTooltip extends window.HTMLElement {
   _onHover (event) {
     if (this.hasAttribute('disabled')) {
       this.text.style.setProperty('visibility', 'hidden')
-    }
-    else {
+    } else {
       if (!this.hasAttribute('v-model')) {
         this.setAttribute('v-model', '')
       } else {
