@@ -127,7 +127,8 @@ class CoreTooltip extends window.HTMLElement {
   * @param {Boolean} val - visibility of Tooltip.
   */
   set vModel (val) {
-    if (val) {
+    const isVisible = Boolean(val)
+    if (isVisible) {
       this.setAttribute('v-model', '')
     } else {
       this.removeAttribute('v-model')
@@ -147,10 +148,34 @@ class CoreTooltip extends window.HTMLElement {
   * @param {Boolean} val - whether or not Tooltip is disabled.
   */
   set disabled (val) {
-    if (val) {
+    const isDisabled = Boolean(val)
+    if (isDisabled) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
+    }
+  }
+
+  /**
+  * This function gets the value of the manual attribute.
+  * @returns {Boolean} whether or not Tooltip is controlled manually.
+  * mouseenter and mouseleave won't have effects if set to true.
+  */
+  get manual () {
+    return this.hasAttribute('manual')
+  }
+
+  /**
+  * This function sets the value of the manual attribute.
+  * @param {Boolean} val - whether or not Tooltip is controlled manually.
+  * mouseenter and mouseleave won't have effects if set to true.
+  */
+  set manual (val) {
+    const isManual = Boolean(val)
+    if (isManual) {
+      this.setAttribute('manual', '')
+    } else {
+      this.removeAttribute('manual')
     }
   }
 
@@ -159,17 +184,25 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('effect')) {
       this.setAttribute('effect', 'dark')
     }
+    if (this.hasAttribute('manual')) {
+      if (this.hasAttribute('v-model')) {
+        this.text.style.setProperty('visibility', 'visible')
+      } else {
+        this.text.style.setProperty('visibility', 'hidden')
+      }
+    }
     this.addEventListener('mouseover', this._onHover)
     this.addEventListener('mouseout', this._onHover)
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model', 'disabled']
+    return ['effect', 'content', 'v-model', 'disabled', 'manual']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
+    const hasValue = newValue !== null
     switch (name) {
       case 'effect':
         // Set the tooltip theme
@@ -185,6 +218,15 @@ class CoreTooltip extends window.HTMLElement {
         // Set the tooltip attribute
         this.text.innerHTML = newValue
         break
+      case 'v-model':
+        // Show/hide tooltip manually
+        if (this.hasAttribute('manual')) {
+          if (hasValue) {
+            this.text.style.setProperty('visibility', 'visible')
+          } else {
+            this.text.style.setProperty('visibility', 'hidden')
+          }
+        }
     }
   }
 
@@ -192,7 +234,7 @@ class CoreTooltip extends window.HTMLElement {
   _onHover (event) {
     if (this.hasAttribute('disabled')) {
       this.text.style.setProperty('visibility', 'hidden')
-    } else {
+    } else if (!this.hasAttribute('manual')) {
       if (!this.hasAttribute('v-model')) {
         this.setAttribute('v-model', '')
       } else {
