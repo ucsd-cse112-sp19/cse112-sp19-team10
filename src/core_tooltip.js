@@ -31,6 +31,8 @@ template.innerHTML = `
         bottom: 125%;
         left: 50%;
         margin-left: -60px;
+
+        transition: all 0.3s ease-in-out;
     }
     
     /* Tooltip arrow */
@@ -60,11 +62,11 @@ template.innerHTML = `
 
     /* Show the tooltip text when you mouse over the tooltip container */
     .tooltip:hover .tooltiptext {
-        visibility: visible;
+      visibility: visible;
     }
 </style>
 <div class="tooltip">
-    <slot></slot>
+    <slot id="tooltipslot"></slot>
     <span class="tooltiptext" id="tooltiptext"></span>
 </div>
 `
@@ -179,6 +181,27 @@ class CoreTooltip extends window.HTMLElement {
     }
   }
 
+  /**
+  * This function gets the value of the enterable attribute.
+  * @returns {Boolean} whether or not the mouse can enter the tooltip.
+  */
+  get enterable () {
+    return this.hasAttribute('enterable')
+  }
+
+  /**
+  * This function sets the value of the manual attribute.
+  * @param {Boolean} val - whether or not the mouse can enter the tooltip.
+  */
+  set enterable (val) {
+    const isEnterable = Boolean(val)
+    if (isEnterable) {
+      this.setAttribute('enterable', '')
+    } else {
+      this.removeAttribute('enterable')
+    }
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
@@ -191,13 +214,21 @@ class CoreTooltip extends window.HTMLElement {
         this.text.style.setProperty('visibility', 'hidden')
       }
     }
-    this.addEventListener('mouseover', this._onHover)
-    this.addEventListener('mouseout', this._onHover)
+    if (!this.hasAttribute('enterable')) {
+      this.setAttribute('enterable', '')
+      this.addEventListener('mouseover', this._onHover)
+      this.addEventListener('mouseout', this._onHover)
+    }
+    else {
+      this.removeAttribute('enterable')
+      this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
+      this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseout', this._onHover)
+    }
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model', 'disabled', 'manual']
+    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'enterable']
   }
 
   // Actions for when an attribute is changed.
@@ -219,13 +250,11 @@ class CoreTooltip extends window.HTMLElement {
         this.text.innerHTML = newValue
         break
       case 'v-model':
-        // Show/hide tooltip manually
-        if (this.hasAttribute('manual')) {
-          if (hasValue) {
-            this.text.style.setProperty('visibility', 'visible')
-          } else {
-            this.text.style.setProperty('visibility', 'hidden')
-          }
+        // Set the visibility
+        if (hasValue) {
+          this.text.style.setProperty('visibility', 'visible')
+        } else {
+          this.text.style.setProperty('visibility', 'hidden')
         }
     }
   }
