@@ -4,6 +4,7 @@ node_js: "stable"
 before_install:
     - stty cols 80
     - npm install
+    - npm install --save-dev testcafe-browser-provider-saucelabs
     - npm install --showroom
 
 script:
