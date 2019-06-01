@@ -8,7 +8,7 @@
     "browsertest": "npm run Chrometest && npm run FireFoxtest && npm run Edgetest",
     "Edgetest": "testcafe \"saucelabs:MicrosoftEdge@16.16299:Windows 10\" tests/",
     "Chrometest": "testcafe \"saucelabs:Chrome@74.0:Windows 10\" tests/",
-    "FireFoxtest": "testcade \"saucelabs:Firefox@66.0:Windows 10\" tests/",
+    "FireFoxtest": "testcafe \"saucelabs:Firefox@66.0:Windows 10\" tests/",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
   },
