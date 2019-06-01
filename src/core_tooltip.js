@@ -134,6 +134,26 @@ class CoreTooltip extends window.HTMLElement {
     }
   }
 
+  /**
+  * This function gets the value of the disabled attribute.
+  * @returns {Boolean} whether or not Tooltip is disabled.
+  */
+  get disabled () {
+    return this.hasAttribute('disabled')
+  }
+
+  /**
+  * This function sets the value of the disabled attribute.
+  * @param {Boolean} val - whether or not Tooltip is disabled.
+  */
+  set disabled (val) {
+    if (val) {
+      this.setAttribute('disabled', '')
+    } else {
+      this.removeAttribute('disabled')
+    }
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
@@ -145,14 +165,14 @@ class CoreTooltip extends window.HTMLElement {
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model']
+    return ['effect', 'content', 'v-model', 'disabled']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
     switch (name) {
-      // Set the tooltip theme
       case 'effect':
+        // Set the tooltip theme
         if (newValue === 'light') {
           this.tooltip.setProperty('--background-color', '#fff')
           this.tooltip.setProperty('--text-color', '#303133')
@@ -168,12 +188,16 @@ class CoreTooltip extends window.HTMLElement {
     }
   }
 
-  // Update v-model with new value
+  // Update v-model with new value, hide tooltip if disabled
   _onHover (event) {
-    if (!this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', '')
+    if (this.hasAttribute('disabled')) {
+      this.text.style.setProperty('visibility', 'hidden')
     } else {
-      this.removeAttribute('v-model')
+      if (!this.hasAttribute('v-model')) {
+        this.setAttribute('v-model', '')
+      } else {
+        this.removeAttribute('v-model')
+      }
     }
   }
 }
