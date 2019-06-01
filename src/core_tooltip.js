@@ -62,6 +62,10 @@ template.innerHTML = `
     .tooltip:hover .tooltiptext {
         visibility: visible;
     }
+
+    .tooltip:focus .tooltiptext {
+      visibility: visible;
+    }
 </style>
 <div class="tooltip">
     <slot></slot>
@@ -179,6 +183,22 @@ class CoreTooltip extends window.HTMLElement {
     }
   }
 
+  /**
+  * This function gets the value of the tabindex attribute.
+  * @returns {Boolean} tabindex of Tooltip.
+  */
+  get tabindex () {
+    return this.getAttribute('tabindex')
+  }
+
+  /**
+  * This function sets the value of the tabindex attribute.
+  * @param {Boolean} val - tabindex of Tooltip.
+  */
+  set tabindex (val) {
+    this.setAttribute('tabindex', val)
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
@@ -190,6 +210,10 @@ class CoreTooltip extends window.HTMLElement {
       } else {
         this.text.style.setProperty('visibility', 'hidden')
       }
+    }
+    if (this.hasAttribute('tabindex')) {
+      this.addEventListener('focus', this._onHover)
+      this.addEventListener('blur', this._onHover)
     }
     this.addEventListener('mouseover', this._onHover)
     this.addEventListener('mouseout', this._onHover)
@@ -219,13 +243,11 @@ class CoreTooltip extends window.HTMLElement {
         this.text.innerHTML = newValue
         break
       case 'v-model':
-        // Show/hide tooltip manually
-        if (this.hasAttribute('manual')) {
-          if (hasValue) {
-            this.text.style.setProperty('visibility', 'visible')
-          } else {
-            this.text.style.setProperty('visibility', 'hidden')
-          }
+        // Set visibility of tooltip
+        if (hasValue) {
+          this.text.style.setProperty('visibility', 'visible')
+        } else {
+          this.text.style.setProperty('visibility', 'hidden')
         }
     }
   }
@@ -234,7 +256,7 @@ class CoreTooltip extends window.HTMLElement {
   _onHover (event) {
     if (this.hasAttribute('disabled')) {
       this.text.style.setProperty('visibility', 'hidden')
-    } else if (!this.hasAttribute('manual')) {
+    } else if (!this.hasAttribute('manual') || this.hasAttribute('tabindex')) {
       if (!this.hasAttribute('v-model')) {
         this.setAttribute('v-model', '')
       } else {
