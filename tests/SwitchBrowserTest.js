@@ -79,14 +79,10 @@ fixture`switch browser test:`
         .expect(switch1.count).eql(1)
         .expect(switch1.exists).ok()
         .expect(switch1.getAttribute('v-model')).eql('false')
-        //.expect(switch_inactive_icon.textContent).eql('Left')
-        //.expect(switch_active_icon.textContent).eql('Right')
         .expect(switch_inactive_icon.getAttribute('style')).eql('color: rgb(64, 158, 255);')
         .expect(switch_active_icon.getAttribute('style')).eql('color: black;');
     await t
         .click(switch_span)
-        //.expect(switch_inactive_icon.textContent).eql('Left')
-        //.expect(switch_active_icon.textContent).eql('Right')
         .expect(switch_inactive_icon.getAttribute('style')).eql('color: black;')
         .expect(switch_active_icon.getAttribute('style')).eql('color: rgb(64, 158, 255);');
   })
