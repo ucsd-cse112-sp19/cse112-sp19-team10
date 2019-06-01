@@ -3,10 +3,7 @@ node_js: "stable"
 
 before_install:
     - stty cols 80
-    - npm install -g standard
-    - npm install --save-dev mocha
-    - npm i -D mocha puppeteer
-    - npm install --save-dev chai
+    - npm install
     - npm install --showroom
 
 script:
