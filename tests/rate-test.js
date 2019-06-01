@@ -167,6 +167,7 @@ test('show-text attribute', async t => {
     })
     await t
         .click(star)
+        .click(star)
         .expect(output_txt.textContent).eql('good')
 })
 
