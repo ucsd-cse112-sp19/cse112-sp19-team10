@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <title>core-tooltip</title>
+        <script src="../src/core_tooltip.js"></script>
+        <style>
+            body {
+                margin: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <core-tooltip content="cow">HOVER HERE</core-tooltip>
+        <core-tooltip content="light" effect="light">HOVER HERE</core-tooltip>
+        <core-tooltip disabled>HOVER HERE</core-tooltip>
+        <core-tooltip content="manual" id="tip" manual><button onclick="showTooltip()">Click Me</button></core-tooltip>
+    </body>
+</html>
+<script>
+    // Sets/removes v-model attribute on click
+    function showTooltip() {
+        oldVal = document.getElementById("tip").vModel
+        document.getElementById("tip").vModel = !oldVal
+    }
+</script>
