@@ -286,7 +286,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
+    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'void-icon-class', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -344,10 +344,16 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].setAttribute('disabled', true)
       }
     }
+    if (this.hasAttribute('void-icon-class')) {
+      var newClass2 = this.getAttribute('void-icon-class')
+      for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
+        this.icon[this.icon.length - i - 1].setAttribute('class', newClass2)
+      }
+    }
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
-      var newClass2 = this.getAttribute('disabled-void-icon-class')
+      var newClass3 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        this.icon[i].setAttribute('class', newClass2)
+        this.icon[i].setAttribute('class', newClass3)
       }
     }
     if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
