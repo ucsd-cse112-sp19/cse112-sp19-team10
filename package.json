@@ -23,7 +23,7 @@
       "mocha"
     ],
     "ignore": [
-      "/docs/",
+      "docs/",
       "tests/"
     ]
   },
