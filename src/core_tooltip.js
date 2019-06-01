@@ -114,21 +114,44 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('content', val)
   }
 
+  /**
+  * This function gets the value of the v-model attribute.
+  * @returns {Boolean} visibility of Tooltip.
+  */
+  get vModel () {
+    return this.hasAttribute('v-model')
+  }
+
+  /**
+  * This function sets the value of the v-model attribute.
+  * @param {Boolean} val - visibility of Tooltip.
+  */
+  set vModel (val) {
+    if (val) {
+      this.setAttribute('v-model', '')
+    } else {
+      this.removeAttribute('v-model')
+    }
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
       this.setAttribute('effect', 'dark')
     }
+    this.addEventListener('mouseover', this._onHover)
+    this.addEventListener('mouseout', this._onHover)
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content']
+    return ['effect', 'content', 'v-model']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
     switch (name) {
+      // Set the tooltip theme
       case 'effect':
         if (newValue === 'light') {
           this.tooltip.setProperty('--background-color', '#fff')
@@ -142,6 +165,15 @@ class CoreTooltip extends window.HTMLElement {
         // Set the tooltip attribute
         this.text.innerHTML = newValue
         break
+    }
+  }
+
+  // Update v-model with new value
+  _onHover (event) {
+    if (!this.hasAttribute('v-model')) {
+      this.setAttribute('v-model', '')
+    } else {
+      this.removeAttribute('v-model')
     }
   }
 }
