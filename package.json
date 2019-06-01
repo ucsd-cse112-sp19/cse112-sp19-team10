@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --exit --timeout 5000",
-    "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/ && testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/ ",
+    "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
   },
