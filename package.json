@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --exit --timeout 5000",
-    "browsertest": "npm run Chrometest && npm run FireFoxtest && npm run Edgetest",
-    "Edgetest": "testcafe \"saucelabs:MicrosoftEdge@16.16299:Windows 10\" tests/",
+    "browsertest": "npm run Chrometest && npm run FireFoxtest && npm run Safaritest",
+    "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
     "Chrometest": "testcafe \"saucelabs:Chrome@74.0:Windows 10\" tests/",
     "FireFoxtest": "testcafe \"saucelabs:Firefox@66.0:Windows 10\" tests/",
     "lint": "standard --fix && standard",
