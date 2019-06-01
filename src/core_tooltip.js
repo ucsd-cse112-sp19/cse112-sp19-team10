@@ -17,11 +17,14 @@ template.innerHTML = `
       font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
       font-size: 12px;
       text-align: center;
-      word-wrap: break-word;
+      // word-wrap: break-word;
       line-height: 1.2;
       padding: 10px;
       border-radius: 4px;
       border: 1px solid #303133;
+
+      white-space:nowrap;
+      max-width:none;
 
       /* Position the tooltip text*/
       position: absolute;
@@ -48,12 +51,11 @@ template.innerHTML = `
 
     /* Top tooltip */
     .tooltip .tooltiptext.top {
-      bottom: 125%;
-      //left: 50%;
-      //margin-left: -60px;
-      // display: block;
-      // margin-left: auto;
-      // margin-right: auto;
+      // width: 120px;
+      // width: auto;
+      bottom: 80%;
+      // left: -75%; 
+      // margin-left: -50%;
     }
     .tooltiptext.top::after, .tooltiptext.top::before {
       top: 100%;
@@ -69,16 +71,11 @@ template.innerHTML = `
     }
     
     /* Bottom tooltip */
-    .tooltip {
-      vertical-align: middle
-    }
     .tooltip .tooltiptext.bottom {
-      top: 125%;
-      // left: 50%;
-      //margin-left: -60px;
-      // display: block;
-      // margin-left: auto;
-      // margin-right: auto;
+      // width: 120px;
+      top: 100%;
+      // left: -125%;
+      // margin-left: -100%; 
     }
     .tooltiptext.bottom::after, .tooltiptext.bottom::before {
       bottom: 100%;
@@ -95,9 +92,8 @@ template.innerHTML = `
 
     /* Left tooltip */
     .tooltip .tooltiptext.left {
-      right: 125%;
-      top: 50%;
-      //margin-top: -60px;
+      top: 10%;
+      right: 130%; 
     }
     .tooltiptext.left::after, .tooltiptext.left::before {
       left: 100%;
@@ -114,9 +110,8 @@ template.innerHTML = `
 
     /* Right tooltip */
     .tooltip .tooltiptext.right {
-      left: 125%;
-      top: 50%;
-      //margin-top: -60px;
+      top: 10%;
+      left: 130%; 
     }
     .tooltiptext.right::after, .tooltiptext.right::before {
       right: 100%;
