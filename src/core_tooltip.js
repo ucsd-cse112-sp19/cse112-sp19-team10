@@ -49,12 +49,11 @@ template.innerHTML = `
     /* Top tooltip */
     .tooltip .tooltiptext.top {
       bottom: 125%;
-      left: 50%;
+      //left: 50%;
       //margin-left: -60px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-
+      // display: block;
+      // margin-left: auto;
+      // margin-right: auto;
     }
     .tooltiptext.top::after, .tooltiptext.top::before {
       top: 100%;
@@ -70,13 +69,16 @@ template.innerHTML = `
     }
     
     /* Bottom tooltip */
+    .tooltip {
+      vertical-align: middle
+    }
     .tooltip .tooltiptext.bottom {
       top: 125%;
-      left: 50%;
+      // left: 50%;
       //margin-left: -60px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+      // display: block;
+      // margin-left: auto;
+      // margin-right: auto;
     }
     .tooltiptext.bottom::after, .tooltiptext.bottom::before {
       bottom: 100%;
