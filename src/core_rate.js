@@ -264,6 +264,15 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
     }
+    if (!this.hasAttribute('icon-classes')) {
+      this.setAttribute('icon-classes', 'fas fa-star')
+    }
+    if (!this.hasAttribute('score-template')) {
+      this.setAttribute('score-template', ' points')
+    }
+    if (!this.hasAttribute('texts')) {
+      this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
+    }
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
     }
@@ -277,7 +286,7 @@ class CoreRate extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
+    return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'void-icon-class', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -326,40 +335,40 @@ class CoreRate extends window.HTMLElement {
     }
     if (this.hasAttribute('icon-classes')) {
       var newClass1 = this.getAttribute('icon-classes')
-      var classes = newClass1.slice(1, newClass1.length - 1).split(',')
       for (i = 0; i < this.icon.length; i++) {
-        if (this.icon[i].classList.contains('low')) {
-          this.icon[i].setAttribute('class', 'low ' + classes[0])
-        } else if (this.icon[i].classList.contains('mid')) {
-          this.icon[i].setAttribute('class', 'mid ' + classes[1])
-        } else if (this.icon[i].classList.contains('high')) {
-          this.icon[i].setAttribute('class', 'high ' + classes[2])
-        }
+        this.icon[i].setAttribute('class', newClass1)
+      }
+    }
+    if (this.hasAttribute('disabled')) {
+      for (i = 0; i < this.radio.length; i++) {
+        this.radio[i].setAttribute('disabled', true)
+      }
+    }
+    if (this.hasAttribute('void-icon-class')) {
+      var newClass2 = this.getAttribute('void-icon-class')
+      for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
+        this.icon[this.icon.length - i - 1].setAttribute('class', newClass2)
       }
     }
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
-      var newClass2 = this.getAttribute('disabled-void-icon-class')
+      var newClass3 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        if (this.icon[i].classList.contains('low')) {
-          this.icon[i].setAttribute('class', 'low ' + newClass2)
-        } else if (this.icon[i].classList.contains('mid')) {
-          this.icon[i].setAttribute('class', 'mid ' + newClass2)
-        } else if (this.icon[i].classList.contains('high')) {
-          this.icon[i].setAttribute('class', 'high ' + newClass2)
-        }
+        this.icon[i].setAttribute('class', newClass3)
       }
     }
-    if (this.hasAttribute('show-text') && this.hasAttribute('texts')) {
+    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
+       !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
+      var scoreTemp = this.getAttribute('score-template')
+      var score = this.getAttribute('v-model')
+      this.text.innerHTML = score + scoreTemp
+    }
+    if (this.hasAttribute('show-text') && this.hasAttribute('texts') &&
+       !this.hasAttribute('show-score')) {
       var texts = this.getAttribute('texts')
       this.textsArr = texts.split("', '")
       var length = this.textsArr.length
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
-    }
-    if (this.hasAttribute('show-score') && this.hasAttribute('score-template')) {
-      var scoreTemp = this.getAttribute('score-template')
-      var score = this.getAttribute('v-model')
-      this.text.innerHTML = score + scoreTemp
     }
     if (this.hasAttribute('text-color')) {
       this.text.style.setProperty('--text-color', this.getAttribute('text-color'))

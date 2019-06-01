@@ -79,9 +79,10 @@ test('allow-half attribute', async t => {
         .expect(rate.getAttribute('v-model')).contains('.')
 })
 */
+
 test('low-threshold attribute', async t => {
     const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[4]
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[4]
     })
     await t
         .expect(star.getAttribute('class')).contains('low')
@@ -89,7 +90,7 @@ test('low-threshold attribute', async t => {
 
 test('high-threshold attribute', async t => {
     const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0]
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[0]
     })
     await t
         .expect(star.getAttribute('class')).contains('high')
@@ -130,21 +131,21 @@ test('icon-classes attribute', async t => {
         return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[0]
     })
     await t
-        .expect(star.getAttribute('class')).contains("fas fa-smile")
+        .expect(star.getAttribute('class')).contains("fas fa-frown")
 })
 
-/* TODO: when ready for review
 test('void-icon-class attribute', async t => {
     const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2]
+        return document.querySelectorAll('core-rate')[3]
     })
     const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0]
+        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[2]
     })
     await t
-        .expect(star.getAttribute('class')).eql("TODO: write name of void-icon-class")
+        .expect(rate.getAttribute('void-icon-class')).eql("fas fa-frown")
+        .click(star)
+        .expect(star.getAttribute('class')).eql("fas fa-smile")
 })
-*/
 
 test('disabled-void-icon-class attribute', async t => {
     const rate = await Selector(() => {
@@ -166,7 +167,7 @@ test('show-text attribute', async t => {
     })
     await t
         .click(star)
-        .expect(output_txt.textContent).notEql('')
+        .expect(output_txt.textContent).eql('good')
 })
 
 test('show-score attribute', async t => {
