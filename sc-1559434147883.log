@@ -1,0 +1,17 @@
+2019-06-01 17:09:07.921 [5788] Sauce Connect 4.5.3, build 2589 4b3da11 -dirty
+2019-06-01 17:09:07.921 [5788] Trying to autodetect proxy settings
+2019-06-01 17:09:07.925 [5788] Starting up; pid 5788
+2019-06-01 17:09:07.925 [5788] Command line arguments: C:\Users\Tim\Desktop\school (knowledge babe)\2019 spring cse 112\project repo\cse112-sp19-team10\node_modules\sauce-connect-launcher\sc\sc-4.5.3-win32\bin\sc.exe -u ptcheng105 -k **** --tunnel-identifier 1559434147883 --direct-domains *.google.com,*.gstatic.com,*.googleapis.com --readyfile C:\Users\Tim\AppData\Local\Temp\sc-launcher-readyfile -x https://saucelabs.com/rest/v1 
+2019-06-01 17:09:07.925 [5788] Log file: C:\Users\Tim\Desktop\school (knowledge babe)\2019 spring cse 112\project repo\cse112-sp19-team10\sc-1559434147883.log
+2019-06-01 17:09:07.925 [5788] Pid file: C:\Users\Tim\AppData\Roaming/sc_client-1559434147883.pid
+2019-06-01 17:09:07.925 [5788] Timezone: PDT GMT offset: -7h
+2019-06-01 17:09:07.925 [5788] Using no proxy for connecting to Sauce Labs REST API.
+2019-06-01 17:09:08.103 [5788] PROXY *** scproxy started ***
+2019-06-01 17:09:08.122 [5788] PROXY found DNS server 192.168.1.1
+2019-06-01 17:09:08.153 [5788] Started scproxy on port 58829.
+2019-06-01 17:09:08.153 [5788] Please wait for 'you may start your tests' to start your tests.
+2019-06-01 17:09:08.381 [5788] failed to check for existing tunnels
+2019-06-01 17:09:08.381 [5788] Sauce Connect could not establish a connection.
+2019-06-01 17:09:08.382 [5788] Please check your firewall and proxy settings.
+2019-06-01 17:09:08.382 [5788] You can also use the sc --doctor to launch Sauce Connect in diagnostic mode.
+2019-06-01 17:09:08.382 [5788] Goodbye.

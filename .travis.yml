@@ -8,8 +8,6 @@ before_install:
     - npm install --showroom
 
 script:
-    - ping saucelabs.com
-    - curl -v https://saucelabs.com/
     - npm run lint
     - npm run test
     - npm run browsertest
