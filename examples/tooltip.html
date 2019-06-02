@@ -11,10 +11,10 @@
         </style>
     </head>
     <body>
-        <core-tooltip content="cow">HOVER HERE</core-tooltip>
-        <core-tooltip content="light" effect="light">HOVER HERE</core-tooltip>
+        <core-tooltip content="cow" tabindex="1">HOVER HERE</core-tooltip>
+        <core-tooltip content="light" effect="light" tabindex="2">HOVER HERE</core-tooltip>
         <core-tooltip disabled>HOVER HERE</core-tooltip>
-        <core-tooltip content="manual" id="tip" manual><button onclick="showTooltip()">Click Me</button></core-tooltip>
+        <core-tooltip content="manual" id="tip" manual tabindex="3"><button onclick="showTooltip()">Click Me</button></core-tooltip>
     </body>
 </html>
 <script>
