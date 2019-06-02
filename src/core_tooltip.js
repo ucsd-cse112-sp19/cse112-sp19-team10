@@ -34,7 +34,8 @@ template.innerHTML = `
 
         /* Fade-in / Visibility */
         opacity: 0;
-        transition: opacity var(--fade-in-time);
+        transition: opacity 0s;
+        transition-delay: var(--fade-in-time)
     }
     
     /* Tooltip arrow */
