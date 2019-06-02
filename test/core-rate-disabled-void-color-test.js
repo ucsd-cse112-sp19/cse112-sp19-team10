@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('disabled-void-color', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -19,46 +19,37 @@ describe('core-rate', async => {
     // select the component with defaults from the descriptor file
   })
 
-  it('disabled-void-color', async () => {
-    await showroom.setAttribute('disabled-void-color', '#EFF2F7')
+  it('color format 1', async () => {
+    await showroom.setAttribute('disabled-void-color', "#4286f4")
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, '#EFF2F7')
+    assert.deepEqual(val, "#4286f4")
   })
 
-  it('remove attribute', async () => {
-    await showroom.setAttribute('disabled-void-color', '#EFF2F7')
-    const att = await showroom.hasAttribute('disabled-void-color')
-    assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, '#EFF2F7')
-    await showroom.removeAttribute('disabled-void-color')
-    val = await showroom.hasAttribute('disabled-void-color')
-    assert.deepEqual(val, false)
-  })
-
-  it('boolean', async () => {
-    await showroom.setAttribute('disabled-void-color', 'true')
+  it('color format 2', async () => {
+    await showroom.setAttribute('disabled-void-color', "green")
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, "green")
   })
 
+  /*
   it('incorrect color format', async () => {
     await showroom.setAttribute('disabled-void-color', '#GGGGGG')
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, "#4286f4")
   })
 
-  it('string', async () => {
+  it('non color format type', async () => {
     await showroom.setAttribute('disabled-void-color', 'test')
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, "#4286f4")
   })
+*/
 })

@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('void-icon-class', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -19,7 +19,7 @@ describe('core-rate', async => {
     // select the component with defaults from the descriptor file
   })
 
-  it('disabled', async () => {
+  it('string', async () => {
     await showroom.setAttribute('void-icon-class', 'el-icon-star-off')
     const att = await showroom.hasAttribute('void-icon-class')
     assert.deepEqual(att, true)
@@ -27,22 +27,13 @@ describe('core-rate', async => {
     assert.deepEqual(val, 'el-icon-star-off')
   })
 
-  it('remove attribute', async () => {
-    await showroom.setAttribute('void-icon-class', 'el-icon-star-off')
-    const att = await showroom.hasAttribute('void-icon-class')
-    assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('void-icon-class')
-    assert.deepEqual(val, 'el-icon-star-off')
-    await showroom.removeAttribute('void-icon-class')
-    val = await showroom.hasAttribute('void-icon-class')
-    assert.deepEqual(val, false)
-  })
-
-  it('boolean', async () => {
+  /*
+  it('non string type', async () => {
     await showroom.setAttribute('void-icon-class', 'true')
     const att = await showroom.hasAttribute('void-icon-class')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('void-icon-class')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, 'fas fa-frown')
   })
+  */
 })

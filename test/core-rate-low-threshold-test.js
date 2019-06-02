@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('low-threshold', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -24,33 +24,24 @@ describe('core-rate', async => {
     const att = await showroom.hasAttribute('low-threshold')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('low-threshold')
-    assert.deepEqual(val, 4)
+    assert.deepEqual(val, '2')
   })
 
-  it('remove attribute', async () => {
-    await showroom.setAttribute('low-threshold', '2')
+  /*
+  it('invalid number', async () => {
+    await showroom.setAttribute('low-threshold', '-1')
     const att = await showroom.hasAttribute('low-threshold')
     assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('low-threshold')
-    assert.deepEqual(val, 4)
-    await showroom.removeAttribute('low-threshold')
-    val = await showroom.hasAttribute('low-threshold')
-    assert.deepEqual(val, false)
+    const val = await showroom.getAttribute('low-threshold')
+    assert.deepEqual(val, '1')
   })
 
-  it('boolean', async () => {
+  it('non number type', async () => {
     await showroom.setAttribute('low-threshold', 'true')
     const att = await showroom.hasAttribute('low-threshold')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('low-threshold')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, '1')
   })
-
-  it('string', async () => {
-    await showroom.setAttribute('low-threshold', 'test')
-    const att = await showroom.hasAttribute('low-threshold')
-    assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('low-threshold')
-    assert.deepEqual(val, '')
-  })
+  */
 })

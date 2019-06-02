@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('disabled', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -20,29 +20,19 @@ describe('core-rate', async => {
   })
 
   it('disabled', async () => {
-    await showroom.setAttribute('disabled', 'true')
+    await showroom.setAttribute('disabled', '')
     const att = await showroom.hasAttribute('disabled')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled')
     assert.deepEqual(val, '')
   })
-
-  it('remove attribute', async () => {
-    await showroom.setAttribute('disabled', 'true')
-    const att = await showroom.hasAttribute('disabled')
-    assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('disabled')
-    assert.deepEqual(val, '')
-    await showroom.removeAttribute('disabled')
-    val = await showroom.hasAttribute('disabled')
-    assert.deepEqual(val, false)
-  })
-
+/*
   it('non-boolean type', async () => {
     await showroom.setAttribute('disabled', 'test')
     const att = await showroom.hasAttribute('disabled')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled')
-    assert.deepEqual(val, false)
+    assert.deepEqual(val, '')
   })
+*/
 })

@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('colors', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -19,46 +19,45 @@ describe('core-rate', async => {
     // select the component with defaults from the descriptor file
   })
 
-  it('array/object', async () => {
-    await showroom.setAttribute('colors', "['#F7BA2A', '#F7BA2A', '#F7BA2A']")
+  it('color format 1', async () => {
+    await showroom.setAttribute('colors', "[#F7BA2A, #F7BA2A, #F7BA2A]")
     const att = await showroom.hasAttribute('colors')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, ['#F7BA2A', '#F7BA2A', '#F7BA2A'])
+    assert.deepEqual(val, "[#F7BA2A, #F7BA2A, #F7BA2A]")
   })
 
-  it('remove colors', async () => {
-    await showroom.setAttribute('colors', "['#F7BA2A', '#F7BA2A', '#F7BA2A']")
-    const att = await showroom.hasAttribute('colors')
-    assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, ['#F7BA2A', '#F7BA2A', '#F7BA2A'])
-    await showroom.removeAttribute('colors')
-    val = await showroom.hasAttribute('colors')
-    assert.deepEqual(val, false)
-  })
-
-  it('array/object - incorrect color format', async () => {
-    await showroom.setAttribute('colors', "['#F7BA2A', '#GGGGGG', '#F7BA2A']")
+  it('color format 2', async () => {
+    await showroom.setAttribute('colors', "[red,yellow,green]")
     const att = await showroom.hasAttribute('colors')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, "[red,yellow,green]")
   })
 
-  it('boolean', async () => {
+/*
+  it('invalid array/object length', async () => {
+    await showroom.setAttribute('colors', "[#F7BA2A, #F7BA2A]")
+    const att = await showroom.hasAttribute('colors')
+    assert.deepEqual(att, true)
+    const val = await showroom.getAttribute('colors')
+    assert.deepEqual(val, "[#2ed3ce,#2ed3ce,#2ed3ce]")
+  })
+
+  it('incorrect color format', async () => {
+    await showroom.setAttribute('colors', "[#F7BA2A, #GGGGGG, #F7BA2A]")
+    const att = await showroom.hasAttribute('colors')
+    assert.deepEqual(att, true)
+    const val = await showroom.getAttribute('colors')
+    assert.deepEqual(val, "[#2ed3ce,#2ed3ce,#2ed3ce]")
+  })
+
+  it('non array/object type', async () => {
     await showroom.setAttribute('colors', 'true')
     const att = await showroom.hasAttribute('colors')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, "[#2ed3ce,#2ed3ce,#2ed3ce]")
   })
-
-  it('string', async () => {
-    await showroom.setAttribute('colors', 'test')
-    const att = await showroom.hasAttribute('colors')
-    assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, '')
-  })
+*/
 })

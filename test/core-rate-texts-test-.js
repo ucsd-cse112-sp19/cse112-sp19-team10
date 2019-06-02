@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('texts', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -24,33 +24,32 @@ describe('core-rate', async => {
     const att = await showroom.hasAttribute('texts')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('texts')
-    assert.deepEqual(val, ['oops', 'disappointed', 'normal', 'good', 'great'])
+    assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
   })
 
-  it('remove colors', async () => {
-    await showroom.setAttribute('texts', "['oops', 'disappointed', 'normal', 'good', 'great']")
+  /*
+  it('elements in array must all be strings', async () => {
+    await showroom.setAttribute('texts', "[4, #F7BA2A, true, ['what']]")
     const att = await showroom.hasAttribute('texts')
     assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('texts')
-    assert.deepEqual(val, ['oops', 'disappointed', 'normal', 'good', 'great'])
-    await showroom.removeAttribute('texts')
-    val = await showroom.hasAttribute('texts')
-    assert.deepEqual(val, false)
+    const val = await showroom.getAttribute('texts')
+    assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
   })
 
-  it('boolean', async () => {
+  it('incorrect array/object length', async () => {
+    await showroom.setAttribute('texts', "['oops', 'disappointed', 'normal']")
+    const att = await showroom.hasAttribute('texts')
+    assert.deepEqual(att, true)
+    const val = await showroom.getAttribute('texts')
+    assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
+  })
+
+  it('non array/object type', async () => {
     await showroom.setAttribute('texts', 'true')
     const att = await showroom.hasAttribute('texts')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('texts')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
   })
-
-  it('string', async () => {
-    await showroom.setAttribute('texts', 'test')
-    const att = await showroom.hasAttribute('texts')
-    assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('texts')
-    assert.deepEqual(val, '')
-  })
+  */
 })

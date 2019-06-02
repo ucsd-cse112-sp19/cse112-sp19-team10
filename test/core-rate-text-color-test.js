@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-describe('core-rate', async => {
+describe('text-color', async => {
   before(async () => {
     await showroom.start()
     // starts showroom server
@@ -19,7 +19,7 @@ describe('core-rate', async => {
     // select the component with defaults from the descriptor file
   })
 
-  it('disabled-void-color', async () => {
+  it('color format 1', async () => {
     await showroom.setAttribute('text-color', '#1F2D3D')
     const att = await showroom.hasAttribute('text-color')
     assert.deepEqual(att, true)
@@ -27,38 +27,29 @@ describe('core-rate', async => {
     assert.deepEqual(val, '#1F2D3D')
   })
 
-  it('remove attribute', async () => {
-    await showroom.setAttribute('text-color', '#1F2D3D')
+  it('color format 2', async () => {
+    await showroom.setAttribute('text-color', 'yellow')
     const att = await showroom.hasAttribute('text-color')
     assert.deepEqual(att, true)
-    var val = await showroom.getAttribute('text-color')
-    assert.deepEqual(val, '#1F2D3D')
-    await showroom.removeAttribute('text-color')
-    val = await showroom.hasAttribute('text-color')
-    assert.deepEqual(val, false)
+    const val = await showroom.getAttribute('text-color')
+    assert.deepEqual(val, 'yellow')
   })
 
+  /*
   it('boolean', async () => {
     await showroom.setAttribute('text-color', 'true')
     const att = await showroom.hasAttribute('text-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('text-color')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, 'green')
   })
 
-  it('string', async () => {
+  it('incorrect color format', async () => {
     await showroom.setAttribute('text-color', 'test')
     const att = await showroom.hasAttribute('text-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('text-color')
-    assert.deepEqual(val, '')
+    assert.deepEqual(val, 'green')
   })
-
-  it('incorrect color format', async () => {
-    await showroom.setAttribute('text-color', '#GGGGGG')
-    const att = await showroom.hasAttribute('text-color')
-    assert.deepEqual(att, true)
-    const val = await showroom.getAttribute('text-color')
-    assert.deepEqual(val, '')
-  })
+  */
 })
