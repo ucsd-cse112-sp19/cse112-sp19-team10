@@ -20,19 +20,19 @@ describe('colors', async => {
   })
 
   it('color format 1', async () => {
-    await showroom.setAttribute('colors', "[#F7BA2A, #F7BA2A, #F7BA2A]")
+    await showroom.setAttribute('colors', '[#F7BA2A, #F7BA2A, #F7BA2A]')
     const att = await showroom.hasAttribute('colors')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, "[#F7BA2A, #F7BA2A, #F7BA2A]")
+    assert.deepEqual(val, '[#F7BA2A, #F7BA2A, #F7BA2A]')
   })
 
   it('color format 2', async () => {
-    await showroom.setAttribute('colors', "[red,yellow,green]")
+    await showroom.setAttribute('colors', '[red,yellow,green]')
     const att = await showroom.hasAttribute('colors')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('colors')
-    assert.deepEqual(val, "[red,yellow,green]")
+    assert.deepEqual(val, '[red,yellow,green]')
   })
 
 /*

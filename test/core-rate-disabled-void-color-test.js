@@ -20,19 +20,19 @@ describe('disabled-void-color', async => {
   })
 
   it('color format 1', async () => {
-    await showroom.setAttribute('disabled-void-color', "#4286f4")
+    await showroom.setAttribute('disabled-void-color', '#4286f4')
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, "#4286f4")
+    assert.deepEqual(val, '#4286f4')
   })
 
   it('color format 2', async () => {
-    await showroom.setAttribute('disabled-void-color', "green")
+    await showroom.setAttribute('disabled-void-color', 'green')
     const att = await showroom.hasAttribute('disabled-void-color')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('disabled-void-color')
-    assert.deepEqual(val, "green")
+    assert.deepEqual(val, 'green')
   })
 
   /*

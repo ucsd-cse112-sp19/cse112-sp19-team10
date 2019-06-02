@@ -20,10 +20,10 @@ describe('score-template', async => {
   })
 
   it('format', async () => {
-    await showroom.setAttribute('score-template', " points")
+    await showroom.setAttribute('score-template', ' points')
     const att = await showroom.hasAttribute('score-template')
     assert.deepEqual(att, true)
     const val = await showroom.getAttribute('score-template')
-    assert.deepEqual(val, " points")
+    assert.deepEqual(val, ' points')
   })
 })
