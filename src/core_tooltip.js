@@ -34,7 +34,8 @@ template.innerHTML = `
 
         /* Fade-in / Visibility */
         opacity: 0;
-        transition: opacity var(--fade-in-time);
+        transition: opacity 0s;
+        transition-delay: var(--fade-in-time);
     }
     
     /* Tooltip arrow */
@@ -64,7 +65,7 @@ template.innerHTML = `
 
     /* Show the tooltip text when you mouse over the tooltip container */
     .tooltip:hover .tooltiptext {
-        opacity: 1;
+      opacity: 1;
     }
 
     .tooltip:focus .tooltiptext {
@@ -219,6 +220,22 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('open-delay', val)
   }
 
+  /**
+   * This function gets the value of the hide-after attribute
+   * @returns {number} hide delay of Tooltip in ms
+   */
+  get hideAfter () {
+    return this.getAttribute('hide-after')
+  }
+
+  /**
+   * This function sets the value of the hide-after attribute
+   * @returns {number} hide delay of Tooltip in ms
+   */
+  set hideAfter (val) {
+    this.setAttribute('hide-after', val)
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
@@ -271,6 +288,7 @@ class CoreTooltip extends window.HTMLElement {
         }
       case 'open-delay':
         if (hasValue) {
+          // Convert open delay from ms to s
           var fadeTime = this.getAttribute('open-delay') / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + "s")
         }
