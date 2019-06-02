@@ -3,9 +3,10 @@ let template = document.createElement('template')
 template.innerHTML = `
 <style>
   .switch {
+    --custom-width: 40;
     position: relative;
     display: inline-block;
-    width: 40px;
+    width: var(--custom-width);
     height: 22px;
   }
   .switch input {
@@ -21,16 +22,19 @@ template.innerHTML = `
     top: 3px;
   }
   #inactive_text {
-    right: 45px;
+    --iaText-offset: 45px;
+    right: var(--iaText-offset);
     float: left;
   }
   #active_text {
+    --aText-offset: 45px;
     float: right;
-    left: 45px;
+    left: var(--aText-offset);
   }
   .slider {
     --active-color: #409EFF;
     --inactive-color: #C0CCDA;
+    --custom-width: 18px;
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -58,7 +62,7 @@ template.innerHTML = `
   input:checked + .slider:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
-    transform: translateX(18px);
+    transform: translateX(var(--custom-width));
   }
   .slider.round {
     border-radius: 22px;
@@ -128,6 +132,10 @@ class CoreSwitch extends window.HTMLElement {
     this.aText = shadowRoot.querySelector('#active_text')
     // Place holder for inactive text
     this.iaText = shadowRoot.querySelector('#inactive_text')
+    // Place holder for switch width
+    this.switchWidth = shadowRoot.querySelector('.switch').style
+    // Place holder for slider width
+    this.sliderWidth = shadowRoot.querySelector('.slider').style
   }
 
   get disabled () {
@@ -203,6 +211,14 @@ class CoreSwitch extends window.HTMLElement {
     this.setAttribute('inactive-text', val)
   }
 
+  get width () {
+    return this.getAttribute('width')
+  }
+
+  set width (val) {
+    this.setAttribute('width', val)
+  }
+
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
@@ -219,6 +235,9 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-text')) {
       this.setAttribute('inactive-text', '')
     }
+    //if (!this.hasAttribute('width')) {
+    //  this.setAttribute('width', 40)
+    //}
     this.addEventListener('click', this._onClick)
   }
 
@@ -269,6 +288,19 @@ class CoreSwitch extends window.HTMLElement {
       } else {
         this.iaText.style.setProperty('color', 'black')
       }
+    }
+    if (this.hasAttribute('width')) {
+      var newWidth = this.getAttribute('width')
+      this.switchWidth.setProperty('--custom-width', newWidth)
+      // The slider's transform px amount is 22 less than the width of the switch
+      this.sliderWidth.setProperty('--custom-width', String(newWidth - 22) + "px")
+      var test11 = newWidth + 5
+      var testS = test11.toString()
+      var testS0 = testS + "px"
+      this.aText.style.setProperty('--aText-offset', testS0)
+      //this.aText.style.setProperty('left', "105px")
+      //this.iaText.style.setProperty('right', String(newWidth + 5) + "px")
+      //this.iaText.style.setProperty('right', "105px")
     }
   }
 
