@@ -7,11 +7,11 @@ template.innerHTML = `
         display: inline-block;
         --background-color: #303133;
         --text-color: #fff;
+        --fade-in-time: 0s;
     }
 
     /* Tooltip text */
     .tooltip .tooltiptext {
-        visibility: hidden;
         background-color: var(--background-color);
         color: var(--text-color);
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
@@ -31,6 +31,10 @@ template.innerHTML = `
         bottom: 125%;
         left: 50%;
         margin-left: -60px;
+
+        /* Fade-in / Visibility */
+        opacity: 0;
+        transition: opacity var(--fade-in-time);
     }
     
     /* Tooltip arrow */
@@ -60,7 +64,7 @@ template.innerHTML = `
 
     /* Show the tooltip text when you mouse over the tooltip container */
     .tooltip:hover .tooltiptext {
-        visibility: visible;
+        opacity: 1;
     }
 
     .tooltip:focus .tooltiptext {
@@ -199,6 +203,22 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('tabindex', val)
   }
 
+  /**
+   * This function gets the value of the open-delay attribute
+   * @returns {number} open delay of Tooltip in ms
+   */
+  get openDelay () {
+    return this.getAttribute('open-delay')
+  }
+
+  /**
+   * This function sets the value of the open-delay attribute
+   * @param {number} val - open delay of Tooltip in ms
+   */
+  set openDelay (val) {
+    this.setAttribute('open-delay', val)
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
@@ -221,7 +241,7 @@ class CoreTooltip extends window.HTMLElement {
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model', 'disabled', 'manual']
+    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'open-delay']
   }
 
   // Actions for when an attribute is changed.
@@ -248,6 +268,11 @@ class CoreTooltip extends window.HTMLElement {
           this.text.style.setProperty('visibility', 'visible')
         } else {
           this.text.style.setProperty('visibility', 'hidden')
+        }
+      case 'open-delay':
+        if (hasValue) {
+          var fadeTime = this.getAttribute('open-delay') / 1000
+          this.tooltip.setProperty('--fade-in-time', String(fadeTime) + "s")
         }
     }
   }
