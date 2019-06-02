@@ -1,11 +1,6 @@
 language: node_js
 node_js: "stable"
 
-addons:
-    sauce_connect:
-        username: "ptcheng105"
-        access_key: "d9583645-47c4-40c1-bb22-3646e0529fa5"
-
 before_install:
     - stty cols 80
     - npm install

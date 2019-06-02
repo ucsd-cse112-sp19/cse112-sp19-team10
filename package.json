@@ -7,7 +7,7 @@
     "test": "npx mocha --exit --timeout 5000",
     "browsertest": "npm run Chrometest && npm run FireFoxtest && npm run Safaritest",
     "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
-    "Chrometest": "testcafe \"saucelabs:Chrome@74.0:Windows 10\" tests/",
+    "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "FireFoxtest": "testcafe \"saucelabs:Firefox@66.0:Windows 10\" tests/",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
@@ -26,7 +26,7 @@
       "mocha"
     ],
     "ignore": [
-      "docs/",
+      "/docs/",
       "tests/"
     ]
   },
@@ -50,7 +50,7 @@
     "mocha": "^6.1.4",
     "puppeteer": "^1.16.0",
     "standard": "^12.0.1",
-    "testcafe": "^1.2.0",
+    "testcafe": "^1.1.4",
     "testcafe-browser-provider-saucelabs": "^1.7.0"
   }
 }
