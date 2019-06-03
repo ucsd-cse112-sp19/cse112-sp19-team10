@@ -270,11 +270,13 @@ class CoreTooltip extends window.HTMLElement {
         } else {
           this.text.style.setProperty('opacity', '0')
         }
+        break
       case 'open-delay':
         if (hasValue) {
           var fadeTime = this.getAttribute('open-delay') / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
         }
+        break
     }
   }
 
