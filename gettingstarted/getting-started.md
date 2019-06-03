@@ -27,7 +27,7 @@ Using Shinobi is as easy as one, two, three!
 2) Customize!  
 ```
 //change color 
-<core-switch active-color='green' inactive-color='red'></core-switch>
+<core-switch active-color='#53D96D'></core-switch>
 <core-rate colors="[red,gold,green]" void-color="black" low-threshold="1" high-threshold="5"></core-rate>
 ```
 
