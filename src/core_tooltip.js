@@ -227,9 +227,9 @@ class CoreTooltip extends window.HTMLElement {
     }
     if (this.hasAttribute('manual')) {
       if (this.hasAttribute('v-model')) {
-        this.text.style.setProperty('visibility', 'visible')
+        this.text.style.setProperty('opacity', '1')
       } else {
-        this.text.style.setProperty('visibility', 'hidden')
+        this.text.style.setProperty('opacity', '0')
       }
     }
     if (this.hasAttribute('tabindex')) {
@@ -266,9 +266,9 @@ class CoreTooltip extends window.HTMLElement {
       case 'v-model':
         // Set visibility of tooltip
         if (hasValue) {
-          this.text.style.setProperty('visibility', 'visible')
+          this.text.style.setProperty('opacity', '1')
         } else {
-          this.text.style.setProperty('visibility', 'hidden')
+          this.text.style.setProperty('opacity', '0')
         }
       case 'open-delay':
         if (hasValue) {
@@ -281,8 +281,8 @@ class CoreTooltip extends window.HTMLElement {
   // Update v-model with new value, hide tooltip if disabled
   _onHover (event) {
     if (this.hasAttribute('disabled')) {
-      this.text.style.setProperty('visibility', 'hidden')
-    } else if (!this.hasAttribute('manual') || this.hasAttribute('tabindex')) {
+      this.text.style.setProperty('opacity', '0')
+    } else if (!this.hasAttribute('manual')) {
       if (!this.hasAttribute('v-model')) {
         this.setAttribute('v-model', '')
       } else {
