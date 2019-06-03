@@ -1,5 +1,5 @@
-let template = document.createElement('template')
-template.innerHTML = ` 
+let templatRate = document.createElement('template')
+templatRate.innerHTML = ` 
     <style>
       *{
           margin: 0;
@@ -96,7 +96,7 @@ class CoreRate extends window.HTMLElement {
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(templatRate.content.cloneNode(true))
 
     // Place holder for colors property
     this.colors1 = shadowRoot.querySelector('.rate').style

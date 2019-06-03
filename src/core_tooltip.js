@@ -1,5 +1,5 @@
-let template = document.createElement('template')
-template.innerHTML = ` 
+let templateTooltip = document.createElement('template')
+templateTooltip.innerHTML = ` 
 <style>
     /* Tooltip container */
     .tooltip {
@@ -78,7 +78,7 @@ class CoreTooltip extends window.HTMLElement {
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(templateTooltip.content.cloneNode(true))
 
     // Place holder for tooltip style
     this.tooltip = shadowRoot.querySelector('.tooltip').style
