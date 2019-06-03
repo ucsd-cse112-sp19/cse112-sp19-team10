@@ -129,7 +129,8 @@ class CoreRate extends window.HTMLElement {
   }
 
   set disabled (val) {
-    if (val) {
+    const isDisabled = Boolean(val)
+    if (isDisabled) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
@@ -252,17 +253,37 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
     }
-    if (!this.hasAttribute('max')) {
-      this.setAttribute('max', 5)
+    if (this.hasAttribute('v-model') && isNaN(this.getAttribute('v-model'))) {
+      this.setAttribute('v-model', 0)
     }
+    this.setAttribute('max', 5)
     if (!this.hasAttribute('low-threshold')) {
+      this.setAttribute('low-threshold', 2)
+    }
+    if (this.hasAttribute('low-threshold') && isNaN(this.getAttribute('low-threshold'))) {
       this.setAttribute('low-threshold', 2)
     }
     if (!this.hasAttribute('high-threshold')) {
       this.setAttribute('high-threshold', 4)
     }
+    if (this.hasAttribute('high-threshold') && isNaN(this.getAttribute('high-threshold'))) {
+      this.setAttribute('high-threshold', 4)
+    }
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
+    }
+    if (this.hasAttribute('colors')) {
+      var colors = this.getAttribute('colors').slice(1, this.getAttribute('colors').length - 1).split(',')
+      if (!this.validColor(colors[0])) {
+        colors[0] = '#F7BA2A'
+      }
+      if (!this.validColor(colors[1])) {
+        colors[1] = '#F7BA2A'
+      }
+      if (!this.validColor(colors[2])) {
+        colors[2] = '#F7BA2A'
+      }
+      this.setAttribute('colors', '[' + colors[0] + ',' + colors[1] + ',' + colors[2] + ']')
     }
     if (!this.hasAttribute('icon-classes')) {
       this.setAttribute('icon-classes', 'fas fa-star')
@@ -270,17 +291,41 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('score-template')) {
       this.setAttribute('score-template', ' points')
     }
+    if (this.hasAttribute('show-score')) {
+      this.setAttribute('show-score', '')
+    }
     if (!this.hasAttribute('texts')) {
       this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
+    }
+    if (this.hasAttribute('show-text')) {
+      this.setAttribute('show-text', '')
     }
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
     }
+    if (this.hasAttribute('void-color')) {
+      if (!this.validColor(this.getAttribute('void-color'))) {
+        this.setAttribute('void-color', '#C6D1DE')
+      }
+    }
     if (!this.hasAttribute('disabled-void-color')) {
       this.setAttribute('disabled-void-color', '#C6D1DE')
     }
+    if (this.hasAttribute('disabled-void-color')) {
+      if (!this.validColor(this.getAttribute('disabled-void-color'))) {
+        this.setAttribute('disabled-void-color', '#C6D1DE')
+      }
+    }
     if (!this.hasAttribute('text-color')) {
       this.setAttribute('text-color', '#1F2D3D')
+    }
+    if (this.hasAttribute('text-color')) {
+      if (!this.validColor(this.getAttribute('text-color'))) {
+        this.setAttribute('text-color', '#1F2D3D')
+      }
+    }
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
     }
     this.addEventListener('click', this._onClick)
   }
@@ -400,6 +445,19 @@ class CoreRate extends window.HTMLElement {
     if (index !== 0 && this.textsArr) {
       this.text.innerHTML = this.textsArr[index - 1]
     }
+  }
+
+  // Check if string is a color
+  validColor (stringToTest) {
+    if (stringToTest === '') { return false }
+
+    var image = document.createElement('img')
+    image.style.color = 'rgb(0, 0, 0)'
+    image.style.color = stringToTest
+    if (image.style.color !== 'rgb(0, 0, 0)') { return true }
+    image.style.color = 'rgb(255, 255, 255)'
+    image.style.color = stringToTest
+    return image.style.color !== 'rgb(255, 255, 255)'
   }
 }
 
