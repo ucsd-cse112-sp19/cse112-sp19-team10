@@ -13,12 +13,12 @@ Using Shinobi is as easy as one, two, three!
 ```
 
 ```
-<core-tooltip content="This is a switch" tabindex="1">
+<core-tooltip content="This is a switch" tabindex="1" id="exampleSwitch">
     <div class="switch_group">
         <core-switch></core-switch>
     </div>
 </core-tooltip>
-<core-tooltip content="Show us some love!" tabindex="2">
+<core-tooltip content="Show us some love!" tabindex="2" id="exampleRate">
     <div class="rate_group">
         <core-rate></core-rate>
     </div>
