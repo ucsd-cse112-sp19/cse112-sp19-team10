@@ -247,7 +247,7 @@ class CoreTooltip extends window.HTMLElement {
       this.setAttribute('effect', 'dark')
     }
     if (this.hasAttribute('effect')) {
-      if (this.getAttribute('effect') != 'dark' && this.getAttribute('effect') != 'light') {
+      if (this.getAttribute('effect') !== 'dark' && this.getAttribute('effect') !== 'light') {
         this.setAttribute('effect', 'dark')
       }
     }
@@ -269,8 +269,7 @@ class CoreTooltip extends window.HTMLElement {
       if (!isNaN(this.getAttribute('tabindex'))) {
         this.addEventListener('focus', this._onHoverEnterable)
         this.addEventListener('blur', this._onHoverEnterable)
-      }
-      else {
+      } else {
         this.setAttribute('tabindex', 0)
       }
     }
@@ -280,7 +279,7 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('open-delay') || isNaN(this.getAttribute('open-delay'))) {
       this.setAttribute('open-delay', 0)
     }
-    if (this.getAttribute('enterable') == 'false' || this.getAttribute('enterable' == false)) {
+    if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
       // Add event listener for hovering when not enterable
       this.removeAttribute('enterable')
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
