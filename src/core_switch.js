@@ -1,5 +1,5 @@
-let template = document.createElement('template')
-template.innerHTML = `
+let switchTemplate = document.createElement('template')
+switchTemplate.innerHTML = `
 <style>
   .switch {
     position: relative;
@@ -130,7 +130,7 @@ class CoreSwitch extends window.HTMLElement {
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(switchTemplate.content.cloneNode(true))
 
     // Place holder for checkbox
     this.check = shadowRoot.querySelector('input[type=checkbox]')

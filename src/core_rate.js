@@ -1,9 +1,9 @@
-let template = document.createElement('template')
-template.innerHTML = ` 
+let rateTemplate = document.createElement('template')
+rateTemplate.innerHTML = ` 
     <style>
       *{
-          margin: 0;
-          padding: 0;
+        margin: 0;
+        padding: 0;
       }
       .text {
         --text-color: #1F2D3D
@@ -17,26 +17,26 @@ template.innerHTML = `
         margin-top: 5px;
       }
       .rate {
-          --low-color: #F7BA2A;
-          --mid-color: #F7BA2A;
-          --high-color: #F7BA2A;
-          --void-color: #C6D1DE;
-          float: left;
-          height: 46px;
-          padding: 0 10px;
+        --low-color: #F7BA2A;
+        --mid-color: #F7BA2A;
+        --high-color: #F7BA2A;
+        --void-color: #C6D1DE;
+        float: left;
+        height: 46px;
+        padding: 0 10px;
       }
       .rate:not(:checked) > input {
-          position:absolute;
-          top:-9999px;
+        position:absolute;
+        top:-9999px;
       }
       .rate:not(:checked) > label {
-          float:right;
-          overflow:hidden;
-          white-space:nowrap;
-          cursor:pointer;
-          font-size:20px;
-          color:var(--void-color);
-          margin:3px;
+        float:right;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:20px;
+        color:var(--void-color);
+        margin:3px;
       }
       .rate > input.low:checked ~ label,
       .rate input.low:not(:disabled):not(:checked) + label:hover,
@@ -46,7 +46,7 @@ template.innerHTML = `
       .rate > input.low:checked ~ label:hover,
       .rate > input.low:checked ~ label:hover ~ label,
       .rate > label:hover ~ input.low:checked ~ label {
-          color: var(--low-color); 
+        color: var(--low-color); 
       }
       .rate > input.mid:checked ~ label,
       .rate input.mid:not(:disabled):not(:checked) + label:hover,
@@ -56,7 +56,7 @@ template.innerHTML = `
       .rate > input.mid:checked ~ label:hover,
       .rate > input.mid:checked ~ label:hover ~ label,
       .rate > label:hover ~ input.mid:checked ~ label {
-          color: var(--mid-color); 
+        color: var(--mid-color); 
       }
       .rate > input.high:checked ~ label,
       .rate input.high:not(:disabled):not(:checked) + label:hover,
@@ -66,7 +66,7 @@ template.innerHTML = `
       .rate > input.high:checked ~ label:hover,
       .rate > input.high:checked ~ label:hover ~ label,
       .rate > label:hover ~ input.high:checked ~ label {
-          color: var(--high-color); 
+        color: var(--high-color); 
       }
     </style>
     <html>
@@ -96,7 +96,7 @@ class CoreRate extends window.HTMLElement {
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(rateTemplate.content.cloneNode(true))
 
     // Place holder for colors property
     this.colors1 = shadowRoot.querySelector('.rate').style
