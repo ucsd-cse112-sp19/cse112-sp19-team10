@@ -273,7 +273,7 @@ class CoreTooltip extends window.HTMLElement {
       case 'open-delay':
         if (hasValue) {
           var fadeTime = this.getAttribute('open-delay') / 1000
-          this.tooltip.setProperty('--fade-in-time', String(fadeTime) + "s")
+          this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
         }
     }
   }
