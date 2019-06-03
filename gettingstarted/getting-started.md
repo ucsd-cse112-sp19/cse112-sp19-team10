@@ -10,22 +10,29 @@ Using Shinobi is as easy as one, two, three!
 <script src="../src/core_rate.js"></script>
 <script src="../src/core_switch.js"></script>
 <script src="../src/core_tooltip.js"></script>
+```
 
+```
 <core-tooltip content="This is a switch" tabindex="1">
     <div class="switch_group">
-        <core-switch active-color='green' inactive-color='red'></core-switch>
+        <core-switch></core-switch>
     </div>
 </core-tooltip>
 <core-tooltip content="Show us some love!" tabindex="2">
     <div class="rate_group">
-        <core-rate colors="[red,yellow,green]" void-color="black" low-threshold="1" high-threshold="10"></core-rate>
+        <core-rate></core-rate>
     </div>
 </core-tooltip>
 ```
 2) Customize!  
 ```
 //change color 
-<core-switch active-color='blue' inactive-color='orange'></core-switch>
-<core-rate colors="[red,yellow,green]" void-color="black" low-threshold="1" high-threshold="5"></core-rate>
+<core-switch active-color='green' inactive-color='red'></core-switch>
+<core-rate colors="[red,gold,green]" void-color="black" low-threshold="1" high-threshold="5"></core-rate>
+```
+
+```
+//change icon
+<core-rate icon-classes="fas fa-smile" void-icon-class="fas fa-frown"></core-rate>
 ```
 3) And you're done!
