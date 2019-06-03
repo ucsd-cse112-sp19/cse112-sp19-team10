@@ -7,11 +7,11 @@ template.innerHTML = `
         display: inline-block;
         --background-color: #303133;
         --text-color: #fff;
+        --fade-in-time: 0s;
     }
 
     /* Tooltip text */
     .tooltip .tooltiptext {
-        visibility: hidden;
         background-color: var(--background-color);
         color: var(--text-color);
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
@@ -31,6 +31,11 @@ template.innerHTML = `
         bottom: 125%;
         left: 50%;
         margin-left: -60px;
+
+        /* Fade-in / Visibility */
+        opacity: 0;
+        transition: opacity 0s;
+        transition-delay: var(--fade-in-time)
     }
     
     /* Tooltip arrow */
@@ -60,7 +65,7 @@ template.innerHTML = `
 
     /* Show the tooltip text when you mouse over the tooltip container */
     .tooltip:hover .tooltiptext {
-        visibility: visible;
+        opacity: 1;
     }
 
     .tooltip:focus .tooltiptext {
@@ -199,6 +204,22 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('tabindex', val)
   }
 
+  /**
+   * This function gets the value of the open-delay attribute
+   * @returns {number} open delay of Tooltip in ms
+   */
+  get openDelay () {
+    return this.getAttribute('open-delay')
+  }
+
+  /**
+   * This function sets the value of the open-delay attribute
+   * @param {number} val - open delay of Tooltip in ms
+   */
+  set openDelay (val) {
+    this.setAttribute('open-delay', val)
+  }
+
   // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('effect')) {
@@ -206,9 +227,9 @@ class CoreTooltip extends window.HTMLElement {
     }
     if (this.hasAttribute('manual')) {
       if (this.hasAttribute('v-model')) {
-        this.text.style.setProperty('visibility', 'visible')
+        this.text.style.setProperty('opacity', '1')
       } else {
-        this.text.style.setProperty('visibility', 'hidden')
+        this.text.style.setProperty('opacity', '0')
       }
     }
     if (this.hasAttribute('tabindex')) {
@@ -221,7 +242,7 @@ class CoreTooltip extends window.HTMLElement {
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model', 'disabled', 'manual']
+    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'open-delay']
   }
 
   // Actions for when an attribute is changed.
@@ -245,18 +266,25 @@ class CoreTooltip extends window.HTMLElement {
       case 'v-model':
         // Set visibility of tooltip
         if (hasValue) {
-          this.text.style.setProperty('visibility', 'visible')
+          this.text.style.setProperty('opacity', '1')
         } else {
-          this.text.style.setProperty('visibility', 'hidden')
+          this.text.style.setProperty('opacity', '0')
         }
+        break
+      case 'open-delay':
+        if (hasValue) {
+          var fadeTime = this.getAttribute('open-delay') / 1000
+          this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
+        }
+        break
     }
   }
 
   // Update v-model with new value, hide tooltip if disabled
   _onHover (event) {
     if (this.hasAttribute('disabled')) {
-      this.text.style.setProperty('visibility', 'hidden')
-    } else if (!this.hasAttribute('manual') || this.hasAttribute('tabindex')) {
+      this.text.style.setProperty('opacity', '0')
+    } else if (!this.hasAttribute('manual')) {
       if (!this.hasAttribute('v-model')) {
         this.setAttribute('v-model', '')
       } else {
