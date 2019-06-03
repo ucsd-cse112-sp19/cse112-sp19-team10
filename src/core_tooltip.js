@@ -64,6 +64,10 @@ template.innerHTML = `
     .tooltip:hover .tooltiptext {
       visibility: visible;
     }
+
+    .tooltip:focus .tooltiptext {
+      visibility: visible;
+    }
 </style>
 <div class="tooltip">
     <slot id="tooltipslot"></slot>
@@ -200,6 +204,20 @@ class CoreTooltip extends window.HTMLElement {
     } else {
       this.removeAttribute('enterable')
     }
+
+  * This function gets the value of the tabindex attribute.
+  * @returns {Boolean} tabindex of Tooltip.
+  */
+  get tabindex () {
+    return this.getAttribute('tabindex')
+  }
+
+  /**
+  * This function sets the value of the tabindex attribute.
+  * @param {Boolean} val - tabindex of Tooltip.
+  */
+  set tabindex (val) {
+    this.setAttribute('tabindex', val)
   }
 
   // Sets default values for attributes.
@@ -213,6 +231,10 @@ class CoreTooltip extends window.HTMLElement {
       } else {
         this.text.style.setProperty('visibility', 'hidden')
       }
+    }
+    if (this.hasAttribute('tabindex')) {
+      this.addEventListener('focus', this._onHover)
+      this.addEventListener('blur', this._onHover)
     }
     if (!this.hasAttribute('enterable')) {
       // Add event listener for hovering when enterable
@@ -252,7 +274,7 @@ class CoreTooltip extends window.HTMLElement {
         this.text.innerHTML = newValue
         break
       case 'v-model':
-        // Set the visibility
+        // Set visibility of tooltip
         if (hasValue) {
           this.text.style.setProperty('visibility', 'visible')
         } else {
@@ -265,7 +287,7 @@ class CoreTooltip extends window.HTMLElement {
   _onHoverEnterable (event) {
     if (this.hasAttribute('disabled')) {
       this.text.style.setProperty('visibility', 'hidden')
-    } else if (!this.hasAttribute('manual')) {
+    } else if (!this.hasAttribute('manual') || this.hasAttribute('tabindex')) {
       if (!this.hasAttribute('v-model')) {
         this.setAttribute('v-model', '')
       } else {
