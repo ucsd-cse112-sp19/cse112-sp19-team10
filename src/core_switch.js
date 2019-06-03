@@ -364,6 +364,9 @@ class CoreSwitch extends window.HTMLElement {
         this.check.checked = true
       }
     }
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    }
   }
 
   // Gets the attribute values when they change.
