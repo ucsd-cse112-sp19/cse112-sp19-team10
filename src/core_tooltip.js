@@ -215,14 +215,16 @@ class CoreTooltip extends window.HTMLElement {
       }
     }
     if (!this.hasAttribute('enterable')) {
+      // Add event listener for hovering when enterable
       this.setAttribute('enterable', '')
-      this.addEventListener('mouseover', this._onHover)
-      this.addEventListener('mouseout', this._onHover)
-    }
-    else {
+      this.addEventListener('mouseover', this._onHoverEnterable)
+      this.addEventListener('mouseout', this._onHoverEnterable)
+    } else {
+      // Add event listener for hovering when not enterable
       this.removeAttribute('enterable')
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseout', this._onHover)
+      this.shadowRoot.getElementById('tooltipslot').tooltip = this
     }
   }
 
@@ -260,7 +262,7 @@ class CoreTooltip extends window.HTMLElement {
   }
 
   // Update v-model with new value, hide tooltip if disabled
-  _onHover (event) {
+  _onHoverEnterable (event) {
     if (this.hasAttribute('disabled')) {
       this.text.style.setProperty('visibility', 'hidden')
     } else if (!this.hasAttribute('manual')) {
@@ -268,6 +270,19 @@ class CoreTooltip extends window.HTMLElement {
         this.setAttribute('v-model', '')
       } else {
         this.removeAttribute('v-model')
+      }
+    }
+  }
+
+  // Update v-model with new value, hide tooltip if disabled
+  _onHover (event) {
+    if (this.tooltip.hasAttribute('disabled')) {
+      this.tooltip.text.style.setProperty('visibility', 'hidden')
+    } else if (!this.tooltip.hasAttribute('manual')) {
+      if (!this.tooltip.hasAttribute('v-model')) {
+        this.tooltip.setAttribute('v-model', '')
+      } else {
+        this.tooltip.removeAttribute('v-model')
       }
     }
   }
