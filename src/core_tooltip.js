@@ -77,6 +77,9 @@ template.innerHTML = `
     <span class="tooltiptext" id="tooltiptext"></span>
 </div>
 `
+/**
+ * CoreTooltip Class
+ */
 class CoreTooltip extends window.HTMLElement {
   constructor () {
     super()
