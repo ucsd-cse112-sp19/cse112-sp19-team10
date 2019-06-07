@@ -335,7 +335,8 @@ class CoreTooltip extends window.HTMLElement {
     }
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
-    }    if (this.hasAttribute('v-model')) {
+    }
+    if (this.hasAttribute('v-model')) {
       this.setAttribute('v-model', '')
     }
     if (this.hasAttribute('disabled')) {
