@@ -1,30 +1,42 @@
-[![Build Status](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10.svg?token=Nn7W4RnbZq1QGEydYuEM&branch=master)](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10)
+# Shinobi Component Library
+[![Build Status](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10.svg?token=Nn7W4RnbZq1QGEydYuEM&branch=master)](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+---
 
-# Team Rockstar Ninjas
+## A project by Team Rockstar Ninjas  
+The Shinobi Component Library (SCL) is a collection of meticulously built standard web components for you to use in any web project.  
+<img src="img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="300px"/>
 
-<img src="img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="500px"/>
+## Installation
+You can install Shinobi in two ways:  
+- Install using `npm install shinobirockstar`  
+- Download the zip file
 
-## Team Members
+## Getting Started
+Each component is named `core-COMPONENT_NAME`, where *COMPONENT_NAME* is the name of the component. Each component comes with default values allowing you to get started using just one simple line of code. 
 
+There are currently three components  
+- switch  
+- rate  
+- tooltip  
 
-- Julian Pierce, Team Lead/Comms
-- Sean Nam, Co-Lead/Comms
-- Adrian R. Jacinto, Quality Assurance
-- Emily Wing Wong, Quality Assurance
-- Pui Tim Cheng, DevOps
-- Nikolas Nikravesh, DevOps
-- Matt Qiran Jin, Tools & Utilities
-- Oliver Tianheng Liu, Tools & Utilities
-- Brian Frost, Coder
-- Ryan Nguyen, Coder
-- Olivia Miano, Coder
+They can be used like so:
+```
+<core-tooltip>  
+        <core-switch></core-switch>  
+</core-tooltip>  
+<core-rate></core-rate>  
+```
+Read more on the [Getting Started page](docs/usage/GettingStarted.md).
+A full list of attributes is availble through the [API Docs](docs/index.html).    
 
-<img src="img/team-lunch.jpg" title="Team Lunch" alt="Team Lunch" width="500px"/>
+## Team
+The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Come meet the team!](docs/Team.md)
 
-|   |   |   |
-|---|---|---|
-| <img src="img/julian.jpeg" title="Julian" alt="Julian" width="300px" /> Julian Pierce, Team Lead/Comms | <img src="img/sean.jpg" title="sean" alt="sean" width="300px" /> Sean Sangwoo Nam, Co-Lead/Comms | <img src="img/adrian.jpg" title="Adrian" alt="Adrian" width="300px"/> Adrian R. Jacinto, Quality Assurance |
-| <img src="img/Emily.jpg" title="Emily" alt="Emily" width="300px"/> Emily Wing Wong, Quality Assurance | <img src="img/tim.jpg" title="tim" alt="tim" width="300px"/> Pui Tim Cheng(tim), DevOps | <img src="img/nick.png" title="Nik" alt="Nik" width="300px"/> Nikolas Nikravesh, DevOps |   |
-| <img src="img/matt_jin.jpg" title="Matt" alt="Matt" width="300px"/> Matt Jin, Tools & Utilities | <img src="img/oliver.png" title="Oliver" alt="Oliver" width="300px"/> Oliver Tianheng Liu, Tools & Utilities| <img src="img/Brian.jpg" title="Brian" alt="Brian" width="300px"/> Brian Frost, Coder | 
-|<img src="img/ryan.jpg" title="Ryan" alt="Ryan" width="300px"/> Ryan Nguyen, Coder | <img src="img/olivia.jpg" title="Olivia" alt="Olivia" width="300px"/> Olivia Miano, Coder |
+## Code Style
+Our project uses the Standard JavaScript Style, (also known as StandardJS), found at [standardjs.com](standardjs.com)
 
+## Change Log
+This project uses [semantic-release](https://github.com/semantic-release/semantic-release#how-does-it-work) to generate a change log from the git commit messages. Please follow the format as outline in their [docs](https://github.com/semantic-release/semantic-release#how-does-it-work).
+
+## API Docs
+Component Specific API docs can be found: [here](docs/index.html)  
