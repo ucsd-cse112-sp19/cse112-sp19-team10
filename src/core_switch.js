@@ -124,6 +124,9 @@ templateSwitch.innerHTML = `
 </html>
 `
 
+/**
+ * CoreSwitch Class
+ */
 class CoreSwitch extends window.HTMLElement {
   constructor () {
     super()
