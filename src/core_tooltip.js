@@ -1,5 +1,5 @@
-let template = document.createElement('template')
-template.innerHTML = ` 
+let tooltipTemplate = document.createElement('template')
+tooltipTemplate.innerHTML = ` 
 <style>
     /* Tooltip container */
     .tooltip {
@@ -86,7 +86,7 @@ class CoreTooltip extends window.HTMLElement {
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(tooltipTemplate.content.cloneNode(true))
 
     // Place holder for tooltip style
     this.tooltip = shadowRoot.querySelector('.tooltip').style
@@ -249,7 +249,19 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('effect')) {
       this.setAttribute('effect', 'dark')
     }
+    if (this.hasAttribute('effect')) {
+      if (this.getAttribute('effect') !== 'dark' && this.getAttribute('effect') !== 'light') {
+        this.setAttribute('effect', 'dark')
+      }
+    }
+    if (this.hasAttribute('v-model')) {
+      this.setAttribute('v-model', '')
+    }
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    }
     if (this.hasAttribute('manual')) {
+      this.setAttribute('manual', '')
       if (this.hasAttribute('v-model')) {
         this.text.style.setProperty('opacity', '1')
       } else {
@@ -257,20 +269,30 @@ class CoreTooltip extends window.HTMLElement {
       }
     }
     if (this.hasAttribute('tabindex')) {
-      this.addEventListener('focus', this._onHover)
-      this.addEventListener('blur', this._onHover)
+      if (!isNaN(this.getAttribute('tabindex'))) {
+        this.addEventListener('focus', this._onHoverEnterable)
+        this.addEventListener('blur', this._onHoverEnterable)
+      } else {
+        this.setAttribute('tabindex', 0)
+      }
     }
-    if (!this.hasAttribute('enterable')) {
-      // Add event listener for hovering when enterable
-      this.setAttribute('enterable', '')
-      this.addEventListener('mouseover', this._onHoverEnterable)
-      this.addEventListener('mouseout', this._onHoverEnterable)
-    } else {
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', 0)
+    }
+    if (!this.hasAttribute('open-delay') || isNaN(this.getAttribute('open-delay'))) {
+      this.setAttribute('open-delay', 0)
+    }
+    if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
       // Add event listener for hovering when not enterable
       this.removeAttribute('enterable')
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseout', this._onHover)
       this.shadowRoot.getElementById('tooltipslot').tooltip = this
+    } else {
+      // Add event listener for hovering when enterable
+      this.setAttribute('enterable', '')
+      this.addEventListener('mouseover', this._onHoverEnterable)
+      this.addEventListener('mouseout', this._onHoverEnterable)
     }
   }
 
