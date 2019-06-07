@@ -1,9 +1,11 @@
 # Repo Structure
 
 ## Structure
-The repo is divided into several folders: 
+The repo is divided into several folders:  
 - *docs* contain all documentation not on Google Docs as well as our auto-generated API docs
-- 
+- *examples* contain HTML files using the components
+- *src* contains the code for the components
+- *tests* are organized into subfolders by type
 
 ## Example
 Below is an example of what the repo should look like
