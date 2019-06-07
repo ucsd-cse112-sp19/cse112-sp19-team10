@@ -71,6 +71,24 @@ tooltipTemplate.innerHTML = `
       border-top-color: #303133;
       margin-left: -7px;
     }
+    /* Start */
+    .tooltip .tooltiptext.top.start {
+      left: 0%;
+      transform: translateX(0%);
+    }
+    .tooltiptext.top.start::after, .tooltiptext.top.start::before {
+      left: 15%;
+    }
+    /* End */
+    .tooltip .tooltiptext.top.end {
+      left: initial;
+      right: 0;
+      transform: translateX(0%);
+    }
+    .tooltiptext.top.end::after, .tooltiptext.top.end::before {
+      left: initial;
+      right: 15%;
+    }
 
     /* Bottom Tooltip */
     .tooltip .tooltiptext.bottom {
@@ -89,6 +107,24 @@ tooltipTemplate.innerHTML = `
     .tooltiptext.bottom::before {
       border-bottom-color: #303133;
       margin-left: -7px;
+    }
+    /* Start */
+    .tooltip .tooltiptext.bottom.start {
+      left: 0%;
+      transform: translateX(0%);
+    }
+    .tooltiptext.bottom.start::after, .tooltiptext.bottom.start::before {
+      left: 15%;
+    }
+    /* End */
+    .tooltip .tooltiptext.bottom.end {
+      left: initial;
+      right: 0;
+      transform: translateX(0%);
+    }
+    .tooltiptext.bottom.end::after, .tooltiptext.bottom.end::before {
+      left: initial;
+      right: 15%;
     }
 
     /* Left Tooltip */
@@ -109,6 +145,24 @@ tooltipTemplate.innerHTML = `
       border-left-color: #303133;
       margin-top: -7px;
     }
+    /* Start */
+    .tooltip .tooltiptext.left.start {
+      top: 0%;
+      transform: translateY(0%);
+    }
+    .tooltiptext.left.start::after, .tooltiptext.left.start::before {
+      top: 35%;
+    }
+    /* End */
+    .tooltip .tooltiptext.left.end {
+      top: initial;
+      bottom: 0%;
+      transform: translateY(0%);
+    }
+    .tooltiptext.left.end::after, .tooltiptext.left.end::before {
+      top: initial;
+      bottom: 20%;
+    }
 
     /* Right Tooltip */
     .tooltip .tooltiptext.right {
@@ -127,6 +181,24 @@ tooltipTemplate.innerHTML = `
     .tooltiptext.right::before {
       border-right-color: #303133;
       margin-top: -7px;
+    }
+    /* Start */
+    .tooltip .tooltiptext.right.start {
+      top: 0%;
+      transform: translateY(0%);
+    }
+    .tooltiptext.right.start::after, .tooltiptext.right.start::before {
+      top: 35%;
+    }
+    /* End */
+    .tooltip .tooltiptext.right.end {
+      top: initial;
+      bottom: 0%;
+      transform: translateY(0%);
+    }
+    .tooltiptext.right.end::after, .tooltiptext.right.end::before {
+      top: initial;
+      bottom: 20%;
     }
 
     /* Show the tooltip text when you mouse over the tooltip container */
@@ -405,41 +477,35 @@ class CoreTooltip extends window.HTMLElement {
         if (newValue === oldValue) {
           break
         }
-
-        if (oldValue === 'top') {// || oldValue === 'top-start' || oldValue === 'top-end') {
+        if (oldValue === 'top' || oldValue === 'top-start' || oldValue === 'top-end') {
           this.text.classList.remove('top')
-        } else if (oldValue === 'bottom') {// || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
+        } else if (oldValue === 'bottom' || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
           this.text.classList.remove('bottom')
-        } else if (oldValue === 'left') {// || oldValue === 'left-start' || oldValue === 'left-end') {
+        } else if (oldValue === 'left' || oldValue === 'left-start' || oldValue === 'left-end') {
           this.text.classList.remove('left')
-        } else if (oldValue === 'right') {// || oldValue === 'right-start' || oldValue === 'right-end') {
+        } else if (oldValue === 'right' || oldValue === 'right-start' || oldValue === 'right-end') {
           this.text.classList.remove('right')
         }
-        
-        if (newValue === 'top') {
+        if (oldValue === 'top-start' || oldValue === 'bottom-start' || oldValue === 'left-start' || oldValue === 'right-start'){
+          this.text.classList.remove('start')
+        } else if (oldValue === 'top-end' || oldValue === 'bottom-end' || oldValue === 'left-end' || oldValue === 'right-end'){
+          this.text.classList.remove('end')
+        }
+        if (newValue === 'top' || newValue === 'top-start' || newValue === 'top-end') {
           this.text.classList.add('top')
-        // } else if (newValue === 'top-start') {
-
-        // } else if (newValue === 'top-end') {
-
-        } else if (newValue === 'bottom') {
+        } else if (newValue === 'bottom' || newValue === 'bottom-start' || newValue === 'bottom-end') {
           this.text.classList.add('bottom')
-        // } else if (newValue === 'bottom-start') {
-
-        // } else if (newValue === 'bottom-end') {
-
-        } else if (newValue === 'left') {
+        } else if (newValue === 'left' || newValue === 'left-start' || newValue === 'left-end') {
           this.text.classList.add('left')
-        // } else if (newValue === 'left-start') {
-
-        // } else if (newValue === 'left-end') {
-
-        } else if (newValue === 'right') {
+        } else if (newValue === 'right' || newValue === 'right-start' || newValue === 'right-end') {
           this.text.classList.add('right')
-        // } else if (newValue === 'right-start') {
-
-        // } else if (newValue === 'right-end') {
-
+        } else {
+          this.text.classList.add('bottom')
+        }
+        if (newValue === 'top-start' || newValue === 'bottom-start' || newValue === 'left-start' || newValue === 'right-start'){
+          this.text.classList.add('start')
+        } else if (newValue === 'top-end' || newValue === 'bottom-end' || newValue === 'left-end' || newValue === 'right-end'){
+          this.text.classList.add('end')
         }
         break
       case 'v-model':
