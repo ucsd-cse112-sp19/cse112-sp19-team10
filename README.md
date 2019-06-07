@@ -40,5 +40,8 @@ Want to contribute? Read the [guide](https://docs.google.com/document/d/131o201J
 ## Build Environment
 Learn how to set up the build environment and use the tools here: [setting up the build pipeline](https://docs.google.com/document/d/1T7znBZnsLRjiv7TSTTOygoxcIgXU88AOVcoRg2jSkuY/edit)
 
+## Repo Structure
+Learn about how our project directories are set up [here](docs/dev/Repo.md).
+
 ## Team
 The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Come meet the team!](docs/Team.md)
