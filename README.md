@@ -44,4 +44,4 @@ Learn how to set up the build environment and use the tools here: [setting up th
 Learn about how our project directories are set up [here](docs/dev/Repo.md).
 
 ## Team
-The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Come meet the team!](docs/Team.md)
+The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Meet the team!](docs/Team.md)
