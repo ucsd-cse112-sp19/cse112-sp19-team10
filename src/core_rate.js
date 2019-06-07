@@ -90,6 +90,9 @@ rateTemplate.innerHTML = `
     </body>
     </html>
 `
+/**
+ * CoreRate Class
+ */
 class CoreRate extends window.HTMLElement {
   constructor () {
     super()
