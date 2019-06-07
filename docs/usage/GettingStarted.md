@@ -7,6 +7,23 @@ Whether you used npm to install or downloaded the project itself, simply link to
 <script src="../src/core_switch.js"></script>
 <script src="../src/core_tooltip.js"></script>
 ```
+### 2) Add a component
+Each component is named `core-COMPONENT_NAME`, where *COMPONENT_NAME* is the name of the component. Each component comes with default values allowing you to get started using just one simple line of code. 
+
+There are currently three components  
+- switch  
+- rate  
+- tooltip  
+
+They can be used like so:  
+```
+<core-tooltip>  
+        <core-switch></core-switch>  
+</core-tooltip>  
+<core-rate></core-rate>  
+```
+
+Because they are standard web components, you can use the attributes that you already know and use, like so:
 
 ```
 <core-tooltip content="This is a switch" tabindex="1" id="exampleSwitch">
@@ -20,8 +37,10 @@ Whether you used npm to install or downloaded the project itself, simply link to
     </div>
 </core-tooltip>
 ```
+
 ### 2) Customize!
 While all components have specific attributes, many share common ones such as active color and the option to use an icon library like [font-awesome](https://fontawesome.com/). 
+
 ```
 //change color 
 <core-switch active-color='#53D96D'></core-switch>
@@ -32,5 +51,6 @@ While all components have specific attributes, many share common ones such as ac
 //change icon
 <core-rate icon-classes="fas fa-smile" void-icon-class="fas fa-frown"></core-rate>
 ```
+
 ### 3) And you're done! 
 Visit the [API docs](../index.html) for a complete list of attributes. 
