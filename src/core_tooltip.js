@@ -1,41 +1,41 @@
-let templateTooltip = document.createElement('template')
-templateTooltip.innerHTML = ` 
+let tooltipTemplate = document.createElement('template')
+tooltipTemplate.innerHTML = ` 
 <style>
     /* Tooltip container */
     .tooltip {
-        position: relative;
-        display: inline-block;
-        --background-color: #303133;
-        --text-color: #fff;
-        --fade-in-time: 0s;
+      position: relative;
+      display: inline-block;
+      --background-color: #303133;
+      --text-color: #fff;
+      --fade-in-time: 0s;
     }
 
     /* Tooltip text */
     .tooltip .tooltiptext {
-        background-color: var(--background-color);
-        color: var(--text-color);
-        font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
-        font-size: 12px;
-        text-align: center;
-        word-wrap: break-word;
-        line-height: 1.2;
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #303133;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+      font-size: 12px;
+      text-align: center;
+      word-wrap: break-word;
+      line-height: 1.2;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #303133;
 
-        /* Position the tooltip text*/
-        position: absolute;
-        z-index: 1;
+      /* Position the tooltip text*/
+      position: absolute;
+      z-index: 1;
     
-        /* Position the tooltip text with arrow */
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
+      /* Position the tooltip text with arrow */
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
 
-        /* Fade-in / Visibility */
-        opacity: 0;
-        transition: opacity 0s;
-        transition-delay: var(--fade-in-time)
+      /* Fade-in / Visibility */
+      opacity: 0;
+      transition: opacity 0s;
+      transition-delay: var(--fade-in-time)
     }
     
     /* Tooltip arrow */
@@ -73,7 +73,7 @@ templateTooltip.innerHTML = `
     }
 </style>
 <div class="tooltip">
-    <slot></slot>
+    <slot id="tooltipslot"></slot>
     <span class="tooltiptext" id="tooltiptext"></span>
 </div>
 `
@@ -86,7 +86,7 @@ class CoreTooltip extends window.HTMLElement {
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(templateTooltip.content.cloneNode(true))
+    shadowRoot.appendChild(tooltipTemplate.content.cloneNode(true))
 
     // Place holder for tooltip style
     this.tooltip = shadowRoot.querySelector('.tooltip').style
@@ -192,6 +192,27 @@ class CoreTooltip extends window.HTMLElement {
   }
 
   /**
+  * This function gets the value of the enterable attribute.
+  * @returns {Boolean} whether or not the mouse can enter the tooltip.
+  */
+  get enterable () {
+    return this.hasAttribute('enterable')
+  }
+
+  /**
+  * This function sets the value of the manual attribute.
+  * @param {Boolean} val - whether or not the mouse can enter the tooltip.
+  */
+  set enterable (val) {
+    const isEnterable = Boolean(val)
+    if (isEnterable) {
+      this.setAttribute('enterable', '')
+    } else {
+      this.removeAttribute('enterable')
+    }
+  }
+
+  /**
   * This function gets the value of the tabindex attribute.
   * @returns {Boolean} tabindex of Tooltip.
   */
@@ -209,7 +230,7 @@ class CoreTooltip extends window.HTMLElement {
 
   /**
    * This function gets the value of the open-delay attribute
-   * @returns {number} open delay of Tooltip in ms
+   * @returns {number} open delay of Tooltip in ms.
    */
   get openDelay () {
     return this.getAttribute('open-delay')
@@ -217,7 +238,7 @@ class CoreTooltip extends window.HTMLElement {
 
   /**
    * This function sets the value of the open-delay attribute
-   * @param {number} val - open delay of Tooltip in ms
+   * @param {number} val - open delay of Tooltip in ms.
    */
   set openDelay (val) {
     this.setAttribute('open-delay', val)
@@ -228,7 +249,19 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('effect')) {
       this.setAttribute('effect', 'dark')
     }
+    if (this.hasAttribute('effect')) {
+      if (this.getAttribute('effect') !== 'dark' && this.getAttribute('effect') !== 'light') {
+        this.setAttribute('effect', 'dark')
+      }
+    }
+    if (this.hasAttribute('v-model')) {
+      this.setAttribute('v-model', '')
+    }
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    }
     if (this.hasAttribute('manual')) {
+      this.setAttribute('manual', '')
       if (this.hasAttribute('v-model')) {
         this.text.style.setProperty('opacity', '1')
       } else {
@@ -236,16 +269,36 @@ class CoreTooltip extends window.HTMLElement {
       }
     }
     if (this.hasAttribute('tabindex')) {
-      this.addEventListener('focus', this._onHover)
-      this.addEventListener('blur', this._onHover)
+      if (!isNaN(this.getAttribute('tabindex'))) {
+        this.addEventListener('focus', this._onHoverEnterable)
+        this.addEventListener('blur', this._onHoverEnterable)
+      } else {
+        this.setAttribute('tabindex', 0)
+      }
     }
-    this.addEventListener('mouseover', this._onHover)
-    this.addEventListener('mouseout', this._onHover)
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', 0)
+    }
+    if (!this.hasAttribute('open-delay') || isNaN(this.getAttribute('open-delay'))) {
+      this.setAttribute('open-delay', 0)
+    }
+    if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
+      // Add event listener for hovering when not enterable
+      this.removeAttribute('enterable')
+      this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
+      this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseout', this._onHover)
+      this.shadowRoot.getElementById('tooltipslot').tooltip = this
+    } else {
+      // Add event listener for hovering when enterable
+      this.setAttribute('enterable', '')
+      this.addEventListener('mouseover', this._onHoverEnterable)
+      this.addEventListener('mouseout', this._onHoverEnterable)
+    }
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'open-delay']
+    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'enterable', 'open-delay', 'tabindex']
   }
 
   // Actions for when an attribute is changed.
@@ -284,7 +337,7 @@ class CoreTooltip extends window.HTMLElement {
   }
 
   // Update v-model with new value, hide tooltip if disabled
-  _onHover (event) {
+  _onHoverEnterable (event) {
     if (this.hasAttribute('disabled')) {
       this.text.style.setProperty('opacity', '0')
     } else if (!this.hasAttribute('manual')) {
@@ -292,6 +345,19 @@ class CoreTooltip extends window.HTMLElement {
         this.setAttribute('v-model', '')
       } else {
         this.removeAttribute('v-model')
+      }
+    }
+  }
+
+  // Update v-model with new value, hide tooltip if disabled
+  _onHover (event) {
+    if (this.tooltip.hasAttribute('disabled')) {
+      this.tooltip.text.style.setProperty('opacity', '0')
+    } else if (!this.tooltip.hasAttribute('manual')) {
+      if (!this.tooltip.hasAttribute('v-model')) {
+        this.tooltip.setAttribute('v-model', '')
+      } else {
+        this.tooltip.removeAttribute('v-model')
       }
     }
   }
