@@ -25,6 +25,10 @@ template.innerHTML = `
 `
 
 // core-hello class definition
+
+/**
+ * CoreHello class
+ */
 class CoreHello extends window.HTMLElement {
   // Rainbow attribute
   get rainbow () {
