@@ -7,17 +7,29 @@
         <style>
             body {
                 margin: 50px;
+                margin-left: 200px;
             }
         </style>
     </head>
     <body>
         <core-tooltip content="cow">HOVER HERE</core-tooltip>
+        <br>
         <core-tooltip content="light" effect="light">HOVER HERE</core-tooltip>
+        <br>
         <core-tooltip disabled>HOVER HERE</core-tooltip>
+        <br>
         <core-tooltip content="manual" id="tip" manual><button onclick="showTooltip()">Click Me</button></core-tooltip>
+        <br>
         <core-tooltip content="this is placed at the bottom"><p>Bottom</p></core-tooltip>
+        <br>
+        <core-tooltip content="this is placed on top" placement="bottom"><p>you're beautiful you're a model you look like linda evangelista</p></core-tooltip>
+        <br>
+        <core-tooltip content="this is placed on top" placement="top"><p>you're beautiful you're a model you look like linda evangelista</p></core-tooltip>
+        <br>
         <core-tooltip content="this is placed on top" placement="top"><h1>Top</h1></core-tooltip>
+        <br>
         <core-tooltip content="this is placed to the left" placement="left"><p>Left</p></core-tooltip>
+        <br>
         <core-tooltip content="this is placed to the right" placement="right"><p>Right</p></core-tooltip>
     </body>
 </html>

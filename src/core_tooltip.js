@@ -5,8 +5,8 @@ template.innerHTML = `
     .tooltip {
       position: relative;
       display: inline-block;
-      --background-color: #303133;
-      --text-color: #fff;
+      --background-color: #fff;
+      --text-color: #303133;
     }
 
     /* Tooltip text */
@@ -17,20 +17,20 @@ template.innerHTML = `
       font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
       font-size: 12px;
       text-align: center;
-      // word-wrap: break-word;
       line-height: 1.2;
+      min-width: 10px;
+      word-wrap: break-word;
       padding: 10px;
       border-radius: 4px;
       border: 1px solid #303133;
-
-      white-space:nowrap;
-      max-width:none;
+      white-space: nowrap;
+      max-width: none;
 
       /* Position the tooltip text*/
       position: absolute;
       z-index: 1;
     }
-    
+
     /* Tooltip arrow */
     .tooltiptext::after, .tooltiptext::before {
       border: solid transparent;
@@ -41,21 +41,17 @@ template.innerHTML = `
       pointer-events: none;
     }
     .tooltiptext::after {
-      border-color: transparent;
-      border-width: 5px;
-    }
-    .tooltiptext::before {
-      border-color: transparent;
       border-width: 6px;
     }
+    .tooltiptext::before {
+      border-width: 7px;
+    }
 
-    /* Top tooltip */
+    /* Top Tooltip */
     .tooltip .tooltiptext.top {
-      // width: 120px;
-      // width: auto;
-      bottom: 80%;
-      // left: -75%; 
-      // margin-left: -50%;
+      bottom: 140%;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .tooltiptext.top::after, .tooltiptext.top::before {
       top: 100%;
@@ -63,19 +59,18 @@ template.innerHTML = `
     }
     .tooltiptext.top::after {
       border-top-color: var(--background-color);
-      margin-left: -5px;
+      margin-left: -6px;
     }
     .tooltiptext.top::before {
       border-top-color: #303133;
-      margin-left: -6px;
+      margin-left: -7px;
     }
-    
-    /* Bottom tooltip */
+
+    /* Bottom Tooltip */
     .tooltip .tooltiptext.bottom {
-      // width: 120px;
-      top: 100%;
-      // left: -125%;
-      // margin-left: -100%; 
+      // top: 140%;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .tooltiptext.bottom::after, .tooltiptext.bottom::before {
       bottom: 100%;
@@ -83,17 +78,18 @@ template.innerHTML = `
     }
     .tooltiptext.bottom::after {
       border-bottom-color: var(--background-color);
-      margin-left: -5px;
+      margin-left: -6px;
     }
     .tooltiptext.bottom::before {
       border-bottom-color: #303133;
-      margin-left: -6px;
+      margin-left: -7px;
     }
 
-    /* Left tooltip */
+    /* Left Tooltip */
     .tooltip .tooltiptext.left {
-      top: 10%;
-      right: 130%; 
+      top: 50%;
+      right: 140%;
+      transform: translateY(-50%);
     }
     .tooltiptext.left::after, .tooltiptext.left::before {
       left: 100%;
@@ -101,17 +97,18 @@ template.innerHTML = `
     }
     .tooltiptext.left::after {
       border-left-color: var(--background-color);
-      margin-top: -5px;
+      margin-top: -6px;
     }
     .tooltiptext.left::before {
       border-left-color: #303133;
-      margin-top: -6px;
+      margin-top: -7px;
     }
 
-    /* Right tooltip */
+    /* Right Tooltip */
     .tooltip .tooltiptext.right {
-      top: 10%;
-      left: 130%; 
+      top: 50%;
+      left: 140%;
+      transform: translateY(-50%);
     }
     .tooltiptext.right::after, .tooltiptext.right::before {
       right: 100%;
@@ -119,11 +116,11 @@ template.innerHTML = `
     }
     .tooltiptext.right::after {
       border-right-color: var(--background-color);
-      margin-top: -5px;
+      margin-top: -6px;
     }
     .tooltiptext.right::before {
       border-right-color: #303133;
-      margin-top: -6px;
+      margin-top: -7px;
     }
 
     /* Show the tooltip text when you mouse over the tooltip container */
@@ -310,14 +307,14 @@ class CoreTooltip extends window.HTMLElement {
           break
         }
 
-        if (oldValue === 'top' || oldValue === 'top-start' || oldValue === 'top-end') {
+        if (oldValue === 'top') {// || oldValue === 'top-start' || oldValue === 'top-end') {
           this.text.classList.remove('top')
-        } else if (oldValue === 'bottom' || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
+        } else if (oldValue === 'bottom') {// || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
           this.text.classList.remove('bottom')
-        } else if (oldValue === 'left' || oldValue === 'left-start' || oldValue === 'left-end') {
+        } else if (oldValue === 'left') {// || oldValue === 'left-start' || oldValue === 'left-end') {
           this.text.classList.remove('left')
-        } else if (oldValue === 'right' || oldValue === 'right-start' || oldValue === 'right-end') {
-          this.text.classList.remove('left')
+        } else if (oldValue === 'right') {// || oldValue === 'right-start' || oldValue === 'right-end') {
+          this.text.classList.remove('right')
         }
         
         if (newValue === 'top') {
