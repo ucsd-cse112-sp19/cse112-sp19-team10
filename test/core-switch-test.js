@@ -308,5 +308,4 @@ describe('Testing core-switch', async () => {
       assert.deepEqual(val, '123')
     })
   })
-
 })
