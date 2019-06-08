@@ -20,6 +20,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: colors', async () => {
+    /*  Unit Testing for
+        Attribute: colors
+        Description: colors of icons. it should be an array containing three color elements
+        Type: array
+        Default: ['#F7BA2A', '#F7BA2A', '#F7BA2A']
+    */
+
     it('color format 1', async () => {
       await showroom.setAttribute('colors', '[#F7BA2A, #F7BA2A, #F7BA2A]')
       const att = await showroom.hasAttribute('colors')
@@ -38,6 +45,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: disabled', async () => {
+    /*  Unit Testing for
+        Attribute: disabled
+        Description: displays whether or not rate is read-only
+        Type: boolean
+        Default: false
+    */
+
     it('disabled', async () => {
       await showroom.setAttribute('disabled', '')
       const att = await showroom.hasAttribute('disabled')
@@ -48,6 +62,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: disabled-void-color', async () => {
+    /*  Unit Testing for
+        Attribute: disabled-void-color
+        Description: color of unselected read-only icons
+        Type: string
+        Default: #EFF2F7
+    */
+
     it('color format 1', async () => {
       await showroom.setAttribute('disabled-void-color', '#4286f4')
       const att = await showroom.hasAttribute('disabled-void-color')
@@ -66,6 +87,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: disabled-void-icon-class', async () => {
+    /*  Unit Testing for
+        Attribute: disabled-void-icon-class
+        Description: class name of unselected icons
+        Type: string
+        Default: el-icon-star-off
+    */
+
     it('string', async () => {
       await showroom.setAttribute('disabled-void-icon-class', 'el-icon-star-on')
       const att = await showroom.hasAttribute('disabled-void-icon-class')
@@ -76,6 +104,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: high-threshold', async () => {
+    /*  Unit Testing for
+        Attribute: high-threshold
+        Description: threshold value between medium and high level
+        Type: number
+        Default: 4
+    */
+
     it('number', async () => {
       await showroom.setAttribute('high-threshold', '4')
       const att = await showroom.hasAttribute('high-threshold')
@@ -86,6 +121,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: low-threshold', async () => {
+    /*  Unit Testing for
+        Attribute: low-threshold
+        Description: threshold value between low and medium level
+        Type: number
+        Default: 2
+    */
+
     it('number', async () => {
       await showroom.setAttribute('low-threshold', '2')
       const att = await showroom.hasAttribute('low-threshold')
@@ -96,6 +138,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: icon-classes', async () => {
+    /*  Unit Testing for
+        Attribute: icon-classes
+        Description: an array of class name of icons. It should be three elements.
+        Type: array
+        Default: 2
+    */
+
     it('string', async () => {
       await showroom.setAttribute('icon-classes', 'el-icon-star-on')
       const att = await showroom.hasAttribute('icon-classes')
@@ -106,6 +155,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: score-template', async () => {
+    /*  Unit Testing for
+        Attribute: score-template
+        Description: score templated used when show-score attribute is set
+        Type: string
+        Default: {value}
+    */
+
     it('format', async () => {
       await showroom.setAttribute('score-template', ' points')
       const att = await showroom.hasAttribute('score-template')
@@ -116,6 +172,14 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: show-score', async () => {
+    /*  Unit Testing for
+        Attribute: show-score
+        Description: determines whether or not to display current score. show-text
+                     and show-score cannot be true at the same time.
+        Type: boolean
+        Default: false
+    */
+
     it('show score', async () => {
       await showroom.setAttribute('show-score', '')
       const att = await showroom.hasAttribute('show-score')
@@ -126,6 +190,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: show-text', async () => {
+    /*  Unit Testing for
+        Attribute: show-text
+        Description: determines whether or not to display texts
+        Type: boolean
+        Default: false
+    */
+
     it('show text', async () => {
       await showroom.setAttribute('show-text', '')
       const att = await showroom.hasAttribute('show-text')
@@ -136,6 +207,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: text-color', async () => {
+    /*  Unit Testing for
+        Attribute: text-color
+        Description: color of texts when show-text attribute is set
+        Type: string
+        Default: #1F2D3D
+    */
+
     it('color format 1', async () => {
       await showroom.setAttribute('text-color', '#1F2D3D')
       const att = await showroom.hasAttribute('text-color')
@@ -154,6 +232,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: texts', async () => {
+    /*  Unit Testing for
+        Attribute: texts
+        Description: text array set for each icon
+        Type: array
+        Default: ['oops', 'disappointed', 'normal', 'good', 'great']
+    */
+
     it('array/object', async () => {
       await showroom.setAttribute('texts', "['oops', 'disappointed', 'normal', 'good', 'great']")
       const att = await showroom.hasAttribute('texts')
@@ -164,6 +249,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: v-model', async () => {
+    /*  Unit Testing for
+        Attribute: v-model
+        Description: the binding value of the number of icons that are selected
+        Type: number
+        Default: 0
+    */
+
     it('number', async () => {
       await showroom.setAttribute('v-model', '2')
       const att = await showroom.hasAttribute('v-model')
@@ -174,6 +266,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: void-color', async () => {
+    /*  Unit Testing for
+        Attribute: void-color
+        Description: color of unselected icons
+        Type: string
+        Default: #C6D1DE
+    */
+
     it('color format 1', async () => {
       await showroom.setAttribute('void-color', '#C6D1DE')
       const att = await showroom.hasAttribute('void-color')
@@ -192,6 +291,13 @@ describe('core-rate', async => {
   })
 
   context('Testing core-rate attribute: void-icon-class', async () => {
+    /*  Unit Testing for
+        Attribute: void-icon-class
+        Description: class name of unselected icons
+        Type: string
+        Default: el-icon-star-off
+    */
+    
     it('string', async () => {
       await showroom.setAttribute('void-icon-class', 'el-icon-star-off')
       const att = await showroom.hasAttribute('void-icon-class')
