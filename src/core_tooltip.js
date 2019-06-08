@@ -486,9 +486,9 @@ class CoreTooltip extends window.HTMLElement {
         } else if (oldValue === 'right' || oldValue === 'right-start' || oldValue === 'right-end') {
           this.text.classList.remove('right')
         }
-        if (oldValue === 'top-start' || oldValue === 'bottom-start' || oldValue === 'left-start' || oldValue === 'right-start'){
+        if (oldValue === 'top-start' || oldValue === 'bottom-start' || oldValue === 'left-start' || oldValue === 'right-start') {
           this.text.classList.remove('start')
-        } else if (oldValue === 'top-end' || oldValue === 'bottom-end' || oldValue === 'left-end' || oldValue === 'right-end'){
+        } else if (oldValue === 'top-end' || oldValue === 'bottom-end' || oldValue === 'left-end' || oldValue === 'right-end') {
           this.text.classList.remove('end')
         }
         if (newValue === 'top' || newValue === 'top-start' || newValue === 'top-end') {
@@ -502,9 +502,9 @@ class CoreTooltip extends window.HTMLElement {
         } else {
           this.text.classList.add('bottom')
         }
-        if (newValue === 'top-start' || newValue === 'bottom-start' || newValue === 'left-start' || newValue === 'right-start'){
+        if (newValue === 'top-start' || newValue === 'bottom-start' || newValue === 'left-start' || newValue === 'right-start') {
           this.text.classList.add('start')
-        } else if (newValue === 'top-end' || newValue === 'bottom-end' || newValue === 'left-end' || newValue === 'right-end'){
+        } else if (newValue === 'top-end' || newValue === 'bottom-end' || newValue === 'left-end' || newValue === 'right-end') {
           this.text.classList.add('end')
         }
         break
