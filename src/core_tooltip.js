@@ -266,15 +266,15 @@ class CoreTooltip extends window.HTMLElement {
 
   /**
   * This function gets the value of the placement attribute.
-  * @returns {String} value of the placement attribute.
+  * @returns {String} value of either 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', or 'right-end'.
   */
   get placement () {
     return this.getAttribute('placement')
   }
 
   /**
-  * This function sets the value of the placement attribute.
-  * @param {String} val - this is a string.
+  * This function sets the placement attribute of the tooltip.
+  * @param {String} val - either 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', or 'right-end'.
   */
   set placement (val) {
     this.setAttribute('placement', val)
@@ -407,6 +407,12 @@ class CoreTooltip extends window.HTMLElement {
     }
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
+    }
+    if (this.hasAttribute('placement')) {
+      var places = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']
+      if (!places.includes(this.getAttribute('placement'))) {
+        this.setAttribute('placement', 'bottom')
+      }
     }
     if (this.hasAttribute('v-model')) {
       this.setAttribute('v-model', '')
