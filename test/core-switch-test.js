@@ -43,13 +43,13 @@ describe('Testing core-switch', async () => {
       assert.deepEqual(val, '#790604')
     })
 
-    // it('with non value', async () => {
-    //   await showroom.setAttribute('active-color', 'bar')
-    //   const att = await showroom.hasAttribute('active-color')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getAttribute('active-color')
-    //   assert.deepEqual(val, '#409EFF')
-    // })
+    it('with non value', async () => {
+      await showroom.setAttribute('active-color', 'bar')
+      const att = await showroom.hasAttribute('active-color')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('active-color')
+      assert.deepEqual(val, '#409EFF')
+    })
   })
 
   context('Testing core-switch attribute: active-icon-class', async () => {
@@ -90,7 +90,7 @@ describe('Testing core-switch', async () => {
     /*  Unit Testing for
         Attribute: active-value
         Description: switch value when in on state
-        Type: boolean
+        Type: boolean/string/number
         Default: true
     */
 
@@ -110,13 +110,21 @@ describe('Testing core-switch', async () => {
       assert.deepEqual(val, 'false')
     })
 
-    // it('with non-boolean value', async () => {
-    //   await showroom.setAttribute('active-value', 'foo')
-    //   const att = await showroom.hasAttribute('active-value')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getAttribute('active-value')
-    //   assert.deepEqual(val, 'true')
-    // })
+    it('with string value', async () => {
+      await showroom.setAttribute('active-value', 'foo')
+      const att = await showroom.hasAttribute('active-value')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('active-value')
+      assert.deepEqual(val, 'foo')
+    })
+
+    it('with number value', async () => {
+      await showroom.setAttribute('active-value', '123')
+      const att = await showroom.hasAttribute('active-value')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('active-value')
+      assert.deepEqual(val, '123')
+    })
   })
 
   context('Testing core-switch attribute: disabled', async () => {
@@ -134,14 +142,6 @@ describe('Testing core-switch', async () => {
       const val = await showroom.getAttribute('disabled')
       assert.deepEqual(val, '')
     })
-
-    // it('with non-boolean', async () => {
-    //   await showroom.setAttribute('disabled', 'blah')
-    //   const att = await showroom.hasAttribute('disabled')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getAttribute('disabled')
-    //   assert.deepEqual(val, '')
-    // })
   })
 
   context('Testing core-switch attribute: inactive-color', async () => {
@@ -168,13 +168,13 @@ describe('Testing core-switch', async () => {
       assert.deepEqual(val, '#6699cc')
     })
 
-    // it('with non value', async () => {
-    //   await showroom.setAttribute('inactive-color', 'bar')
-    //   const att = await showroom.hasAttribute('inactive-color')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getAttribute('inactive-color')
-    //   assert.deepEqual(val, '#C0CCDA')
-    // })
+    it('with non value', async () => {
+      await showroom.setAttribute('inactive-color', 'bar')
+      const att = await showroom.hasAttribute('inactive-color')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('inactive-color')
+      assert.deepEqual(val, '#C0CCDA')
+    })
   })
 
   context('Testing core-switch attribute: inactive-icon-class', async () => {
@@ -214,7 +214,7 @@ describe('Testing core-switch', async () => {
     /*  Unit Testing for
         Attribute: inactive-value
         Description: switch value when in off state
-        Type: boolean
+        Type: boolean/string/number
         Default: true
     */
 
@@ -234,13 +234,21 @@ describe('Testing core-switch', async () => {
       assert.deepEqual(val, 'false')
     })
 
-    // it('with non-boolean value', async () => {
-    //   await showroom.setAttribute('inactive-value', 'foo')
-    //   const att = await showroom.hasAttribute('inactive-value')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getAttribute('inactive-value')
-    //   assert.deepEqual(val, 'false')
-    // })
+    it('with string value', async () => {
+      await showroom.setAttribute('inactive-value', 'foo')
+      const att = await showroom.hasAttribute('inactive-value')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('inactive-value')
+      assert.deepEqual(val, 'foo')
+    })
+
+    it('with number value', async () => {
+      await showroom.setAttribute('inactive-value', '123')
+      const att = await showroom.hasAttribute('inactive-value')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('inactive-value')
+      assert.deepEqual(val, '123')
+    })
   })
 
   context('Testing core-switch attribute: name', async () => {
@@ -301,36 +309,4 @@ describe('Testing core-switch', async () => {
     })
   })
 
-  describe('Testing core-switch attribute: width', async () => {
-    /*  Unit Testing for
-        Attribute: width
-        Description: sets the width of core-switch
-        Type: number
-        Default: 40
-    */
-
-    it('with default', async () => {
-      await showroom.setAttribute('width', '40')
-      const att = await showroom.hasAttribute('width')
-      assert.deepEqual(att, true)
-      const val = await showroom.getAttribute('width')
-      assert.deepEqual(val, '40')
-    })
-
-    it('without default value', async () => {
-      await showroom.setAttribute('width', '100')
-      const att = await showroom.hasAttribute('width')
-      assert.deepEqual(att, true)
-      const val = await showroom.getAttribute('width')
-      assert.deepEqual(val, '100')
-    })
-
-    // it('with non-int', async () => {
-    //   await showroom.setAttribute('width', 'blah')
-    //   const att = await showroom.hasAttribute('width')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getAttribute('width')
-    //   assert.deepEqual(val, '40')
-    // })
-  })
 })
