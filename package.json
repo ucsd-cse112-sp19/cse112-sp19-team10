@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --exit --timeout 5000",
-    "browsertest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/ && testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/ ",
-    "lint": "standard --fix && standard"
+    "browsertest": "npm run Chrometest && npm run Safaritest",
+    "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
+    "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
+    "lint": "standard --fix && standard",
+    "localbrowser": "testcafe chrome tests/"
   },
   "repository": {
     "type": "git",
@@ -28,9 +31,11 @@
   },
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
   "dependencies": {
+    "acorn": "^6.1.1",
     "bootstrap": "^4.3.1",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
+    "shinobirockstar": "^1.0.0",
     "showroom": "^0.9.3"
   },
   "husky": {

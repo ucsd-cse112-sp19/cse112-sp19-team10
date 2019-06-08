@@ -1,5 +1,5 @@
-let template = document.createElement('template')
-template.innerHTML = `
+let switchTemplate = document.createElement('template')
+switchTemplate.innerHTML = `
 <style>
   .switch {
     position: relative;
@@ -124,13 +124,16 @@ template.innerHTML = `
 </html>
 `
 
+/**
+ * CoreSwitch Class
+ */
 class CoreSwitch extends window.HTMLElement {
   constructor () {
     super()
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(switchTemplate.content.cloneNode(true))
 
     // Place holder for checkbox
     this.check = shadowRoot.querySelector('input[type=checkbox]')
@@ -157,7 +160,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function gets the value of the v-model attribute.
-  * @returns {Boolean} value of the v-model attribute.
+  * @returns {Boolean/String/number} value of the v-model attribute.
   */
   get vModel () {
     return this.hasAttribute('v-model')
@@ -165,7 +168,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function sets the value of the v-model attribute.
-  * @param {Boolean} val - this is a Boolean.
+  * @param {Boolean/String/number} val - this is the value of the switch.
   */
   set vModel (val) {
     this.setAttribute('v-model', val)
@@ -184,7 +187,8 @@ class CoreSwitch extends window.HTMLElement {
   * @param {Boolean} val - this is a Boolean.
   */
   set disabled (val) {
-    if (val) {
+    const isDisabled = Boolean(val)
+    if (isDisabled) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
@@ -193,7 +197,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function gets the value of the active-value attribute.
-  * @returns {String} value of the active-value attribute.
+  * @returns {Boolean/String/number} value of the active-value attribute.
   */
   get activeValue () {
     return this.getAttribute('active-value')
@@ -201,7 +205,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function sets the value of the active-value attribute.
-  * @param {String} val - this is a String.
+  * @param {Boolean/String/number} val - value of the switch when it is enabled.
   */
   set activeValue (val) {
     this.setAttribute('active-value', val)
@@ -209,7 +213,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function gets the value of the inactive-value attribute.
-  * @returns {String} value of the inactive-value attribute.
+  * @returns {Boolean/String/number} value of the inactive-value attribute.
   */
   get inactiveValue () {
     return this.getAttribute('inactive-value')
@@ -217,7 +221,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function sets the value of the inactive-value attribute.
-  * @param {String} val - this is a String.
+  * @param {Boolean/String/number} val - value of the switch when it is not enabled.
   */
   set inactiveValue (val) {
     this.setAttribute('inactive-value', val)
@@ -337,9 +341,6 @@ class CoreSwitch extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
-    if (!this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', false)
-    }
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
     }
@@ -358,8 +359,17 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-text')) {
       this.setAttribute('inactive-text', '')
     }
-    this.addEventListener('click', this._onClick)
-    this.toggleSwitch()
+    if (!this.hasAttribute('v-model')) {
+      this.toggleSwitch()
+    }
+    if (this.hasAttribute('v-model')) {
+      if (this.getAttribute('v-model') === this.getAttribute('active-value')) {
+        this.check.checked = true
+      }
+    }
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    }
   }
 
   // Gets the attribute values when they change.
@@ -376,12 +386,20 @@ class CoreSwitch extends window.HTMLElement {
     // Set active color
     if (this.hasAttribute('active-color')) {
       var newColor1 = this.getAttribute('active-color')
-      this.aColor.setProperty('--active-color', newColor1)
+      if (this.validColor(newColor1)) {
+        this.aColor.setProperty('--active-color', newColor1)
+      } else {
+        this.setAttribute('active-color', '#409EFF')
+      }
     }
     // Set inactive color
     if (this.hasAttribute('inactive-color')) {
       var newColor2 = this.getAttribute('inactive-color')
-      this.aColor.setProperty('--inactive-color', newColor2)
+      if (this.validColor(newColor2)) {
+        this.aColor.setProperty('--inactive-color', newColor2)
+      } else {
+        this.setAttribute('inactive-color', '#C0CCDA')
+      }
     }
     // Set active icon
     if (this.hasAttribute('active-icon-class')) {
@@ -425,20 +443,6 @@ class CoreSwitch extends window.HTMLElement {
     }
   }
 
-  // Update v-model when switch is clicked
-  _onClick (event) {
-    this._updateVmodel()
-  }
-
-  // Update v-model value
-  _updateVmodel () {
-    if (this.disabled) {
-      return
-    }
-    var isChecked = this.check.checked
-    this.setAttribute('v-model', isChecked)
-  }
-
   // Change v-model based on active/inactive value
   toggleSwitch () {
     if (this.check.checked) {
@@ -460,6 +464,19 @@ class CoreSwitch extends window.HTMLElement {
         this.setAttribute('title', 'Switch value: ' + inactiveValue)
       }
     }
+  }
+
+  // Check if string is a color
+  validColor (stringToTest) {
+    if (stringToTest === '') { return false }
+
+    var image = document.createElement('img')
+    image.style.color = 'rgb(0, 0, 0)'
+    image.style.color = stringToTest
+    if (image.style.color !== 'rgb(0, 0, 0)') { return true }
+    image.style.color = 'rgb(255, 255, 255)'
+    image.style.color = stringToTest
+    return image.style.color !== 'rgb(255, 255, 255)'
   }
 }
 
