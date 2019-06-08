@@ -1,3 +1,0 @@
-testcafe with saucelab and travis test
-
-1) https://devexpress.github.io/testcafe/documentation/continuous-integration/travis-and-sauce-labs.html#step-1---install-testcafe-and-create-tests
