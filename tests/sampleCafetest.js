@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe'
 
 fixture`core hello browser test:`
-  .page`../test/core-hello.html`
+  .page`../examples/hello.html`
 // to use local file look at this https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#specifying-the-start-webpage
 // Eg fixture `MyFixture`
 //  .page `file:///user/my-website/index.html`;
