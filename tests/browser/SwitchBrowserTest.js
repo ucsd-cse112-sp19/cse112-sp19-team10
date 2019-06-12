@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe'
 
 fixture`switch browser test:`
-  .page`../examples/switch.html`
+  .page`../../examples/switch.html`
 
   test('SwitchBrowserTest @ v-model changed from false to true and true to false after click', async t => {
     const switch1 = Selector('#switch1');

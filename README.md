@@ -39,6 +39,9 @@ Browser tests are done through [Testcafe](https://devexpress.github.io/testcafe/
 ## Contributing
 Want to contribute? Read the [guide](https://docs.google.com/document/d/131o201JKLoXA3ThO713b-uAVn71Ql5zLPmLm_eqTdMU/edit) on how to get started!
 
+## Component Architecture
+We are using a very straightforward architecture for the components. It should be easy to tell by reading the code. In case you are unsure, read this short explanation [here](docs/dev/Architecture.md).
+
 ## Build Environment
 Learn how to set up the build environment and use the tools here: [setting up the build pipeline](https://docs.google.com/document/d/1T7znBZnsLRjiv7TSTTOygoxcIgXU88AOVcoRg2jSkuY/edit)
 
