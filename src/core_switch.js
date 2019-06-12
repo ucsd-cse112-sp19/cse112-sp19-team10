@@ -341,9 +341,11 @@ class CoreSwitch extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
+    // Set default active-value to true
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
     }
+    // Set default inactive-value to false
     if (!this.hasAttribute('inactive-value')) {
       this.setAttribute('inactive-value', false)
     }
@@ -361,8 +363,7 @@ class CoreSwitch extends window.HTMLElement {
     }
     if (!this.hasAttribute('v-model')) {
       this.toggleSwitch()
-    }
-    if (this.hasAttribute('v-model')) {
+    } else {
       if (this.getAttribute('v-model') === this.getAttribute('active-value')) {
         this.check.checked = true
       }
