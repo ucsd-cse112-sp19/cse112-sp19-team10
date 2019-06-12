@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --exit --timeout 5000",
-    "browsertest": "npm run Chrometest && npm run Safaritest",
+    "browsertest": "npm run Safaritest",
     "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
-    "coverage": "nyc --reporter=lcov npm run test",
+    "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text npm run test",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
   },
@@ -29,6 +29,9 @@
       "/docs/",
       "tests/"
     ]
+  },
+  "nyc": {
+    "all": "true"
   },
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
   "dependencies": {
