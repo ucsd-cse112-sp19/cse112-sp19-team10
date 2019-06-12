@@ -156,8 +156,6 @@ test('void-icon-class attribute', async t => {
     await t
         .expect(rate.getAttribute('void-icon-class')).eql("fas fa-frown")
         .click(star)
-
-    await t
         .expect(star.getAttribute('class')).eql("fas fa-smile")
 })
 
@@ -173,33 +171,78 @@ test('disabled-void-icon-class attribute', async t => {
 
 // test behavior when show-text attribute is set, then there should be text content from the texts attribute based on which label is clicked
 test('show-text attribute', async t => {
-    const star = await Selector(() => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[6]
+    })
+    const star5 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[0]
+    })
+    const star4 = await Selector(() => {
         return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[1]
+    })
+    const star3 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[2]
+    })
+    const star2 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[3]
+    })
+    const star1 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[4]
     })
     const output_txt = await Selector(() => {
         return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('.text')
     })
-    await t
-        .click(star)
 
     await t
+        .expect(rate.hasAttribute('show-text')).eql(true)
+        .click(star5)
+        .expect(output_txt.textContent).eql('great')
+        .click(star4)
         .expect(output_txt.textContent).eql('good')
+        .click(star3)
+        .expect(output_txt.textContent).eql('normal')
+        .click(star2)
+        .expect(output_txt.textContent).eql('disappointed')
+        .click(star1)
+        .expect(output_txt.textContent).eql('oops')
 })
 
 // test behavior when show-score attribute is set, then there should be text content along with the score-template
 // attribute's value based on which label is clicked
 test('show-score attribute', async t => {
-    const star = await Selector(() => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5]
+    })
+    const star5 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0]
+    })
+    const star4 = await Selector(() => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
+    })
+    const star3 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[2]
+    })
+    const star2 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[3]
+    })
+    const star1 = await Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[4]
     })
     const output_txt = await Selector(() => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('.text')
     })
     await t
-        .click(star)
-
-    await t
-        .expect(output_txt.textContent).contains(' points')
+        .expect(rate.hasAttribute('show-score')).eql(true)
+        .click(star5)
+        .expect(output_txt.textContent).eql('5 points')
+        .click(star4)
+        .expect(output_txt.textContent).eql('4 points')
+        .click(star3)
+        .expect(output_txt.textContent).eql('3 points')
+        .click(star2)
+        .expect(output_txt.textContent).eql('2 points')
+        .click(star1)
+        .expect(output_txt.textContent).eql('1 points')
 })
 
 // test to see that when the text-score color attribute is set, then the text-color should be contained in span element's style attribute
@@ -209,41 +252,4 @@ test('text-color attribute', async t => {
     })
     await t
         .expect(output_txt.getAttribute('style')).contains("text-color")
-})
-
-// test to see if the texts attribute contains the expected text content and that text content is displayed
-test('texts attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6]
-    })
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[0]
-    })
-
-    const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('.text')
-    })
-
-    await t
-        .click(star)
-        .expect(rate.getAttribute('texts')).contains('great')
-
-    await t
-        .expect(output_txt.textContent).eql('great')
-})
-
-// test to see that text content output contains the score-template value
-test('score-template attribute', async t => {
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
-    })
-    const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('.text')
-    })
-    await t
-        .expect(output_txt.textContent).eql('0 points')
-        .click(star)
-
-    await t
-        .expect(output_txt.textContent).eql('4 points')
 })
