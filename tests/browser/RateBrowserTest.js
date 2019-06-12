@@ -16,7 +16,7 @@ test('rate components exists', async t => {
         .expect(Selector(() => document.querySelectorAll('core-rate')[4].exists)).ok()
         .expect(Selector(() => document.querySelectorAll('core-rate')[5].exists)).ok()
         .expect(Selector(() => document.querySelectorAll('core-rate')[6].exists)).ok()
-        .expect(rate_group.count).eql(7)
+        .expect(rate_group.count).eql(10)
 })
 
 // test behavior is expected when the fourth star is clicked, then v-model value is changed from 0 to 4
