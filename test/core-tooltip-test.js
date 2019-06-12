@@ -238,7 +238,7 @@ describe('Testing core-tooltip', async () => {
       const val = await showroom.getAttribute('placement')
       assert.deepEqual(val, 'left-end')
     })
-    
+
     it('Mapping Property -> Attribute with right', async () => {
       await showroom.setProperty('placement', 'right')
       const att = await showroom.hasAttribute('placement')
@@ -262,7 +262,7 @@ describe('Testing core-tooltip', async () => {
       const val = await showroom.getAttribute('placement')
       assert.deepEqual(val, 'right-end')
     })
-    
+
     it('Mapping Attribute -> Property with top', async () => {
       await showroom.setAttribute('placement', 'top')
       const att = await showroom.hasAttribute('placement')
@@ -278,7 +278,7 @@ describe('Testing core-tooltip', async () => {
       const val = await showroom.getProperty('placement')
       assert.deepEqual(val, 'top-start')
     })
-  
+
     it('Mapping Attribute -> Property with top-end', async () => {
       await showroom.setAttribute('placement', 'top-end')
       const att = await showroom.hasAttribute('placement')
@@ -358,7 +358,101 @@ describe('Testing core-tooltip', async () => {
       const val = await showroom.getProperty('placement')
       assert.deepEqual(val, 'right-end')
     })
-  
   })
 
+  context('core-tooltip attribute: v-model', async () => {
+    /*  Unit Testing for
+        Attribute: v-model
+        Description: visibility of Tooltip
+        Type: boolean
+        Default: false
+
+        mapping:
+          false <-> no disabled attribute
+          true <-> '' or any string
+    */
+
+    it('with default value', async () => {
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, false)
+    })
+
+    it('Mapping Property -> Attribute with boolean', async () => {
+      await showroom.setProperty('vModel', true)
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('v-model')
+      assert.deepEqual(val, '')
+    })
+
+    it('Mapping Attribute -> Property with boolean', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('vModel', false)
+      const ele = await showroom.hasAttribute('v-model')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setAttribute('v-model', true)
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('vModel')
+      assert.deepEqual(val, true)
+    })
+
+    it('Mapping Property -> Attribute with valid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('vModel', false)
+      const ele = await showroom.hasAttribute('v-model')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setProperty('vModel', 'true')
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('v-model')
+      assert.deepEqual(val, '')
+    })
+
+    it('Mapping Attribute -> Property with valid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('vModel', false)
+      const ele = await showroom.hasAttribute('v-model')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setAttribute('v-model', '')
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('vModel')
+      assert.deepEqual(val, true)
+    })
+
+    it('Mapping Property -> Attribute with invalid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('vModel', false)
+      const ele = await showroom.hasAttribute('v-model')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setProperty('vModel', '123')
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('v-model')
+      assert.deepEqual(val, '')
+    })
+
+    it('Mapping Attribute -> Property with invalid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('vModel', false)
+      const ele = await showroom.hasAttribute('v-model')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setAttribute('v-model', '123')
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('vModel')
+      assert.deepEqual(val, true)
+    })
+  })
 })
