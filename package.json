@@ -4,13 +4,13 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha --exit --timeout 5000",
+    "test": "npx mocha 'tests/unit/*.js' --exit --timeout 5000",
     "browsertest": "npm run Safaritest",
-    "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
-    "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
+    "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/browser",
+    "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/browser",
     "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text npm run test",
     "lint": "standard --fix && standard",
-    "localbrowser": "testcafe chrome tests/"
+    "localbrowser": "testcafe chrome tests/browser"
   },
   "repository": {
     "type": "git",
