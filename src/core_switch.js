@@ -196,6 +196,70 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   /**
+    * This function gets the value of the active-icon-class attribute.
+    * @returns {String} value of the active-icon-class attribute.
+    */
+  get activeIconClass () {
+    return this.getAttribute('active-icon-class')
+  }
+
+  /**
+  * This function sets the value of the active-icon-class attribute.
+  * @param {String} val - this is a icon class name.
+  */
+  set activeIconClass (val) {
+    this.setAttribute('active-icon-class', val)
+  }
+
+  /**
+  * This function gets the value of the inactive-icon-class attribute.
+  * @returns {String} value of the inactive-icon-class attribute.
+  */
+  get inactiveIconClass () {
+    return this.getAttribute('inactive-icon-class')
+  }
+
+  /**
+  * This function sets the value of the inactive-icon-class attribute.
+  * @param {String} val - this is a icon class name.
+  */
+  set inactiveIconClass (val) {
+    this.setAttribute('inactive-icon-class', val)
+  }
+
+  /**
+  * This function gets the value of the active-text attribute.
+  * @returns {String} value of the active-text attribute.
+  */
+  get activeText () {
+    return this.getAttribute('active-text')
+  }
+
+  /**
+  * This function sets the value of the active-text attribute.
+  * @param {String} val - this is a String.
+  */
+  set activeText (val) {
+    this.setAttribute('active-text', val)
+  }
+
+  /**
+  * This function gets the value of the inactive-text attribute.
+  * @returns {String} value of the inactive-text attribute.
+  */
+  get inactiveText () {
+    return this.getAttribute('inactive-text')
+  }
+
+  /**
+  * This function sets the value of the active-text attribute.
+  * @param {String} val - this is a String.
+  */
+  set inactiveText (val) {
+    this.setAttribute('inactive-text', val)
+  }
+
+  /**
   * This function gets the value of the active-value attribute.
   * @returns {Boolean/String/number} value of the active-value attribute.
   */
@@ -260,70 +324,6 @@ class CoreSwitch extends window.HTMLElement {
   }
 
   /**
-  * This function gets the value of the active-icon-class attribute.
-  * @returns {String} value of the active-icon-class attribute.
-  */
-  get activeIconClass () {
-    return this.getAttribute('active-icon-class')
-  }
-
-  /**
-  * This function sets the value of the active-icon-class attribute.
-  * @param {String} val - this is a icon class name.
-  */
-  set activeIconClass (val) {
-    this.setAttribute('active-icon-class', val)
-  }
-
-  /**
-  * This function gets the value of the inactive-icon-class attribute.
-  * @returns {String} value of the inactive-icon-class attribute.
-  */
-  get inactiveIconClass () {
-    return this.getAttribute('inactive-icon-class')
-  }
-
-  /**
-  * This function sets the value of the inactive-icon-class attribute.
-  * @param {String} val - this is a icon class name.
-  */
-  set inactiveIconClass (val) {
-    this.setAttribute('inactive-icon-class', val)
-  }
-
-  /**
-  * This function gets the value of the active-text attribute.
-  * @returns {String} value of the active-text attribute.
-  */
-  get activeText () {
-    return this.getAttribute('active-text')
-  }
-
-  /**
-  * This function sets the value of the active-text attribute.
-  * @param {String} val - this is a String.
-  */
-  set activeText (val) {
-    this.setAttribute('active-text', val)
-  }
-
-  /**
-  * This function gets the value of the inactive-text attribute.
-  * @returns {String} value of the inactive-text attribute.
-  */
-  get inactiveText () {
-    return this.getAttribute('inactive-text')
-  }
-
-  /**
-  * This function sets the value of the active-text attribute.
-  * @param {String} val - this is a String.
-  */
-  set inactiveText (val) {
-    this.setAttribute('inactive-text', val)
-  }
-
-  /**
   * This function gets the value of the name attribute.
   * @returns {String} value of the name attribute.
   */
@@ -341,6 +341,16 @@ class CoreSwitch extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    }
+    // Set default active text to empty
+    if (!this.hasAttribute('active-text')) {
+      this.setAttribute('active-text', '')
+    }
+    if (!this.hasAttribute('inactive-text')) {
+      this.setAttribute('inactive-text', '')
+    }
     // Set default active-value to true
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
@@ -355,21 +365,12 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
-    if (!this.hasAttribute('active-text')) {
-      this.setAttribute('active-text', '')
-    }
-    if (!this.hasAttribute('inactive-text')) {
-      this.setAttribute('inactive-text', '')
-    }
     if (!this.hasAttribute('v-model')) {
       this.toggleSwitch()
     } else {
       if (this.getAttribute('v-model') === this.getAttribute('active-value')) {
         this.check.checked = true
       }
-    }
-    if (this.hasAttribute('disabled')) {
-      this.setAttribute('disabled', '')
     }
   }
 
@@ -383,6 +384,8 @@ class CoreSwitch extends window.HTMLElement {
     // Disable switch
     if (this.hasAttribute('disabled')) {
       this.check.setAttribute('disabled', true)
+    } else {
+      this.check.removeAttribute('disabled')
     }
     // Set active color
     if (this.hasAttribute('active-color')) {
