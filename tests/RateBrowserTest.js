@@ -5,6 +5,9 @@ fixture `rate browser test`
 
 // check if all seven components exist
 test('rate components exists', async t => {
+    const rate_group = await Selector(() => {
+        return document.querySelectorAll('core-rate')
+    })
     await t
         .expect(Selector(() => document.querySelectorAll('core-rate')[0].exists)).ok()
         .expect(Selector(() => document.querySelectorAll('core-rate')[1].exists)).ok()
@@ -13,14 +16,6 @@ test('rate components exists', async t => {
         .expect(Selector(() => document.querySelectorAll('core-rate')[4].exists)).ok()
         .expect(Selector(() => document.querySelectorAll('core-rate')[5].exists)).ok()
         .expect(Selector(() => document.querySelectorAll('core-rate')[6].exists)).ok()
-})
-
-// check there is a total of seven core-rate components
-test('core-rate count', async t => {
-    const rate_group = await Selector(() => {
-        return document.querySelectorAll('core-rate')
-    })
-    await t
         .expect(rate_group.count).eql(7)
 })
 
@@ -29,17 +24,40 @@ test('v-model attribute', async t => {
     const rate = await Selector(() => {
         return document.querySelectorAll('core-rate')[5]
     })
-    const star = await Selector(() => {
+    const star5 = Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0]
+    })
+    const star4 = Selector(() => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
+    })
+    const star3 = Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[2]
+    })
+    const star2 = Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[3]
+    })
+    const star1 = Selector(() => {
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[4]
     })
     await t
         .expect(rate.withAttribute('v-model', '0').exists).ok()
-        .click(star)
+        .click(star5)
+        .expect(rate.withAttribute('v-model', '5').exists).ok()
+        .click(star4)
         .expect(rate.withAttribute('v-model', '4').exists).ok()
+        .click(star3)
+        .expect(rate.withAttribute('v-model', '3').exists).ok()
+        .click(star2)
+        .expect(rate.withAttribute('v-model', '2').exists).ok()
+        .click(star1)
+        .expect(rate.withAttribute('v-model', '1').exists).ok()
 })
 
 // test behavior when disabled attribute is set, then nothing about the component has been modified
 test('disabled attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[3]
+    })
     const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[1]
     })
@@ -47,26 +65,46 @@ test('disabled attribute', async t => {
         return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('#star5')
     })
     await t
+        .expect(rate.getAttribute('v-model')).eql('0')
         .click(star)
         .expect(output.checked).notOk()
+        .expect(rate.getAttribute('v-model')).eql('4')
 })
 
 // test to see if one of the class attributes for the sub elements in rate component contains the value 'low' used to identify the low-threshold
 test('low-threshold attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const group = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelector('div')
+    })
     const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[4]
     })
     await t
-        .expect(star.getAttribute('class')).contains('low')
+        .expect(rate.hasAttribute('low-threshold')).eql(true)
+        .expect(rate.getAttribute('low-threshold')).eql('1')
+        .expect(rate.getAttribute('colors')).contains('red')
+        .expect(star.getAttribute('class')).eql('low')
 })
 
 // test to see if one of the class attributes for the sub elements in rate component contains the value 'high' used to identify the high-threshold
 test('high-threshold attribute', async t => {
+    const rate = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2]
+    })
+    const group = await Selector(() => {
+        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelector('div')
+    })
     const star = await Selector(() => {
         return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[0]
     })
     await t
-        .expect(star.getAttribute('class')).contains('high')
+        .expect(rate.hasAttribute('high-threshold')).eql(true)
+        .expect(rate.getAttribute('high-threshold')).eql('5')
+        .expect(rate.getAttribute('colors')).contains('green')
+        .expect(star.getAttribute('class')).eql('high')
 })
 
 // test to see if the style attribute contains the color which determines the colors of each star in the component
@@ -118,6 +156,8 @@ test('void-icon-class attribute', async t => {
     await t
         .expect(rate.getAttribute('void-icon-class')).eql("fas fa-frown")
         .click(star)
+
+    await t
         .expect(star.getAttribute('class')).eql("fas fa-smile")
 })
 
@@ -137,11 +177,12 @@ test('show-text attribute', async t => {
         return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[1]
     })
     const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('span')
+        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('.text')
     })
     await t
         .click(star)
-        .click(star)
+
+    await t
         .expect(output_txt.textContent).eql('good')
 })
 
@@ -152,10 +193,12 @@ test('show-score attribute', async t => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
     })
     const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('.text')
     })
     await t
         .click(star)
+
+    await t
         .expect(output_txt.textContent).contains(' points')
 })
 
@@ -178,12 +221,14 @@ test('texts attribute', async t => {
     })
 
     const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('span')
+        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('.text')
     })
 
     await t
         .click(star)
         .expect(rate.getAttribute('texts')).contains('great')
+
+    await t
         .expect(output_txt.textContent).eql('great')
 })
 
@@ -193,9 +238,12 @@ test('score-template attribute', async t => {
         return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
     })
     const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
+        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('.text')
     })
     await t
+        .expect(output_txt.textContent).eql('0 points')
         .click(star)
-        .expect(output_txt.innerText).contains(' points')
+
+    await t
+        .expect(output_txt.textContent).eql('4 points')
 })
