@@ -297,7 +297,7 @@ describe('core-rate', async => {
         Type: string
         Default: el-icon-star-off
     */
-
+    
     it('string', async () => {
       await showroom.setAttribute('void-icon-class', 'el-icon-star-off')
       const att = await showroom.hasAttribute('void-icon-class')

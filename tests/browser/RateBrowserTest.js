@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe'
 
 fixture `rate browser test`
-  .page `../examples/rate.html`
+  .page `../../examples/rate.html`
 
 // check if all seven components exist
 test('rate components exists', async t => {
