@@ -11,6 +11,7 @@ before_install:
 
 before_script:
     - npm install codeclimate-test-reporter istanbul -g
+    - npm install nyc
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     - ./cc-test-reporter before-build
@@ -18,7 +19,7 @@ before_script:
 script:
     - npm run lint
     - npm run test
-    - istanbul cover npm run test
+    - npm run coverage
     - npm run browsertest
 
 after_script:
