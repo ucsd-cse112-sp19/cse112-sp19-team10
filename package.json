@@ -4,13 +4,16 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha --exit --timeout 5000",
-    "browsertest": "npm run Safaritest",
-    "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
-    "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
+    "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
+    "unitTest:switch": "npx mocha test/unit/core-switch-test.js --exit --timeout 5000",
+    "unitTest:rate": "npx mocha test/unit/core-rate-test.js --exit --timeout 5000",
+    "unitTest:hello": "npx mocha test/unit/core-hello-test.js --exit --timeout 5000",
+    "browserTest": "npm run browserTest:chrome && npm run browserTest:safari",
+    "browserTest:chrome": "testcafe \"saucelabs:Chrome@beta:Windows 10\" test/browser",
+    "browserTest:safariTest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" test/browser",
     "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text npm run test",
     "lint": "standard --fix && standard",
-    "localbrowser": "testcafe chrome tests/"
+    "localbrowser": "testcafe chrome test/browser"
   },
   "repository": {
     "type": "git",
@@ -27,7 +30,7 @@
     ],
     "ignore": [
       "/docs/",
-      "tests/"
+      "test/browser"
     ]
   },
   "nyc": {
@@ -54,6 +57,7 @@
     "istanbul": "^0.4.5",
     "jest": "^24.7.1",
     "mocha": "^6.1.4",
+    "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
     "puppeteer": "^1.16.0",
     "showroom": "^0.9.3",
