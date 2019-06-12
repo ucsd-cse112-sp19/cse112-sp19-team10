@@ -387,11 +387,6 @@ class CoreRate extends window.HTMLElement {
         this.icon[i].setAttribute('class', newClass1)
       }
     }
-    if (this.hasAttribute('disabled')) {
-      for (i = 0; i < this.radio.length; i++) {
-        this.radio[i].setAttribute('disabled', true)
-      }
-    }
     if (this.hasAttribute('void-icon-class')) {
       var newClass2 = this.getAttribute('void-icon-class')
       for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
