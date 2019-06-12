@@ -44,7 +44,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test 'tests/unit/*.js' && npm run lint && documentation build src/ -f html -o docs"
+      "pre-commit": "npm run test && npm run lint && documentation build src/ -f html -o docs"
     }
   },
   "devDependencies": {
