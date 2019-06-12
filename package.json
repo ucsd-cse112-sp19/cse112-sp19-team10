@@ -8,7 +8,7 @@
     "browsertest": "npm run Safaritest",
     "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
-    "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text-lcov | coveralls npm run test",
+    "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text-lcov | coveralls",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
   },
