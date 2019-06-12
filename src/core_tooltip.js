@@ -258,7 +258,7 @@ class CoreTooltip extends window.HTMLElement {
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'open-delay']
+    return ['effect', 'content', 'v-model', 'disabled', 'manual', 'open-delay', 'hide-after']
   }
 
   // Actions for when an attribute is changed.
@@ -292,6 +292,14 @@ class CoreTooltip extends window.HTMLElement {
           var fadeTime = this.getAttribute('open-delay') / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + "s")
         }
+      case 'hide-after':
+        if (hasValue) {
+          this.text.addEventListener("mouseenter", function () {
+            setTimeout(function() {
+              this.text.style.setProperty('visibility', hidden)
+            });
+          });
+        }
     }
   }
 
@@ -305,6 +313,12 @@ class CoreTooltip extends window.HTMLElement {
       } else {
         this.removeAttribute('v-model')
       }
+    }
+    if (this.hasAttribute('hide-after')) {
+      var delay = this.getAttribute('hide-after')
+      setTimeout(function() {
+        this.text.style.setProperty('visibility', 'hidden')
+      }, 200);
     }
   }
 }
