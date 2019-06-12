@@ -46,7 +46,7 @@ fixture`switch browser test:`
         .expect(switch2.hasAttribute('title')).notOk();//title should not exist before click
     await t
         .click(switch2_span)
-        .expect(switch2.getAttribute('v-model')).eql('true')
+        .expect(switch2.getAttribute('v-model')).eql('cow')
         .expect(switch2.hasAttribute('title')).ok()
         .expect(switch2.getAttribute('title')).eql('Switch value: cow');
   })

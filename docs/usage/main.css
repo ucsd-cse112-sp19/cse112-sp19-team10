@@ -1,0 +1,10 @@
+.rate_group core-rate {
+      margin:50%;
+  }
+  .switch_group core-switch{
+      padding: 10px 24px;
+      display: block;
+  }
+  body {
+      margin: 100px;
+}

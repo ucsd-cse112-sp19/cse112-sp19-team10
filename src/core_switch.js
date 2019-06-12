@@ -1,5 +1,5 @@
-let template = document.createElement('template')
-template.innerHTML = `
+let switchTemplate = document.createElement('template')
+switchTemplate.innerHTML = `
 <style>
   .switch {
     position: relative;
@@ -124,13 +124,16 @@ template.innerHTML = `
 </html>
 `
 
+/**
+ * CoreSwitch Class
+ */
 class CoreSwitch extends window.HTMLElement {
   constructor () {
     super()
 
     // Attach shadow root
     const shadowRoot = this.attachShadow({ mode: 'open' })
-    shadowRoot.appendChild(template.content.cloneNode(true))
+    shadowRoot.appendChild(switchTemplate.content.cloneNode(true))
 
     // Place holder for checkbox
     this.check = shadowRoot.querySelector('input[type=checkbox]')
@@ -147,7 +150,7 @@ class CoreSwitch extends window.HTMLElement {
 
     // Event listener for toggling switch
     this.addEventListener('click', e => {
-      // Don't toggle the drawer if it's disabled.
+      // Don't toggle the switch if it's disabled.
       if (this.disabled) {
         return
       }
@@ -155,102 +158,189 @@ class CoreSwitch extends window.HTMLElement {
     })
   }
 
+  /**
+  * This function gets the value of the v-model attribute.
+  * @returns {Boolean/String/number} value of the v-model attribute.
+  */
   get vModel () {
     return this.hasAttribute('v-model')
   }
 
+  /**
+  * This function sets the value of the v-model attribute.
+  * @param {Boolean/String/number} val - this is the value of the switch.
+  */
   set vModel (val) {
     this.setAttribute('v-model', val)
   }
 
+  /**
+  * This function gets the value of the disabled attribute.
+  * @returns {Boolean} value of the disabled attribute.
+  */
   get disabled () {
     return this.hasAttribute('disabled')
   }
 
+  /**
+  * This function sets the value of the disabled attribute.
+  * @param {Boolean} val - this is a Boolean.
+  */
   set disabled (val) {
-    if (val) {
+    const isDisabled = Boolean(val)
+    if (isDisabled) {
       this.setAttribute('disabled', '')
     } else {
       this.removeAttribute('disabled')
     }
   }
 
+  /**
+  * This function gets the value of the active-value attribute.
+  * @returns {Boolean/String/number} value of the active-value attribute.
+  */
   get activeValue () {
     return this.getAttribute('active-value')
   }
 
+  /**
+  * This function sets the value of the active-value attribute.
+  * @param {Boolean/String/number} val - value of the switch when it is enabled.
+  */
   set activeValue (val) {
     this.setAttribute('active-value', val)
   }
 
+  /**
+  * This function gets the value of the inactive-value attribute.
+  * @returns {Boolean/String/number} value of the inactive-value attribute.
+  */
   get inactiveValue () {
     return this.getAttribute('inactive-value')
   }
 
+  /**
+  * This function sets the value of the inactive-value attribute.
+  * @param {Boolean/String/number} val - value of the switch when it is not enabled.
+  */
   set inactiveValue (val) {
     this.setAttribute('inactive-value', val)
   }
 
+  /**
+  * This function gets the value of the active-color attribute.
+  * @returns {color} value of the active-color attribute.
+  */
   get activeColor () {
     return this.getAttribute('active-color')
   }
 
+  /**
+  * This function sets the value of the active-color attribute.
+  * @param {color} val - this is a color.
+  */
   set activeColor (val) {
     this.setAttribute('active-color', val)
   }
 
+  /**
+  * This function gets the value of the inactive-color attribute.
+  * @returns {color} value of the inactive-color attribute.
+  */
   get inactiveColor () {
     return this.getAttribute('inactive-color')
   }
 
+  /**
+  * This function sets the value of the inactive-color attribute.
+  * @param {color} val - this is a color.
+  */
   set inactiveColor (val) {
     this.setAttribute('inactive-color', val)
   }
 
+  /**
+  * This function gets the value of the active-icon-class attribute.
+  * @returns {String} value of the active-icon-class attribute.
+  */
   get activeIconClass () {
     return this.getAttribute('active-icon-class')
   }
 
+  /**
+  * This function sets the value of the active-icon-class attribute.
+  * @param {String} val - this is a icon class name.
+  */
   set activeIconClass (val) {
     this.setAttribute('active-icon-class', val)
   }
 
+  /**
+  * This function gets the value of the inactive-icon-class attribute.
+  * @returns {String} value of the inactive-icon-class attribute.
+  */
   get inactiveIconClass () {
     return this.getAttribute('inactive-icon-class')
   }
 
+  /**
+  * This function sets the value of the inactive-icon-class attribute.
+  * @param {String} val - this is a icon class name.
+  */
   set inactiveIconClass (val) {
     this.setAttribute('inactive-icon-class', val)
   }
 
+  /**
+  * This function gets the value of the active-text attribute.
+  * @returns {String} value of the active-text attribute.
+  */
   get activeText () {
     return this.getAttribute('active-text')
   }
 
+  /**
+  * This function sets the value of the active-text attribute.
+  * @param {String} val - this is a String.
+  */
   set activeText (val) {
     this.setAttribute('active-text', val)
   }
 
+  /**
+  * This function gets the value of the inactive-text attribute.
+  * @returns {String} value of the inactive-text attribute.
+  */
   get inactiveText () {
     return this.getAttribute('inactive-text')
   }
 
+  /**
+  * This function sets the value of the active-text attribute.
+  * @param {String} val - this is a String.
+  */
   set inactiveText (val) {
     this.setAttribute('inactive-text', val)
   }
 
+  /**
+  * This function gets the value of the name attribute.
+  * @returns {String} value of the name attribute.
+  */
   get name () {
     return this.getAttribute('name')
   }
 
+  /**
+  * This function sets the value of the name attribute.
+  * @param {String} val - this is a String.
+  */
   set name (val) {
     this.setAttribute('name', val)
   }
 
+  // Sets default values for attributes.
   connectedCallback () {
-    if (!this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', false)
-    }
     if (!this.hasAttribute('active-value')) {
       this.setAttribute('active-value', true)
     }
@@ -269,38 +359,63 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-text')) {
       this.setAttribute('inactive-text', '')
     }
-    this.addEventListener('click', this._onClick)
-    this.toggleSwitch()
+    if (!this.hasAttribute('v-model')) {
+      this.toggleSwitch()
+    }
+    if (this.hasAttribute('v-model')) {
+      if (this.getAttribute('v-model') === this.getAttribute('active-value')) {
+        this.check.checked = true
+      }
+    }
+    if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    }
   }
 
+  // Gets the attribute values when they change.
   static get observedAttributes () {
     return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class', 'active-text', 'inactive-text']
   }
 
+  // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
+    // Disable switch
     if (this.hasAttribute('disabled')) {
       this.check.setAttribute('disabled', true)
     }
+    // Set active color
     if (this.hasAttribute('active-color')) {
       var newColor1 = this.getAttribute('active-color')
-      this.aColor.setProperty('--active-color', newColor1)
+      if (this.validColor(newColor1)) {
+        this.aColor.setProperty('--active-color', newColor1)
+      } else {
+        this.setAttribute('active-color', '#409EFF')
+      }
     }
+    // Set inactive color
     if (this.hasAttribute('inactive-color')) {
       var newColor2 = this.getAttribute('inactive-color')
-      this.aColor.setProperty('--inactive-color', newColor2)
+      if (this.validColor(newColor2)) {
+        this.aColor.setProperty('--inactive-color', newColor2)
+      } else {
+        this.setAttribute('inactive-color', '#C0CCDA')
+      }
     }
+    // Set active icon
     if (this.hasAttribute('active-icon-class')) {
       var newClass1 = this.getAttribute('active-icon-class')
       this.activeIcon.setAttribute('class', newClass1)
       var actIconColor = this.getAttribute('active-color')
       this.activeIcon.style.setProperty('--active-color', actIconColor)
     }
+    // Set inactive icon
     if (this.hasAttribute('inactive-icon-class')) {
       var newClass2 = this.getAttribute('inactive-icon-class')
       this.inactiveIcon.setAttribute('class', newClass2)
       var inactIconColor = this.getAttribute('active-color')
       this.inactiveIcon.style.setProperty('--active-color', inactIconColor)
     }
+    // Set active text
     if (this.hasAttribute('active-text')) {
       var activeText = this.getAttribute('active-text')
       this.aText.innerHTML = activeText
@@ -311,6 +426,7 @@ class CoreSwitch extends window.HTMLElement {
         this.aText.style.setProperty('color', 'black')
       }
     }
+    // Set inactive text
     if (this.hasAttribute('inactive-text')) {
       var inactiveText = this.getAttribute('inactive-text')
       this.iaText.innerHTML = inactiveText
@@ -321,23 +437,13 @@ class CoreSwitch extends window.HTMLElement {
         this.iaText.style.setProperty('color', 'black')
       }
     }
+    // Set name
     if (this.hasAttribute('name')) {
       this.check.setAttribute('name', this.getAttribute('name'))
     }
   }
 
-  _onClick (event) {
-    this._updateVmodel()
-  }
-
-  _updateVmodel () {
-    if (this.disabled) {
-      return
-    }
-    var isChecked = this.check.checked
-    this.setAttribute('v-model', isChecked)
-  }
-
+  // Change v-model based on active/inactive value
   toggleSwitch () {
     if (this.check.checked) {
       let activeValue = this.getAttribute('active-value')
@@ -358,6 +464,19 @@ class CoreSwitch extends window.HTMLElement {
         this.setAttribute('title', 'Switch value: ' + inactiveValue)
       }
     }
+  }
+
+  // Check if string is a color
+  validColor (stringToTest) {
+    if (stringToTest === '') { return false }
+
+    var image = document.createElement('img')
+    image.style.color = 'rgb(0, 0, 0)'
+    image.style.color = stringToTest
+    if (image.style.color !== 'rgb(0, 0, 0)') { return true }
+    image.style.color = 'rgb(255, 255, 255)'
+    image.style.color = stringToTest
+    return image.style.color !== 'rgb(255, 255, 255)'
   }
 }
 
