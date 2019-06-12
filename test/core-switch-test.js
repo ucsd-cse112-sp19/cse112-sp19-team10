@@ -230,7 +230,6 @@ describe('Testing core-switch', async () => {
       const val = await showroom.getProperty('activeValue')
       assert.deepEqual(val, '456')
     })
-
   })
 
   context('Testing core-switch attribute: disabled', async () => {
@@ -263,7 +262,7 @@ describe('Testing core-switch', async () => {
       await showroom.setProperty('disabled', false)
       const ele = await showroom.hasAttribute('disabled')
       assert.deepEqual(ele, false)
-      
+
       // checking mapping
       await showroom.setAttribute('disabled', true)
       const att = await showroom.hasAttribute('disabled')
@@ -604,14 +603,14 @@ describe('Testing core-switch', async () => {
         Type: boolean/ string/ number
         Default: false
     */
-    
+
     it('check for attribute with default string', async () => {
       const att = await showroom.hasAttribute('v-model')
       assert.deepEqual(att, true)
       const val = await showroom.getAttribute('v-model')
       assert.deepEqual(val, 'false')
     })
-    
+
     it('Mapping Property -> Attribute with valid string', async () => {
       await showroom.setProperty('vModel', 'foo')
       const att = await showroom.hasAttribute('v-model')
@@ -658,6 +657,6 @@ describe('Testing core-switch', async () => {
     //   assert.deepEqual(att, true)
     //   const val = await showroom.getProperty('vModel')
     //   assert.deepEqual(val, '456')
-    // }) 
+    // })
   })
 })

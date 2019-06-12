@@ -66,9 +66,7 @@ describe('core-hello', async => {
       assert.deepEqual(text, 'Hello World ')
       assert.deepEqual(txt, 'Thomas')
     })
-
   })
-
 
   context('Testing lang attribute mapping Attribute -> Property', async () => {
     it('should display Hello World in Spanish: Hola Mundo', async () => {
@@ -109,11 +107,9 @@ describe('core-hello', async => {
       assert.deepEqual(text, 'Hello World ')
       assert.deepEqual(txt, 'Thomas')
     })
-
   })
 
   context('Testing rainbow attribute', async () => {
-
     it('Testing mapping Attribute -> Property with boolean', async () => {
       await showroom.setAttribute('rainbow', true)
       const rainbow = await showroom.hasAttribute('rainbow')
