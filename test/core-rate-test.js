@@ -576,7 +576,7 @@ describe('core-rate', async => {
         Type: string
         Default: fas fa-frown
     */
-
+   
     it('set property first then check if attribute updated', async () => {
       await showroom.setProperty('voidIconClass', 'el-icon-star-on')
       const att = await showroom.hasAttribute('void-icon-class')
