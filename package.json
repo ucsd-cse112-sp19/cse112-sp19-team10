@@ -8,7 +8,7 @@
     "browsertest": "npm run Safaritest",
     "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
-    "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text npm run test",
+    "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text-lcov npm run test",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
   },
@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "coveralls": "^3.0.4",
     "documentation": "^11.0.0",
     "husky": "^2.3.0",
     "istanbul": "^0.4.5",
