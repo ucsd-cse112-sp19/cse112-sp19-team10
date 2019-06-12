@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
-    "unitTest:switch": "npx mocha test/unit/core-switch-test.js --exit --timeout 5000",
-    "unitTest:rate": "npx mocha test/unit/core-rate-test.js --exit --timeout 5000",
-    "unitTest:hello": "npx mocha test/unit/core-hello-test.js --exit --timeout 5000",
+    "unitTest:switch": "npx mocha tests/unit/core-switch-test.js --exit --timeout 5000",
+    "unitTest:rate": "npx mocha tests/unit/core-rate-test.js --exit --timeout 5000",
+    "unitTest:hello": "npx mocha tests/unit/core-hello-test.js --exit --timeout 5000",
     "browserTest": "npm run browserTest:chrome && npm run browserTest:safari",
-    "browserTest:chrome": "testcafe \"saucelabs:Chrome@beta:Windows 10\" test/browser",
-    "browserTest:safariTest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" test/browser",
+    "browserTest:chrome": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/browser",
+    "browserTest:safariTest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/browser",
     "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text npm run test",
     "lint": "standard --fix && standard",
-    "localbrowser": "testcafe chrome test/browser"
+    "localbrowser": "testcafe chrome tests/browser"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     ],
     "ignore": [
       "/docs/",
-      "test/browser"
+      "tests/browser"
     ]
   },
   "nyc": {
