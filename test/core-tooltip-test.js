@@ -77,7 +77,6 @@ describe('Testing core-tooltip', async () => {
     // })
   })
 
-  
   context('core-tooltip attribute: content', async () => {
     /*  Unit Testing for
         Attribute: content
@@ -102,7 +101,7 @@ describe('Testing core-tooltip', async () => {
       const val = await showroom.getProperty('content')
       assert.deepEqual(val, 'foo')
     })
-    
+
     it('Mapping Property -> Attribute with boolean', async () => {
       await showroom.setProperty('content', true)
       const att = await showroom.hasAttribute('content')
@@ -134,6 +133,232 @@ describe('Testing core-tooltip', async () => {
       const val = await showroom.getProperty('content')
       assert.deepEqual(val, '456')
     })
+  })
+
+  context('core-tooltip attribute: placement', async () => {
+    /*  Unit Testing for
+        Attribute: placement
+        Description: position of Tooltip
+        Type: string
+        Accepted Values: top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end
+        Default: bottom
+    */
+
+    it('default value', async () => {
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'bottom')
+    })
+
+    // it('Mapping Property -> Attribute with invaild string', async () => {
+    //   await showroom.setProperty('placement', 'foo')
+    //   const att = await showroom.hasAttribute('placement')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getAttribute('placement')
+    //   assert.deepEqual(val, 'bottom')
+    // })
+
+    // it('Mapping Attribute -> Property with invaild string', async () => {
+    //   await showroom.setAttribute('placement', 'bar')
+    //   const att = await showroom.hasAttribute('placement')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('placement')
+    //   assert.deepEqual(val, 'bottom')
+    // })
+
+    it('Mapping Property -> Attribute with top', async () => {
+      await showroom.setProperty('placement', 'top')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'top')
+    })
+
+    it('Mapping Property -> Attribute with top-start', async () => {
+      await showroom.setProperty('placement', 'top-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'top-start')
+    })
+
+    it('Mapping Property -> Attribute with top-end', async () => {
+      await showroom.setProperty('placement', 'top-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'top-end')
+    })
+
+    it('Mapping Property -> Attribute with bottom', async () => {
+      await showroom.setProperty('placement', 'bottom')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'bottom')
+    })
+
+    it('Mapping Property -> Attribute with bottom-start', async () => {
+      await showroom.setProperty('placement', 'bottom-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'bottom-start')
+    })
+
+    it('Mapping Property -> Attribute with bottom-end', async () => {
+      await showroom.setProperty('placement', 'bottom-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'bottom-end')
+    })
+
+    it('Mapping Property -> Attribute with left', async () => {
+      await showroom.setProperty('placement', 'left')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'left')
+    })
+
+    it('Mapping Property -> Attribute with left-start', async () => {
+      await showroom.setProperty('placement', 'left-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'left-start')
+    })
+
+    it('Mapping Property -> Attribute with left-end', async () => {
+      await showroom.setProperty('placement', 'left-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'left-end')
+    })
+    
+    it('Mapping Property -> Attribute with right', async () => {
+      await showroom.setProperty('placement', 'right')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'right')
+    })
+
+    it('Mapping Property -> Attribute with right-start', async () => {
+      await showroom.setProperty('placement', 'right-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'right-start')
+    })
+
+    it('Mapping Property -> Attribute with right-end', async () => {
+      await showroom.setProperty('placement', 'right-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'right-end')
+    })
+    
+    it('Mapping Attribute -> Property with top', async () => {
+      await showroom.setAttribute('placement', 'top')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'top')
+    })
+
+    it('Mapping Attribute -> Property with top-start', async () => {
+      await showroom.setAttribute('placement', 'top-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'top-start')
+    })
+  
+    it('Mapping Attribute -> Property with top-end', async () => {
+      await showroom.setAttribute('placement', 'top-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'top-end')
+    })
+
+    it('Mapping Attribute -> Property with bottom', async () => {
+      await showroom.setAttribute('placement', 'bottom')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'bottom')
+    })
+
+    it('Mapping Attribute -> Property with bottom-start', async () => {
+      await showroom.setAttribute('placement', 'bottom-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'bottom-start')
+    })
+
+    it('Mapping Attribute -> Property with bottom-end', async () => {
+      await showroom.setAttribute('placement', 'bottom-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'bottom-end')
+    })
+
+    it('Mapping Attribute -> Property with left', async () => {
+      await showroom.setAttribute('placement', 'left')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'left')
+    })
+
+    it('Mapping Attribute -> Property with left-start', async () => {
+      await showroom.setAttribute('placement', 'left-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'left-start')
+    })
+
+    it('Mapping Attribute -> Property with left-end', async () => {
+      await showroom.setAttribute('placement', 'left-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'left-end')
+    })
+
+    it('Mapping Attribute -> Property with right', async () => {
+      await showroom.setAttribute('placement', 'right')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'right')
+    })
+
+    it('Mapping Attribute -> Property with right-start', async () => {
+      await showroom.setAttribute('placement', 'right-start')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'right-start')
+    })
+
+    it('Mapping Attribute -> Property with right-end', async () => {
+      await showroom.setAttribute('placement', 'right-end')
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'right-end')
+    })
+  
   })
 
 })
