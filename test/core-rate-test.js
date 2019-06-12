@@ -42,7 +42,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('colors')
       assert.deepEqual(val, '[red,yellow,green]')
     })
-/*
+    /*
     it('default value is set, if invalid array length', async () => {
       await showroom.setAttribute('colors', "[#F7BA2A, #F7BA2A]")
       const att = await showroom.hasAttribute('colors')
@@ -50,7 +50,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('colors')
       assert.deepEqual(val, "[#f7ba2a, #f7ba2a, #f7ba2a]")
     })
-  
+
     it('default value is set, if non-array type', async () => {
       await showroom.setAttribute('colors', false)
       const att = await showroom.hasAttribute('colors')
@@ -157,7 +157,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('disabledVoidIconClass')
       assert.deepEqual(val, 'el-icon-star-off')
     })
-/*
+    /*
     it('non-string type, will convert to string', async () => {
       await showroom.setAttribute('disabled-void-icon-class', true)
       const att = await showroom.hasAttribute('disabled-void-icon-class')
@@ -191,7 +191,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('highThreshold')
       assert.deepEqual(val, '3')
     })
-/*
+    /*
     it('set default value, if not in range (low-threshold,5]', async () => {
       await showroom.setAttribute('high-threshold', 6)
       const att = await showroom.hasAttribute('high-threshold')
@@ -240,14 +240,14 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('lowThreshold')
       assert.deepEqual(val, '2')
     })
-/*
+    /*
     it('set default value, if not in range [0,high-threshold)', async () => {
       await showroom.setAttribute('low-threshold', -1)
       const att = await showroom.hasAttribute('low-threshold')
       assert.deepEqual(att, true)
       const val = await showroom.getProperty('lowThreshold')
       assert.deepEqual(val, '2')
-      
+
       await showroom.setAttribute('high-threshold', 3)
       await showroom.setAttribute('low-threshold', 3)
       const att2 = await showroom.hasAttribute('low-threshold')
@@ -434,7 +434,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('textColor')
       assert.deepEqual(val, 'green')
     })
-/*
+    /*
     it('set default value, non color format type', async () => {
       await showroom.setAttribute('text-color', false)
       const att = await showroom.hasAttribute('text-color')
@@ -468,7 +468,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('texts')
       assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
     })
-/*
+    /*
     it('set default value, if incorrect array length', async () => {
       await showroom.setAttribute('texts', "['normal', 'good', 'great']")
       const att = await showroom.hasAttribute('texts')
@@ -510,7 +510,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('vModel')
       assert.deepEqual(val, '2')
     })
-/*
+    /*
     it('set default value, if value is out of range', async () => {
       await showroom.setAttribute('v-model', -1)
       const att = await showroom.hasAttribute('v-model')
@@ -558,7 +558,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('voidColor')
       assert.deepEqual(val, 'green')
     })
-/*
+    /*
     it('set default value, if non-color format type', async () => {
       await showroom.setAttribute('void-color', true)
       const att = await showroom.hasAttribute('void-color')
@@ -576,7 +576,7 @@ describe('core-rate', async => {
         Type: string
         Default: fas fa-frown
     */
-   
+
     it('set property first then check if attribute updated', async () => {
       await showroom.setProperty('voidIconClass', 'el-icon-star-on')
       const att = await showroom.hasAttribute('void-icon-class')
@@ -592,7 +592,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('voidIconClass')
       assert.deepEqual(val, 'el-icon-star-on')
     })
-/*
+    /*
     it('set default value, if non-string type', async () => {
       await showroom.setAttribute('void-icon-class', true)
       const att = await showroom.hasAttribute('void-icon-class')

@@ -14,13 +14,13 @@
     </head>
     <body>
         <div class="rate_group">
-            <core-rate id='0'></core-rate>
-            <core-rate id='1' colors="[#2ed3ce,#2ed3ce,#2ed3ce]" void-color="black"></core-rate>
-            <core-rate id='2' colors="[red,yellow,green]" void-color="black" low-threshold="1" high-threshold="5"></core-rate>
-            <core-rate id='3' colors="[red,gold,green]" icon-classes="fas fa-smile" void-icon-class="fas fa-frown"></core-rate>
-            <core-rate id='4' disabled v-model='3' disabled-void-color="#4286f4" disabled-void-icon-class="fas fa-ban"></core-rate>
-            <core-rate id='5' score-template=" points" show-score></core-rate>
-            <core-rate id='6' texts="['oops', 'disappointed', 'normal', 'good', 'great']" show-text text-color="green"></core-rate>
+            <core-rate></core-rate>
+            <core-rate colors="[#2ed3ce,#2ed3ce,#2ed3ce]" void-color="black"></core-rate>
+            <core-rate colors="[red,yellow,green]" void-color="black" low-threshold="1" high-threshold="5"></core-rate>
+            <core-rate olors="[red,gold,green]" icon-classes="fas fa-smile" void-icon-class="fas fa-frown"></core-rate>
+            <core-rate disabled v-model='3' disabled-void-color="#4286f4" disabled-void-icon-class="fas fa-ban"></core-rate>
+            <core-rate score-template=" points" show-score></core-rate>
+            <core-rate texts="['oops', 'disappointed', 'normal', 'good', 'great']" show-text text-color="green"></core-rate>
         </div>
     </body>
 </html>
