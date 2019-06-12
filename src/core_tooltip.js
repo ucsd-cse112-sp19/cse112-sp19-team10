@@ -217,6 +217,7 @@ tooltipTemplate.innerHTML = `
 `
 /**
  * CoreTooltip Class
+ * 
  */
 class CoreTooltip extends window.HTMLElement {
   constructor () {
