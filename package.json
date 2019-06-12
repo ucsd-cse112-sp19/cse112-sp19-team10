@@ -4,11 +4,11 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha --exit --timeout 5000",
+    "test": "nyc --reporter=html --reporter=text npx mocha --exit --timeout 5000",
     "browsertest": "npm run Safaritest",
     "Chrometest": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/",
     "Safaritest": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/",
-    "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix && standard",
     "localbrowser": "testcafe chrome tests/"
   },
