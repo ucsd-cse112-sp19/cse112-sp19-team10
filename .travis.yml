@@ -18,7 +18,7 @@ before_script:
 script:
     - npm run lint
     - npm run test
-    - istanbul cover test -- -R spec
+    - istanbul cover npm run test -- -R spec
     - npm run browsertest
 
 after_script:
