@@ -163,7 +163,7 @@ class CoreSwitch extends window.HTMLElement {
   * @returns {Boolean/String/number} value of the v-model attribute.
   */
   get vModel () {
-    return this.hasAttribute('v-model')
+    return this.getAttribute('v-model')
   }
 
   /**
