@@ -76,4 +76,64 @@ describe('Testing core-tooltip', async () => {
     //   assert.deepEqual(val2, 'dark')
     // })
   })
+
+  
+  context('core-tooltip attribute: content', async () => {
+    /*  Unit Testing for
+        Attribute: content
+        Description: display content, can be overridden by slot#content
+        Type: string
+        Accepted Values: any
+        Default: N/A
+    */
+
+    it('Mapping Property -> Attribute with string', async () => {
+      await showroom.setProperty('content', 'light')
+      const att = await showroom.hasAttribute('content')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('content')
+      assert.deepEqual(val, 'light')
+    })
+
+    it('Mapping Attribute -> Property with string', async () => {
+      await showroom.setAttribute('content', 'foo')
+      const att = await showroom.hasAttribute('content')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('content')
+      assert.deepEqual(val, 'foo')
+    })
+    
+    it('Mapping Property -> Attribute with boolean', async () => {
+      await showroom.setProperty('content', true)
+      const att = await showroom.hasAttribute('content')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('content')
+      assert.deepEqual(val, 'true')
+    })
+
+    it('Mapping Attribute -> Property with boolean', async () => {
+      await showroom.setAttribute('content', false)
+      const att = await showroom.hasAttribute('content')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('content')
+      assert.deepEqual(val, 'false')
+    })
+
+    it('Mapping Property -> Attribute with number', async () => {
+      await showroom.setProperty('content', 123)
+      const att = await showroom.hasAttribute('content')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('content')
+      assert.deepEqual(val, '123')
+    })
+
+    it('Mapping Attribute -> Property with number', async () => {
+      await showroom.setAttribute('content', 456)
+      const att = await showroom.hasAttribute('content')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('content')
+      assert.deepEqual(val, '456')
+    })
+  })
+
 })
