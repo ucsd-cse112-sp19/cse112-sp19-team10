@@ -435,7 +435,7 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('tabindex')) {
       this.setAttribute('tabindex', 0)
     }
-    if (!this.hasAttribute('open-delay') || isNaN(this.getAttribute('open-delay'))) {
+    if (!this.hasAttribute('open-delay')) {
       this.setAttribute('open-delay', 0)
     }
     if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
@@ -466,9 +466,10 @@ class CoreTooltip extends window.HTMLElement {
         if (newValue === 'light') {
           this.tooltip.setProperty('--background-color', '#fff')
           this.tooltip.setProperty('--text-color', '#303133')
-        } else {
+        } else if (newValue === 'dark') {
           this.tooltip.setProperty('--background-color', '#303133')
           this.tooltip.setProperty('--text-color', '#fff')
+        } else {
           this.setAttribute('effect', 'dark')
         }
         break
@@ -527,9 +528,11 @@ class CoreTooltip extends window.HTMLElement {
         }
         break
       case 'open-delay':
-        if (hasValue) {
+        if (hasValue && !isNaN(this.getAttribute('open-delay'))) {
           var fadeTime = this.getAttribute('open-delay') / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
+        } else {
+          this.setAttribute('open-delay', 0)
         }
         break
     }
