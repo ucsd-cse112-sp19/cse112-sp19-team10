@@ -392,15 +392,11 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('active-icon-class')) {
       var newClass1 = this.getAttribute('active-icon-class')
       this.activeIcon.setAttribute('class', newClass1)
-      var actIconColor = this.getAttribute('active-color')
-      this.activeIcon.style.setProperty('--active-color', actIconColor)
     }
     // Set inactive icon
     if (this.hasAttribute('inactive-icon-class')) {
       var newClass2 = this.getAttribute('inactive-icon-class')
       this.inactiveIcon.setAttribute('class', newClass2)
-      var inactIconColor = this.getAttribute('active-color')
-      this.inactiveIcon.style.setProperty('--active-color', inactIconColor)
     }
     // Set active text
     if (this.hasAttribute('active-text')) {
