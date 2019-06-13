@@ -395,11 +395,6 @@ class CoreSwitch extends window.HTMLElement {
         // Set active text
         if (this.hasAttribute('active-text')) {
           this.aText.innerHTML = newValue
-          // if (this.check.checked) {
-          //   this.aText.style.setProperty('color', '#409EFF')
-          // } else {
-          //   this.aText.style.setProperty('color', 'black')
-          // }
         } else {
           this.aText.innerHTML = ''
         }
@@ -408,11 +403,6 @@ class CoreSwitch extends window.HTMLElement {
         // Set inactive text
         if (this.hasAttribute('inactive-text')) {
           this.iaText.innerHTML = newValue
-          // if (!this.check.checked) {
-          //   this.iaText.style.setProperty('color', '#409EFF')
-          // } else {
-          //   this.iaText.style.setProperty('color', 'black')
-          // }
         } else {
           this.aText.innerHTML = ''
         }
