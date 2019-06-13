@@ -123,7 +123,6 @@ switchTemplate.innerHTML = `
 </body>
 </html>
 `
-
 /**
  * CoreSwitch Class
  */
