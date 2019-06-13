@@ -23,9 +23,6 @@ template.innerHTML = `
     </style>
     <h1><span id="hello"></span> <slot></slot></h1>
 `
-
-// core-hello class definition
-
 /**
  * CoreHello class
  */
