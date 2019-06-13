@@ -8,7 +8,6 @@ before_install:
     - npm i -D mocha puppeteer
     - npm install --save-dev chai
     - npm install --showroom
-    - npm install run-when-changed
 
 before_script:
     - npm install codeclimate-test-reporter istanbul -g
