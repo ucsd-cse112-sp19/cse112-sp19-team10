@@ -447,9 +447,9 @@ class CoreSwitch extends window.HTMLElement {
     if (this.check.checked) {
       let activeValue = this.getAttribute('active-value')
       this.setAttribute('v-model', activeValue)
+      this.aText.style.setProperty('color', '#409EFF')
+      this.iaText.style.setProperty('color', 'black')
       if (activeValue === 'true') {
-        this.aText.style.setProperty('color', '#409EFF')
-        this.iaText.style.setProperty('color', 'black')
         this.removeAttribute('title')
       } else {
         // TODO: MAKE TOOLTIP?
@@ -458,9 +458,9 @@ class CoreSwitch extends window.HTMLElement {
     } else {
       let inactiveValue = this.getAttribute('inactive-value')
       this.setAttribute('v-model', inactiveValue)
+      this.iaText.style.setProperty('color', '#409EFF')
+      this.aText.style.setProperty('color', 'black')
       if (inactiveValue === 'false') {
-        this.iaText.style.setProperty('color', '#409EFF')
-        this.aText.style.setProperty('color', 'black')
         this.removeAttribute('title')
       } else {
         // TODO: MAKE TOOLTIP?
