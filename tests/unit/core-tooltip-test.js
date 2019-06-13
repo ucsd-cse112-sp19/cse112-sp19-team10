@@ -762,20 +762,53 @@ describe('Testing core-tooltip', async () => {
     })
 
     // it('Mapping Attribute -> Property with valid string', async () => {
-    //   await showroom.setAttribute('tabindex', '123')
+    //   await showroom.setAttribute('tabindex', '12')
     //   const att = await showroom.hasAttribute('tabindex')
     //   assert.deepEqual(att, true)
     //   const val = await showroom.getProperty('tabindex')
-    //   assert.deepEqual(val, '123')
+    //   assert.deepEqual(val, '12')
     // })
 
     // it('Mapping Attribute -> Property with valid string', async () => {
-    //   await showroom.setAttribute('tabindex', '456')
+    //   await showroom.setAttribute('tabindex', '6')
     //   const att = await showroom.hasAttribute('tabindex')
     //   assert.deepEqual(att, true)
     //   const val = await showroom.getProperty('tabindex')
-    //   assert.deepEqual(val, '456')
+    //   assert.deepEqual(val, '6')
     // })
+
+    // it('Mapping Attribute -> Property with number', async () => {
+    //   await showroom.setAttribute('tabindex', 16)
+    //   const att = await showroom.hasAttribute('tabindex')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('tabindex')
+    //   assert.deepEqual(val, '16')
+    // })
+
+    // it('Mapping Attribute -> Property with number', async () => {
+    //   await showroom.setAttribute('tabindex', 100)
+    //   const att = await showroom.hasAttribute('tabindex')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('tabindex')
+    //   assert.deepEqual(val, 100)
+    // })
+
+    // it('Mapping Attribute -> Property with invalid value', async () => {
+    //   await showroom.setAttribute('tabindex', false)
+    //   const att = await showroom.hasAttribute('tabindex')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('tabindex')
+    //   assert.deepEqual(val, '0')
+    // })
+
+    // it('Mapping Attribute -> Property with invalid', async () => {
+    //   await showroom.setAttribute('tabindex', 'foo')
+    //   const att = await showroom.hasAttribute('tabindex')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('tabindex')
+    //   assert.deepEqual(val, '0')
+    // })
+    
   })
 
   context('Testing core-switch attribute: open-delay', async () => {
