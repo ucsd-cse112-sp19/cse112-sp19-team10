@@ -45,7 +45,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-when-changed --watch 'src/core_hello.js' --watch 'tests/browser/HelloBrowserTest.js' --watch 'tests/unit/core-hello.js' --exec 'unitTest:hello' && run-when-changed --watch 'src/core_switch.js' --watch 'tests/browser/SwitchBrowserTest.js' --watch 'tests/unit/core-switch.js' --exec 'unitTest:switch' && run-when-changed --watch 'src/core_rate.js' --watch 'tests/browser/RateBrowserTest.js' --watch 'tests/unit/core-rate.js' --exec 'unitTest:rate' test && run-when-changed --watch '*.js' --exec 'lint' && documentation build src/ -f html -o docs"
+      "pre-commit": [
+        "run-when-changed --watch 'src/core_hello.js' --watch 'tests/unit/core-hello.js' --exec 'unitTest:hello'",
+        "run-when-changed --watch 'src/core_switch.js' --watch 'tests/unit/core-switch.js' --exec 'unitTest:switch'",
+        "run-when-changed --watch 'src/core_rate.js' --watch 'tests/unit/core-rate.js' --exec 'unitTest:rate'",
+        "run-when-changed --watch 'src/core_hello.js' --watch 'tests/browser/HelloBrowserTest.js' --exec 'browserTest:hello'",
+        "run-when-changed --watch 'src/core_switch.js' --watch 'tests/browser/SwitchBrowserTest.js' --exec 'browserTest:switch'",
+        "run-when-changed --watch 'src/core_rate.js' --watch 'tests/browser/RateBrowserTest.js' --exec 'browserTest:rate'",
+        "run-when-changed --watch '*.js' --exec 'lint'",
+        "documentation build src/ -f html -o docs"
+      ]
     }
   },
   "devDependencies": {
