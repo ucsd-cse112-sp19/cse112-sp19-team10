@@ -7,10 +7,11 @@ Table of Contents
 =================
 <!--ts-->
    * [Shinobi Component Library](#shinobi-component-library)
+   * [Table of Contents](#table-of-contents)
       * [A project by Team Rockstar Ninjas](#a-project-by-team-rockstar-ninjas)
       * [Installation](#installation)
       * [Getting Started](#getting-started)
-      * [API Docs](#api-docs)
+         * [API Docs](#api-docs)
       * [Coding Style](#coding-style)
       * [Testing](#testing)
       * [Contributing](#contributing)
@@ -19,10 +20,13 @@ Table of Contents
       * [Repo Structure](#repo-structure)
       * [Change Log](#change-log)
       * [Team](#team)
+      * [License](#license)
+      * [Dependencies](#dependencies)
 
-<!-- Added by: seannam, at: Thu Jun 13 01:25:57 PDT 2019 -->
+<!-- Added by: seannam, at: Thu Jun 13 01:35:27 PDT 2019 -->
 
 <!--te-->
+
 ## A project by Team Rockstar Ninjas
 The Shinobi Component Library (SCL) is a collection of meticulously built standard web components for you to use in any web project.  
 <img src="docs/img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="300px"/>
@@ -44,7 +48,7 @@ They can be used like so:
 ```
 Read more on the [Getting Started page](docs/usage/GettingStarted.md).
 
-## API Docs
+### API Docs
 Component Specific API docs can be found: [here](docs/index.html)  
 These include a full list of attributes for each component.    
 
@@ -73,3 +77,6 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 
 ## Team
 The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Meet the team!](docs/Team.md)
+
+## License
+## Dependencies
