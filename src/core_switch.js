@@ -74,6 +74,7 @@ switchTemplate.innerHTML = `
     position: absolute;
     left: 45px;
     top: 2px;
+    color: #000000;
   }
   #inactive_icon {
     position: absolute;
