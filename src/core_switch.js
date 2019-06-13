@@ -394,11 +394,11 @@ class CoreSwitch extends window.HTMLElement {
         // Set active text
         if (this.hasAttribute('active-text')) {
           this.aText.innerHTML = newValue
-          if (this.check.checked) {
-            this.aText.style.setProperty('color', '#409EFF')
-          } else {
-            this.aText.style.setProperty('color', 'black')
-          }
+          // if (this.check.checked) {
+          //   this.aText.style.setProperty('color', '#409EFF')
+          // } else {
+          //   this.aText.style.setProperty('color', 'black')
+          // }
         } else {
           this.aText.innerHTML = ''
         }
@@ -407,11 +407,11 @@ class CoreSwitch extends window.HTMLElement {
         // Set inactive text
         if (this.hasAttribute('inactive-text')) {
           this.iaText.innerHTML = newValue
-          if (!this.check.checked) {
-            this.iaText.style.setProperty('color', '#409EFF')
-          } else {
-            this.iaText.style.setProperty('color', 'black')
-          }
+          // if (!this.check.checked) {
+          //   this.iaText.style.setProperty('color', '#409EFF')
+          // } else {
+          //   this.iaText.style.setProperty('color', 'black')
+          // }
         } else {
           this.aText.innerHTML = ''
         }
@@ -447,6 +447,8 @@ class CoreSwitch extends window.HTMLElement {
       let activeValue = this.getAttribute('active-value')
       this.setAttribute('v-model', activeValue)
       if (activeValue === 'true') {
+        this.aText.style.setProperty('color', '#409EFF')
+        this.iaText.style.setProperty('color', 'black')
         this.removeAttribute('title')
       } else {
         // TODO: MAKE TOOLTIP?
@@ -456,6 +458,8 @@ class CoreSwitch extends window.HTMLElement {
       let inactiveValue = this.getAttribute('inactive-value')
       this.setAttribute('v-model', inactiveValue)
       if (inactiveValue === 'false') {
+        this.iaText.style.setProperty('color', '#409EFF')
+        this.aText.style.setProperty('color', 'black')
         this.removeAttribute('title')
       } else {
         // TODO: MAKE TOOLTIP?
