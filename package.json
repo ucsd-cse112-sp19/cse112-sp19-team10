@@ -39,7 +39,6 @@
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
   "dependencies": {
     "acorn": "^6.1.1",
-    "bootstrap": "^4.3.1",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "shinobirockstar": "^1.0.0",
@@ -53,9 +52,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "documentation": "^11.0.0",
+    "flat": "^4.1.0",
     "husky": "^2.3.0",
     "istanbul": "^0.4.5",
-    "jest": "^24.7.1",
     "mocha": "^6.1.4",
     "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
