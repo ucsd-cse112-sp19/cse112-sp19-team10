@@ -460,7 +460,6 @@ class CoreSwitch extends window.HTMLElement {
       if (inactiveValue === 'false') {
         this.removeAttribute('title')
       } else {
-        // TODO: MAKE TOOLTIP?
         this.setAttribute('title', 'Switch value: ' + inactiveValue)
       }
     }
