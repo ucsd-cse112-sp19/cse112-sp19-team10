@@ -1,8 +1,8 @@
 import { Selector } from 'testcafe'
-
+//browser test for switch component
 fixture`Switch Browser Test:`
   .page`../../examples/switch.html`
-
+  //test case for basic use of of switch: able to turn on and off
   test('v-model changed from false to true and true to false after click', async t => {
     const switch1 = Selector('#switch1');
     const switch1_span = await Selector(() => document.querySelector('#switch1').shadowRoot.querySelector('label'));
@@ -23,6 +23,7 @@ fixture`Switch Browser Test:`
         .expect(switch1.getAttribute('v-model')).eql('false');
   })
 
+  //test case for checking when the component is disabled, it the switch cant be turned on
   test("disabled", async t=>{
     const switch2 = Selector('#switch_disabled');
     const switch2_span = await Selector(() => document.querySelector('#switch_disabled').shadowRoot.querySelector('label'));
@@ -43,6 +44,7 @@ fixture`Switch Browser Test:`
     await t.expect(switch2.getAttribute('v-model')).eql('false');
   })
 
+  //test case for a switch component that has a named value and make sure the named value is shown after turned on
   test("named value", async t=>{
     const switch2 = Selector('#switch_named');
     const switch2_span = await Selector(() => document.querySelector('#switch_named').shadowRoot.querySelector('label'));
@@ -64,6 +66,7 @@ fixture`Switch Browser Test:`
         .expect(switch2.getAttribute('title')).eql('Switch value: cow');
   })
 
+  //test case for switch component that has icon as label, also make sure the corresponding icon is "turned on" (color change) after switches to on.
   test("SwitchBrowserTest @ light up corresponding icon",async t=>{
     const switch_icon = Selector('#switch_icon');
     const switch_span = await Selector(() => document.querySelector('#switch_icon').shadowRoot.querySelector('label'));
@@ -91,32 +94,33 @@ fixture`Switch Browser Test:`
         // check active icon color is black
         .expect(switch_active_icon.getStyleProperty('color')).eql('rgb(64, 158, 255)');
   })
+  
+  //test case for switch component that has icon as label, also make sure the corresponding text is "turned on" (color change) after switches to on.
+  test("SwitchBrowserTest @ light up corresponding text", async t=>{
+    const switch_text = Selector('#switch_text');
+    const switch_span = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('label'));
+    const switch_inactive_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#inactive_text'));
+    const switch_active_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#active_text'));
 
-  // test("SwitchBrowserTest @ light up corresponding text", async t=>{
-  //   const switch_text = Selector('#switch_text');
-  //   const switch_span = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('label'));
-  //   const switch_inactive_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#inactive_text'));
-  //   const switch_active_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#active_text'));
+    await t
+        // check if the switch exist
+        .expect(switch_text.count).eql(1)
+        .expect(switch_text.exists).ok()
+        // check if the default v-model value is false
+        .expect(switch_text.getAttribute('v-model')).eql('false')
+        .expect(switch_inactive_text.textContent).eql('Left')
+        .expect(switch_active_text.textContent).eql('Right')
+        // check inactive text color is blue
+        .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(64, 158, 255)')
+        // check active text color is black
+        .expect(switch_active_text.getStyleProperty('color')).eql('rgb(0, 0, 0)');
 
-  //   await t
-  //       // check if the switch exist
-  //       .expect(switch_text.count).eql(1)
-  //       .expect(switch_text.exists).ok()
-  //       // check if the default v-model value is false
-  //       .expect(switch_text.getAttribute('v-model')).eql('false')
-  //       .expect(switch_inactive_text.textContent).eql('Left')
-  //       .expect(switch_active_text.textContent).eql('Right')
-  //       // check inactive text color is blue
-  //       .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(64, 158, 255)')
-  //       // check active text color is black
-  //       .expect(switch_active_text.getStyleProperty('color')).eql('rgb(0, 0, 0)');
-
-  //   await t
-  //       .click(switch_span)
-  //       .expect(switch_inactive_text.textContent).eql('Left')
-  //       .expect(switch_active_text.textContent).eql('Right')
-  //       // check inactive text color is black
-  //       .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(0, 0, 0)')
-  //       // check active text color is blue
-  //       .expect(switch_active_text.getStyleProperty('color')).eql('rgb(64, 158, 255)');
-  // })
+    await t
+        .click(switch_span)
+        .expect(switch_inactive_text.textContent).eql('Left')
+        .expect(switch_active_text.textContent).eql('Right')
+        // check inactive text color is black
+        .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(0, 0, 0)')
+        // check active text color is blue
+        .expect(switch_active_text.getStyleProperty('color')).eql('rgb(64, 158, 255)');
+  })
