@@ -402,9 +402,8 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('active-text')) {
       var activeText = this.getAttribute('active-text')
       this.aText.innerHTML = activeText
-      var actColor1 = this.getAttribute('active-color')
       if (this.check.checked) {
-        this.aText.style.setProperty('color', actColor1)
+        this.aText.style.setProperty('color', '#409EFF')
       } else {
         this.aText.style.setProperty('color', 'black')
       }
@@ -413,9 +412,8 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('inactive-text')) {
       var inactiveText = this.getAttribute('inactive-text')
       this.iaText.innerHTML = inactiveText
-      var actColor2 = this.getAttribute('active-color')
       if (!this.check.checked) {
-        this.iaText.style.setProperty('color', actColor2)
+        this.iaText.style.setProperty('color', '#409EFF')
       } else {
         this.iaText.style.setProperty('color', 'black')
       }
