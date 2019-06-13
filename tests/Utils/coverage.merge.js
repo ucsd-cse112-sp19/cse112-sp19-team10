@@ -30,8 +30,7 @@ const getLineNumber = function (line) {
   let i
   try {
     i = parseInt(parts[1].split(',')[0])
-  }
-  catch (err) {
+  } catch (err) {
     // console.log("pardon?")
     // console.log(line)
     // console.log("---------------")
