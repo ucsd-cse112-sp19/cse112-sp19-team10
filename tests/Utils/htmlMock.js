@@ -1,3 +1,4 @@
+
 const HTMLElement = class HTMLElement {}
 
 const document = {
@@ -15,4 +16,5 @@ global.document = document
 
 // require('../../src/core_hello.js')
 // require('../../src/core_rate.js')
-// require('../../src/core_switch')
+// require('../../src/core_switch.js')
+// require('../../src/core_tooltip.js')

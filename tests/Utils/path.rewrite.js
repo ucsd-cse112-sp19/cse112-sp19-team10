@@ -1,11 +1,12 @@
 const fs = require('fs')
 const readline = require('readline')
+const path = require('path')
 
 const components = [
-  'CoreHello',
-  'CustomButton',
-  'CustomPopover',
-  'CustomSlider'
+  'core_hello',
+  'core_rate',
+  'core_switch',
+  'core_tooltip'
 ]
 const coverageFileName = 'coverage_test/lcov.info'
 
@@ -33,12 +34,15 @@ lineReader.on('line', function (line) {
     coverage += line + '\n'
   } else {
     let newLine = ''
-    const parts = line.split('.nyc_output/js/')
-    newLine += parts[0]
-    newLine += 'Components/'
-    newLine += matchComp + '/'
-    newLine += parts[1]
-    coverage += newLine + '\n'
+    // const parts = line.split('.nyc_output/js/')
+    const parts = line.split('.nyc_output' + path.sep + 'js' + path.sep)
+    if (parts.length > 1) {
+      newLine += parts[0]
+      newLine += 'src' + path.sep
+      // newLine += matchComp + '/'
+      newLine += parts[1]
+      coverage += newLine + '\n'
+    }
   }
 })
 

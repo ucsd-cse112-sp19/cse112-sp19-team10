@@ -1,15 +1,17 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
+const coverage = require('../Utils/coverage.js')
 
 describe('Testing core-switch', async () => {
   before(async () => {
     await showroom.start()
+    return coverage.beforeHook(showroom)
     // starts showroom server
   })
 
   after(async () => {
     console.log('Shutting down')
-    await showroom.stop()
+    return coverage.afterHook(showroom)
     // stops the showroom server
   })
 

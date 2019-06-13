@@ -44,6 +44,7 @@
   "homepage": "https://github.com/ucsd-cse112/cse112-sp19-team10#readme",
   "dependencies": {
     "acorn": "^6.1.1",
+    "codacy-coverage": "^3.4.0",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "puppeteer-to-istanbul": "^1.2.2",
@@ -57,6 +58,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "document": "^0.4.7",
     "documentation": "^11.0.0",
     "flat": "^4.1.0",
     "husky": "^2.3.0",
@@ -68,6 +70,8 @@
     "showroom": "^0.9.3",
     "standard": "^12.0.1",
     "testcafe": "^1.1.4",
-    "testcafe-browser-provider-saucelabs": "^1.7.0"
+    "testcafe-browser-provider-saucelabs": "^1.7.0",
+    "window": "^4.2.6",
+    "puppeteer-to-istanbul": "^1.2.2"
   }
 }

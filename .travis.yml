@@ -1,6 +1,7 @@
 env:
     global:
-        - CC_TEST_REPORTER_ID=133c121dd43557bc358549a7e9530ac24ddfb446620202a8a9239ab1f2cdfd43
+        - CC_TEST_REPORTER_ID=c05f1ceb4164eb0613da0ef25cca46bc15ffa470f458987ae5300ca4919c20ce
+        - CODECOV_TOKEN="5a1e2521-7d8a-4b8d-966a-f3d947f917e6"
 
 
 language: node_js
@@ -13,6 +14,7 @@ before_install:
     - npm i -D mocha puppeteer
     - npm install --save-dev chai
     - npm install --showroom
+    - npm install -g codecov
 
 before_script:
     - npm install codeclimate-test-reporter istanbul -g
@@ -25,8 +27,6 @@ script:
     - npm run lint
     - npm run test "tests/unit/*.js"
     - npm run coveragetest
-    - npm run browsertest
 
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  - codeclimate-test-reporter < ./coverage/lcov.info
+  - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT
