@@ -9,27 +9,31 @@ Table of Contents
    * [Shinobi Component Library](#shinobi-component-library)
    * [Table of Contents](#table-of-contents)
       * [A project by Team Rockstar Ninjas](#a-project-by-team-rockstar-ninjas)
+         * [About Web Components](#about-web-components)
       * [Installation](#installation)
       * [Getting Started](#getting-started)
          * [API Docs](#api-docs)
-      * [Coding Style](#coding-style)
-      * [Testing](#testing)
       * [Contributing](#contributing)
-      * [Component Architecture](#component-architecture)
-      * [Build Environment](#build-environment)
-      * [Repo Structure](#repo-structure)
+         * [Build Environment](#build-environment)
+         * [Coding Style](#coding-style)
+         * [Component Architecture](#component-architecture)
+         * [Repo Structure](#repo-structure)
+      * [Testing](#testing)
       * [Change Log](#change-log)
       * [Team](#team)
       * [License](#license)
       * [Dependencies](#dependencies)
 
-<!-- Added by: seannam, at: Thu Jun 13 01:35:27 PDT 2019 -->
+<!-- Added by: seannam, at: Thu Jun 13 01:49:27 PDT 2019 -->
 
 <!--te-->
 
 ## A project by Team Rockstar Ninjas
 The Shinobi Component Library (SCL) is a collection of meticulously built standard web components for you to use in any web project.  
 <img src="docs/img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="300px"/>
+
+### About Web Components
+It can be overwhelming trying to learn everything on web components. We recommend our [short guide](docs/WebComponentGuide.md) and the included "Recommended Resources" section.
 
 ## Installation
 You can install Shinobi in two ways:  
@@ -52,25 +56,25 @@ Read more on the [Getting Started page](docs/usage/GettingStarted.md).
 Component Specific API docs can be found: [here](https://ucsd-cse112.github.io/cse112-sp19-team10/docs/index.html)  
 These include a full list of attributes for each component.    
 
-## Coding Style
+## Contributing
+Want to contribute? Read the [guide](https://docs.google.com/document/d/131o201JKLoXA3ThO713b-uAVn71Ql5zLPmLm_eqTdMU/edit) on how to get started!
+
+### Build Environment
+Learn how to set up the build environment and use the tools here: [setting up the build pipeline](https://docs.google.com/document/d/1T7znBZnsLRjiv7TSTTOygoxcIgXU88AOVcoRg2jSkuY/edit)
+
+### Coding Style
 Our project uses the Standard JavaScript Style, (also known as StandardJS), found at [standardjs.com](standardjs.com)  
 Read more about our coding style [here](docs/dev/CodingStyle.md).
+
+### Component Architecture
+We are using a very straightforward architecture for the components. It should be easy to tell by reading the code. In case you are unsure, read this short explanation [here](docs/dev/Architecture.md).
+
+### Repo Structure
+Learn about how our project directories are set up [here](docs/dev/Repo.md).
 
 ## Testing
 For unit tests, we are using [Mocha](https://mochajs.org/) and [Showroom](https://github.com/eavichay/showroom). Read about how to modify existing tests and write new ones in our [unit testing guide](https://docs.google.com/document/d/1lbslRDDltuQ9W85m4ydCMiX7PHPhnL075Dgzt4M1Nuo/edit).  
 Browser tests are done through [Testcafe](https://devexpress.github.io/testcafe/) and [SauceLabs](https://saucelabs.com/). Find our guide [here](https://docs.google.com/document/d/1x6_YWZVBgTehy1oi4eblvHlfXKKR_XMpY9cHYgYD3EI/edit).
-
-## Contributing
-Want to contribute? Read the [guide](https://docs.google.com/document/d/131o201JKLoXA3ThO713b-uAVn71Ql5zLPmLm_eqTdMU/edit) on how to get started!
-
-## Component Architecture
-We are using a very straightforward architecture for the components. It should be easy to tell by reading the code. In case you are unsure, read this short explanation [here](docs/dev/Architecture.md).
-
-## Build Environment
-Learn how to set up the build environment and use the tools here: [setting up the build pipeline](https://docs.google.com/document/d/1T7znBZnsLRjiv7TSTTOygoxcIgXU88AOVcoRg2jSkuY/edit)
-
-## Repo Structure
-Learn about how our project directories are set up [here](docs/dev/Repo.md).
 
 ## Change Log
 This project uses [semantic-release](https://github.com/semantic-release/semantic-release#how-does-it-work) to generate a change log from the git commit messages. Please follow the format as outline in their [docs](https://github.com/semantic-release/semantic-release#how-does-it-work).
