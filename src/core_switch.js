@@ -404,7 +404,6 @@ class CoreSwitch extends window.HTMLElement {
       this.aText.innerHTML = activeText
       if (this.check.checked) {
         this.aText.style.setProperty('color', '#409EFF')
-        
       } else {
         this.aText.style.setProperty('color', 'black')
       }
