@@ -12,37 +12,41 @@
         </style>
     </head>
     <body>
-        <core-tooltip content="cow" tabindex="1">HOVER HERE</core-tooltip>
-        <core-tooltip content="light" effect="light" tabindex="2">HOVER HERE</core-tooltip>
-        <core-tooltip disabled>HOVER HERE</core-tooltip>
-        <core-tooltip content="not enterable" enterable=false tabindex="3">HOVER HERE</core-tooltip>
-        <core-tooltip content="manual" id="tip" manual><button onclick="showTooltip()">Click Me</button></core-tooltip>
-        <br>
-        <core-tooltip content="this is placed at the bottom">Bottom</core-tooltip>
+        <core-tooltip id="cow" content="cow" tabindex="1">HOVER HERE</core-tooltip>
+        <br><br>
+        <core-tooltip id="light" content="light" effect="light" tabindex="2">HOVER HERE</core-tooltip>
+        <br><br>
+        <core-tooltip id="disabled" disabled>HOVER HERE</core-tooltip>
+        <br><br>
+        <core-tooltip id="not_enterable" content="not enterable" enterable=false tabindex="3">HOVER HERE</core-tooltip>
         <br><br><br><br>
-        <core-tooltip content="this is placed on top" placement="top">Top</core-tooltip>
-        <br>
-        <core-tooltip content="this is placed to the left" placement="left">Left</core-tooltip>
-        <br>
-        <core-tooltip content="this is placed to the right" placement="right">Right</core-tooltip>
-        <br>
-        <core-tooltip content="this is placed at the bottom" placement="bottom-start">Bottom Start</core-tooltip>
+        <core-tooltip id="manual" content="manual" id="tip" manual><button onclick="showTooltip()">Click Me</button></core-tooltip>
+        <br><br>
+        <core-tooltip id="bottom" content="this is placed at the bottom">Bottom</core-tooltip>
         <br><br><br><br>
-        <core-tooltip content="this is placed on top" placement="top-start">Top Start</core-tooltip>
+        <core-tooltip id="top" content="this is placed on top" placement="top">Top</core-tooltip>
         <br>
-        <core-tooltip content="this is placed to the left" placement="left-start">Left Start</core-tooltip>
+        <core-tooltip id="left" content="this is placed to the left" placement="left">Left</core-tooltip>
         <br>
-        <core-tooltip content="this is placed to the right" placement="right-start">Right Start</core-tooltip>
+        <core-tooltip id="right" content="this is placed to the right" placement="right">Right</core-tooltip>
         <br>
-        <core-tooltip content="this is placed at the bottom" placement="bottom-end">Bottom End</core-tooltip>
+        <core-tooltip id="bottom_start" content="this is placed at the bottom" placement="bottom-start">Bottom Start</core-tooltip>
         <br><br><br><br>
-        <core-tooltip content="this is placed on top" placement="top-end">Top End</core-tooltip>
+        <core-tooltip id="top_start" content="this is placed on top" placement="top-start">Top Start</core-tooltip>
         <br>
-        <core-tooltip content="this is placed to the left" placement="left-end">Left End</core-tooltip>
+        <core-tooltip id="left_start" content="this is placed to the left" placement="left-start">Left Start</core-tooltip>
         <br>
-        <core-tooltip content="this is placed to the right" placement="right-end">Right End</core-tooltip>
+        <core-tooltip id="right_start" content="this is placed to the right" placement="right-start">Right Start</core-tooltip>
+        <br>
+        <core-tooltip id="bottom_end" content="this is placed at the bottom" placement="bottom-end">Bottom End</core-tooltip>
+        <br><br><br><br>
+        <core-tooltip id="top_end" content="this is placed on top" placement="top-end">Top End</core-tooltip>
+        <br>
+        <core-tooltip id="left_end" content="this is placed to the left" placement="left-end">Left End</core-tooltip>
+        <br>
+        <core-tooltip id="right_end" content="this is placed to the right" placement="right-end">Right End</core-tooltip>
         <br><br><br>
-        <core-tooltip content="he" open-delay=3000  tabindex="3">Hover HERE</core-tooltip>
+        <core-tooltip id="he" content="he" open-delay=3000  tabindex="3">Hover HERE</core-tooltip>
     </body>
 </html>
 <script>
