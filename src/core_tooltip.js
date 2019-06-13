@@ -411,7 +411,7 @@ class CoreTooltip extends window.HTMLElement {
     }
     // Set default v-model to false
     if (this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', false)
+      this.setAttribute('v-model', '')
     }
     if (this.hasAttribute('disabled')) {
       this.setAttribute('disabled', '')
