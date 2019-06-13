@@ -565,4 +565,5 @@ class CoreTooltip extends window.HTMLElement {
   }
 }
 
+// Connect class to 'core-tooltip' custom element
 window.customElements.define('core-tooltip', CoreTooltip)
