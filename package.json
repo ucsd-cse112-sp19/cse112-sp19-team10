@@ -4,7 +4,7 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
+    "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate && npm run unitTest:tooltip",
     "unitTest:switch": "npx mocha tests/unit/core-switch-test.js --exit --timeout 5000",
     "unitTest:rate": "npx mocha tests/unit/core-rate-test.js --exit --timeout 5000",
     "unitTest:hello": "npx mocha tests/unit/core-hello-test.js --exit --timeout 5000",

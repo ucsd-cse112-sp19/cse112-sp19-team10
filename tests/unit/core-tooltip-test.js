@@ -750,8 +750,8 @@ describe('Testing core-tooltip', async () => {
         Description: tabindex of Tooltip
         Type: number
         Default: 0
-    
-        tabindex indicates if its element can be focused and if/where it 
+
+        tabindex indicates if its element can be focused and if/where it
         participates in sequential keyboard navigation
     */
     it('with default value', async () => {
