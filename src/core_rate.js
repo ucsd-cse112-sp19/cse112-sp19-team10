@@ -128,22 +128,6 @@ class CoreRate extends window.HTMLElement {
   }
 
   /**
-  * This function gets the value of the max attribute.
-  * @returns {integer} max rating score.
-  */
-  get max () {
-    return this.getAttribute('max')
-  }
-
-  /**
-  * This function sets the value of the max attribute.
-  * @param {integer} val - max rating score.
-  */
-  set max (val) {
-    this.setAttribute('max', 5)
-  }
-
-  /**
   * This function gets the value of the disabled attribute.
   * @returns {Boolean} whether Rate is read-only.
   */
@@ -390,19 +374,18 @@ class CoreRate extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
+    // Set dfault v-model to 0
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
     }
-    if (this.hasAttribute('v-model') && isNaN(this.getAttribute('v-model'))) {
-      this.setAttribute('v-model', 0)
-    }
-    this.setAttribute('max', 5)
+    // Set default low-threshold to 2
     if (!this.hasAttribute('low-threshold')) {
       this.setAttribute('low-threshold', 2)
     }
     if (this.hasAttribute('low-threshold') && isNaN(this.getAttribute('low-threshold'))) {
       this.setAttribute('low-threshold', 2)
     }
+    // Set default high-threshold to 4
     if (!this.hasAttribute('high-threshold')) {
       this.setAttribute('high-threshold', 4)
     }
@@ -478,17 +461,13 @@ class CoreRate extends window.HTMLElement {
   attributeChangedCallback (name, oldValue, newValue) {
     var i
     // Check stars based on v-model
-    if (this.hasAttribute('v-model')) {
-      var numStars = this.getAttribute('v-model')
+    if (this.hasAttribute('v-model') && !isNaN(newValue)) {
+      var numStars = Number(newValue)
       for (i = 0; i < numStars; i++) {
         this.radio[this.radio.length - numStars].setAttribute('checked', true)
       }
-    }
-    // Set disabled
-    if (this.hasAttribute('disabled')) {
-      for (i = 0; i < this.radio.length; i++) {
-        this.radio[i].setAttribute('disabled', true)
-      }
+    } else {
+      this.setAttribute('v-model', 0)
     }
     if (this.hasAttribute('low-threshold') || this.hasAttribute('high-threshold')) {
       var low = parseInt(this.getAttribute('low-threshold'))
