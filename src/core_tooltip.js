@@ -293,12 +293,7 @@ class CoreTooltip extends window.HTMLElement {
   * @param {Boolean} val - visibility of Tooltip.
   */
   set vModel (val) {
-    const isVisible = Boolean(val)
-    if (isVisible) {
-      this.setAttribute('v-model', true)
-    } else {
-      this.setAttribute('v-model', false)
-    }
+    this.setAttribute('v-model', val)
   }
 
   /**
@@ -515,7 +510,7 @@ class CoreTooltip extends window.HTMLElement {
         break
       case 'v-model':
         // Set visibility of tooltip
-        if (hasValue && Boolean(newValue) === true) {
+        if (hasValue && Boolean(newValue)) {
           this.setAttribute('v-model', true)
           this.text.style.setProperty('opacity', '1')
         } else {
