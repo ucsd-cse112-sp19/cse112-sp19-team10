@@ -388,6 +388,7 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('score-template', val)
   }
 
+  // Sets default values for attributes.
   connectedCallback () {
     if (!this.hasAttribute('v-model')) {
       this.setAttribute('v-model', 0)
@@ -469,18 +470,21 @@ class CoreRate extends window.HTMLElement {
     this.addEventListener('click', this._onClick)
   }
 
+  // Gets the attribute values when they change.
   static get observedAttributes () {
     return ['v-model', 'disabled', 'low-threshold', 'high-threshold', 'colors', 'void-color', 'disabled-void-color', 'icon-classes', 'void-icon-class', 'disabled-void-icon-class', 'show-text', 'show-score', 'text-color', 'texts', 'score-template']
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
     var i
+    // Check stars based on v-model
     if (this.hasAttribute('v-model')) {
       var numStars = this.getAttribute('v-model')
       for (i = 0; i < numStars; i++) {
         this.radio[this.radio.length - numStars].setAttribute('checked', true)
       }
     }
+    // Set disabled
     if (this.hasAttribute('disabled')) {
       for (i = 0; i < this.radio.length; i++) {
         this.radio[i].setAttribute('disabled', true)
@@ -502,6 +506,7 @@ class CoreRate extends window.HTMLElement {
         this.icon[i].classList.add('high')
       }
     }
+    // Set colors
     if (this.hasAttribute('colors')) {
       var newColor1 = this.getAttribute('colors')
       var colors = newColor1.slice(1, newColor1.length - 1).split(',')
@@ -509,6 +514,7 @@ class CoreRate extends window.HTMLElement {
       this.colors1.setProperty('--mid-color', colors[1])
       this.colors1.setProperty('--high-color', colors[2])
     }
+    // Set void-color
     if (this.hasAttribute('void-color')) {
       var newColor2 = this.getAttribute('void-color')
       this.colors1.setProperty('--void-color', newColor2)
@@ -517,6 +523,7 @@ class CoreRate extends window.HTMLElement {
       var dVoid = this.getAttribute('disabled-void-color')
       this.colors1.setProperty('--void-color', dVoid)
     }
+    // Set icons
     if (this.hasAttribute('icon-classes')) {
       var newClass1 = this.getAttribute('icon-classes')
       for (i = 0; i < this.icon.length; i++) {
@@ -529,18 +536,21 @@ class CoreRate extends window.HTMLElement {
         this.icon[this.icon.length - i - 1].setAttribute('class', newClass2)
       }
     }
+    // Set disabled void icons
     if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
       var newClass3 = this.getAttribute('disabled-void-icon-class')
       for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
         this.icon[i].setAttribute('class', newClass3)
       }
     }
+    // Set score
     if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
        !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
       var scoreTemp = this.getAttribute('score-template')
       var score = this.getAttribute('v-model')
       this.text.innerHTML = score + scoreTemp
     }
+    // Set texts
     if (this.hasAttribute('show-text') && this.hasAttribute('texts') &&
        !this.hasAttribute('show-score')) {
       var texts = this.getAttribute('texts')
@@ -549,16 +559,19 @@ class CoreRate extends window.HTMLElement {
       this.textsArr[0] = this.textsArr[0].substr(2)
       this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
     }
+    // Set text-color
     if (this.hasAttribute('text-color')) {
       this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
     }
   }
 
+  // Update v-model and texts when rate is changed
   _onClick (event) {
     this._updateVmodel()
     this._updateTexts()
   }
 
+  // Update v-model value
   _updateVmodel () {
     if (this.disabled) {
       return
@@ -574,6 +587,7 @@ class CoreRate extends window.HTMLElement {
     this.setAttribute('v-model', numStars)
   }
 
+  // Update texts value
   _updateTexts () {
     var index = this.getAttribute('v-model')
     if (index !== 0 && this.textsArr) {
