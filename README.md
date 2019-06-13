@@ -35,9 +35,15 @@ The Shinobi Component Library (SCL) is a collection of meticulously built standa
 It can be overwhelming trying to learn everything on web components. We recommend our [short guide](docs/WebComponentGuide.md) and the included "Recommended Resources" section.
 
 ## Installation
-You can install Shinobi in two ways:  
+Each component of our library is encapsulated into one JavaScript file. You can add Shinobi by downloading and linking to the [source files](https://github.com/ucsd-cse112/cse112-sp19-team10/releases/download/v1.0/src.zip) in your project or by linking through a CDN.
+```
+<script src="https://cdn.jsdelivr.net/npm/shinobirockstar@1.0.0/src/core_rate.js"></script>
+```
+
+If you'd like to [contribute](#contributing) or read the source code, you can:
 - Install using `npm install shinobirockstar`  
-- Download the zip file
+- Download the zip file from Github
+- Clone the project using `git clone https://github.com/ucsd-cse112/cse112-sp19-team10.git`
 
 ## Getting Started
 Each component is named `core-COMPONENT_NAME`, where *COMPONENT_NAME* is the name of the component. Each component comes with default values allowing you to get started using just one simple line of code.
