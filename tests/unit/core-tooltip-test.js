@@ -648,4 +648,197 @@ describe('Testing core-tooltip', async () => {
     })
   })
 
+  context('core-tooltip attribute: enterable', async () => {
+    /*  Unit Testing for
+        Attribute: enterable
+        Description: whether the mouse can enter the tooltip
+        Type: boolean
+        Default: true
+
+        mapping:
+          false <-> no enterable attribute
+          true <-> '' or any string
+    */
+
+    it('with default value', async () => {
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('enterable')
+      assert.deepEqual(val, '')
+    })
+
+    it('Mapping Property -> Attribute with boolean', async () => {
+      await showroom.setProperty('enterable', false)
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, false)
+    })
+
+    it('Mapping Attribute -> Property with boolean', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('enterable', false)
+      const ele = await showroom.hasAttribute('enterable')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setAttribute('enterable', true)
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('enterable')
+      assert.deepEqual(val, true)
+    })
+
+    it('Mapping Property -> Attribute with valid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('enterable', false)
+      const ele = await showroom.hasAttribute('enterable')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setProperty('enterable', 'true')
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('enterable')
+      assert.deepEqual(val, '')
+    })
+
+    it('Mapping Attribute -> Property with valid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('enterable', false)
+      const ele = await showroom.hasAttribute('enterable')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setAttribute('enterable', '')
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('enterable')
+      assert.deepEqual(val, true)
+    })
+
+    it('Mapping Property -> Attribute with invalid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('enterable', false)
+      const ele = await showroom.hasAttribute('enterable')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setProperty('enterable', '123')
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('enterable')
+      assert.deepEqual(val, '')
+    })
+
+    it('Mapping Attribute -> Property with invalid string', async () => {
+      // remove the attribute to reset it
+      await showroom.setProperty('enterable', false)
+      const ele = await showroom.hasAttribute('enterable')
+      assert.deepEqual(ele, false)
+
+      // checking mapping
+      await showroom.setAttribute('enterable', '123')
+      const att = await showroom.hasAttribute('enterable')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('enterable')
+      assert.deepEqual(val, true)
+    })
+  })
+
+  context('Testing core-switch attribute: tabindex', async () => {
+    /*  Unit Testing for
+        Attribute: tabindex
+        Description: tabindex of Tooltip
+        Type: number
+        Default: 0
+    
+        tabindex indicates if its element can be focused and if/where it 
+        participates in sequential keyboard navigation
+    */
+    it('with default value', async () => {
+      const att = await showroom.hasAttribute('tabindex')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('tabindex')
+      assert.deepEqual(val, '0')
+    })
+
+    // it('Mapping Attribute -> Property with valid string', async () => {
+    //   await showroom.setAttribute('tabindex', '123')
+    //   const att = await showroom.hasAttribute('tabindex')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('tabindex')
+    //   assert.deepEqual(val, '123')
+    // })
+
+    // it('Mapping Attribute -> Property with valid string', async () => {
+    //   await showroom.setAttribute('tabindex', '456')
+    //   const att = await showroom.hasAttribute('tabindex')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('tabindex')
+    //   assert.deepEqual(val, '456')
+    // })
+  })
+
+  context('Testing core-switch attribute: open-delay', async () => {
+    /*  Unit Testing for
+        Attribute: open-delay
+        Description: delay of appearance, in millisecond
+        Type: number
+        Default: 0
+    */
+
+    it('with default value', async () => {
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      const val = await showroom.getAttribute('open-delay')
+      assert.deepEqual(val, '0')
+    })
+
+    it('Mapping Attribute -> Property with valid string', async () => {
+      await showroom.setAttribute('open-delay', '123')
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('openDelay')
+      assert.deepEqual(val, '123')
+    })
+
+    it('Mapping Attribute -> Property with valid string', async () => {
+      await showroom.setAttribute('open-delay', '456')
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('openDelay')
+      assert.deepEqual(val, '456')
+    })
+
+    it('Mapping Attribute -> Property with number', async () => {
+      await showroom.setAttribute('open-delay', 789)
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('openDelay')
+      assert.deepEqual(val, '789')
+    })
+
+    it('Mapping Attribute -> Property with number', async () => {
+      await showroom.setAttribute('open-delay', 123)
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('openDelay')
+      assert.deepEqual(val, '123')
+    })
+
+    // it('Mapping Attribute -> Property with boolean', async () => {
+    //   await showroom.setAttribute('open-delay', true)
+    //   const att = await showroom.hasAttribute('open-delay')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('openDelay')
+    //   assert.deepEqual(val, '0')
+    // })
+
+    // it('Mapping Attribute -> Property with boolean', async () => {
+    //   await showroom.setAttribute('open-delay', false)
+    //   const att = await showroom.hasAttribute('open-delay')
+    //   assert.deepEqual(att, true)
+    //   const val = await showroom.getProperty('openDelay')
+    //   assert.deepEqual(val, '0')
+    // })
+  })
 })
