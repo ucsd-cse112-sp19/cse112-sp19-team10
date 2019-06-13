@@ -483,4 +483,5 @@ class CoreSwitch extends window.HTMLElement {
   }
 }
 
+// Connect class to 'core-hello' custom element
 window.customElements.define('core-switch', CoreSwitch)
