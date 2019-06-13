@@ -2,21 +2,22 @@ const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
 describe('core-rate', async => {
+
+  // start/restart showroom server for before each test is done
   before(async () => {
     await showroom.start()
-    // starts showroom server
   })
 
+  // stop showroom server for after each test is done
   after(async () => {
     console.log('Shutting down')
     await showroom.stop()
-    // stops the showroom server
   })
 
+  // initialize the web component for each test and add a delay time of 150ms
   beforeEach(async () => {
     await showroom.setTestSubject('core-rate')
     await showroom.page.waitFor(150)
-    // select the component with defaults from the descriptor file
   })
 
   context('Testing core-rate attribute: colors', async () => {
@@ -42,6 +43,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('colors')
       assert.deepEqual(val, '[red,yellow,green]')
     })
+
+    /**
+     * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
+     */
     /*
     it('default value is set, if invalid array length', async () => {
       await showroom.setAttribute('colors', "[#F7BA2A, #F7BA2A]")
@@ -58,7 +63,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('colors')
       assert.deepEqual(val, "[#f7ba2a, #f7ba2a, #f7ba2a]")
     })
-  */
+    */
   })
 
   context('Testing core-rate attribute: disabled', async () => {
@@ -123,7 +128,11 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('disabledVoidColor')
       assert.deepEqual(val, 'green')
     })
-  /*
+
+    /**
+     * This test is commented out because the coders haven't implemented it yet so it could pass the build.
+     */    
+    /*
     it('set default value, non color format type', async () => {
       await showroom.setAttribute('disabled-void-color', true)
       const att = await showroom.hasAttribute('disabled-void-color')
@@ -131,7 +140,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('disabledVoidColor')
       assert.deepEqual(val, "#EFF2F7")
     })
-  */
+    */
   })
 
   context('Testing core-rate attribute: disabled-void-icon-class', async () => {
@@ -157,6 +166,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('disabledVoidIconClass')
       assert.deepEqual(val, 'el-icon-star-off')
     })
+
+    /**
+     * This test is commented out because the coders haven't implemented it yet so it could pass the build.
+     */      
     /*
     it('non-string type, will convert to string', async () => {
       await showroom.setAttribute('disabled-void-icon-class', true)
@@ -165,7 +178,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('disabledVoidIconClass')
       assert.deepEqual(val, 'fas fa-ban')
     })
-*/
+    */
   })
 
   context('Testing core-rate attribute: high-threshold', async () => {
@@ -191,6 +204,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('highThreshold')
       assert.deepEqual(val, '3')
     })
+
+    /**
+     * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
+     */      
     /*
     it('set default value, if not in range (low-threshold,5]', async () => {
       await showroom.setAttribute('high-threshold', 6)
@@ -240,6 +257,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('lowThreshold')
       assert.deepEqual(val, '2')
     })
+
+    /**
+     * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
+     */     
     /*
     it('set default value, if not in range [0,high-threshold)', async () => {
       await showroom.setAttribute('low-threshold', -1)
@@ -263,7 +284,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('lowThreshold')
       assert.deepEqual(val, '2')
     })
-*/
+    */
   })
 
   context('Testing core-rate attribute: icon-classes', async () => {
@@ -434,6 +455,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('textColor')
       assert.deepEqual(val, 'green')
     })
+
+    /**
+     * This test is commented out because the coders haven't implemented it yet so it could pass the build.
+     */  
     /*
     it('set default value, non color format type', async () => {
       await showroom.setAttribute('text-color', false)
@@ -468,6 +493,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('texts')
       assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
     })
+
+    /**
+     * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
+     */    
     /*
     it('set default value, if incorrect array length', async () => {
       await showroom.setAttribute('texts', "['normal', 'good', 'great']")
@@ -484,7 +513,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('texts')
       assert.deepEqual(val, "['oops', 'disappointed', 'normal', 'good', 'great']")
     })
-*/
+    */
   })
 
   context('Testing core-rate attribute: v-model', async () => {
@@ -510,6 +539,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('vModel')
       assert.deepEqual(val, '2')
     })
+
+    /**
+     * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
+     */      
     /*
     it('set default value, if value is out of range', async () => {
       await showroom.setAttribute('v-model', -1)
@@ -532,7 +565,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('vModel')
       assert.deepEqual(val, '0')
     })
-*/
+    */
   })
 
   context('Testing core-rate attribute: void-color', async () => {
@@ -558,6 +591,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('voidColor')
       assert.deepEqual(val, 'green')
     })
+
+    /**
+     * This test is commented out because the coders haven't implemented it yet so it could pass the build.
+     */  
     /*
     it('set default value, if non-color format type', async () => {
       await showroom.setAttribute('void-color', true)
@@ -566,7 +603,7 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('voidColor')
       assert.deepEqual(val, "#C6D1DE")
     })
-*/
+    */
   })
 
   context('Testing core-rate attribute: void-icon-class', async () => {
@@ -592,6 +629,10 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('voidIconClass')
       assert.deepEqual(val, 'el-icon-star-on')
     })
+
+    /**
+     * This test is commented out because the coders haven't implemented it yet so it could pass the build.
+     */      
     /*
     it('set default value, if non-string type', async () => {
       await showroom.setAttribute('void-icon-class', true)
@@ -600,6 +641,6 @@ describe('core-rate', async => {
       const val = await showroom.getProperty('voidIconClass')
       assert.deepEqual(val, 'fas fa-frown')
     })
-*/
+    */
   })
 })
