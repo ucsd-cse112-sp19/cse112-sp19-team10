@@ -4,7 +4,6 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "dev": "run-when-changed --watch 'src/core_hello.js' --watch 'tests/unit/core-hello-test.js' --exec 'mocha tests/unit/core-switch-test.js --exit --timeout 20000' --watch 'src/core_switch.js' --watch 'tests/unit/core-switch-test.js' --exec 'mocha tests/unit/core-rate-test.js --exit --timeout 20000' --watch 'src/core_rate.js' --watch 'tests/unit/core-rate-test.js' --exec 'mocha tests/unit/core-hello-test.js --exit --timeout 20000'",
     "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
     "unitTest:switch": "npx mocha tests/unit/core-switch-test.js --exit --timeout 20000",
     "unitTest:rate": "npx mocha tests/unit/core-rate-test.js --exit --timeout 20000",
@@ -46,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run dev && npm run lint && documentation build src/ -f html -o docs"
+      "pre-commit": "npm run test && npm run lint && documentation build src/ -f html -o docs"
     }
   },
   "devDependencies": {
@@ -59,7 +58,6 @@
     "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
     "puppeteer": "^1.16.0",
-    "run-when-changed": "^2.1.0",
     "showroom": "^0.9.3",
     "standard": "^12.0.1",
     "testcafe": "^1.1.4",
