@@ -111,26 +111,50 @@ class CoreRate extends window.HTMLElement {
     this.text = shadowRoot.querySelector('.text')
   }
 
+  /**
+  * This function gets the value of the v-model attribute.
+  * @returns {integer} value of the v-model attribute.
+  */
   get vModel () {
     return this.getAttribute('v-model')
   }
 
+  /**
+  * This function sets the value of the v-model attribute.
+  * @param {integer} val - value of the v-model attribute.
+  */
   set vModel (val) {
     this.setAttribute('v-model', val)
   }
 
+  /**
+  * This function gets the value of the max attribute.
+  * @returns {integer} max rating score.
+  */
   get max () {
     return this.getAttribute('max')
   }
 
+  /**
+  * This function sets the value of the max attribute.
+  * @param {integer} val - max rating score.
+  */
   set max (val) {
     this.setAttribute('max', 5)
   }
 
+  /**
+  * This function gets the value of the disabled attribute.
+  * @returns {Boolean} whether Rate is read-only.
+  */
   get disabled () {
     return this.hasAttribute('disabled')
   }
 
+  /**
+  * This function sets the value of the disabled attribute.
+  * @param {Boolean} val - whether Rate is read-only.
+  */
   set disabled (val) {
     const isDisabled = Boolean(val)
     if (isDisabled) {
@@ -140,74 +164,152 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  /**
+  * This function gets the value of the low-threshold attribute.
+  * @returns {integer} threshold value between low and medium level.
+  * The value itself will be included in low level.
+  */
   get lowThreshold () {
     return this.getAttribute('low-threshold')
   }
 
+  /**
+  * This function sets the value of the low-threshold attribute.
+  * @param {integer} threshold value between low and medium level.
+  * The value itself will be included in low level.
+  */
   set lowThreshold (val) {
     this.setAttribute('low-threshold', val)
   }
 
+  /**
+  * This function gets the value of the high-threshold attribute.
+  * @returns {integer} threshold value between medium and high level.
+  * The value itself will be included in high level.
+  */
   get highThreshold () {
     return this.getAttribute('high-threshold')
   }
 
+  /**
+  * This function sets the value of the high-threshold attribute.
+  * @param {integer} threshold value between medium and high level.
+  * The value itself will be included in high level.
+  */
   set highThreshold (val) {
     this.setAttribute('high-threshold', val)
   }
 
+  /**
+  * This function gets the value of the colors attribute.
+  * @returns {array} array of colors for icons.
+  */
   get colors () {
     return this.getAttribute('colors')
   }
 
+  /**
+  * This function sets the value of the colors attribute.
+  * @param {array} val - this is an array of colors for icons,
+  * it should have 3 elements each of which corresponds with a score level.
+  */
   set colors (val) {
     this.setAttribute('colors', val)
   }
 
+  /**
+  * This function gets the value of the void-color attribute.
+  * @returns {color} color of unselected icons.
+  */
   get voidColor () {
     return this.getAttribute('void-color')
   }
 
+  /**
+  * This function sets the value of the void-color attribute.
+  * @param {color} val - color of unselected icons.
+  */
   set voidColor (val) {
     this.setAttribute('void-color', val)
   }
 
+  /**
+  * This function gets the value of the disabled-void-color attribute.
+  * @returns {color} color of unselected read-only icons.
+  */
   get disabledVoidColor () {
     return this.getAttribute('disabled-void-color')
   }
 
+  /**
+  * This function sets the value of the disabled-void-color attribute.
+  * @param {color} val - color of unselected read-only icons.
+  */
   set disabledVoidColor (val) {
     this.setAttribute('disabled-void-color', val)
   }
 
+  /**
+  * This function gets the value of the icon-classes attribute.
+  * @returns {array} array of class names of icons.
+  */
   get iconClasses () {
     return this.getAttribute('icon-classes')
   }
 
+  /**
+  * This function sets the value of the icon-classes attribute.
+  * @param {array} val - array of class names of icons, it should have 3
+  * elements each of which corresponds with a score level.
+  */
   set iconClasses (val) {
     this.setAttribute('icon-classes', val)
   }
 
+  /**
+  * This function gets the value of the void-icon-class attribute.
+  * @returns {String} class name of unselected icons.
+  */
   get voidIconClass () {
     return this.getAttribute('void-icon-class')
   }
 
+  /**
+  * This function sets the value of the void-icon-class attribute.
+  * @param {String} val - class name of unselected icons.
+  */
   set voidIconClass (val) {
     this.setAttribute('void-icon-class', val)
   }
 
+  /**
+  * This function gets the value of the disabled-void-icon-class attribute.
+  * @returns {String} class name of unselected read-only icons.
+  */
   get disabledVoidIconClass () {
     return this.getAttribute('disabled-void-icon-class')
   }
 
+  /**
+  * This function sets the value of the disabled-void-icon-class attribute.
+  * @param {String} val - class name of unselected read-only icons.
+  */
   set disabledVoidIconClass (val) {
     this.setAttribute('disabled-void-icon-class', val)
   }
 
+  /**
+  * This function gets the value of the show-text attribute.
+  * @returns {Boolean} whether to display texts.
+  */
   get showText () {
     return this.hasAttribute('show-text')
   }
 
+  /**
+  * This function sets the value of the show-text attribute.
+  * @param {Boolean} val - whether to display texts.
+  */
   set showText (val) {
     if (val) {
       this.setAttribute('show-text', '')
@@ -216,10 +318,20 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  /**
+  * This function gets the value of the show-score attribute.
+  * @returns {Boolean} whether to display current score. show-score and
+  * show-text cannot be true at the same time.
+  */
   get showScore () {
     return this.hasAttribute('show-score')
   }
 
+  /**
+  * This function sets the value of the show-score attribute.
+  * @param {Boolean} val - whether to display current score. show-score and
+  * show-text cannot be true at the same time.
+  */
   set showScore (val) {
     if (val) {
       this.setAttribute('show-score', '')
@@ -228,26 +340,50 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  /**
+  * This function gets the value of the text-color attribute.
+  * @returns {color} color of texts.
+  */
   get textColor () {
     return this.getAttribute('text-color')
   }
 
+  /**
+  * This function sets the value of the text-color attribute.
+  * @param {color} val - color of texts.
+  */
   set textColor (val) {
     this.setAttribute('text-color', val)
   }
 
+  /**
+  * This function gets the value of the texts attribute.
+  * @returns {array} text array.
+  */
   get texts () {
     return this.getAttribute('texts')
   }
 
+  /**
+  * This function sets the value of the texts attribute.
+  * @param {array} val - text array.
+  */
   set texts (val) {
     this.setAttribute('texts', val)
   }
 
+  /**
+  * This function gets the value of the score-template attribute.
+  * @returns {String} score template.
+  */
   get scoreTemplate () {
     return this.getAttribute('score-template')
   }
 
+  /**
+  * This function sets the value of the score-template attribute.
+  * @param {String} val - score template.
+  */
   set scoreTemplate (val) {
     this.setAttribute('score-template', val)
   }
@@ -385,11 +521,6 @@ class CoreRate extends window.HTMLElement {
       var newClass1 = this.getAttribute('icon-classes')
       for (i = 0; i < this.icon.length; i++) {
         this.icon[i].setAttribute('class', newClass1)
-      }
-    }
-    if (this.hasAttribute('disabled')) {
-      for (i = 0; i < this.radio.length; i++) {
-        this.radio[i].setAttribute('disabled', true)
       }
     }
     if (this.hasAttribute('void-icon-class')) {

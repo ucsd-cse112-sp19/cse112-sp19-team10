@@ -10,7 +10,11 @@
                 margin:50%;
             }
         </style>
-
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="rate_group">
@@ -22,5 +26,26 @@
             <core-rate score-template=" points" show-score></core-rate>
             <core-rate texts="['oops', 'disappointed', 'normal', 'good', 'great']" show-text text-color="green"></core-rate>
         </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div style="text-align: center" class="col-sm-6">Resize window for Bootstrap integration!</div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm text-center">
+                     <core-rate></core-rate>
+                </div>
+                <div class="col-sm text-center">
+                    <core-rate></core-rate>
+                </div>
+                <div class="col-sm text-center">
+                    <core-rate></core-rate>
+                </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
