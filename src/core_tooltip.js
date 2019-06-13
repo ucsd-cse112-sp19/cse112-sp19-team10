@@ -398,7 +398,6 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('tabindex', val)
   }
 
-
   // Sets default values for attributes.
   connectedCallback () {
     // Set default effect to dark if not present or invalid
