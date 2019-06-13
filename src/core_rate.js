@@ -109,6 +109,9 @@ class CoreRate extends window.HTMLElement {
     this.radio = shadowRoot.querySelectorAll('input[type=radio]')
     // Place holder for text
     this.text = shadowRoot.querySelector('.text')
+
+    // onclick event listener
+    this.addEventListener('click', this._onClick)
   }
 
   /**
@@ -382,75 +385,38 @@ class CoreRate extends window.HTMLElement {
     if (!this.hasAttribute('low-threshold')) {
       this.setAttribute('low-threshold', 2)
     }
-    if (this.hasAttribute('low-threshold') && isNaN(this.getAttribute('low-threshold'))) {
-      this.setAttribute('low-threshold', 2)
-    }
     // Set default high-threshold to 4
     if (!this.hasAttribute('high-threshold')) {
       this.setAttribute('high-threshold', 4)
     }
-    if (this.hasAttribute('high-threshold') && isNaN(this.getAttribute('high-threshold'))) {
-      this.setAttribute('high-threshold', 4)
-    }
+    // Set default colors to '[#F7BA2A,#F7BA2A,#F7BA2A]'
     if (!this.hasAttribute('colors')) {
       this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
     }
-    if (this.hasAttribute('colors')) {
-      var colors = this.getAttribute('colors').slice(1, this.getAttribute('colors').length - 1).split(',')
-      if (!this.validColor(colors[0])) {
-        colors[0] = '#F7BA2A'
-      }
-      if (!this.validColor(colors[1])) {
-        colors[1] = '#F7BA2A'
-      }
-      if (!this.validColor(colors[2])) {
-        colors[2] = '#F7BA2A'
-      }
-      this.setAttribute('colors', '[' + colors[0] + ',' + colors[1] + ',' + colors[2] + ']')
-    }
-    if (!this.hasAttribute('icon-classes')) {
-      this.setAttribute('icon-classes', 'fas fa-star')
-    }
-    if (!this.hasAttribute('score-template')) {
-      this.setAttribute('score-template', ' points')
-    }
-    if (this.hasAttribute('show-score')) {
-      this.setAttribute('show-score', '')
-    }
-    if (!this.hasAttribute('texts')) {
-      this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
-    }
-    if (this.hasAttribute('show-text')) {
-      this.setAttribute('show-text', '')
-    }
+    // Set default void-color to #C6D1DE
     if (!this.hasAttribute('void-color')) {
       this.setAttribute('void-color', '#C6D1DE')
     }
-    if (this.hasAttribute('void-color')) {
-      if (!this.validColor(this.getAttribute('void-color'))) {
-        this.setAttribute('void-color', '#C6D1DE')
-      }
-    }
+    // Set default disabled-void-color to disabled-void-color
     if (!this.hasAttribute('disabled-void-color')) {
       this.setAttribute('disabled-void-color', '#C6D1DE')
     }
-    if (this.hasAttribute('disabled-void-color')) {
-      if (!this.validColor(this.getAttribute('disabled-void-color'))) {
-        this.setAttribute('disabled-void-color', '#C6D1DE')
-      }
+    // Set default icon classes to stars
+    if (!this.hasAttribute('icon-classes')) {
+      this.setAttribute('icon-classes', 'fas fa-star')
     }
+    // Set default text color to #1F2D3D
     if (!this.hasAttribute('text-color')) {
       this.setAttribute('text-color', '#1F2D3D')
     }
-    if (this.hasAttribute('text-color')) {
-      if (!this.validColor(this.getAttribute('text-color'))) {
-        this.setAttribute('text-color', '#1F2D3D')
-      }
+    // Set default texts
+    if (!this.hasAttribute('texts')) {
+      this.setAttribute('texts', "['oops','disappointed','normal','good','great']")
     }
-    if (this.hasAttribute('disabled')) {
-      this.setAttribute('disabled', '')
+    // Set default scort template to ' points'
+    if (!this.hasAttribute('score-template')) {
+      this.setAttribute('score-template', ' points')
     }
-    this.addEventListener('click', this._onClick)
   }
 
   // Gets the attribute values when they change.
@@ -460,87 +426,127 @@ class CoreRate extends window.HTMLElement {
 
   attributeChangedCallback (name, oldValue, newValue) {
     var i
-    // Check stars based on v-model
-    if (this.hasAttribute('v-model') && !isNaN(newValue)) {
-      var numStars = Number(newValue)
-      for (i = 0; i < numStars; i++) {
-        this.radio[this.radio.length - numStars].setAttribute('checked', true)
-      }
-    } else {
-      this.setAttribute('v-model', 0)
-    }
-    if (this.hasAttribute('low-threshold') || this.hasAttribute('high-threshold')) {
-      var low = parseInt(this.getAttribute('low-threshold'))
-      var high = parseInt(this.getAttribute('high-threshold'))
-      for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
-        this.radio[i].classList.add('low')
-        this.icon[i].classList.add('low')
-      }
-      for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
-        this.radio[i].classList.add('mid')
-        this.icon[i].classList.add('mid')
-      }
-      for (i = this.radio.length - high; i >= 0; i--) {
-        this.radio[i].classList.add('high')
-        this.icon[i].classList.add('high')
-      }
-    }
-    // Set colors
-    if (this.hasAttribute('colors')) {
-      var newColor1 = this.getAttribute('colors')
-      var colors = newColor1.slice(1, newColor1.length - 1).split(',')
-      this.colors1.setProperty('--low-color', colors[0])
-      this.colors1.setProperty('--mid-color', colors[1])
-      this.colors1.setProperty('--high-color', colors[2])
-    }
-    // Set void-color
-    if (this.hasAttribute('void-color')) {
-      var newColor2 = this.getAttribute('void-color')
-      this.colors1.setProperty('--void-color', newColor2)
-    }
-    if (this.hasAttribute('disabled-void-color') && this.hasAttribute('disabled')) {
-      var dVoid = this.getAttribute('disabled-void-color')
-      this.colors1.setProperty('--void-color', dVoid)
-    }
-    // Set icons
-    if (this.hasAttribute('icon-classes')) {
-      var newClass1 = this.getAttribute('icon-classes')
-      for (i = 0; i < this.icon.length; i++) {
-        this.icon[i].setAttribute('class', newClass1)
-      }
-    }
-    if (this.hasAttribute('void-icon-class')) {
-      var newClass2 = this.getAttribute('void-icon-class')
-      for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
-        this.icon[this.icon.length - i - 1].setAttribute('class', newClass2)
-      }
-    }
-    // Set disabled void icons
-    if (this.hasAttribute('disabled-void-icon-class') && this.hasAttribute('disabled')) {
-      var newClass3 = this.getAttribute('disabled-void-icon-class')
-      for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
-        this.icon[i].setAttribute('class', newClass3)
-      }
-    }
-    // Set score
-    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
-       !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
-      var scoreTemp = this.getAttribute('score-template')
-      var score = this.getAttribute('v-model')
-      this.text.innerHTML = score + scoreTemp
-    }
-    // Set texts
-    if (this.hasAttribute('show-text') && this.hasAttribute('texts') &&
-       !this.hasAttribute('show-score')) {
-      var texts = this.getAttribute('texts')
-      this.textsArr = texts.split("', '")
-      var length = this.textsArr.length
-      this.textsArr[0] = this.textsArr[0].substr(2)
-      this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
-    }
-    // Set text-color
-    if (this.hasAttribute('text-color')) {
-      this.text.style.setProperty('--text-color', this.getAttribute('text-color'))
+    switch (name) {
+      case 'v-model':
+        // Check stars based on v model
+        if (this.hasAttribute('v-model') && !isNaN(newValue)) {
+          var numStars = Number(newValue)
+          for (i = 0; i < numStars; i++) {
+            this.radio[this.radio.length - numStars].setAttribute('checked', true)
+          }
+        } else {
+          this.setAttribute('v-model', 0)
+        }
+        break;
+      case 'disabled':
+        // Set disabled
+        this.updateDisabled()
+        break
+      case 'low-threshold':
+        // Set low threshold
+        if (this.hasAttribute('low-threshold') && !isNaN(newValue)) {
+          this.updateThreshold()
+        } else {
+          this.setAttribute('low-threshold', 2)
+        }
+        break
+      case 'high-threshold':
+        // Set high threshold
+        if (this.hasAttribute('high-threshold') && !isNaN(newValue)) {
+          this.updateThreshold()
+        } else {
+          this.setAttribute('high-threshold', 4)
+        }
+        break
+      case 'colors':
+        // Set colors
+        var colors = newValue.slice(1, newValue.length - 1).split(',')
+        if (this.hasAttribute('colors') && (colors.length === 3)) {
+          if (!this.validColor(colors[0])) {
+            colors[0] = '#F7BA2A'
+          }
+          if (!this.validColor(colors[1])) {
+            colors[1] = '#F7BA2A'
+          }
+          if (!this.validColor(colors[2])) {
+            colors[2] = '#F7BA2A'
+          }
+          this.colors1.setProperty('--low-color', colors[0])
+          this.colors1.setProperty('--mid-color', colors[1])
+          this.colors1.setProperty('--high-color', colors[2])
+        } else {
+          this.setAttribute('colors', '[#F7BA2A,#F7BA2A,#F7BA2A]')
+        }
+        break
+      case 'void-color':
+        // Set void color
+        if (this.hasAttribute('void-color') && this.validColor(newValue)) {
+          var newColor2 = this.getAttribute('void-color')
+          this.colors1.setProperty('--void-color', newColor2)
+        } else {
+          this.setAttribute('void-color', '#C6D1DE')
+        }
+        break
+      case 'disabled-void-color':
+        // Set disabled void color
+        this.updateDisabled()
+        break
+      case 'icon-classes':
+        // Set icons
+        if (this.hasAttribute('icon-classes')) {
+          for (i = 0; i < this.icon.length; i++) {
+            this.icon[i].setAttribute('class', newValue)
+          }
+        }
+        break
+      case 'void-icon-class':
+        // Set void icon class
+        if (this.hasAttribute('void-icon-class')) {
+          for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
+            this.icon[this.icon.length - i - 1].setAttribute('class', newValue)
+          }
+        }
+        break
+      case 'disabled-void-icon-class':
+        // Set disabled void icon class
+        this.updateDisabled()
+        break
+      case 'show-text':
+        // Set show text
+        if (this.hasAttribute('show-text') && newValue === '') {
+          this.updateShow()
+        } else if (this.hasAttribute('show-text')) {
+          this.setAttribute('show-text', '')
+        } else {
+          this.removeAttribute('show-text')
+        } 
+        break
+      case 'show-score':
+        //Set show score
+        if (this.hasAttribute('show-score') && newValue === '') {
+          this.updateShow()
+        } else if (this.hasAttribute('show-score')) {
+          this.setAttribute('show-score', '')
+        } else {
+          this.removeAttribute('show-score')
+        } 
+        break
+      case 'text-color':
+        // Set text-color
+        if (this.hasAttribute('text-color') && this.validColor(newValue)) {
+          this.text.style.setProperty('--text-color', newValue)
+        } else {
+          this.setAttribute('text-color', '#1F2D3D')
+        }
+        break
+      case 'texts':
+        // Set texts
+        this.updateShow()
+        break
+      case 'score-template':
+        // Set score template
+        this.updateShow()
+        break
     }
   }
 
@@ -574,6 +580,71 @@ class CoreRate extends window.HTMLElement {
     }
   }
 
+  updateThreshold() {
+    var i
+    var low = parseInt(this.getAttribute('low-threshold'))
+    var high = parseInt(this.getAttribute('high-threshold'))
+    for (i = this.radio.length - 1; i >= this.radio.length - low; i--) {
+      this.radio[i].classList.add('low')
+      this.icon[i].classList.add('low')
+    }
+    for (i = this.radio.length - low - 1; i > this.radio.length - high; i--) {
+      this.radio[i].classList.add('mid')
+      this.icon[i].classList.add('mid')
+    }
+    for (i = this.radio.length - high; i >= 0; i--) {
+      this.radio[i].classList.add('high')
+      this.icon[i].classList.add('high')
+    }
+  }
+
+  updateDisabled() {
+    var i
+    // Set disabled
+    if (this.hasAttribute('disabled') && this.getAttribute('disabled') === '') {
+      for (i = 0; i < this.radio.length; i++) {
+        this.radio[i].setAttribute('disabled', true)
+      }
+      // Set disabled void color
+      if (this.hasAttribute('disabled-void-color') && this.validColor(this.getAttribute('disabled-void-color'))) {
+        this.colors1.setProperty('--void-color', this.getAttribute('disabled-void-color'))
+      } else {
+        this.setAttribute('disabled-void-color', '#C6D1DE')
+      }
+      // Set disabled void icons
+      console.log(this.getAttribute('disabled-void-icon-class'))
+      if (this.hasAttribute('disabled-void-icon-class')) {
+        for (i = 0; i < this.getAttribute('v-model') - 1; i++) {
+          this.icon[i].setAttribute('class', this.getAttribute('disabled-void-icon-class'))
+        }
+      }
+    } else if (this.hasAttribute('disabled')) {
+      this.setAttribute('disabled', '')
+    } else {
+      this.removeAttribute('disabled')
+    }
+   
+  }
+
+  updateShow() {
+    // Set score
+    if (this.hasAttribute('show-score') && this.hasAttribute('score-template') &&
+       !this.hasAttribute('show-text') && (this.getAttribute('show-score') === '')) {
+      var scoreTemp = this.getAttribute('score-template')
+      var score = this.getAttribute('v-model')
+      this.text.innerHTML = score + scoreTemp
+    }
+    // Set texts
+    if (this.hasAttribute('show-text') && this.hasAttribute('texts') &&
+       !this.hasAttribute('show-score')) {
+      var texts = this.getAttribute('texts')
+      this.textsArr = texts.split("', '")
+      var length = this.textsArr.length
+      this.textsArr[0] = this.textsArr[0].substr(2)
+      this.textsArr[length - 1] = this.textsArr[length - 1].substr(0, length)
+    }
+  }
+
   // Check if string is a color
   validColor (stringToTest) {
     if (stringToTest === '') { return false }
@@ -588,4 +659,5 @@ class CoreRate extends window.HTMLElement {
   }
 }
 
+// Connect class to 'core-rate' custom element
 window.customElements.define('core-rate', CoreRate)
