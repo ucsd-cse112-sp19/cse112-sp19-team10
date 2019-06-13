@@ -4,8 +4,8 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
+    "dev": "run-when-changed --watch '**/src/core_hello.js' --exec 'unitTest:hello' && run-when-changed --watch '**/tests/unit/core-hello-test.js' --exec 'unitTest:hello' && run-when-changed --watch '**/src/core_switch.js' --exec 'unitTest:switch' && run-when-changed --watch '**/tests/unit/core-switch-test.js' --exec 'unitTest:switch' && run-when-changed --watch '**/src/core_rate.js' --exec 'unitTest:rate' && run-when-changed --watch '**/tests/unit/core-rate-test.js' --exec 'unitTest:rate'",
     "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
-    "pretest": "run-when-changed --watch '**/src/core_hello.js' --exec 'unitTest:hello' && run-when-changed --watch '**/tests/unit/core-hello-test.js' --exec 'unitTest:hello' && run-when-changed --watch '**/src/core_switch.js' --exec 'unitTest:switch' && run-when-changed --watch '**/tests/unit/core-switch-test.js' --exec 'unitTest:switch' && run-when-changed --watch '**/src/core_rate.js' --exec 'unitTest:rate' && run-when-changed --watch '**/tests/unit/core-rate-test.js' --exec 'unitTest:rate'",
     "unitTest:switch": "npx mocha tests/unit/core-switch-test.js --exit --timeout 20000",
     "unitTest:rate": "npx mocha tests/unit/core-rate-test.js --exit --timeout 20000",
     "unitTest:hello": "npx mocha tests/unit/core-hello-test.js --exit --timeout 20000",
@@ -46,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run pretest && npm run lint && documentation build src/ -f html -o docs"
+      "pre-commit": "npm run dev && npm run lint && documentation build src/ -f html -o docs"
     }
   },
   "devDependencies": {
