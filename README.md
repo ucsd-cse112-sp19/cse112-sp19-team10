@@ -3,9 +3,9 @@
 <a href="https://github.com/DevExpress/testcafe"><img alt="Tested with TestCafe" src="https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg"></a> [![Maintainability](https://api.codeclimate.com/v1/badges/a964c0b0f9918af7aefd/maintainability)](https://codeclimate.com/repos/5cc0c0aa5014ac306c010419/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/a964c0b0f9918af7aefd/test_coverage)](https://codeclimate.com/repos/5cc0c0aa5014ac306c010419/test_coverage)
 ---
 
-## A project by Team Rockstar Ninjas  
+## A project by Team Rockstar Ninjas
 The Shinobi Component Library (SCL) is a collection of meticulously built standard web components for you to use in any web project.  
-<img src="img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="300px"/>
+<img src="docs/img/rockstar_ninja.PNG" title="Team Logo" alt="Team Logo" width="300px"/>
 
 ## Installation
 You can install Shinobi in two ways:  
