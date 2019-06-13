@@ -17,6 +17,7 @@ Below is an example of what the repo should look like
 ├── _config.yml
 ├── docs
 │   ├── Team.md
+│   ├── img
 │   ├── dev
 │   │   └── CodingStyle.md
 │   ├── index.html
@@ -26,7 +27,6 @@ Below is an example of what the repo should look like
 │   ├── rate.html
 │   ├── switch.html
 │   └── tooltip.html
-├── img
 ├── node_modules
 ├── package-lock.json
 ├── package.json
