@@ -285,7 +285,7 @@ class CoreTooltip extends window.HTMLElement {
   * @returns {Boolean} visibility of Tooltip.
   */
   get vModel () {
-    return this.getAttribute('v-model')
+    return this.hasAttribute('v-model')
   }
 
   /**
@@ -293,7 +293,13 @@ class CoreTooltip extends window.HTMLElement {
   * @param {Boolean} val - visibility of Tooltip.
   */
   set vModel (val) {
-    this.setAttribute('v-model', val)
+    const isVisible = Boolean(val)
+    if (isVisible) {
+      this.setAttribute('v-model', '')
+    } else {
+      this.removeAttribute('v-model')
+    }
+    // this.setAttribute('v-model', val)
   }
 
   /**
@@ -512,11 +518,12 @@ class CoreTooltip extends window.HTMLElement {
         break
       case 'v-model':
         // Set visibility of tooltip
-        if (hasValue && Boolean(newValue)) {
+        if (hasValue) {
+        // if (hasValue && Boolean(newValue)) {
           this.text.style.setProperty('opacity', '1')
         } else {
           this.text.style.setProperty('opacity', '0')
-          this.setAttribute('v-model', false)
+          // this.setAttribute('v-model', false)
         }
         break
       case 'open-delay':
