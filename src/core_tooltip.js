@@ -395,19 +395,15 @@ class CoreTooltip extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
-    if (this.hasAttribute('effect')) {
-      if (this.getAttribute('effect') !== 'dark' && this.getAttribute('effect') !== 'light') {
-        this.setAttribute('effect', 'dark')
-      }
+    // Set default effect to dark if not present or invalid
+    if (!this.hasAttribute('effect')) {
+      this.setAttribute('effect', 'dark')
     }
+    // Set default placement to bottom if not present or invalid
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
-    } else {
-      var places = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']
-      if (!places.includes(this.getAttribute('placement'))) {
-        this.setAttribute('placement', 'bottom')
-      }
     }
+    // Set default v-model to false
     if (this.hasAttribute('v-model')) {
       this.setAttribute('v-model', false)
     }
@@ -467,6 +463,7 @@ class CoreTooltip extends window.HTMLElement {
         } else {
           this.tooltip.setProperty('--background-color', '#303133')
           this.tooltip.setProperty('--text-color', '#fff')
+          this.setAttribute('effect', 'dark')
         }
         break
       case 'content':
@@ -474,9 +471,12 @@ class CoreTooltip extends window.HTMLElement {
         this.text.innerHTML = newValue
         break
       case 'placement':
+        // Set the placement attribute
+        // No change
         if (newValue === oldValue) {
           break
         }
+        // Remove oldValue classes
         if (oldValue === 'top' || oldValue === 'top-start' || oldValue === 'top-end') {
           this.text.classList.remove('top')
         } else if (oldValue === 'bottom' || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
@@ -491,6 +491,7 @@ class CoreTooltip extends window.HTMLElement {
         } else if (oldValue === 'top-end' || oldValue === 'bottom-end' || oldValue === 'left-end' || oldValue === 'right-end') {
           this.text.classList.remove('end')
         }
+        // Add newValue classes
         if (newValue === 'top' || newValue === 'top-start' || newValue === 'top-end') {
           this.text.classList.add('top')
         } else if (newValue === 'bottom' || newValue === 'bottom-start' || newValue === 'bottom-end') {
@@ -500,7 +501,8 @@ class CoreTooltip extends window.HTMLElement {
         } else if (newValue === 'right' || newValue === 'right-start' || newValue === 'right-end') {
           this.text.classList.add('right')
         } else {
-          this.text.classList.add('bottom')
+          // Default to bottom
+          this.setAttribute('placement', 'bottom')
         }
         if (newValue === 'top-start' || newValue === 'bottom-start' || newValue === 'left-start' || newValue === 'right-start') {
           this.text.classList.add('start')
@@ -511,11 +513,10 @@ class CoreTooltip extends window.HTMLElement {
       case 'v-model':
         // Set visibility of tooltip
         if (hasValue && Boolean(newValue)) {
-          this.setAttribute('v-model', true)
           this.text.style.setProperty('opacity', '1')
         } else {
-          this.setAttribute('v-model', false)
           this.text.style.setProperty('opacity', '0')
+          this.setAttribute('v-model', false)
         }
         break
       case 'open-delay':
