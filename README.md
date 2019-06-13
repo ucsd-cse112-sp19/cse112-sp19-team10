@@ -49,7 +49,7 @@ They can be used like so:
 Read more on the [Getting Started page](docs/usage/GettingStarted.md).
 
 ### API Docs
-Component Specific API docs can be found: [here](docs/index.html)  
+Component Specific API docs can be found: [here](https://ucsd-cse112.github.io/cse112-sp19-team10/docs/index.html)  
 These include a full list of attributes for each component.    
 
 ## Coding Style
