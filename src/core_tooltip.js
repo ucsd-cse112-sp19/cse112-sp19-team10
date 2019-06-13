@@ -285,7 +285,7 @@ class CoreTooltip extends window.HTMLElement {
   * @returns {Boolean} visibility of Tooltip.
   */
   get vModel () {
-    return this.hasAttribute('v-model')
+    return this.getAttribute('v-model')
   }
 
   /**
@@ -295,9 +295,9 @@ class CoreTooltip extends window.HTMLElement {
   set vModel (val) {
     const isVisible = Boolean(val)
     if (isVisible) {
-      this.setAttribute('v-model', '')
+      this.setAttribute('v-model', true)
     } else {
-      this.removeAttribute('v-model')
+      this.setAttribute('v-model', false)
     }
   }
 
@@ -407,15 +407,14 @@ class CoreTooltip extends window.HTMLElement {
     }
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
-    }
-    if (this.hasAttribute('placement')) {
+    } else {
       var places = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']
       if (!places.includes(this.getAttribute('placement'))) {
         this.setAttribute('placement', 'bottom')
       }
     }
     if (this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', '')
+      this.setAttribute('v-model', false)
     }
     if (this.hasAttribute('disabled')) {
       this.setAttribute('disabled', '')
@@ -516,9 +515,11 @@ class CoreTooltip extends window.HTMLElement {
         break
       case 'v-model':
         // Set visibility of tooltip
-        if (hasValue) {
+        if (hasValue && Boolean(newValue) === true) {
+          this.setAttribute('v-model', true)
           this.text.style.setProperty('opacity', '1')
         } else {
+          this.setAttribute('v-model', false)
           this.text.style.setProperty('opacity', '0')
         }
         break
