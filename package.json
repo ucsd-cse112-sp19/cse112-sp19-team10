@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
-    "unitTest:switch": "npx mocha tests/unit/core-switch-test.js --exit --timeout 20000",
-    "unitTest:rate": "npx mocha tests/unit/core-rate-test.js --exit --timeout 20000",
-    "unitTest:hello": "npx mocha tests/unit/core-hello-test.js --exit --timeout 20000",
+    "unitTest:switch": "npx mocha tests/unit/core-switch-test.js --exit --timeout 30000",
+    "unitTest:rate": "npx mocha tests/unit/core-rate-test.js --exit --timeout 30000",
+    "unitTest:hello": "npx mocha tests/unit/core-hello-test.js --exit --timeout 30000",
     "browsertest": "npm run browserTest:chrome && npm run browserTest:safari",
     "browserTest:chrome": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/browser",
     "browserTest:safari": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/browser",

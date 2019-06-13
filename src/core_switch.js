@@ -325,11 +325,11 @@ class CoreSwitch extends window.HTMLElement {
     if (this.hasAttribute('disabled')) {
       this.setAttribute('disabled', '')
     }
-    // Set default active text to empty
+    // Set default active-text to empty
     if (!this.hasAttribute('active-text')) {
       this.setAttribute('active-text', '')
     }
-    // Set default inactive text to empty
+    // Set default inactive-text to empty
     if (!this.hasAttribute('inactive-text')) {
       this.setAttribute('inactive-text', '')
     }
@@ -341,86 +341,103 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-value')) {
       this.setAttribute('inactive-value', false)
     }
-    // Set default active-color to
+    // Set default active-color to #409EFF
     if (!this.hasAttribute('active-color')) {
       this.setAttribute('active-color', '#409EFF')
     }
+    // Set default inactive-color to #C0CCDA
     if (!this.hasAttribute('inactive-color')) {
       this.setAttribute('inactive-color', '#C0CCDA')
     }
-    if (!this.hasAttribute('v-model')) {
-      this.toggleSwitch()
+    // Set deafult v-model to active or inactive value
+    if (this.hasAttribute('v-model') && this.getAttribute('v-model') === this.getAttribute('active-value')) {
+      this.check.checked = true
     } else {
-      if (this.getAttribute('v-model') === this.getAttribute('active-value')) {
-        this.check.checked = true
-      }
+      this.check.checked = false
     }
+    this.toggleSwitch()
   }
 
   // Gets the attribute values when they change.
   static get observedAttributes () {
-    return ['v-model', 'disabled', 'active-color', 'inactive-color', 'name', 'active-icon-class', 'inactive-icon-class', 'active-text', 'inactive-text']
+    return ['disabled', 'active-icon-class', 'inactive-icon-class', 'active-text', 'inactive-text', 'active-color', 'inactive-color', 'name']
   }
 
   // Actions for when an attribute is changed.
   attributeChangedCallback (name, oldValue, newValue) {
-    // Disable switch
-    if (this.hasAttribute('disabled')) {
-      this.check.setAttribute('disabled', true)
-    } else {
-      this.check.removeAttribute('disabled')
-    }
-    // Set active color
-    if (this.hasAttribute('active-color')) {
-      var newColor1 = this.getAttribute('active-color')
-      if (this.validColor(newColor1)) {
-        this.aColor.setProperty('--active-color', newColor1)
-      } else {
-        this.setAttribute('active-color', '#409EFF')
-      }
-    }
-    // Set inactive color
-    if (this.hasAttribute('inactive-color')) {
-      var newColor2 = this.getAttribute('inactive-color')
-      if (this.validColor(newColor2)) {
-        this.aColor.setProperty('--inactive-color', newColor2)
-      } else {
-        this.setAttribute('inactive-color', '#C0CCDA')
-      }
-    }
-    // Set active icon
-    if (this.hasAttribute('active-icon-class')) {
-      var newClass1 = this.getAttribute('active-icon-class')
-      this.activeIcon.setAttribute('class', newClass1)
-    }
-    // Set inactive icon
-    if (this.hasAttribute('inactive-icon-class')) {
-      var newClass2 = this.getAttribute('inactive-icon-class')
-      this.inactiveIcon.setAttribute('class', newClass2)
-    }
-    // Set active text
-    if (this.hasAttribute('active-text')) {
-      var activeText = this.getAttribute('active-text')
-      this.aText.innerHTML = activeText
-      if (this.check.checked) {
-        this.aText.style.setProperty('color', '#409EFF')
-      } else {
-        this.aText.style.setProperty('color', 'black')
-      }
-    }
-    // Set inactive text
-    if (this.hasAttribute('inactive-text')) {
-      var inactiveText = this.getAttribute('inactive-text')
-      this.iaText.innerHTML = inactiveText
-      if (!this.check.checked) {
-        this.iaText.style.setProperty('color', '#409EFF')
-      } else {
-        this.iaText.style.setProperty('color', 'black')
-      }
-    }
-    // Set name
-    if (this.hasAttribute('name')) {
-      this.check.setAttribute('name', this.getAttribute('name'))
+    switch (name) {
+      case 'disabled':
+        // Set disabled
+        if (this.hasAttribute('disabled')) {
+          this.check.setAttribute('disabled', '')
+        } else {
+          this.check.removeAttribute('disabled')
+        }
+        break
+      case 'active-icon-class':
+        // Set active icon
+        if (this.hasAttribute('active-icon-class')) {
+          this.activeIcon.setAttribute('class', newValue)
+        } else {
+          this.activeIcon.setAttribute('class', '')
+        }
+        break
+      case 'inactive-icon-class':
+        // Set inactive icon
+        if (this.hasAttribute('inactive-icon-class')) {
+          this.inactiveIcon.setAttribute('class', newValue)
+        } else {
+          this.activeIcon.setAttribute('class', '')
+        }
+        break
+      case 'active-text':
+        // Set active text
+        if (this.hasAttribute('active-text')) {
+          this.aText.innerHTML = newValue
+          if (this.check.checked) {
+            this.aText.style.setProperty('color', '#409EFF')
+          } else {
+            this.aText.style.setProperty('color', 'black')
+          }
+        } else {
+          this.aText.innerHTML = ''
+        }
+        break
+      case 'inactive-text':
+        // Set inactive text
+        if (this.hasAttribute('inactive-text')) {
+          this.iaText.innerHTML = newValue
+          if (!this.check.checked) {
+            this.iaText.style.setProperty('color', '#409EFF')
+          } else {
+            this.iaText.style.setProperty('color', 'black')
+          }
+        } else {
+          this.aText.innerHTML = ''
+        }
+        break
+      case 'active-color':
+        // Set active color
+        if (this.hasAttribute('active-color') && this.validColor(newValue)) {
+          this.aColor.setProperty('--active-color', newValue)
+        } else {
+          this.setAttribute('active-color', '#409EFF')
+        }
+        break
+      case 'inactive-color':
+        // Set inactive color
+        if (this.hasAttribute('inactive-color') && this.validColor(newValue)) {
+          this.aColor.setProperty('--inactive-color', newValue)
+        } else {
+          this.setAttribute('inactive-color', '#C0CCDA')
+        }
+        break
+      case 'name':
+        // Set name
+        if (this.hasAttribute('name')) {
+          this.check.setAttribute('name', newValue)
+        }
+        break
     }
   }
 
