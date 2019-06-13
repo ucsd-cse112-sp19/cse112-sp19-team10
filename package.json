@@ -13,7 +13,12 @@
     "browserTest:safari": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/browser",
     "coverage": "nyc --include=\"src/**\" --reporter=html --reporter=text npm run test",
     "lint": "standard --fix && standard",
-    "localbrowser": "testcafe chrome tests/browser"
+    "localbrowser": "testcafe chrome tests/browser",
+    "coveragetest": "npm run pre_test && nyc --reporter=lcovonly --report-dir coverage_test --exclude Utils/ --exclude Tests/  mocha --bail --inline-diffs ./tests/unit/tests.js --timeout 10000 --exit && npm run post_test",
+    "pre_test": "nyc --reporter=lcovonly --exclude Utils/ node tests/Utils/htmlMock.js",
+    "post_test": "npm run pathrewrite && npm run cov_merge",
+    "pathrewrite": "node ./tests/Utils/path.rewrite.js",
+    "cov_merge": "node ./tests/Utils/coverage.merge.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +46,7 @@
     "acorn": "^6.1.1",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
+    "puppeteer-to-istanbul": "^1.2.2",
     "shinobirockstar": "^1.0.0",
     "showroom": "^0.9.3"
   },
@@ -58,7 +64,7 @@
     "mocha": "^6.1.4",
     "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
-    "puppeteer": "^1.16.0",
+    "puppeteer": "^1.17.0",
     "showroom": "^0.9.3",
     "standard": "^12.0.1",
     "testcafe": "^1.1.4",

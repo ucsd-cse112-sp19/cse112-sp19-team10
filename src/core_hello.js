@@ -28,7 +28,7 @@ template.innerHTML = `
 
 /**
  * CoreHello class
- * 
+ *
  */
 class CoreHello extends window.HTMLElement {
   // Rainbow attribute

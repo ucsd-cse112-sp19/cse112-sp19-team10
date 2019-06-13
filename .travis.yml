@@ -19,7 +19,7 @@ before_script:
 script:
     - npm run lint
     - npm run test "tests/unit/*.js"
-    - npm run coverage
+    - npm run coveragetest
     - npm run browsertest
 
 after_script:
