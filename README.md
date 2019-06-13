@@ -18,13 +18,13 @@ Table of Contents
          * [Coding Style](#coding-style)
          * [Component Architecture](#component-architecture)
          * [Repo Structure](#repo-structure)
+        * [Dependencies](#dependencies)
       * [Testing](#testing)
       * [Change Log](#change-log)
       * [Team](#team)
       * [License](#license)
-      * [Dependencies](#dependencies)
 
-<!-- Added by: seannam, at: Thu Jun 13 01:49:27 PDT 2019 -->
+<!-- Added by: seannam, at: Thu Jun 13 02:02:54 PDT 2019 -->
 
 <!--te-->
 
@@ -72,6 +72,8 @@ We are using a very straightforward architecture for the components. It should b
 ### Repo Structure
 Learn about how our project directories are set up [here](docs/dev/Repo.md).
 
+### Dependencies
+
 ## Testing
 For unit tests, we are using [Mocha](https://mochajs.org/) and [Showroom](https://github.com/eavichay/showroom). Read about how to modify existing tests and write new ones in our [unit testing guide](https://docs.google.com/document/d/1lbslRDDltuQ9W85m4ydCMiX7PHPhnL075Dgzt4M1Nuo/edit).  
 Browser tests are done through [Testcafe](https://devexpress.github.io/testcafe/) and [SauceLabs](https://saucelabs.com/). Find our guide [here](https://docs.google.com/document/d/1x6_YWZVBgTehy1oi4eblvHlfXKKR_XMpY9cHYgYD3EI/edit).
@@ -83,4 +85,3 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Meet the team!](docs/Team.md)
 
 ## License
-## Dependencies
