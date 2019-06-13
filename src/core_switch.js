@@ -76,25 +76,6 @@ switchTemplate.innerHTML = `
     top: 2px;
   }
   #inactive_icon {
-    --active-color: #409EFF;
-    position: absolute;
-    right: 45px;
-    top: 2px;
-    color: var(--active-color);
-  }
-  input:checked ~ #active_icon {
-    --active-color: #409EFF;
-    color: var(--active-color);
-  }
-  input:checked ~ #inactive_icon {
-    color: #000000;
-  }
-  #active_icon {
-    position: absolute;
-    left: 45px;
-    top: 2px;
-  }
-  #inactive_icon {
     position: absolute;
     right: 45px;
     top: 2px;
@@ -236,7 +217,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function sets the value of the active-text attribute.
-  * @param {String} val - this is a String.
+  * @param {String} val - this is a String to display when active.
   */
   set activeText (val) {
     this.setAttribute('active-text', val)
@@ -252,7 +233,7 @@ class CoreSwitch extends window.HTMLElement {
 
   /**
   * This function sets the value of the active-text attribute.
-  * @param {String} val - this is a String.
+  * @param {String} val - this is a String to display when inactive.
   */
   set inactiveText (val) {
     this.setAttribute('inactive-text', val)
@@ -340,6 +321,7 @@ class CoreSwitch extends window.HTMLElement {
 
   // Sets default values for attributes.
   connectedCallback () {
+    // Disable switch if set
     if (this.hasAttribute('disabled')) {
       this.setAttribute('disabled', '')
     }
@@ -347,6 +329,7 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('active-text')) {
       this.setAttribute('active-text', '')
     }
+    // Set default inactive text to empty
     if (!this.hasAttribute('inactive-text')) {
       this.setAttribute('inactive-text', '')
     }
@@ -358,6 +341,7 @@ class CoreSwitch extends window.HTMLElement {
     if (!this.hasAttribute('inactive-value')) {
       this.setAttribute('inactive-value', false)
     }
+    // Set default active-color to 
     if (!this.hasAttribute('active-color')) {
       this.setAttribute('active-color', '#409EFF')
     }
