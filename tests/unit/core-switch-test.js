@@ -22,7 +22,7 @@ describe('Testing core-switch', async () => {
   context('Testing core-switch attribute: active-color', async () => {
     /*  Unit Testing for
         Attribute: active-color
-        Description: background color when in on state
+        Description: background color of the slider when in on state
         Type: string
         Default: #409EFF
     */
@@ -331,7 +331,7 @@ describe('Testing core-switch', async () => {
   context('Testing core-switch attribute: inactive-color', async () => {
     /*  Unit Testing for
         Attribute: inactive-color
-        Description: background color when in off state
+        Description: background color of the slider when in off state
         Type: string
         Default: #C0CCDA
     */
@@ -635,28 +635,28 @@ describe('Testing core-switch', async () => {
       assert.deepEqual(val, '123')
     })
 
-    // it('Mapping Attribute -> Property with vaild string', async () => {
-    //   await showroom.setAttribute('v-model', 'bar')
-    //   const att = await showroom.hasAttribute('v-model')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getProperty('vModel')
-    //   assert.deepEqual(val, 'bar')
-    // })
+    it('Mapping Attribute -> Property with vaild string', async () => {
+      await showroom.setAttribute('v-model', 'bar')
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('vModel')
+      assert.deepEqual(val, 'bar')
+    })
 
-    // it('Mapping Attribute -> Property with boolean', async () => {
-    //   await showroom.setAttribute('v-model', false)
-    //   const att = await showroom.hasAttribute('v-model')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getProperty('vModel')
-    //   assert.deepEqual(val, 'false')
-    // })
+    it('Mapping Attribute -> Property with boolean', async () => {
+      await showroom.setAttribute('v-model', false)
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('vModel')
+      assert.deepEqual(val, 'false')
+    })
 
-    // it('Mapping Attribute -> Property with number', async () => {
-    //   await showroom.setAttribute('v-model', 456)
-    //   const att = await showroom.hasAttribute('v-model')
-    //   assert.deepEqual(att, true)
-    //   const val = await showroom.getProperty('vModel')
-    //   assert.deepEqual(val, '456')
-    // })
+    it('Mapping Attribute -> Property with number', async () => {
+      await showroom.setAttribute('v-model', 456)
+      const att = await showroom.hasAttribute('v-model')
+      assert.deepEqual(att, true)
+      const val = await showroom.getProperty('vModel')
+      assert.deepEqual(val, '456')
+    })
   })
 })
