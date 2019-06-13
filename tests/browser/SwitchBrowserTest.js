@@ -4,7 +4,7 @@ fixture`switch browser test:`
   .page`../../examples/switch.html`
 
   test('SwitchBrowserTest @ v-model changed from false to true and true to false after click', async t => {
-    const switch1 = Selector('#switch1');
+    const switch1 = Selector('#switch_named');
     const switch1_span = await Selector(() => document.querySelector('#switch1').shadowRoot.querySelector('label'));
     // check if the switch exist
     await t
@@ -36,7 +36,7 @@ fixture`switch browser test:`
   })
 
   test("SwitchBrowserTest @ named value",async t=>{
-    const switch2 = Selector('#switch_named');
+    const switch2 = Selector('#switch_values');
     const switch2_span = await Selector(() => document.querySelector('#switch_named').shadowRoot.querySelector('label'));
 
     await t
