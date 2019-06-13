@@ -299,7 +299,6 @@ class CoreTooltip extends window.HTMLElement {
     } else {
       this.removeAttribute('v-model')
     }
-    // this.setAttribute('v-model', val)
   }
 
   /**
@@ -321,6 +320,22 @@ class CoreTooltip extends window.HTMLElement {
     } else {
       this.removeAttribute('disabled')
     }
+  }
+
+  /**
+   * This function gets the value of the open-delay attribute
+   * @returns {number} open delay of Tooltip in ms.
+   */
+  get openDelay () {
+    return this.getAttribute('open-delay')
+  }
+
+  /**
+   * This function sets the value of the open-delay attribute
+   * @param {number} val - open delay of Tooltip in ms.
+   */
+  set openDelay (val) {
+    this.setAttribute('open-delay', val)
   }
 
   /**
@@ -383,21 +398,6 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('tabindex', val)
   }
 
-  /**
-   * This function gets the value of the open-delay attribute
-   * @returns {number} open delay of Tooltip in ms.
-   */
-  get openDelay () {
-    return this.getAttribute('open-delay')
-  }
-
-  /**
-   * This function sets the value of the open-delay attribute
-   * @param {number} val - open delay of Tooltip in ms.
-   */
-  set openDelay (val) {
-    this.setAttribute('open-delay', val)
-  }
 
   // Sets default values for attributes.
   connectedCallback () {
@@ -409,12 +409,15 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
     }
-    // Set default v-model to false
     if (this.hasAttribute('v-model')) {
       this.setAttribute('v-model', '')
     }
     if (this.hasAttribute('disabled')) {
       this.setAttribute('disabled', '')
+    }
+    // Set default open-delay to 0
+    if (!this.hasAttribute('open-delay')) {
+      this.setAttribute('open-delay', 0)
     }
     if (this.hasAttribute('manual')) {
       this.setAttribute('manual', '')
@@ -423,20 +426,6 @@ class CoreTooltip extends window.HTMLElement {
       } else {
         this.text.style.setProperty('opacity', '0')
       }
-    }
-    if (this.hasAttribute('tabindex')) {
-      if (!isNaN(this.getAttribute('tabindex'))) {
-        this.addEventListener('focus', this._onHoverEnterable)
-        this.addEventListener('blur', this._onHoverEnterable)
-      } else {
-        this.setAttribute('tabindex', 0)
-      }
-    }
-    if (!this.hasAttribute('tabindex')) {
-      this.setAttribute('tabindex', 0)
-    }
-    if (!this.hasAttribute('open-delay')) {
-      this.setAttribute('open-delay', 0)
     }
     if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
       // Add event listener for hovering when not enterable
@@ -449,6 +438,10 @@ class CoreTooltip extends window.HTMLElement {
       this.setAttribute('enterable', '')
       this.addEventListener('mouseover', this._onHoverEnterable)
       this.addEventListener('mouseout', this._onHoverEnterable)
+    }
+    // Set default tab index to 0
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', 0)
     }
   }
 
@@ -520,19 +513,27 @@ class CoreTooltip extends window.HTMLElement {
       case 'v-model':
         // Set visibility of tooltip
         if (hasValue) {
-        // if (hasValue && Boolean(newValue)) {
           this.text.style.setProperty('opacity', '1')
         } else {
           this.text.style.setProperty('opacity', '0')
-          // this.setAttribute('v-model', false)
         }
         break
       case 'open-delay':
-        if (hasValue && !isNaN(this.getAttribute('open-delay'))) {
-          var fadeTime = this.getAttribute('open-delay') / 1000
+        if (hasValue && !isNaN(newValue)) {
+          var fadeTime = Number(newValue) / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
         } else {
           this.setAttribute('open-delay', 0)
+        }
+        break
+      case 'tabindex':
+        if (this.hasAttribute('tabindex')) {
+          if (!isNaN(this.getAttribute('tabindex'))) {
+            this.addEventListener('focus', this._onHoverEnterable)
+            this.addEventListener('blur', this._onHoverEnterable)
+          } else {
+            this.setAttribute('tabindex', 0)
+          }
         }
         break
     }
