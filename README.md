@@ -20,8 +20,10 @@ Table of Contents
          * [Component Architecture](#component-architecture)
          * [Repo Structure](#repo-structure)
          * [Dependencies](#dependencies)
+         * [Updating the README](#updating-the-readme)
       * [Testing](#testing)
-      * [Change Log](#change-log)
+      * [Known Issues](#known-issues)
+         * [Change Log](#change-log)
       * [Team](#team)
       * [License](#license)
 
@@ -63,11 +65,17 @@ Read more on the [Getting Started page](docs/usage/GettingStarted.md).
 Component Specific API docs can be found: [here](https://ucsd-cse112.github.io/cse112-sp19-team10/docs/index.html)  
 These include a full list of attributes for each component.    
 
+### Examples
+There are examples for each component:
+- [Rate](https://ucsd-cse112.github.io/cse112-sp19-team10/examples/rate.html)
+- [Switch](https://ucsd-cse112.github.io/cse112-sp19-team10/examples/switch.html)
+- [Tooltip](https://ucsd-cse112.github.io/cse112-sp19-team10/examples/tooltip.html)
+
 ## Contributing
 Want to contribute? Read the [guide](https://docs.google.com/document/d/131o201JKLoXA3ThO713b-uAVn71Ql5zLPmLm_eqTdMU/edit) on how to get started!
 
 ### Build Environment
-Learn how to set up the build environment and use the tools here: [setting up the build pipeline](https://docs.google.com/document/d/1T7znBZnsLRjiv7TSTTOygoxcIgXU88AOVcoRg2jSkuY/edit)
+Learn how to set up the build environment and use the tools here: [setting up the build pipeline](https://docs.google.com/document/d/1T7znBZnsLRjiv7TSTTOygoxcIgXU88AOVcoRg2jSkuY/edit).
 
 ### Coding Style
 Our project uses the Standard JavaScript Style, (also known as StandardJS), found at [standardjs.com](standardjs.com)  
@@ -80,13 +88,33 @@ We are using a very straightforward architecture for the components. It should b
 Learn about how our project directories are set up [here](docs/dev/Repo.md).
 
 ### Dependencies
+Dependencies are listed under `dependencies` and `devDependencies` in the [`package.json`](package.json).  This will have the most up-to-date list.
+This is a list of each dependencies:
+- mocha: unit tests
+- showroom: 
+- chai: asserts
+- husky: pre-commit tasks using Github hooks
+- standard: linter
+- testcafe: browser testing framework
+- testcafe-browser-provider-saucelabs: use testcafe with saucelabs
+
+### Updating the README
+The README is using a [shell script](https://github.com/ekalinin/github-markdown-toc) to generate the table of contents. Since the README is not often updated, this script must be manually run to update the table of contents, but they can also be edited manually.  
+To run the script, follow the directions to set up the script then run:
+```
+./utils/gh-md-toc --insert README.md
+```
 
 ## Testing
-For unit tests, we are using [Mocha](https://mochajs.org/) and [Showroom](https://github.com/eavichay/showroom). Read about how to modify existing tests and write new ones in our [unit testing guide](https://docs.google.com/document/d/1lbslRDDltuQ9W85m4ydCMiX7PHPhnL075Dgzt4M1Nuo/edit).  
-Browser tests are done through [Testcafe](https://devexpress.github.io/testcafe/) and [SauceLabs](https://saucelabs.com/). Find our guide [here](https://docs.google.com/document/d/1x6_YWZVBgTehy1oi4eblvHlfXKKR_XMpY9cHYgYD3EI/edit).
+- For unit tests, we are using [Mocha](https://mochajs.org/) and [Showroom](https://github.com/eavichay/showroom). Read about how to modify existing tests and write new ones in our [unit testing guide](https://docs.google.com/document/d/1lbslRDDltuQ9W85m4ydCMiX7PHPhnL075Dgzt4M1Nuo/edit).  
+- Browser tests are done through [Testcafe](https://devexpress.github.io/testcafe/) and [SauceLabs](https://saucelabs.com/). Find our guide [here](https://docs.google.com/document/d/1x6_YWZVBgTehy1oi4eblvHlfXKKR_XMpY9cHYgYD3EI/edit).
+- See our [full list](https://docs.google.com/document/d/1NJwUiCW6A7htAkYt5D9KlLrRf-20Q_cx8ipcCyGnmQ0/edit?usp=sharing) for all the tests for each component
 
-## Change Log
-This project uses [semantic-release](https://github.com/semantic-release/semantic-release#how-does-it-work) to generate a change log from the git commit messages. Please follow the format as outline in their [docs](https://github.com/semantic-release/semantic-release#how-does-it-work).
+## Known Issues
+- Browser tests on TestCafe/SauceLabs sometimes time out, usually with a **ETIMEOUT** error. This causes Travis builds to fail and blocks pull requests on Github. Rerunning the build on Travis generally fixes this issue.
+
+### Change Log
+This project is set up to use [semantic-release](https://github.com/semantic-release/semantic-release#how-does-it-work) to generate a change log from the git commit messages. Please follow the format as outline in their [docs](https://github.com/semantic-release/semantic-release#how-does-it-work). However, it has not been fully tested or integrated to the master branch. You can read our implementation notes [here](https://drive.google.com/a/ucsd.edu/file/d/1U0ZaXYs-A14-t2VXM4h5-GqYuRQV9C5d/view?usp=sharing).
 
 ## Team
 The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Meet the team!](docs/Team.md)
