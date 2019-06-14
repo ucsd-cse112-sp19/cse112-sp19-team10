@@ -92,31 +92,31 @@ fixture`Switch Browser Test:`
         .expect(switch_active_icon.getStyleProperty('color')).eql('rgb(64, 158, 255)');
   })
 
-  // test("SwitchBrowserTest @ light up corresponding text", async t=>{
-  //   const switch_text = Selector('#switch_text');
-  //   const switch_span = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('label'));
-  //   const switch_inactive_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#inactive_text'));
-  //   const switch_active_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#active_text'));
+  test("SwitchBrowserTest @ light up corresponding text", async t=>{
+    const switch_text = Selector('#switch_text');
+    const switch_span = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('label'));
+    const switch_inactive_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#inactive_text'));
+    const switch_active_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#active_text'));
 
-  //   await t
-  //       // check if the switch exist
-  //       .expect(switch_text.count).eql(1)
-  //       .expect(switch_text.exists).ok()
-  //       // check if the default v-model value is false
-  //       .expect(switch_text.getAttribute('v-model')).eql('false')
-  //       .expect(switch_inactive_text.textContent).eql('Left')
-  //       .expect(switch_active_text.textContent).eql('Right')
-  //       // check inactive text color is blue
-  //       .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(64, 158, 255)')
-  //       // check active text color is black
-  //       .expect(switch_active_text.getStyleProperty('color')).eql('rgb(0, 0, 0)');
+    await t
+        // check if the switch exist
+        .expect(switch_text.count).eql(1)
+        .expect(switch_text.exists).ok()
+        // check if the default v-model value is false
+        .expect(switch_text.getAttribute('v-model')).eql('false')
+        .expect(switch_inactive_text.textContent).eql('Left')
+        .expect(switch_active_text.textContent).eql('Right')
+        // check inactive text color is blue
+        .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(64, 158, 255)')
+        // check active text color is black
+        .expect(switch_active_text.getStyleProperty('color')).eql('rgb(0, 0, 0)');
 
-  //   await t
-  //       .click(switch_span)
-  //       .expect(switch_inactive_text.textContent).eql('Left')
-  //       .expect(switch_active_text.textContent).eql('Right')
-  //       // check inactive text color is black
-  //       .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(0, 0, 0)')
-  //       // check active text color is blue
-  //       .expect(switch_active_text.getStyleProperty('color')).eql('rgb(64, 158, 255)');
-  // })
+    await t
+        .click(switch_span)
+        .expect(switch_inactive_text.textContent).eql('Left')
+        .expect(switch_active_text.textContent).eql('Right')
+        // check inactive text color is black
+        .expect(switch_inactive_text.getStyleProperty('color')).eql('rgb(0, 0, 0)')
+        // check active text color is blue
+        .expect(switch_active_text.getStyleProperty('color')).eql('rgb(64, 158, 255)');
+  })
