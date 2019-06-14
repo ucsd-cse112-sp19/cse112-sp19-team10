@@ -368,7 +368,7 @@ class CoreTooltip extends window.HTMLElement {
 
   /**
   * This function gets the value of the tabindex attribute.
-  * @returns {Boolean} tabindex of Tooltip.
+  * @returns {number} tabindex of Tooltip.
   */
   get tabindex () {
     return this.getAttribute('tabindex')
@@ -376,7 +376,7 @@ class CoreTooltip extends window.HTMLElement {
 
   /**
   * This function sets the value of the tabindex attribute.
-  * @param {Boolean} val - tabindex of Tooltip.
+  * @param {number} val - tabindex of Tooltip.
   */
   set tabindex (val) {
     this.setAttribute('tabindex', val)
