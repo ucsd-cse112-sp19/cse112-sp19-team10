@@ -558,10 +558,11 @@ describe('Testing core-tooltip', async () => {
       assert.deepEqual(ele, false)
 
       // checking mapping
-      await showroom.setProperty('vModel', '123')
+      await showroom.setProperty('vModel', '456')
       // check if the attribute exists
       const att = await showroom.hasAttribute('v-model')
       assert.deepEqual(att, true)
+      // setting its property or attribute to a value will change the default value from false to true
       // check if changed property value change attribute value to the default value
       const val = await showroom.getAttribute('v-model')
       assert.deepEqual(val, '')
@@ -579,6 +580,8 @@ describe('Testing core-tooltip', async () => {
       // check if the attribute exists
       const att = await showroom.hasAttribute('v-model')
       assert.deepEqual(att, true)
+
+      // setting its property or attribute to a value will change the default value from false to true
       // check if changed attribute value change property value to the default value
       const val = await showroom.getProperty('vModel')
       assert.deepEqual(val, true)
@@ -676,6 +679,7 @@ describe('Testing core-tooltip', async () => {
       // check if the attribute exists
       const att = await showroom.hasAttribute('disabled')
       assert.deepEqual(att, true)
+      // setting its property or attribute to a value will change the default value from false to true
       // check if changed property value change attribute value to the default value
       const val = await showroom.getAttribute('disabled')
       assert.deepEqual(val, '')
@@ -693,6 +697,7 @@ describe('Testing core-tooltip', async () => {
       // check if the attribute exists
       const att = await showroom.hasAttribute('disabled')
       assert.deepEqual(att, true)
+      // setting its property or attribute to a value will change the default value from false to true
       // check if changed attribute value change property value to the default value
       const val = await showroom.getProperty('disabled')
       assert.deepEqual(val, true)
@@ -790,6 +795,7 @@ describe('Testing core-tooltip', async () => {
       // check if attribute does not exist
       const att = await showroom.hasAttribute('manual')
       assert.deepEqual(att, true)
+      // setting its property or attribute to a value will change the default value from false to true
       // check if changed property value change attribute value to the default value
       const val = await showroom.getAttribute('manual')
       assert.deepEqual(val, '')
@@ -807,6 +813,7 @@ describe('Testing core-tooltip', async () => {
       // check if attribute does not exist
       const att = await showroom.hasAttribute('manual')
       assert.deepEqual(att, true)
+      // setting its property or attribute to a value will change the default value from false to true
       // check if changed attribute value change property value to the default value
       const val = await showroom.getProperty('manual')
       assert.deepEqual(val, true)
@@ -1085,7 +1092,7 @@ describe('Testing core-tooltip', async () => {
       assert.deepEqual(val, '123')
     })
 
-    // it('Mapping Property -> Attribute with boolean', async () => {
+    // it('Mapping Property -> Attribute with invalid value boolean', async () => {
     //   await showroom.setProperty('openDelay', true)
     //   // check if the attribute exists
     //   const att = await showroom.hasAttribute('open-delay')
@@ -1095,7 +1102,7 @@ describe('Testing core-tooltip', async () => {
     //   assert.deepEqual(val, '0')
     // })
 
-    // it('Mapping Attribute -> Property with boolean', async () => {
+    // it('Mapping Attribute -> Property with invalid value boolean', async () => {
     //   await showroom.setAttribute('open-delay', false)
     //   // check if the attribute exists
     //   const att = await showroom.hasAttribute('open-delay')
