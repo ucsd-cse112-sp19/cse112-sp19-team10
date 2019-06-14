@@ -1,6 +1,8 @@
 # Shinobi Component Library
 [![Build Status](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10.svg?token=Nn7W4RnbZq1QGEydYuEM&branch=master)](https://travis-ci.com/ucsd-cse112/cse112-sp19-team10) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) 
-<a href="https://github.com/DevExpress/testcafe"><img alt="Tested with TestCafe" src="https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg"></a> [![Maintainability](https://api.codeclimate.com/v1/badges/a964c0b0f9918af7aefd/maintainability)](https://codeclimate.com/repos/5cc0c0aa5014ac306c010419/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/a964c0b0f9918af7aefd/test_coverage)](https://codeclimate.com/repos/5cc0c0aa5014ac306c010419/test_coverage)
+<a href="https://github.com/DevExpress/testcafe"><img alt="Tested with TestCafe" src="https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg"></a> [![Maintainability](https://api.codeclimate.com/v1/badges/a964c0b0f9918af7aefd/maintainability)](https://codeclimate.com/repos/5cc0c0aa5014ac306c010419/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/a964c0b0f9918af7aefd/test_coverage)](https://codeclimate.com/repos/5cc0c0aa5014ac306c010419/test_coverage) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 
 Table of Contents
 =================
@@ -90,3 +92,4 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 The Shinobi Component Library is brought to you by Team Rockstar Ninjas, a group of students from UCSD's CSE 112 course. [Meet the team!](docs/Team.md)
 
 ## License
+[MIT License](docs/LICENSE)
