@@ -89,7 +89,7 @@ describe('Testing core-tooltip', async () => {
     //   assert.deepEqual(att, true)
 
     //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getProperty('effect')
+    //   const val = await showroom.getAttribute('effect')
     //   assert.deepEqual(val, 'dark')
     // })
 
