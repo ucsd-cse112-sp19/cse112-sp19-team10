@@ -2,17 +2,20 @@ const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
 describe('Testing core-switch', async () => {
+  // runs before any test in each context() block and first run of beforeEach()
   before(async () => {
     await showroom.start()
     // starts showroom server
   })
 
+  // runs after all test in each context() block and last run of afterEach()
   after(async () => {
     console.log('Shutting down')
     await showroom.stop()
     // stops the showroom server
   })
 
+  // runs before every test in the context() block
   beforeEach(async () => {
     await showroom.setTestSubject('core-switch')
     await showroom.page.waitFor(150)
@@ -28,8 +31,10 @@ describe('Testing core-switch', async () => {
     */
 
     it('check for attribute with default string', async () => {
+      // check if the attribute exists
       const att = await showroom.hasAttribute('active-color')
       assert.deepEqual(att, true)
+       // check if the changed attribute value is reflected to the property value
       const val = await showroom.getAttribute('active-color')
       assert.deepEqual(val, '#409EFF')
     })
@@ -37,8 +42,10 @@ describe('Testing core-switch', async () => {
     it('Mapping Property -> Attribute with hex code', async () => {
       // #790604 = cherry red
       await showroom.setProperty('activeColor', '#790604')
+      // check if the attribute exists
       const att = await showroom.hasAttribute('active-color')
       assert.deepEqual(att, true)
+      // check if the changed attribute value is reflected to the attribute value
       const val = await showroom.getAttribute('active-color')
       assert.deepEqual(val, '#790604')
     })
