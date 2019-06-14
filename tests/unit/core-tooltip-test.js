@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
-// Some unit tests are failing so they are commented out to allow it pass the 
+// Some unit tests are failing so they are commented out to allow it pass the
 // building stage in pipeline
 
 describe('Testing core-tooltip', async () => {
@@ -36,11 +36,11 @@ describe('Testing core-tooltip', async () => {
 
     it('Mapping Attribute -> Property with dark', async () => {
       await showroom.setAttribute('effect', 'dark')
-      
+
       // check if the attribute exists
       const att = await showroom.hasAttribute('effect')
       assert.deepEqual(att, true)
-      
+
       // check if the changed attribute value is reflected to the property value
       const val = await showroom.getProperty('effect')
       assert.deepEqual(val, 'dark')
@@ -48,12 +48,12 @@ describe('Testing core-tooltip', async () => {
 
     it('Mapping Property -> Attribute with light', async () => {
       await showroom.setProperty('effect', 'light')
-      
+
       // check if the attribute exists
       const att = await showroom.hasAttribute('effect')
       assert.deepEqual(att, true)
 
-      // check if the changed attribute value is reflected to the attribute value      
+      // check if the changed attribute value is reflected to the attribute value
       const val = await showroom.getAttribute('effect')
       assert.deepEqual(val, 'light')
     })
@@ -104,7 +104,6 @@ describe('Testing core-tooltip', async () => {
     //   const val = await showroom.getAttribute('effect')
     //   assert.deepEqual(val, 'dark')
     // })
-
   })
 
   context('core-tooltip attribute: content', async () => {
@@ -159,7 +158,7 @@ describe('Testing core-tooltip', async () => {
       const att = await showroom.hasAttribute('content')
       assert.deepEqual(att, true)
 
-       // check if the changed attribute value is reflected to the property value
+      // check if the changed attribute value is reflected to the property value
       const val = await showroom.getProperty('content')
       assert.deepEqual(val, 'false')
     })
@@ -621,7 +620,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setAttribute('disabled', true)
       // check if the attribute exists
@@ -638,7 +636,6 @@ describe('Testing core-tooltip', async () => {
       // check that the attribute got removed
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
-
 
       // checking mapping
       await showroom.setProperty('disabled', 'true')
@@ -657,7 +654,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setAttribute('disabled', '')
       // check if the attribute exists
@@ -675,7 +671,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setProperty('disabled', '123')
       // check if the attribute exists
@@ -692,7 +687,6 @@ describe('Testing core-tooltip', async () => {
       // check that the attribute got removed
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
-
 
       // checking mapping
       await showroom.setAttribute('disabled', '123')
@@ -740,7 +734,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setAttribute('manual', true)
       // check if attribute does not exist
@@ -757,7 +750,6 @@ describe('Testing core-tooltip', async () => {
       // check that the attribute got removed
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
-
 
       // checking mapping
       await showroom.setProperty('manual', 'true')
@@ -776,7 +768,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setAttribute('manual', '')
       // check if attribute does not exist
@@ -794,7 +785,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setProperty('manual', '123')
       // check if attribute does not exist
@@ -811,7 +801,6 @@ describe('Testing core-tooltip', async () => {
       // check that the attribute got removed
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
-
 
       // checking mapping
       await showroom.setAttribute('manual', '123')
@@ -860,7 +849,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setAttribute('enterable', true)
       // check if the attribute exists
@@ -877,7 +865,6 @@ describe('Testing core-tooltip', async () => {
       // check that the attribute got removed
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
-
 
       // checking mapping
       await showroom.setProperty('enterable', 'true')
@@ -896,7 +883,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setAttribute('enterable', '')
       // check if the attribute exists
@@ -914,7 +900,6 @@ describe('Testing core-tooltip', async () => {
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
 
-
       // checking mapping
       await showroom.setProperty('enterable', '123')
       // check if the attribute exists
@@ -931,7 +916,6 @@ describe('Testing core-tooltip', async () => {
       // check that the attribute got removed
       const ele = await showroom.hasAttribute('v-model')
       assert.deepEqual(ele, false)
-
 
       // checking mapping
       await showroom.setAttribute('enterable', '123')
