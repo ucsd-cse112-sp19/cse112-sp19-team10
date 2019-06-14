@@ -4,11 +4,10 @@
   "description": "<img src=\"img/rockstar_ninja.PNG\" title=\"Team Logo\" alt=\"Team Logo\" width=\"500px\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate && npm run unitTest:tooltip",
+    "test": "npm run unitTest:hello && npm run unitTest:switch && npm run unitTest:rate",
     "unitTest:switch": "npx mocha tests/unit/SwitchUnitTest.js --exit --timeout 60000",
     "unitTest:rate": "npx mocha tests/unit/RateUnitTest.js --exit --timeout 60000",
     "unitTest:hello": "npx mocha tests/unit/HelloUnitTest.js --exit --timeout 60000",
-    "unitTest:tooltip": "npx mocha tests/unit/TooltipUnitTest.js --exit --timeout 60000",
     "browsertest": "npm run browserTest:chrome && npm run browserTest:safari",
     "browserTest:chrome": "testcafe \"saucelabs:Chrome@beta:Windows 10\" tests/browser",
     "browserTest:safari": "testcafe \"saucelabs:Safari@11.1:macOS 10.13\" tests/browser",
