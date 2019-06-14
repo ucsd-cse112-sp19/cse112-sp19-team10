@@ -281,7 +281,7 @@ class CoreRate extends window.HTMLElement {
   set disabledVoidIconClass (val) {
     this.setAttribute('disabled-void-icon-class', val)
   }
-  
+
   /**
   * This function gets the value of the show-text attribute.
   * @returns {Boolean} whether to display texts.
@@ -596,5 +596,4 @@ class CoreRate extends window.HTMLElement {
 }
 
 // Connect class to 'core-rate' custom element
-
 window.customElements.define('core-rate', CoreRate)
