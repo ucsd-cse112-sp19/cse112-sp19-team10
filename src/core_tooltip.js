@@ -408,26 +408,16 @@ class CoreTooltip extends window.HTMLElement {
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
     }
-    if (this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', '')
-    }
-    if (this.hasAttribute('disabled')) {
-      this.setAttribute('disabled', '')
-    }
     // Set default open-delay to 0
     if (!this.hasAttribute('open-delay')) {
       this.setAttribute('open-delay', 0)
     }
+    // Make tooltip default to invisible if manual
     if (this.hasAttribute('manual')) {
-      this.setAttribute('manual', '')
-      if (this.hasAttribute('v-model')) {
-        this.text.style.setProperty('opacity', '1')
-      } else {
-        this.text.style.setProperty('opacity', '0')
-      }
+      this.text.style.setProperty('opacity', '0')
     }
+    // Add event listener for hovering when not enterable
     if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
-      // Add event listener for hovering when not enterable
       this.removeAttribute('enterable')
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseout', this._onHover)
@@ -513,11 +503,21 @@ class CoreTooltip extends window.HTMLElement {
         // Set visibility of tooltip
         if (hasValue) {
           this.text.style.setProperty('opacity', '1')
+          if (newValue !== '') {
+            this.setAttribute('v-model', '')
+          }
         } else {
           this.text.style.setProperty('opacity', '0')
         }
         break
+      case 'disabled':
+        // Set disabled to true if there's input
+        if (hasValue && newValue !== '') {
+          this.setAttribute('disabled', '')
+        }
+        break
       case 'open-delay':
+        // Set open delay to input value
         if (hasValue && !isNaN(newValue)) {
           var fadeTime = Number(newValue) / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
@@ -526,6 +526,7 @@ class CoreTooltip extends window.HTMLElement {
         }
         break
       case 'tabindex':
+        // Add event listeners if tabindex is set
         if (this.hasAttribute('tabindex')) {
           if (!isNaN(this.getAttribute('tabindex'))) {
             this.addEventListener('focus', this._onHoverEnterable)
@@ -533,6 +534,12 @@ class CoreTooltip extends window.HTMLElement {
           } else {
             this.setAttribute('tabindex', 0)
           }
+        }
+        break
+      case 'manual':
+        // Set manual to true if there's input
+        if (hasValue && newValue !== '') {
+          this.setAttribute('manual', '')
         }
         break
     }
