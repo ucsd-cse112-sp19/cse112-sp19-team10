@@ -49,6 +49,8 @@ If you'd like to [contribute](#contributing) or read the source code, you can:
 - Download the zip file from Github
 - Clone the project using `git clone https://github.com/ucsd-cse112/cse112-sp19-team10.git`
 
+Note: If you are using Font-Awesome icons, you need to follow their instructions to include their library in your project. Our library **does not** include Font-Awesome or other external libraries we are using in demos, such as Bootstrap.
+
 ## Getting Started
 Each component is named `core-COMPONENT_NAME`, where *COMPONENT_NAME* is the name of the component. Each component comes with default values allowing you to get started using just one simple line of code.
 
