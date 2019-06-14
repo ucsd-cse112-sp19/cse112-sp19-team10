@@ -323,6 +323,22 @@ class CoreTooltip extends window.HTMLElement {
   }
 
   /**
+   * This function gets the value of the open-delay attribute
+   * @returns {number} open delay of Tooltip in ms.
+   */
+  get openDelay () {
+    return this.getAttribute('open-delay')
+  }
+
+  /**
+   * This function sets the value of the open-delay attribute
+   * @param {number} val - open delay of Tooltip in ms.
+   */
+  set openDelay (val) {
+    this.setAttribute('open-delay', val)
+  }
+
+  /**
   * This function gets the value of the manual attribute.
   * @returns {Boolean} whether or not Tooltip is controlled manually.
   * mouseenter and mouseleave won't have effects if set to true.
@@ -382,68 +398,26 @@ class CoreTooltip extends window.HTMLElement {
     this.setAttribute('tabindex', val)
   }
 
-  /**
-   * This function gets the value of the open-delay attribute
-   * @returns {number} open delay of Tooltip in ms.
-   */
-  get openDelay () {
-    return this.getAttribute('open-delay')
-  }
-
-  /**
-   * This function sets the value of the open-delay attribute
-   * @param {number} val - open delay of Tooltip in ms.
-   */
-  set openDelay (val) {
-    this.setAttribute('open-delay', val)
-  }
-
   // Sets default values for attributes.
   connectedCallback () {
-    if (this.hasAttribute('effect')) {
-      if (this.getAttribute('effect') !== 'dark' && this.getAttribute('effect') !== 'light') {
-        this.setAttribute('effect', 'dark')
-      }
+    // Set default effect to dark if not present or invalid
+    if (!this.hasAttribute('effect')) {
+      this.setAttribute('effect', 'dark')
     }
+    // Set default placement to bottom if not present or invalid
     if (!this.hasAttribute('placement')) {
       this.setAttribute('placement', 'bottom')
     }
-    if (this.hasAttribute('placement')) {
-      var places = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']
-      if (!places.includes(this.getAttribute('placement'))) {
-        this.setAttribute('placement', 'bottom')
-      }
-    }
-    if (this.hasAttribute('v-model')) {
-      this.setAttribute('v-model', '')
-    }
-    if (this.hasAttribute('disabled')) {
-      this.setAttribute('disabled', '')
-    }
-    if (this.hasAttribute('manual')) {
-      this.setAttribute('manual', '')
-      if (this.hasAttribute('v-model')) {
-        this.text.style.setProperty('opacity', '1')
-      } else {
-        this.text.style.setProperty('opacity', '0')
-      }
-    }
-    if (this.hasAttribute('tabindex')) {
-      if (!isNaN(this.getAttribute('tabindex'))) {
-        this.addEventListener('focus', this._onHoverEnterable)
-        this.addEventListener('blur', this._onHoverEnterable)
-      } else {
-        this.setAttribute('tabindex', 0)
-      }
-    }
-    if (!this.hasAttribute('tabindex')) {
-      this.setAttribute('tabindex', 0)
-    }
-    if (!this.hasAttribute('open-delay') || isNaN(this.getAttribute('open-delay'))) {
+    // Set default open-delay to 0
+    if (!this.hasAttribute('open-delay')) {
       this.setAttribute('open-delay', 0)
     }
+    // Make tooltip default to invisible if manual
+    if (this.hasAttribute('manual')) {
+      this.text.style.setProperty('opacity', '0')
+    }
+    // Add event listener for hovering when not enterable
     if (this.getAttribute('enterable') === 'false' || this.getAttribute('enterable' === false)) {
-      // Add event listener for hovering when not enterable
       this.removeAttribute('enterable')
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseover', this._onHover)
       this.shadowRoot.getElementById('tooltipslot').addEventListener('mouseout', this._onHover)
@@ -453,6 +427,10 @@ class CoreTooltip extends window.HTMLElement {
       this.setAttribute('enterable', '')
       this.addEventListener('mouseover', this._onHoverEnterable)
       this.addEventListener('mouseout', this._onHoverEnterable)
+    }
+    // Set default tab index to 0
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', 0)
     }
   }
 
@@ -470,9 +448,11 @@ class CoreTooltip extends window.HTMLElement {
         if (newValue === 'light') {
           this.tooltip.setProperty('--background-color', '#fff')
           this.tooltip.setProperty('--text-color', '#303133')
-        } else {
+        } else if (newValue === 'dark') {
           this.tooltip.setProperty('--background-color', '#303133')
           this.tooltip.setProperty('--text-color', '#fff')
+        } else {
+          this.setAttribute('effect', 'dark')
         }
         break
       case 'content':
@@ -480,9 +460,12 @@ class CoreTooltip extends window.HTMLElement {
         this.text.innerHTML = newValue
         break
       case 'placement':
+        // Set the placement attribute
+        // No change
         if (newValue === oldValue) {
           break
         }
+        // Remove oldValue classes
         if (oldValue === 'top' || oldValue === 'top-start' || oldValue === 'top-end') {
           this.text.classList.remove('top')
         } else if (oldValue === 'bottom' || oldValue === 'bottom-start' || oldValue === 'bottom-end') {
@@ -497,6 +480,7 @@ class CoreTooltip extends window.HTMLElement {
         } else if (oldValue === 'top-end' || oldValue === 'bottom-end' || oldValue === 'left-end' || oldValue === 'right-end') {
           this.text.classList.remove('end')
         }
+        // Add newValue classes
         if (newValue === 'top' || newValue === 'top-start' || newValue === 'top-end') {
           this.text.classList.add('top')
         } else if (newValue === 'bottom' || newValue === 'bottom-start' || newValue === 'bottom-end') {
@@ -506,7 +490,8 @@ class CoreTooltip extends window.HTMLElement {
         } else if (newValue === 'right' || newValue === 'right-start' || newValue === 'right-end') {
           this.text.classList.add('right')
         } else {
-          this.text.classList.add('bottom')
+          // Default to bottom
+          this.setAttribute('placement', 'bottom')
         }
         if (newValue === 'top-start' || newValue === 'bottom-start' || newValue === 'left-start' || newValue === 'right-start') {
           this.text.classList.add('start')
@@ -518,14 +503,43 @@ class CoreTooltip extends window.HTMLElement {
         // Set visibility of tooltip
         if (hasValue) {
           this.text.style.setProperty('opacity', '1')
+          if (newValue !== '') {
+            this.setAttribute('v-model', '')
+          }
         } else {
           this.text.style.setProperty('opacity', '0')
         }
         break
+      case 'disabled':
+        // Set disabled to true if there's input
+        if (hasValue && newValue !== '') {
+          this.setAttribute('disabled', '')
+        }
+        break
       case 'open-delay':
-        if (hasValue) {
-          var fadeTime = this.getAttribute('open-delay') / 1000
+        // Set open delay to input value
+        if (hasValue && !isNaN(newValue)) {
+          var fadeTime = Number(newValue) / 1000
           this.tooltip.setProperty('--fade-in-time', String(fadeTime) + 's')
+        } else {
+          this.setAttribute('open-delay', 0)
+        }
+        break
+      case 'tabindex':
+        // Add event listeners if tabindex is set
+        if (this.hasAttribute('tabindex')) {
+          if (!isNaN(this.getAttribute('tabindex'))) {
+            this.addEventListener('focus', this._onHoverEnterable)
+            this.addEventListener('blur', this._onHoverEnterable)
+          } else {
+            this.setAttribute('tabindex', 0)
+          }
+        }
+        break
+      case 'manual':
+        // Set manual to true if there's input
+        if (hasValue && newValue !== '') {
+          this.setAttribute('manual', '')
         }
         break
     }
@@ -558,4 +572,5 @@ class CoreTooltip extends window.HTMLElement {
   }
 }
 
+// Connect class to 'core-tooltip' custom element
 window.customElements.define('core-tooltip', CoreTooltip)
