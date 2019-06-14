@@ -366,7 +366,7 @@ describe('Testing core-switch', async () => {
       // check if the attribute exists
       const att = await showroom.hasAttribute('disabled')
       assert.deepEqual(att, true)
-      // check if changed property value change attribute value to the default value      
+      // check if changed property value change attribute value to the default value
       const val = await showroom.getAttribute('disabled')
       assert.deepEqual(val, '')
     })
@@ -382,7 +382,7 @@ describe('Testing core-switch', async () => {
       // check if the attribute exists
       const att = await showroom.hasAttribute('disabled')
       assert.deepEqual(att, true)
-      // check if changed attribute value change property value to the default value      
+      // check if changed attribute value change property value to the default value
       const val = await showroom.getProperty('disabled')
       assert.deepEqual(val, true)
     })
