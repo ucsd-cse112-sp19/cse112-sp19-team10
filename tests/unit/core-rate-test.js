@@ -2,7 +2,6 @@ const assert = require('assert').strict
 const showroom = require('showroom/puppeteer')()
 
 describe('core-rate', async => {
-
   // start/restart showroom server for before each test is done
   before(async () => {
     await showroom.start()
@@ -131,7 +130,7 @@ describe('core-rate', async => {
 
     /**
      * This test is commented out because the coders haven't implemented it yet so it could pass the build.
-     */    
+     */
     /*
     it('set default value, non color format type', async () => {
       await showroom.setAttribute('disabled-void-color', true)
@@ -169,7 +168,7 @@ describe('core-rate', async => {
 
     /**
      * This test is commented out because the coders haven't implemented it yet so it could pass the build.
-     */      
+     */
     /*
     it('non-string type, will convert to string', async () => {
       await showroom.setAttribute('disabled-void-icon-class', true)
@@ -207,7 +206,7 @@ describe('core-rate', async => {
 
     /**
      * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
-     */      
+     */
     /*
     it('set default value, if not in range (low-threshold,5]', async () => {
       await showroom.setAttribute('high-threshold', 6)
@@ -260,7 +259,7 @@ describe('core-rate', async => {
 
     /**
      * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
-     */     
+     */
     /*
     it('set default value, if not in range [0,high-threshold)', async () => {
       await showroom.setAttribute('low-threshold', -1)
@@ -458,7 +457,7 @@ describe('core-rate', async => {
 
     /**
      * This test is commented out because the coders haven't implemented it yet so it could pass the build.
-     */  
+     */
     /*
     it('set default value, non color format type', async () => {
       await showroom.setAttribute('text-color', false)
@@ -496,7 +495,7 @@ describe('core-rate', async => {
 
     /**
      * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
-     */    
+     */
     /*
     it('set default value, if incorrect array length', async () => {
       await showroom.setAttribute('texts', "['normal', 'good', 'great']")
@@ -542,7 +541,7 @@ describe('core-rate', async => {
 
     /**
      * These tests are commented out because the coders haven't implemented it yet so it could pass the build.
-     */      
+     */
     /*
     it('set default value, if value is out of range', async () => {
       await showroom.setAttribute('v-model', -1)
@@ -594,7 +593,7 @@ describe('core-rate', async => {
 
     /**
      * This test is commented out because the coders haven't implemented it yet so it could pass the build.
-     */  
+     */
     /*
     it('set default value, if non-color format type', async () => {
       await showroom.setAttribute('void-color', true)
@@ -632,7 +631,7 @@ describe('core-rate', async => {
 
     /**
      * This test is commented out because the coders haven't implemented it yet so it could pass the build.
-     */      
+     */
     /*
     it('set default value, if non-string type', async () => {
       await showroom.setAttribute('void-icon-class', true)
