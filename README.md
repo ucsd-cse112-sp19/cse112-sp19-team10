@@ -117,7 +117,7 @@ To run the script, follow the directions to set up the script then run:
 - See our [full list](https://docs.google.com/document/d/1NJwUiCW6A7htAkYt5D9KlLrRf-20Q_cx8ipcCyGnmQ0/edit?usp=sharing) for all the tests for each component
 
 ## Known Issues
-- Browser tests on TestCafe/SauceLabs sometimes time out, usually with a **ETIMEOUT** or similor error. This causes Travis builds to fail and blocks pull requests on Github. Rerunning the build on Travis generally fixes this issue.
+- Browser tests on TestCafe/SauceLabs sometimes time out, usually with a **ETIMEOUT** or similar error. This causes Travis builds to fail and blocks pull requests on Github. Rerunning the build on Travis generally fixes this issue.
 - We are using Showroom, Mocha, and Chai for our unit testing. Unfortunately, this does not integrate well with CodeClimate's test coverage reporter. However, rest assured as we many have unit and browser tests and are confidently it covers a majority of cases.
 
 ### Change Log
