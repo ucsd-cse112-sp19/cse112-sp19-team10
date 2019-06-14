@@ -5,7 +5,10 @@ const jsBlacklistFileName = [
   'custom-control-form.js',
   'jsoneditor.min.js',
   'showroom-app.js',
-  'showroom-integration.js'
+  'showroom-integration.js',
+  'core-hello.showroom.js',
+  'core-rate.showroom.js',
+  'core-switch.showroom.js'
 ]
 
 const cssBlacklistFileName = [
