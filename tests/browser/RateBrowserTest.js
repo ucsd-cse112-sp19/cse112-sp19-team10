@@ -3,11 +3,12 @@ import { Selector } from 'testcafe'
 fixture `rate browser test`
   .page `../../examples/rate.html`
 
-// check if all seven components exist
 test('rate components exists', async t => {
-    const rate_group = await Selector(() => {
-        return document.querySelectorAll('core-rate')
-    })
+
+    // selector for all the rate components
+    const rate_group = await Selector(() => document.querySelectorAll('core-rate'))
+    
+    // check that the first seven components exist and the total count (including the bootstrapped components)
     await t
         .expect(Selector(() => document.querySelectorAll('core-rate')[0].exists)).ok()
         .expect(Selector(() => document.querySelectorAll('core-rate')[1].exists)).ok()
@@ -19,26 +20,19 @@ test('rate components exists', async t => {
         .expect(rate_group.count).eql(10)
 })
 
-// test behavior is expected when the fourth star is clicked, then v-model value is changed from 0 to 4
 test('v-model attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5]
-    })
-    const star5 = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0]
-    })
-    const star4 = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
-    })
-    const star3 = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[2]
-    })
-    const star2 = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[3]
-    })
-    const star1 = Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[4]
-    })
+
+    // selector for the rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[5])
+
+    // selectors for each star
+    const star5 = Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0])
+    const star4 = Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1])
+    const star3 = Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[2])
+    const star2 = Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[3])
+    const star1 = Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[4])
+
+    // click each star and expect the v-model value to be the correct value
     await t
         .expect(rate.withAttribute('v-model', '0').exists).ok()
         .click(star5)
@@ -53,17 +47,18 @@ test('v-model attribute', async t => {
         .expect(rate.withAttribute('v-model', '1').exists).ok()
 })
 
-// test behavior when disabled attribute is set, then nothing about the component has been modified
 test('disabled attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[3]
-    })
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[1]
-    })
-    const output = await Selector(() => {
-        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('#star5')
-    })
+
+    // selector for rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[3])
+
+    // selector for the fourth star
+    const star = await Selector(() => document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[1])
+
+    // selector for the rate component 
+    const output = await Selector(() => document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('#star5'))
+
+    // test behavior when disabled attribute is set, then nothing about the component has been modified
     await t
         .expect(rate.getAttribute('v-model')).eql('0')
         .click(star)
@@ -71,128 +66,146 @@ test('disabled attribute', async t => {
         .expect(rate.getAttribute('v-model')).eql('4')
 })
 
-// test to see if one of the class attributes for the sub elements in rate component contains the value 'low' used to identify the low-threshold
 test('low-threshold attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2]
-    })
-    const group = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelector('div')
-    })
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[4]
-    })
+
+    // selector for the rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[2])
+
+    // selector for the first star (color red on mouse click)
+    const star = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[4])
+   
+    // selector for the first star (color red on mouse click)
+    const input1 = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[4]) 
+
+    // test to see if one of the class attributes for the sub elements in rate component contains
+    // the value 'low' used to identify the low-threshold
     await t
+        .click(star)
         .expect(rate.hasAttribute('low-threshold')).eql(true)
         .expect(rate.getAttribute('low-threshold')).eql('1')
         .expect(rate.getAttribute('colors')).contains('red')
-        .expect(star.getAttribute('class')).eql('low')
+        .expect(input1.getAttribute('class')).eql('low')
 })
 
-// test to see if one of the class attributes for the sub elements in rate component contains the value 'high' used to identify the high-threshold
 test('high-threshold attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2]
-    })
-    const group = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelector('div')
-    })
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[0]
-    })
+
+    // selector for the rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[2])
+
+    // selector for the fifth star (color green on mouse click)
+    const star = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0])
+
+    // selector for the input element handling the class name
+    const input1 = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('input')[0])
+
+    // test to see if one of the class attributes for the sub elements in rate component contains
+    // the value 'high' used to identify the high-threshold
     await t
+        .click(star)
         .expect(rate.hasAttribute('high-threshold')).eql(true)
         .expect(rate.getAttribute('high-threshold')).eql('5')
         .expect(rate.getAttribute('colors')).contains('green')
-        .expect(star.getAttribute('class')).eql('high')
+        .expect(input1.getAttribute('class')).eql('high')
 })
 
 // test to see if the style attribute contains the color which determines the colors of each star in the component
 test('colors attribute', async t => {
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[1].shadowRoot.querySelector('.rate')
-    })
+
+    // selector for the first star
+    const star1 = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[4])
+    // selector for the third star
+    const star3 = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[2])
+    // selector for the fifth star
+    const star5 = await Selector(() => document.querySelectorAll('core-rate')[2].shadowRoot.querySelectorAll('label')[0])
+
+    // test to see when the specific stars are clicked, the color property value is changed to the assigned colors
     await t
-        .expect(star.getAttribute('style')).contains('color')
+        .click(star1)
+        .expect(star1.getStyleProperty('color')).eql('rgb(255, 0, 0)')
+        .click(star3)
+        .expect(star3.getStyleProperty('color')).eql('rgb(255, 255, 0)')
+        .click(star5)
+        .expect(star5.getStyleProperty('color')).eql('rgb(0, 128, 0)')
 })
 
-// test to see if the style attribute contains the void-color variable which determines the set void-color for the stars
 test('void-color attribute', async t => {
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[1].shadowRoot.querySelector('.rate')
-    })
+
+    // selector for the rate component
+    const star = await Selector(() => document.querySelectorAll('core-rate')[1].shadowRoot.querySelector('.rate'))
+
+    // test to see if the style attribute contains the void-color variable which determines the set void-color for the stars
     await t
         .expect(star.getAttribute('style')).contains('void-color')
 })
 
-// test to see if a rate component with disabled attribute set contains the disabled-void-color value set in its style attribute
 test('disabled-void-color attribute', async t => {
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('.rate')
-    })
+
+    // selector for the rate component
+    const star = await Selector(() => document.querySelectorAll('core-rate')[4].shadowRoot.querySelector('.rate'))
+
+    // test to see if a rate component with disabled attribute set contains the disabled-void-color value set in its style attribute
     await t
         .expect(star.getAttribute('style')).contains('void-color')
 })
 
-// test to see if the label sub component, which is responsible for setting the correct icon based on its class attribute,
-// has the same value as the icon-classes attribute's value
 test('icon-classes attribute', async t => {
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[0]
-    })
+
+    // selector for the fifth star
+    const star = await Selector(() => document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[0])
+
+    // test to see if the label sub component, which is responsible for setting the correct icon based on its class attribute,
+    // has the same value as the icon-classes attribute's value
     await t
         .expect(star.getAttribute('class')).contains("fas fa-frown")
 })
 
-// test to see if the label sub component, which is responsible for setting the correct icon based on its class attribute,
-// has the same value as the void-icon-classes attribute's value for labels that have not been checked
 test('void-icon-class attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[3]
-    })
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[2]
-    })
+
+    // selector for the rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[3])
+
+    // selector for the third star
+    const star = await Selector(() => document.querySelectorAll('core-rate')[3].shadowRoot.querySelectorAll('label')[2])
+
+    // test to see if the label sub component, which is responsible for setting the correct icon based on its class attribute,
+    // has the same value as the void-icon-classes attribute's value for labels that have not been checked
     await t
         .expect(rate.getAttribute('void-icon-class')).eql("fas fa-frown")
         .click(star)
         .expect(star.getAttribute('class')).eql("fas fa-smile")
 })
 
-// test to see if the label sub component, which is responsible for setting the correct icon based on its class attribute,
-// has the same value as the disabled-void-icon-classes attribute's value for labels that have not been checked
 test('disabled-void-icon-class attribute', async t => {
-    const star = await Selector(() => {
-        return document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[0]
-    })
+
+    // selector for the fifth star
+    const star = await Selector(() => document.querySelectorAll('core-rate')[4].shadowRoot.querySelectorAll('label')[0])
+
+    // test to see if the label sub component, which is responsible for setting the correct icon based on its class attribute,
+    // has the same value as the disabled-void-icon-classes attribute's value for labels that have not been checked
     await t
         .expect(star.getAttribute('class')).contains('fas fa-ban')
 })
 
-// test behavior when show-text attribute is set, then there should be text content from the texts attribute based on which label is clicked
-test('show-text attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6]
-    })
-    const star5 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[0]
-    })
-    const star4 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[1]
-    })
-    const star3 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[2]
-    })
-    const star2 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[3]
-    })
-    const star1 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[4]
-    })
-    const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('.text')
-    })
+test('show-text and text-color attribute', async t => {
 
+    // selctor for the rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[6])
+
+    // selector for each of the five stars
+    const star5 = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[0])
+    const star4 = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[1])
+    const star3 = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[2])
+    const star2 = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[3])
+    const star1 = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelectorAll('label')[4])
+
+    // selector for the element that handles the text output
+    const output_txt = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('.text'))
+
+    // selector for the element to output the text
+    const output_span = await Selector(() => document.querySelectorAll('core-rate')[6].shadowRoot.querySelector('span'))
+
+    // test behavior when show-text attribute is set, then there should be text content from the texts attribute
+    // based on which label is clicked
     await t
         .expect(rate.hasAttribute('show-text')).eql(true)
         .click(star5)
@@ -205,32 +218,26 @@ test('show-text attribute', async t => {
         .expect(output_txt.textContent).eql('disappointed')
         .click(star1)
         .expect(output_txt.textContent).eql('oops')
+        .expect(output_span.getStyleProperty('color')).contains('rgb(0, 128, 0)')
 })
 
-// test behavior when show-score attribute is set, then there should be text content along with the score-template
-// attribute's value based on which label is clicked
 test('show-score attribute', async t => {
-    const rate = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5]
-    })
-    const star5 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0]
-    })
-    const star4 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1]
-    })
-    const star3 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[2]
-    })
-    const star2 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[3]
-    })
-    const star1 = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[4]
-    })
-    const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('.text')
-    })
+
+    // selctor for the rate component
+    const rate = await Selector(() => document.querySelectorAll('core-rate')[5])
+
+    // selector for each of the five stars
+    const star5 = await Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[0])
+    const star4 = await Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[1])
+    const star3 = await Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[2])
+    const star2 = await Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[3])
+    const star1 = await Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelectorAll('label')[4])
+
+    // selector for the element that handles the text output
+    const output_txt = await Selector(() => document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('.text'))
+
+    // test behavior when show-score attribute is set, then there should be text content along with the score-template
+    // attribute's value based on which label is clicked
     await t
         .expect(rate.hasAttribute('show-score')).eql(true)
         .click(star5)
@@ -243,13 +250,4 @@ test('show-score attribute', async t => {
         .expect(output_txt.textContent).eql('2 points')
         .click(star1)
         .expect(output_txt.textContent).eql('1 points')
-})
-
-// test to see that when the text-score color attribute is set, then the text-color should be contained in span element's style attribute
-test('text-color attribute', async t => {
-    const output_txt = await Selector(() => {
-        return document.querySelectorAll('core-rate')[5].shadowRoot.querySelector('span')
-    })
-    await t
-        .expect(output_txt.getAttribute('style')).contains("text-color")
 })
