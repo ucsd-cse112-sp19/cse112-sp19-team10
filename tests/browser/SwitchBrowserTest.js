@@ -1,6 +1,6 @@
 import { Selector } from 'testcafe'
 //browser test for switch component
-fixture`Switch Browser Test:`
+fixture`switch browser test:`
   .page`../../examples/switch.html`
   //test case for basic use of of switch: able to turn on and off
   test('v-model changed from false to true and true to false after click', async t => {
@@ -67,7 +67,7 @@ fixture`Switch Browser Test:`
   })
 
   //test case for switch component that has icon as label, also make sure the corresponding icon is "turned on" (color change) after switches to on.
-  test("SwitchBrowserTest @ light up corresponding icon",async t=>{
+  test("light up corresponding icon",async t=>{
     const switch_icon = Selector('#switch_icon');
     const switch_span = await Selector(() => document.querySelector('#switch_icon').shadowRoot.querySelector('label'));
     const switch_inactive_icon = await Selector(() => document.querySelector('#switch_icon').shadowRoot.querySelector('#inactive_icon'));
@@ -96,7 +96,7 @@ fixture`Switch Browser Test:`
   })
   
   //test case for switch component that has icon as label, also make sure the corresponding text is "turned on" (color change) after switches to on.
-  test("SwitchBrowserTest @ light up corresponding text", async t=>{
+  test("light up corresponding text", async t=>{
     const switch_text = Selector('#switch_text');
     const switch_span = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('label'));
     const switch_inactive_text = await Selector(() => document.querySelector('#switch_text').shadowRoot.querySelector('#inactive_text'));
