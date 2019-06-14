@@ -58,52 +58,52 @@ describe('Testing core-tooltip', async () => {
       assert.deepEqual(val, 'light')
     })
 
-    // it('Mapping Attribute -> Property with invalid string', async () => {
-    //   await showroom.setAttribute('effect', 'foo')
+    it('Mapping Attribute -> Property with invalid string', async () => {
+      await showroom.setAttribute('effect', 'foo')
 
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('effect')
-    //   assert.deepEqual(att, true)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('effect')
+      assert.deepEqual(att, true)
 
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('effect')
-    //   assert.deepEqual(val, 'dark')
-    // })
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('effect')
+      assert.deepEqual(val, 'dark')
+    })
 
-    // it('Mapping Attribute -> Property with invalid value', async () => {
-    //   await showroom.setAttribute('effect', 123)
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('effect')
-    //   assert.deepEqual(att, true)
+    it('Mapping Attribute -> Property with invalid value', async () => {
+      await showroom.setAttribute('effect', 123)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('effect')
+      assert.deepEqual(att, true)
 
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('effect')
-    //   assert.deepEqual(val, 'dark')
-    // })
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('effect')
+      assert.deepEqual(val, 'dark')
+    })
 
-    // it('Mapping Property -> Attribute with invalid string', async () => {
-    //   await showroom.setProperty('effect', 'foo')
+    it('Mapping Property -> Attribute with invalid string', async () => {
+      await showroom.setProperty('effect', 'foo')
 
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('effect')
-    //   assert.deepEqual(att, true)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('effect')
+      assert.deepEqual(att, true)
 
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('effect')
-    //   assert.deepEqual(val, 'dark')
-    // })
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('effect')
+      assert.deepEqual(val, 'dark')
+    })
 
-    // it('Mapping Property -> Attribute with invalid value', async () => {
-    //   await showroom.setProperty('effect', 123)
+    it('Mapping Property -> Attribute with invalid value', async () => {
+      await showroom.setProperty('effect', 123)
 
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('effect')
-    //   assert.deepEqual(att, true)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('effect')
+      assert.deepEqual(att, true)
 
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('effect')
-    //   assert.deepEqual(val, 'dark')
-    // })
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('effect')
+      assert.deepEqual(val, 'dark')
+    })
   })
 
   context('core-tooltip attribute: content', async () => {
@@ -207,28 +207,28 @@ describe('Testing core-tooltip', async () => {
       assert.deepEqual(val, 'bottom')
     })
 
-    // it('Mapping Property -> Attribute with invaild string', async () => {
-    //   await showroom.setProperty('placement', 'foo')
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('placement')
-    //   assert.deepEqual(att, true)
+    it('Mapping Property -> Attribute with invaild string', async () => {
+      await showroom.setProperty('placement', 'foo')
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
 
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('placement')
-    //   assert.deepEqual(val, 'bottom')
-    // })
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('placement')
+      assert.deepEqual(val, 'bottom')
+    })
 
-    // it('Mapping Attribute -> Property with invaild string', async () => {
-    //   await showroom.setAttribute('placement', 'bar')
+    it('Mapping Attribute -> Property with invaild string', async () => {
+      await showroom.setAttribute('placement', 'bar')
 
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('placement')
-    //   assert.deepEqual(att, true)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('placement')
+      assert.deepEqual(att, true)
 
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('placement')
-    //   assert.deepEqual(val, 'bottom')
-    // })
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('placement')
+      assert.deepEqual(val, 'bottom')
+    })
 
     it('Mapping Property -> Attribute with top', async () => {
       await showroom.setProperty('placement', 'top')
@@ -994,45 +994,45 @@ describe('Testing core-tooltip', async () => {
       assert.deepEqual(val, '100')
     })
 
-    // it('Mapping Attribute -> Property with invalid value boolean', async () => {
-    //   await showroom.setAttribute('tabindex', false)
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('tabindex')
-    //   assert.deepEqual(att, true)
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('tabindex')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Attribute -> Property with invalid value boolean', async () => {
+      await showroom.setAttribute('tabindex', false)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('tabindex')
+      assert.deepEqual(att, true)
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('tabindex')
+      assert.deepEqual(val, '0')
+    })
 
-    // it('Mapping Attribute -> Property with invalid string', async () => {
-    //   await showroom.setAttribute('tabindex', 'foo')
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('tabindex')
-    //   assert.deepEqual(att, true)
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('tabindex')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Attribute -> Property with invalid string', async () => {
+      await showroom.setAttribute('tabindex', 'foo')
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('tabindex')
+      assert.deepEqual(att, true)
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('tabindex')
+      assert.deepEqual(val, '0')
+    })
 
-    // it('Mapping Property -> Attribute with invalid value boolean', async () => {
-    //   await showroom.setProperty('tabindex', false)
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('tabindex')
-    //   assert.deepEqual(att, true)
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('tabindex')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Property -> Attribute with invalid value boolean', async () => {
+      await showroom.setProperty('tabindex', false)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('tabindex')
+      assert.deepEqual(att, true)
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('tabindex')
+      assert.deepEqual(val, '0')
+    })
 
-    // it('Mapping Property -> Attribute with invalid string', async () => {
-    //   await showroom.setProperty('tabindex', 'bar')
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('tabindex')
-    //   assert.deepEqual(att, true)
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('tabindex')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Property -> Attribute with invalid string', async () => {
+      await showroom.setProperty('tabindex', 'bar')
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('tabindex')
+      assert.deepEqual(att, true)
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('tabindex')
+      assert.deepEqual(val, '0')
+    })
   })
 
   context('Testing core-switch attribute: open-delay', async () => {
@@ -1092,44 +1092,44 @@ describe('Testing core-tooltip', async () => {
       assert.deepEqual(val, '123')
     })
 
-    // it('Mapping Property -> Attribute with invalid value boolean', async () => {
-    //   await showroom.setProperty('openDelay', true)
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('open-delay')
-    //   assert.deepEqual(att, true)
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('open-delay')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Property -> Attribute with invalid value boolean', async () => {
+      await showroom.setProperty('openDelay', true)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('open-delay')
+      assert.deepEqual(val, '0')
+    })
 
-    // it('Mapping Attribute -> Property with invalid value boolean', async () => {
-    //   await showroom.setAttribute('open-delay', false)
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('open-delay')
-    //   assert.deepEqual(att, true)
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('openDelay')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Attribute -> Property with invalid value boolean', async () => {
+      await showroom.setAttribute('open-delay', false)
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('openDelay')
+      assert.deepEqual(val, '0')
+    })
 
-    // it('Mapping Attribute -> Property with invalid string', async () => {
-    //   await showroom.setAttribute('open-delay', 'foo')
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('open-delay')
-    //   assert.deepEqual(att, true)
-    //   // check if changed attribute value change property value to the default value
-    //   const val = await showroom.getProperty('openDelay')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Attribute -> Property with invalid string', async () => {
+      await showroom.setAttribute('open-delay', 'foo')
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      // check if changed attribute value change property value to the default value
+      const val = await showroom.getProperty('openDelay')
+      assert.deepEqual(val, '0')
+    })
 
-    // it('Mapping Property -> Attribute with invalid string', async () => {
-    //   await showroom.setProperty('openDelay', 'bar')
-    //   // check if the attribute exists
-    //   const att = await showroom.hasAttribute('open-delay')
-    //   assert.deepEqual(att, true)
-    //   // check if changed property value change attribute value to the default value
-    //   const val = await showroom.getAttribute('open-delay')
-    //   assert.deepEqual(val, '0')
-    // })
+    it('Mapping Property -> Attribute with invalid string', async () => {
+      await showroom.setProperty('openDelay', 'bar')
+      // check if the attribute exists
+      const att = await showroom.hasAttribute('open-delay')
+      assert.deepEqual(att, true)
+      // check if changed property value change attribute value to the default value
+      const val = await showroom.getAttribute('open-delay')
+      assert.deepEqual(val, '0')
+    })
   })
 })
