@@ -14,6 +14,7 @@ Table of Contents
       * [Installation](#installation)
       * [Getting Started](#getting-started)
          * [API Docs](#api-docs)
+         * [Examples](#examples)
       * [Contributing](#contributing)
          * [Build Environment](#build-environment)
          * [Coding Style](#coding-style)
@@ -27,7 +28,7 @@ Table of Contents
       * [Team](#team)
       * [License](#license)
 
-<!-- Added by: seannam, at: Thu Jun 13 02:02:54 PDT 2019 -->
+<!-- Added by: seannam, at: Thu Jun 13 23:22:24 PDT 2019 -->
 
 <!--te-->
 
@@ -116,7 +117,7 @@ To run the script, follow the directions to set up the script then run:
 - See our [full list](https://docs.google.com/document/d/1NJwUiCW6A7htAkYt5D9KlLrRf-20Q_cx8ipcCyGnmQ0/edit?usp=sharing) for all the tests for each component
 
 ## Known Issues
-- Browser tests on TestCafe/SauceLabs sometimes time out, usually with a **ETIMEOUT** error. This causes Travis builds to fail and blocks pull requests on Github. Rerunning the build on Travis generally fixes this issue.
+- Browser tests on TestCafe/SauceLabs sometimes time out, usually with a **ETIMEOUT** or similor error. This causes Travis builds to fail and blocks pull requests on Github. Rerunning the build on Travis generally fixes this issue.
 
 ### Change Log
 This project is set up to use [semantic-release](https://github.com/semantic-release/semantic-release#how-does-it-work) to generate a change log from the git commit messages. Please follow the format as outline in their [docs](https://github.com/semantic-release/semantic-release#how-does-it-work). However, it has not been fully tested or integrated to the master branch. You can read our implementation notes [here](https://drive.google.com/a/ucsd.edu/file/d/1U0ZaXYs-A14-t2VXM4h5-GqYuRQV9C5d/view?usp=sharing).
