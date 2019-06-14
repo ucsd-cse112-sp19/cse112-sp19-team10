@@ -128,22 +128,6 @@ class CoreRate extends window.HTMLElement {
   }
 
   /**
-  * This function gets the value of the max attribute.
-  * @returns {integer} max rating score.
-  */
-  get max () {
-    return this.getAttribute('max')
-  }
-
-  /**
-  * This function sets the value of the max attribute.
-  * @param {integer} val - max rating score.
-  */
-  set max (val) {
-    this.setAttribute('max', 5)
-  }
-
-  /**
   * This function gets the value of the disabled attribute.
   * @returns {Boolean} whether Rate is read-only.
   */
@@ -396,7 +380,6 @@ class CoreRate extends window.HTMLElement {
     if (this.hasAttribute('v-model') && isNaN(this.getAttribute('v-model'))) {
       this.setAttribute('v-model', 0)
     }
-    this.setAttribute('max', 5)
     if (!this.hasAttribute('low-threshold')) {
       this.setAttribute('low-threshold', 2)
     }
@@ -490,6 +473,7 @@ class CoreRate extends window.HTMLElement {
         this.radio[i].setAttribute('disabled', true)
       }
     }
+    // Set low and high threshold
     if (this.hasAttribute('low-threshold') || this.hasAttribute('high-threshold')) {
       var low = parseInt(this.getAttribute('low-threshold'))
       var high = parseInt(this.getAttribute('high-threshold'))
@@ -514,22 +498,24 @@ class CoreRate extends window.HTMLElement {
       this.colors1.setProperty('--mid-color', colors[1])
       this.colors1.setProperty('--high-color', colors[2])
     }
-    // Set void-color
+    // Set void color
     if (this.hasAttribute('void-color')) {
       var newColor2 = this.getAttribute('void-color')
       this.colors1.setProperty('--void-color', newColor2)
     }
+    // Set disabled void color
     if (this.hasAttribute('disabled-void-color') && this.hasAttribute('disabled')) {
       var dVoid = this.getAttribute('disabled-void-color')
       this.colors1.setProperty('--void-color', dVoid)
     }
-    // Set icons
+    // Set icon classes
     if (this.hasAttribute('icon-classes')) {
       var newClass1 = this.getAttribute('icon-classes')
       for (i = 0; i < this.icon.length; i++) {
         this.icon[i].setAttribute('class', newClass1)
       }
     }
+    // Set void icon class
     if (this.hasAttribute('void-icon-class')) {
       var newClass2 = this.getAttribute('void-icon-class')
       for (i = this.icon.length - 1; i >= this.getAttribute('v-model'); i--) {
@@ -608,5 +594,7 @@ class CoreRate extends window.HTMLElement {
     return image.style.color !== 'rgb(255, 255, 255)'
   }
 }
+
+// Connect class to 'core-rate' custom element
 
 window.customElements.define('core-rate', CoreRate)
