@@ -93,7 +93,7 @@ describe('Testing core-tooltip', async () => {
     //   assert.deepEqual(val, 'dark')
     // })
 
-    // it('Mapping Attribute -> Attribute with invalid value', async () => {
+    // it('Mapping Property -> Attribute with invalid value', async () => {
     //   await showroom.setProperty('effect', 123)
 
     //   // check if the attribute exists
