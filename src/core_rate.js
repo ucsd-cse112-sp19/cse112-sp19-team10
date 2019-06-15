@@ -291,6 +291,14 @@ class CoreRate extends window.HTMLElement {
   }
 
   /**
+  * This function gets the value of the show-text attribute.
+  * @returns {Boolean} whether to display texts.
+  */
+  get showText2 () {
+    return this.hasAttribute('show-text')
+  }
+
+  /**
   * This function sets the value of the show-text attribute.
   * @param {Boolean} val - whether to display texts.
   */
