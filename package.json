@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "documentation": "^11.0.0",
+    "documentation": "^14.0.0",
     "flat": "^4.1.0",
     "husky": "^2.3.0",
     "istanbul": "^0.4.5",
